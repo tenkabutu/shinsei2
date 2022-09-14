@@ -1,17 +1,28 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
+    <x-slot name="head">
+
+
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
-                    You're logged in!
-                </div>
-            </div>
-        </div>
+    <div class="main_right">
+    <fieldset>
+				<legend>info</legend>
+				<ul><li>
+				ここには各項目の総数などの情報を載せる予定ですが間に合ってないので更新予定などの注意点をば</li>
+				</ul>
+				</fieldset>
+    	 <fieldset>
+				<legend>不具合</legend>
+				<ul><li></li>
+				</ul>
+				</fieldset>
+        <fieldset>
+				<legend>近いうちに実装予定</legend>
+				<ul>
+
+				<li>案件内容などの対応手順を案件ページに表示</li>
+
+				</ul>
+				</fieldset>
     </div>
 </x-app-layout>

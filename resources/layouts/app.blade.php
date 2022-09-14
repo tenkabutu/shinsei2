@@ -4,10 +4,18 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
-
+        @if(isset(Auth::user()->id))
+				@if(Auth::user()->id==7)
+				<link rel="icon" type="image/vnd.microsoft.icon" href="/tabusapo_lb/public/img/tabsapo2.png">
+				<title>ヘルプデスク支援ツール</title>
+				@else
 				<link rel="icon" type="image/vnd.microsoft.icon" href="/tabusapo_lb/public/img/favicon.png">
 				<title>{{ config('app.name', 'Laravel2') }}</title>
-
+				@endif
+			@else
+				<link rel="icon" type="image/vnd.microsoft.icon" href="/tabusapo_lb/public/img/favicon.png">
+				<title>{{ config('app.name', 'Laravel2') }}</title>
+			@endif
 
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">

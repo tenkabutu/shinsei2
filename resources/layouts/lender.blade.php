@@ -2,12 +2,11 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
+        <link rel="icon" type="image/vnd.microsoft.icon" href="/tabusapo_lb/public/img/favicon.png">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-				<link rel="icon" type="image/vnd.microsoft.icon" href="/tabusapo_lb/public/img/favicon.png">
-				<title>{{ config('app.name', 'Laravel2') }}</title>
-
+        <title>{{ config('app.name', 'Laravel2') }}</title>
 
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
@@ -19,7 +18,7 @@
         <script src="{{ url(mix('js/app.js')) }}" defer></script>
          {{ $head }}
     </head>
-    <body class="font-sans antialiased">
+    <body class="font-sans antialiased reception_body">
         <div id="wrap">
             @include('layouts.nav')
 
