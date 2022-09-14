@@ -7,8 +7,6 @@
 
 				<link rel="icon" type="image/vnd.microsoft.icon" href="/tabusapo_lb/public/img/favicon.png">
 				<title>{{ config('app.name', 'Laravel2') }}</title>
-
-
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
@@ -17,7 +15,7 @@
 
         <!-- Scripts -->
         <script src="{{ url(mix('js/app.js')) }}" defer></script>
-         {{ $head }}
+
     </head>
     <body class="font-sans antialiased">
         <div id="wrap">
