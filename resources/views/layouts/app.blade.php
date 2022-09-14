@@ -15,6 +15,7 @@
 
         <!-- Scripts -->
         <script src="{{ url(mix('js/app.js')) }}" defer></script>
+        {{ $head }}
 
     </head>
     <body class="font-sans antialiased">

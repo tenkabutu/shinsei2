@@ -1,7 +1,6 @@
 <x-app-layout>
     <x-slot name="head">
 
-
     </x-slot>
 
     <div class="main_right">

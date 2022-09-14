@@ -4,7 +4,7 @@
 		<h4>
 			<a href="/tabusapo_lb/public">
 
-				<img width="70" alt="" src="/shinsei2/public/img/shinsei.jpg">タブサポ君
+				<img width="70" alt="" src="/shinsei2/public/img/shinsei.jpg">申請つーる
 
 			</a>
 		</h4>
