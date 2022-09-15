@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('user',[UserController::class,'userlist']);
 Route::get('/', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');

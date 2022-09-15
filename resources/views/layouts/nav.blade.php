@@ -31,6 +31,15 @@
 						</tr>
 					</table>
 				</div>
+				<div class='side_label'>
+					<span>データ</span>
+				</div>
+				<ul>
+
+					<li><a href="/shinsei2/public/user" active="request()->routeIs('device')">ユーザー</a></li>
+
+					<li><a href="/tabusapo_lb/public/category" >カテゴリー(未実装)</a></li>
+				</ul>
 
 
 
