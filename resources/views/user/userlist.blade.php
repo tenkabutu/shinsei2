@@ -13,12 +13,13 @@
 				<th>権限</th>
 				<th></th>
 			</tr>
-			{{-- @foreach ($records as $record) --}} @foreach ($records as $id =>
+			{{-- @foreach ($userlist as $record) --}} @foreach ($userlist as $id =>
 			$record)
 			<tr class="d{{$id+1}}">
 				<td>{{ $id + 1 }}</td>
 				<td>{{ $record->name}}</td>
 				<td>{{ $record->email}}</td>
+				<td>{{ $record->roletag->nametag}}</td>
 
 
 				<td><a href="/save/{{ $record->id }}/edit">編集</a>｜ <a

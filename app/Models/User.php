@@ -11,6 +11,9 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
+    public function roletag(){
+        return $this->belongsTo('App\Models\Nametag','role')->where('groupid', '=', 1);
+    }
 
     /**
      * The attributes that are mass assignable.
