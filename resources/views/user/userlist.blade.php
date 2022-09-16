@@ -11,6 +11,7 @@
 				<th>使用者</th>
 				<th>アドレス</th>
 				<th>権限</th>
+				<th>承認</th>
 				<th></th>
 			</tr>
 			{{-- @foreach ($userlist as $record) --}} @foreach ($userlist as $id =>
@@ -20,6 +21,7 @@
 				<td>{{ $record->name}}</td>
 				<td>{{ $record->email}}</td>
 				<td>{{ $record->roletag->nametag}}</td>
+				<td>{{optional( $record->approvaltag)->nametag}}</td>
 
 
 				<td><a href="/save/{{ $record->id }}/edit">編集</a>｜ <a

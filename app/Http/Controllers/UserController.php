@@ -15,7 +15,7 @@ class UserController extends Controller
     public function userlist(){
 
         $data = ['records' => DB::select(' SELECT * FROM users')];
-        $userlist = user::with('roletag')->get();
+        $userlist = user::with('roletag','approvaltag')->get();
 
         return view('user.userlist',compact('userlist'));
 

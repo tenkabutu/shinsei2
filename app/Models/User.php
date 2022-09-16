@@ -14,6 +14,12 @@ class User extends Authenticatable
     public function roletag(){
         return $this->belongsTo('App\Models\Nametag','role')->where('groupid', '=', 1);
     }
+    public function approvaltag(){
+        return $this->belongsTo('App\Models\Nametag','approval')->where('groupid', '=', 2);
+    }
+    public function areatag(){
+        return $this->belongsTo('App\Models\Nametag','area')->where('groupid', '=', 3);
+    }
 
     /**
      * The attributes that are mass assignable.
