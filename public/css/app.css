@@ -881,7 +881,7 @@ video {
 }.leftNavigation {
   width: 220px;
   text-align: left;
-  background-color: #006200;
+  background-color: #004800;
   color: white;
   padding: 10px;
   border-radius: 5px 0 0 5px;
@@ -939,7 +939,7 @@ video {
 }.leftNavigation span {
   position: relative;
   padding-right: 10px;
-  background-color: green;
+  background-color:#004800;
   z-index: 2;
 }.side_label {
   position: relative;
