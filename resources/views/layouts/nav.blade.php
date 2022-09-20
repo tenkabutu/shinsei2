@@ -30,6 +30,24 @@
 							<td>{{ Auth::user()->name }}</td>
 						</tr>
 					</table>
+					<table>
+						<tr>
+							<th colspan='2'>残有給(持越5日)</th>
+						</tr>
+						<tr>
+							<th width='100'>10日</th>
+							<th>2時間</th>
+						</tr>
+					</table>
+					<table>
+						<tr>
+							<th colspan='2'>未振替</th>
+						</tr>
+						<tr>
+							<th width='30'>9/10</th>
+							<th>5時間</th>
+						</tr>
+					</table>
 				</div>
 				<div class='side_label'>
 					<span>勤務申請</span>

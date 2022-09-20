@@ -52,16 +52,16 @@ body > div {
   box-sizing: border-box;
 }
 #account {
-  margin: 0px 5px 10px;
-  height: 50px;
+  margin: 0px 5px 20px;
+
 }
 nav{
 	font-family: "Meiryo";
 }
 #account table {
-  margin: 0px;
+  margin: 0px 0  5px 0;
   width: 100%;
-  height: 100%;
+  height: 55px;
   text-align: center;
   border-top: 1px solid white;
   border-left: 1px solid white;
