@@ -9,16 +9,19 @@
 			<tr>
 				<th>ID</th>
 				<th>使用者</th>
+				<th>表示名</th>
 				<th>アドレス</th>
 				<th>権限</th>
 				<th>承認</th>
 				<th>地域</th>
+				<th></th>
 			</tr>
 			{{-- @foreach ($userlist as $record) --}}
 			@foreach ($userlist as $id =>$record)
 			<tr class="d{{$id+1}}">
 				<td>{{ $id + 1 }}</td>
 				<td>{{ $record->name}}</td>
+				<td>{{ $record->name2}}</td>
 				<td>{{ $record->email}}</td>
 				@if(Auth::user()->role==3)
 				<td>
@@ -58,7 +61,7 @@
 
 
 
-				<td><button onclick="">編集</button></td>
+				<td><button onclick="">変更</button></td>
 			</tr>
 			@endforeach
 		</table>
