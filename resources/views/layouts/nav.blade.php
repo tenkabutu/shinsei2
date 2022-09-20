@@ -2,7 +2,7 @@
 	<header class="leftNavigation ps{{Auth::user()->id}}_2">
 	<nav>
 		<h4>
-			<a href="/tabusapo_lb/public">
+			<a href="/shinsei2/public">
 
 				<img width="70" alt="" src="/shinsei2/public/img/shinsei.jpg">申請つーる
 
