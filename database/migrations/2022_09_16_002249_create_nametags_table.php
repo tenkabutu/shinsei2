@@ -17,6 +17,7 @@ class CreateNametagsTable extends Migration
             $table->id();
             $table->timestamps();
             $table->string('nametag');
+            $table->integer('tagid');
             $table->integer('groupid')->default(0);
             $table->integer('revision')->default(0);
         });

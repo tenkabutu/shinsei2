@@ -14,15 +14,16 @@ class NametagsTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::insert('INSERT INTO nametags (nametag,groupid,revision)VALUES
-("管理者",1,1),
-("リーダー",1,1),
-("支援員",1,1),
-("すべて",2,1),
-("エリア",2,1),
-("江越",3,1),
-("八代",3,1),
-("山鹿",3,1)
+        DB::insert('INSERT INTO nametags (nametag,tagid,groupid,revision)VALUES
+("管理者",0,1,1),
+("リーダー",1,1,1),
+("支援員",2,1,1),
+("すべて",1,2,1),
+("エリア",2,2,1),
+("なし",0,2,1),
+("江越",0,3,1),
+("八代",1,3,1),
+("山鹿",2,3,1)
 '
 );
     }

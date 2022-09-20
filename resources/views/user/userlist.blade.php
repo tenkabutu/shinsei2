@@ -34,19 +34,31 @@
 				@if(Auth::user()->role==3)
 				<td>
 					<select>
-					<option val=1 @if($record->role==0)select @endif >管理者</option>
-					<option val=2 @if($record->role==0)select @endif >リーダー</option>
-					<option val=3 @if($record->role==0)select @endif >支援員</option>
+					<option val=1 @if($record->approval==1)selected @endif >すべて</option>
+					<option val=2 @if($record->approval==2)selected @endif >エリア</option>
+					<option val=0 @if($record->approval==0)selected @endif >なし</option>
+
 					</select>
 				</td>
 				@else
-				<td>{{ $record->roletag->nametag}}</td>
+				<td>{{ $record->approvaltag->nametag}}</td>
 				@endif
-				<td>{{optional( $record->areatag)->nametag}}</td>
+				@if(Auth::user()->role==3)
+				<td>
+					<select>
+					<option val=0 @if($record->area==0)selected @endif >江越</option>
+					<option val=1 @if($record->area==1)selected @endif >八代</option>
+					<option val=2 @if($record->area==2)selected @endif >山鹿</option>
+
+					</select>
+				</td>
+				@else
+				<td>{{ $record->areatag->nametag}}</td>
+				@endif
 
 
 
-				<td><a href="/save/{{ $record->id }}/edit">編集</a></td>
+				<td><button onclick="">編集</button></td>
 			</tr>
 			@endforeach
 		</table>

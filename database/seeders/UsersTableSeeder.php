@@ -15,7 +15,7 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         DB::insert('INSERT INTO users (name,email,password,approval)VALUES
-("遠藤陽介","tenkabutu100@gmail.com","$2y$10$ZsfBX7D7o61Xz3BUgrUxUOR0YuSfZdqOdswXpe3A2bhsgteUMzGd6",4),
+("遠藤陽介","tenkabutu100@gmail.com","$2y$10$ZsfBX7D7o61Xz3BUgrUxUOR0YuSfZdqOdswXpe3A2bhsgteUMzGd6",1),
 ("一藤 恵","g_ichifuji@ict-ss.com","$2y$10$pRDzBruCmfVtXCk2T3CC3e5I3EdGwYUVL7sc1BYvNcZhVwcp8BdQ2",0),
 ("松金 秀治","g_matsukane@ict-ss.com","$2y$10$dIdhF.NitoS5rLIP4zztGOk.YSmI7.e6C7IaoCDeKW/ANjuZwE56W",0),
 ("林田　菜緒","g_n-hayashida@ict-ss.com","$2y$10$eCcLQjz8xg/vaKedFHLnre.paxBTycaJQVMpN80mC7bb3CV2ullJ",0),

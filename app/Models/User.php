@@ -12,13 +12,13 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
     public function roletag(){
-        return $this->belongsTo('App\Models\Nametag','role')->where('groupid', '=', 1);
+        return $this->belongsTo('App\Models\Nametag','role','tagid')->where('groupid', '=', 1);
     }
     public function approvaltag(){
-        return $this->belongsTo('App\Models\Nametag','approval')->where('groupid', '=', 2);
+        return $this->belongsTo('App\Models\Nametag','approval','tagid')->where('groupid', '=', 2);
     }
     public function areatag(){
-        return $this->belongsTo('App\Models\Nametag','area')->where('groupid', '=', 3);
+        return $this->belongsTo('App\Models\Nametag','area','tagid')->where('groupid', '=', 3);
     }
 
     /**
@@ -28,6 +28,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'name2',
         'email',
         'password',
     ];
