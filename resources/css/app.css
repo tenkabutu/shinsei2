@@ -10,7 +10,7 @@ html {
 body {
     display: block;
     margin: 8px;
-    background-color: #ddd;
+    background-color: #fff;
 }
 
 .result_table input[type="text"]{
@@ -37,20 +37,11 @@ body > div {
 	background-color: #fff;
 	border-radius: 5px;
 	position: relative;
-	display: flex;
+
 	box-shadow: 2px 2px 4px gray;
 }
 
-#wrap main {
-  flex: 1;
-  background-color: #fff;
-  border-radius: 0 5px 5px 0;
-  box-shadow: 2px 2px 4px gray;
-  float:right;
-  width:77%;
-  padding:10px 10px 10px 10px;
-  box-sizing: border-box;
-}
+
 #account {
   margin: 0px 5px 20px;
 
@@ -326,6 +317,54 @@ span.position_right{
 .navbar_menu li a{
 	display: block;
 }
+/* || 申請ツール基本設定 */
+#wrap main {
+  flex: 1;
+  background-color: #e3e2ed;
+  border-radius: 0 5px 5px 0;
+  box-shadow: 2px 2px 4px gray;
+  float:right;
+  width:77%;
+  padding:10px 10px 10px 10px;
+  box-sizing: border-box;
+}
+#shinsei_wrap{
+	margin:0 70px;
+}
+#shinsei_wrap label{
+	font-size:13px;
+
+}
+#shinsei_wrap fieldset{
+	border-radius: 5px;
+	border:none;
+	background-color: #fafafa;
+	padding: 5px 0 5px 10px;
+}
+#shinsei_wrap section{
+	margin:0 0 20px;
+}
+#shinsei_wrap section p{
+	text-align:center;
+	margin:0px;
+	font-size:12px;
+}
+#shinsei_wrap fieldset>div{
+	padding:5px 20px 5px 0;
+	display:grid;
+}
+#shinsei_wrap fieldset>div:not(:last-child){
+	border-bottom:1px solid #b1b1be;
+}
+/* || 見出し操作 */
+
+#shinsei_wrap h3{
+	text-align: center;
+}
+#shinsei_wrap h5{
+	margin:0px;
+	color:gray;
+}
 /* || table */
 table {
 	font-size:12px;
@@ -384,4 +423,8 @@ table select{
 }
 .clearfix {
 	display: block;
+}
+
+.text_right{
+	text-align: right;
 }

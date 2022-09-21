@@ -55,7 +55,7 @@
 				<ul>
 
 					<li><a href="/shinsei2/public/user" >休暇申請(未実装)</a></li>
-					<li><a href="/shinsei2/public/user" >時間外・振替申請(未実装)</a></li>
+					<li><a href="/shinsei2/public/create_ov" >振替申請</a></li>
 					<li><a href="/shinsei2/public/user" >テレワーク申請(未実装)</a></li>
 
 					<li><a href="/tabusapo_lb/public/category" >申請一覧(未実装)</a></li>

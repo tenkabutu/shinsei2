@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\OverWorkController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,6 +16,8 @@ use App\Http\Controllers\UserController;
 */
 
 Route::get('user',[UserController::class,'userlist']);
+Route::get('create_ov',[OverWorkController::class,'create']);
+
 Route::get('/', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
