@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->integer('role')->default(3);
             $table->integer('approval')->default(0);
             $table->integer('area')->default(0);
+            $table->integer('work_type_id')->default(0);
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
