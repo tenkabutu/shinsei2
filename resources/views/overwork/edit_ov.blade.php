@@ -154,19 +154,20 @@
 						<label class="g12">振替時間</label>
 						<label class="time_alert g23"></label><label class="hour3 g34"></label><label class="minutes3 g45"></label>
 					</div>
-					<div>
+					<div class="grid_wrap2"  id="grid_reception">
 
 						<label class="g12" for="order_content">振替理由　　：</label>
 						<textarea class="g23"id="order_content" name ="order_content"  rows="3" cols="60"></textarea>
 					</div>
 
-					<div>
+					<div class="grid_wrap2"  id="grid_reception">
 
 						<label class="g12" for="order_content">予定業務内容：</label>
 						<textarea class="g23"id="order_content" name ="order_content"  rows="3" cols="60"></textarea>
-					</div>
-					<!-- <div>
-						<div class="grid_wide">
+
+
+					</div><div class="grid_wrap2"  id="grid_reception">
+					<div class="grid_wide">
 							<label for="device_model">オプション1</label>
 							<input id="device_model" name="etc1" type="hidden" value="null">
 							<input id="device_model" name="etc1" type="checkbox" value="1"
@@ -183,47 +184,19 @@
 							<input id="device_model" name="etc4" type="hidden" value="null">
 							<input id="device_model" name="etc4" type="checkbox" value="1"
 							 @if(old('etc4'))checked="checked"@else @endif />
-						</div>
-					</div> -->
+						</div></div>
 				</fieldset>
 			</section>
 			<section>
 			<h5>　振替休暇情報</h5>
 				<fieldset>
-					<div>
+					<div class="grid_wrap2"  id="grid_reception">
 						<label class="g12">振替予定日</label>
-						<input type="text" class="g23 target2" name="reception_date" autocomplete="off">
+						<input type="text" id="target" name="reception_date" autocomplete="off">
 					</div>
-					<div>
-						<label class="g12">開始時間</label>
-						<div class="g23">
-						<input type="number"  name="hour3" autocomplete="off" >
-						<input type="number"  name="minutes3" autocomplete="off" >
-						</div>
-						<label class="g34">終了時間</label>
-						<div class="g45">
-						<input type="number"  name="hour4" autocomplete="off" >
-						<input type="number" readonly="readonly" name="minutes4" autocomplete="off" >
-						</div>
-
-						<label class="g56">休憩時間</label>
-						<div class="g67">
-						<input type="number"  name="break" autocomplete="off" >
-
-						</div>
-					</div>
-					<div>
+					<div class="grid_wrap2"  id="grid_reception">
 
 						<div class="g23 text_right"><button>＋</button></div>
-					</div>
-				</fieldset>
-			</section>
-			<section>
-
-				<fieldset>
-					<div>
-						<button class="g12">保存</button>
-						<button class="g23">保存&申請</button>
 					</div>
 				</fieldset>
 			</section>

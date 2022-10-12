@@ -28,8 +28,8 @@ class AppServiceProvider extends ServiceProvider
         Blade::directive('hour', function ($expression) {
             return "<?php echo ($expression)->format('G'); ?>";
         });
-            Blade::directive('minutes', function ($expression) {
-                return "<?php echo ($expression)->format('i'); ?>";
-            });
+        Blade::directive('minutes', function ($expression) {
+            return "<?php echo ($expression)->format('i'); ?>";
+        });
     }
 }
