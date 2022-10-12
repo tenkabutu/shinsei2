@@ -14,6 +14,7 @@
 				<th>権限</th>
 				<th>承認</th>
 				<th>地域</th>
+				<th>勤務時間</th>
 				<th></th>
 			</tr>
 			{{-- @foreach ($userlist as $record) --}}
@@ -58,7 +59,21 @@
 				@else
 				<td>{{ $record->areatag->nametag}}</td>
 				@endif
+				@if(Auth::user()->role==3)
+				<td>
+					<select>
+					<option val=0 @if($record->worktype_id==0)selected @endif >未設定</option>
+					<option val=1 @if($record->worktype_id==1)selected @endif >9時-18時:8</option>
+					<option val=2 @if($record->worktype_id==2)selected @endif >8時半-17時:7.5</option>
+					<option val=3 @if($record->worktype_id==3)selected @endif >9時-17時:7</option>
+					<option val=4 @if($record->worktype_id==4)selected @endif >10時-18時:7</option>
+					<option val=5 @if($record->worktype_id==5)selected @endif >8時半-16時半:7</option>
 
+					</select>
+				</td>
+				@else
+				<td>{{optional( $record->worktype)->worktype}}</td>
+				@endif
 
 
 				<td><button onclick="">変更</button></td>

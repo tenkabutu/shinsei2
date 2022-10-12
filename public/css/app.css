@@ -509,6 +509,13 @@ span.position_right{
 }
 
 
+input[type="number"]{
+	width:35px;
+	font-size:16px;
+	font-weight: bold;
+}
+
+
 /* || 見出し操作 */
 
 
@@ -593,6 +600,12 @@ div.grid_wide{
 
 
 .g45{grid-column:4/5;}
+
+
+.g56{grid-column:5/6;}
+
+
+.g67{grid-column:6/7;}
 
 
 .g13{grid-column:1/3;}

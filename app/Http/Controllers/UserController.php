@@ -15,7 +15,7 @@ class UserController extends Controller
     public function userlist(){
 
 
-        $userlist = user::with('roletag','approvaltag','areatag')->get();
+        $userlist = user::with('roletag','approvaltag','areatag','worktype')->get();
 
         return view('user.userlist',compact('userlist'));
 

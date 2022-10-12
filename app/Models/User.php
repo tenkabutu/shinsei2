@@ -20,6 +20,9 @@ class User extends Authenticatable
     public function areatag(){
         return $this->belongsTo('App\Models\Nametag','area','tagid')->where('groupid', '=', 3);
     }
+    public function worktype(){
+        return $this->belongsTo('App\Models\WorkType');
+    }
 
     /**
      * The attributes that are mass assignable.

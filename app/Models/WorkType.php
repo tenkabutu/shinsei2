@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class WorkType extends Model
 {
     use HasFactory;
+    protected $table = 'worktypes';
+    protected $dates = ['setdate1','setdate2'];
 }

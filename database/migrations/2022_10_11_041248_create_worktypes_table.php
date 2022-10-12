@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateWorkTypesTable extends Migration
+class CreateWorktypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,15 @@ class CreateWorkTypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('work_types', function (Blueprint $table) {
+        Schema::create('worktypes', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->string('worktype');
             $table->Time('setdate1')->nullable();
             $table->Time('setdate2')->nullable();
-            $table->float('hours')->default(0)->nullable();
+            $table->integer('hours')->default(0)->nullable();
+            $table->integer('minutes')->default(0)->nullable();
             $table->integer('break')->default(60)->nullable();
-
         });
     }
 
@@ -32,6 +32,6 @@ class CreateWorkTypesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('work_types');
+        Schema::dropIfExists('worktypes');
     }
 }
