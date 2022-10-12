@@ -36,7 +36,7 @@ class OverWorkController extends Controller
         if($request->etc3==1){
             $request->merge(['delivery_order' =>$date]);
         } */
-
+        $matter = new Matter();
         $matter ->fill($request->except('_token'))->save();
         /* $id = $matter->id;
         $category =new category();

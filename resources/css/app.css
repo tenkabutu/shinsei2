@@ -361,6 +361,11 @@ input[type="number"]{
 	font-size:16px;
 	font-weight: bold;
 }
+select{
+	width:45px;
+	font-size:16px;
+	font-weight: bold;
+}
 /* || 見出し操作 */
 
 #shinsei_wrap h3{

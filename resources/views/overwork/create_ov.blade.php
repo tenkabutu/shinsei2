@@ -51,6 +51,10 @@
 					<div class="g12"><label>振替作業申請</label></div>
 					<div class="g23 text_right">許可済み</div>
 				</div>
+			</fieldset>
+		</section>
+		<section>
+			<fieldset>
 				<div>
 					<div class="g12"><label>振替休暇時間1</label></div>
 					<div class="g23 text_right">10月5日：4時間</div>
@@ -125,29 +129,34 @@
 
 		<form action="matter/store" method="post"  class="repeater"  onsubmit="return false;">
 			@csrf
+			<input type="hidden" name="user_id" value="{{Auth::user()->id}}">
 			<!-- onsubmit="return false;"  -->
 			<section>
 			<h5>　振替作業情報</h5>
 				<fieldset>
 					<div>
 						<label class="g12">振替予定日</label>
-						<input type="text" class="target2 g23" name="reception_date" autocomplete="off">
+						<input type="text" class="target2 g23" name="matter_change_date" autocomplete="off">
 					</div>
 					<div>
 						<label class="g12">開始時間</label>
 						<div class="g23">
-						<input type="number"  name="hour1" autocomplete="off" value="@hour($user->worktype->setdate1)">
-						<input type="number"  name="minutes1" autocomplete="off" value="@minutes($user->worktype->setdate1)">
+						<input type="number"  name="hour1"   autocomplete="off" value="@hour($user->worktype->setdate1)">
+						<input type="number"  name="minutes1" min="0" max="59" autocomplete="off" value="@minutes($user->worktype->setdate1)">
 						</div>
 						<label class="g34">終了時間</label>
 						<div class="g45">
-						<input type="number"  name="hour2" autocomplete="off" value="@hour($user->worktype->setdate2)">
-						<input type="number" readonly="readonly" name="minutes2" autocomplete="off" value="@minutes($user->worktype->setdate2)">
+						<input type="number"  name="hour2"  autocomplete="off" value="@hour($user->worktype->setdate2)">
+
+						<select name="minutes2">
+							<option class="mdef1" @if($user->worktype->minutes==0) selected @endif>0</option>
+							<option class="mdef2" @if($user->worktype->minutes==30) selected @endif>30</option>
+						</select>
 						</div>
 
 						<label class="g56">休憩時間</label>
 						<div class="g67">
-						<input type="number"  name="break" autocomplete="off" value="{{$user->worktype->break}}">
+						<input type="number"  name="break" max="60" autocomplete="off" value="{{$user->worktype->break}}">
 
 						</div>
 					</div>
@@ -208,7 +217,7 @@
 								<label class="g34">終了時間</label>
 								<div class="g45">
 									<input type="number" name="hour5" autocomplete="off">
-									<input type="number" readonly="readonly" name="minutes5" autocomplete="off">
+									<input type="number" step="30" name="minutes5" autocomplete="off">
 								</div>
 
 								<label class="g56">休憩時間</label>
@@ -217,7 +226,7 @@
 								</div>
 							</div>
 							<div class="grid">
-								<label class="g12">振替時間</label> <label class="time_alert g23"></label><label class="hour6 g34"></label><label class="minutes6 g45"></label>
+								<label class="g12">振替時間</label><label class="hour6 g34"></label><label class="minutes6 g45"></label>
 
 							</div>
 
@@ -262,17 +271,30 @@ $(function(){
 	        }
 	      }});
 
-	$('input[type="number"]').bind('input', function () {
+	$('input[type="number"],select[name="minutes2"]').bind('input', function () {
 		var h1 = $('input[name="hour1"]').val()- 0;
 		var h2 = $('input[name="hour2"]').val()- 0;
 		var m1 = $('input[name="minutes1"]').val()- 0;
-		var m2 = $('input[name="minutes2"]').val()- 0;
+		var mdf1 =$('.mdef1').val()-0;
+		$('.mdef1').text(m1);
+		if(m1<30){
+			$('.mdef2').text(m1+30);
+		}else{
+			$('.mdef2').text(m1-30);
+		}
+		var m2 = $('select[name="minutes2"]').val()- 0;
 		var bt = $('input[name="break"]').val()- 0;
+
 		var mt = ((h2*60+m2)-(h1*60+m1))-bt;
 
 		var wt = Math.floor(mt/60);
 		var lt = mt%60;
-
+		if(wt>4){
+			$('input[name="break"]').val('60');
+			mt = ((h2*60+m2)-(h1*60+m1))-60;
+			wt = Math.floor(mt/60);
+			lt = mt%60;
+		}
 		$('label.hour3').text(wt+'時間');
 		$('label.minutes3').text(lt+'分');
 		if(wt>{{$user->worktype->hours}}){
@@ -282,10 +304,8 @@ $(function(){
 		}else{
 			$('label.time_alert').text('');
 			}
-
-
-
 	});
+
 
  });
 </script>

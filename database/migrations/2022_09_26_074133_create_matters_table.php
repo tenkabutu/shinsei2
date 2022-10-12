@@ -22,6 +22,8 @@ class CreateMattersTable extends Migration
             $table->dateTime('matter_request_date')->nullable();;
             $table->dateTime('matter_reply_date')->nullable();;
             $table->dateTime('matter_change_date');
+            $table->dateTime('setdate1');
+            $table->dateTime('setdate2');
             $table->string('order_content');
             $table->string('work_content')->nullable();
             $table->integer('status')->default(0)->nullable();
