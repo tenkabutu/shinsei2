@@ -554,6 +554,11 @@ table select{
 /* || grid */
 
 
+.grid{
+	display: grid;
+}
+
+
 .grid_wrap ,.grid_wrap2,.grid_wrap3,.grid_wrap4{
     display: grid;
     width:100%;

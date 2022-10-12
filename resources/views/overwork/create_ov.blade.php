@@ -3,6 +3,7 @@
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+	<script src='/shinsei2/public/js/jquery.repeater.js'></script>
 	<script>
    $(function() {
 	   $.datetimepicker.setLocale('ja');
@@ -122,7 +123,7 @@
 
 
 
-		<form action="matter/store" method="post">
+		<form action="matter/store" method="post"  class="repeater"  onsubmit="return false;">
 			@csrf
 			<!-- onsubmit="return false;"  -->
 			<section>
@@ -152,7 +153,8 @@
 					</div>
 					<div>
 						<label class="g12">振替時間</label>
-						<label class="time_alert g23"></label><label class="hour3 g34"></label><label class="minutes3 g45"></label>
+						<label class="time_alert g23"></label><label class="hour3 g34">{{$user->worktype->hours}}時間</label>
+						<label class="minutes3 g45">{{$user->worktype->minutes}}分</label>
 					</div>
 					<div>
 
@@ -189,34 +191,50 @@
 			</section>
 			<section>
 			<h5>　振替休暇情報</h5>
+
 				<fieldset>
-					<div>
-						<label class="g12">振替予定日</label>
-						<input type="text" class="g23 target2" name="reception_date" autocomplete="off">
+					<div data-repeater-list>
+						<div data-repeater-item>
+							<div class="grid">
+								<label class="g12">振替予定日</label>
+								<input type="text" class="g23 target2" name="reception_date" autocomplete="off">
+							</div>
+							<div class="grid">
+								<label class="g12">開始時間</label>
+								<div class="g23">
+									<input type="number" name="hour4" autocomplete="off">
+									<input type="number" name="minutes4" autocomplete="off">
+								</div>
+								<label class="g34">終了時間</label>
+								<div class="g45">
+									<input type="number" name="hour5" autocomplete="off">
+									<input type="number" readonly="readonly" name="minutes5" autocomplete="off">
+								</div>
+
+								<label class="g56">休憩時間</label>
+								<div class="g67">
+									<input type="number" name="break" autocomplete="off">
+								</div>
+							</div>
+							<div class="grid">
+								<label class="g12">振替時間</label> <label class="time_alert g23"></label><label class="hour6 g34"></label><label class="minutes6 g45"></label>
+
+							</div>
+
+						</div>
 					</div>
 					<div>
-						<label class="g12">開始時間</label>
-						<div class="g23">
-						<input type="number"  name="hour3" autocomplete="off" >
-						<input type="number"  name="minutes3" autocomplete="off" >
-						</div>
-						<label class="g34">終了時間</label>
-						<div class="g45">
-						<input type="number"  name="hour4" autocomplete="off" >
-						<input type="number" readonly="readonly" name="minutes4" autocomplete="off" >
-						</div>
 
-						<label class="g56">休憩時間</label>
-						<div class="g67">
-						<input type="number"  name="break" autocomplete="off" >
-
+						<div class="g23 text_right">
+							<button data-repeater-create>＋</button>
 						</div>
 					</div>
 					<div>
-
-						<div class="g23 text_right"><button>＋</button></div>
+						<label class="g12">合計振替休暇時間</label>
+						<div class="g23 text_right">○時間</div>
 					</div>
 				</fieldset>
+
 			</section>
 			<section>
 
@@ -225,6 +243,7 @@
 						<button class="g12">保存</button>
 						<button class="g23">保存&申請</button>
 					</div>
+
 				</fieldset>
 			</section>
 		</form>
@@ -237,6 +256,11 @@
 <script>
 
 $(function(){
+	$('.repeater').repeater({hide: function (deleteElement) {
+	      if(confirm('削除してもいいですか？')) {
+	          $(this).slideUp(deleteElement);
+	        }
+	      }});
 
 	$('input[type="number"]').bind('input', function () {
 		var h1 = $('input[name="hour1"]').val()- 0;
@@ -249,8 +273,8 @@ $(function(){
 		var wt = Math.floor(mt/60);
 		var lt = mt%60;
 
-		$('label.hour3').text(wt);
-		$('label.minutes3').text(lt);
+		$('label.hour3').text(wt+'時間');
+		$('label.minutes3').text(lt+'分');
 		if(wt>{{$user->worktype->hours}}){
 			$('label.time_alert').text('設定時間オーバー');
 		}else if(wt=={{$user->worktype->hours}}&&lt>{{$user->worktype->minutes}}){
