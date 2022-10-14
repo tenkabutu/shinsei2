@@ -12,15 +12,14 @@
 
 	  $('.target2').datetimepicker({
 		  scrollMonth : false,
-		   scrollInput : false,
+		  scrollInput : false,
 		  timepicker:false,
 	      format:'Y/n/j'
 		});
 	  $('.target3').datetimepicker({
 		  scrollMonth : false,
-		   scrollInput : false,
-
-	      format:'h:m'
+		  scrollInput : false,
+		  format:'h:m'
 		});
 	});
 	</script>
@@ -31,86 +30,24 @@
 <div class="main_right">
 	<div id="shinsei_wrap">
 
+		@if(isset($matter->status))
 		<h3>振替申請</h3>
-		@if (count($errors) > 0)
-		<ul>
-			@foreach($errors->all() as $err)
-			<li class="text-danger">{{ $err }}</li> @endforeach
-		</ul>
+		<p>作成日:{{$matter->created_at}}　　更新日:{{$matter->updated_at}}</p>
+			<x-change-status/>
+		@else
+		<h3>新規振替申請</h3>
 		@endif
 
-		<section>
-			<h5>　申請状況</h5>
-			<fieldset>
+			<ul>
+				@foreach($errors->all() as $err)
+				<li class="text-danger">{{ $err }}</li> @endforeach
+			</ul>
 
-				<div>
-					<div class="g12"><label>振替作業時間</label></div>
-					<div class="g23 text_right">9月2日：8時間</div>
-				</div>
-				<div>
-					<div class="g12"><label>振替作業申請</label></div>
-					<div class="g23 text_right">許可済み</div>
-				</div>
-			</fieldset>
-		</section>
-		<section>
-			<fieldset>
-				<div>
-					<div class="g12"><label>振替休暇時間1</label></div>
-					<div class="g23 text_right">10月5日：4時間</div>
-				</div>
-				<div>
-					<div class="g12"><label>振替休暇申請1</label></div>
-					<div class="g23 text_right">許可済み</div>
-				</div>
-				<div>
-					<div class="g12"><label>振替休暇時間2</label></div>
-					<div class="g23 text_right">10月5日：2時間</div>
-				</div>
-				<div>
-					<div class="g12"><label>振替休暇申請2</label></div>
-					<div class="g23 text_right">申請中</div>
-				</div>
-				<div>
-					<div class="g12"><label>残り振替休暇時間</label></div>
-					<div class="g23 text_right">2時間</div>
-				</div>
+		<x-user-box :userdata="$user"/>
 
-
-			</fieldset>
-			<p>申請中・申請後に設定時間を変更すると再度申請が必要になります。</p>
-
-		</section>
-
-		<section>
-			<h5>　申請情報</h5>
-			<fieldset>
-
-
-				<div>
-					<div class="g12"><label>申請日</label></div>
-					<div class="g23 text_right">text</div>
-				</div>
-				<div>
-					<div class="g12"><label>社員番号</label></div>
-					<div class="g23 text_right">{{Auth::user()->id}}</div>
-				</div>
-				<div>
-					<div class="g12"><label>申請者</label></div>
-					<div class="g23 text_right">{{Auth::user()->name}}</div>
-				</div>
-				<div>
-					<div class="g12"><label>所属</label></div>
-					<div class="g23 text_right">{{ $user->areatag->nametag}}</div>
-				</div>
-			</fieldset>
-		</section>
 		<section>
 			<h5>　通知</h5>
 			<fieldset>
-
-
-
 				<div>
 					<div class="g12"><label>承認者</label></div>
 					<div class="g23 text_right">水田浩子</div>
@@ -122,82 +59,20 @@
 
 			</fieldset>
 		</section>
-
-
-
-
-
-		<form action="matter/store" method="post"  class="repeater"  onsubmit="return false;">
+		<form  method="post" action="save_ov" class="repeater"  >
 			@csrf
 			<input type="hidden" name="user_id" value="{{Auth::user()->id}}">
+			<input type="hidden" name="matter_type" value="1">
+			<input type="hidden" name="starttime" value="@hour($user->worktype->setdate1):@minutes($user->worktype->setdate1):00">
+			<input type="hidden" name="endtime" value="@hour($user->worktype->setdate2):@minutes($user->worktype->setdate2):00">
 			<!-- onsubmit="return false;"  -->
-			<section>
-			<h5>　振替作業情報</h5>
-				<fieldset>
-					<div>
-						<label class="g12">振替予定日</label>
-						<input type="text" class="target2 g23" name="matter_change_date" autocomplete="off">
-					</div>
-					<div>
-						<label class="g12">開始時間</label>
-						<div class="g23">
-						<input type="number"  name="hour1"   autocomplete="off" value="@hour($user->worktype->setdate1)">
-						<input type="number"  name="minutes1" min="0" max="59" autocomplete="off" value="@minutes($user->worktype->setdate1)">
-						</div>
-						<label class="g34">終了時間</label>
-						<div class="g45">
-						<input type="number"  name="hour2"  autocomplete="off" value="@hour($user->worktype->setdate2)">
+			@if(isset($matter))
+				<x-matter-rewrite-box :userdata="$user" :matter="$matter"/>
+			@else
+				<x-matter-box :userdata="$user"/>
+			@endif
 
-						<select name="minutes2">
-							<option class="mdef1" @if($user->worktype->minutes==0) selected @endif>0</option>
-							<option class="mdef2" @if($user->worktype->minutes==30) selected @endif>30</option>
-						</select>
-						</div>
 
-						<label class="g56">休憩時間</label>
-						<div class="g67">
-						<input type="number"  name="break" max="60" autocomplete="off" value="{{$user->worktype->break}}">
-
-						</div>
-					</div>
-					<div>
-						<label class="g12">振替時間</label>
-						<label class="time_alert g23"></label><label class="hour3 g34">{{$user->worktype->hours}}時間</label>
-						<label class="minutes3 g45">{{$user->worktype->minutes}}分</label>
-					</div>
-					<div>
-
-						<label class="g12" for="order_content">振替理由　　：</label>
-						<textarea class="g23"id="order_content" name ="order_content"  rows="3" cols="60"></textarea>
-					</div>
-
-					<div>
-
-						<label class="g12" for="order_content">予定業務内容：</label>
-						<textarea class="g23"id="order_content" name ="order_content"  rows="3" cols="60"></textarea>
-					</div>
-					<!-- <div>
-						<div class="grid_wide">
-							<label for="device_model">オプション1</label>
-							<input id="device_model" name="etc1" type="hidden" value="null">
-							<input id="device_model" name="etc1" type="checkbox" value="1"
-							 @if(old('etc1')) checked="checked"@else @endif />
-							<label for="device_model">　オプション2</label>
-							<input id="device_model" name="etc2" type="hidden" value="null">
-							<input id="device_model" name="etc2" type="checkbox" value="1"
-							 @if(old('etc2')) checked="checked"@else @endif />
-							<label for="device_model">　オプション3</label>
-							<input id="device_model" name="etc3" type="hidden" value="null">
-							<input id="device_model" name="etc3" type="checkbox" value="1"
-							 @if(old('etc3'))checked="checked"@else @endif />
-							 <label for="device_model">　オプション4</label>
-							<input id="device_model" name="etc4" type="hidden" value="null">
-							<input id="device_model" name="etc4" type="checkbox" value="1"
-							 @if(old('etc4'))checked="checked"@else @endif />
-						</div>
-					</div> -->
-				</fieldset>
-			</section>
 			<section>
 			<h5>　振替休暇情報</h5>
 
@@ -235,7 +110,7 @@
 					<div>
 
 						<div class="g23 text_right">
-							<button data-repeater-create>＋</button>
+							<span data-repeater-create>＋</span>
 						</div>
 					</div>
 					<div>
@@ -245,36 +120,37 @@
 				</fieldset>
 
 			</section>
-			<section>
+			@if(isset($matter))
+				@if($matter->user_id==Auth::user()->id)
+			<x-save-box :status="$matter->status"/>
+				@endif
+			@else
+			<x-save-box :status="0"/>
+			@endif
 
-				<fieldset>
-					<div>
-						<button class="g12">保存</button>
-						<button class="g23">保存&申請</button>
-					</div>
-
-				</fieldset>
-			</section>
 		</form>
-
-
-</div>
 	</div>
+</div>
 
 
 <script>
+function setAction(url) {
+    $('form').attr('action', url);
 
+    $('form').submit();
+}
 $(function(){
 	$('.repeater').repeater({hide: function (deleteElement) {
 	      if(confirm('削除してもいいですか？')) {
 	          $(this).slideUp(deleteElement);
 	        }
-	      }});
+	}});
 
-	$('input[type="number"],select[name="minutes2"]').bind('input', function () {
-		var h1 = $('input[name="hour1"]').val()- 0;
-		var h2 = $('input[name="hour2"]').val()- 0;
-		var m1 = $('input[name="minutes1"]').val()- 0;
+
+	$('input[type="number"],select.minutes2').bind('input', function () {
+		var h1 = $('input.hour1').val()- 0;
+		var h2 = $('input.hour2').val()- 0;
+		var m1 = $('input.minutes1').val()- 0;
 		var mdf1 =$('.mdef1').val()-0;
 		$('.mdef1').text(m1);
 		if(m1<30){
@@ -282,11 +158,9 @@ $(function(){
 		}else{
 			$('.mdef2').text(m1-30);
 		}
-		var m2 = $('select[name="minutes2"]').val()- 0;
+		var m2 = $('select.minutes2').val()- 0;
 		var bt = $('input[name="break"]').val()- 0;
-
 		var mt = ((h2*60+m2)-(h1*60+m1))-bt;
-
 		var wt = Math.floor(mt/60);
 		var lt = mt%60;
 		if(wt>4){
@@ -297,6 +171,8 @@ $(function(){
 		}
 		$('label.hour3').text(wt+'時間');
 		$('label.minutes3').text(lt+'分');
+		$('input[name="starttime"]').val(h1+":"+m1+":00");
+		$('input[name="endtime"]').val(h2+":"+m2+":00");
 		if(wt>{{$user->worktype->hours}}){
 			$('label.time_alert').text('設定時間オーバー');
 		}else if(wt=={{$user->worktype->hours}}&&lt>{{$user->worktype->minutes}}){
@@ -305,8 +181,6 @@ $(function(){
 			$('label.time_alert').text('');
 			}
 	});
-
-
  });
 </script>
 </x-app-layout>

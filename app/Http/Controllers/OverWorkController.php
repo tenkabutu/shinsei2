@@ -22,12 +22,13 @@ class OverWorkController extends Controller
         return view('overwork.create_ov',compact('user'));
 
     }
-    public function store(Request $request){
+    public function save(Request $request){
+
         $request->validate([
+                'matter_change_date' => ['required', 'string', 'max:55'],
                 'order_content' => ['required', 'string', 'max:255'],
-                'reception_date' => ['required', 'string', 'max:255'],
-                'school_id' => ['required', 'integer', 'max:255']
-                //'email' => ['required', 'string', 'email', 'max:255', 'unique:users']
+                //'user_id' => ['required', 'integer', 'max:255']
+                //'starttime' => ['required', 'string', 'email', 'max:255', 'unique:users']
 
         ]);
         //var_dump($request->device_name);
@@ -53,6 +54,32 @@ class OverWorkController extends Controller
         //event(new Registered($user));
 
         //@foreach ($records as $id =>$record)
-        return  redirect('overwork/'.$id.'/edit_ov');
+        return  redirect($id.'/rewrite_ov');
     }
+    public function save_request(Request $request){
+        $request->validate([
+                'matter_change_date' => ['required', 'string', 'max:55'],
+                'order_content' => ['required', 'string', 'max:255'],
+
+        ]);
+        $matter = new Matter();
+        $request->merge(['status' =>2]);
+        $date=Carbon::now()->toDateTimeString();
+        $request->merge(['matter_request_date' =>$date]);
+        $matter ->fill($request->except('_token'))->save();
+        $request->session()->regenerateToken();
+        $id = $matter->id;
+        return  redirect($id.'/rewrite_ov');
+    }
+    public function show_ov($id){
+
+        $matter = matter::findOrFail($id);
+
+        $user=user::with('roletag','approvaltag','areatag','worktype')->findOrFail(Auth::user()->id);
+
+        return view('overwork.create_ov',compact('user','matter'));
+
+
+    }
+
 }

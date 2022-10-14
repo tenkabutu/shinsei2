@@ -17,6 +17,13 @@ use App\Http\Controllers\OverWorkController;
 
 Route::get('user',[UserController::class,'userlist']);
 Route::get('create_ov',[OverWorkController::class,'create']);
+Route::get('{id}/rewrite_ov',[OverWorkController::class,'show_ov']);
+
+Route::post('save_ov',[OverWorkController::class,'save']);
+Route::post('save_request_ov',[OverWorkController::class,'save_request']);
+
+Route::post('{id}/save_ov',[OverWorkController::class,'save']);
+Route::post('{id}/save_request_ov',[OverWorkController::class,'save_request']);
 
 Route::get('/', function () {
     return view('dashboard');
