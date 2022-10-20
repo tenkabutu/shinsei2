@@ -71,6 +71,35 @@ class OverWorkController extends Controller
         $id = $matter->id;
         return  redirect($id.'/rewrite_ov');
     }
+
+    public function update(Request $request,$id){
+        $request->validate([
+                'matter_change_date' => ['required', 'string', 'max:55'],
+                'order_content' => ['required', 'string', 'max:255'],
+
+        ]);
+        $request->merge(['status' =>2]);
+        $date=Carbon::now()->toDateTimeString();
+        $request->merge(['matter_request_date' =>$date]);
+        $matter =matter::find($id)
+        ->fill($request->except('_token'))->save();
+        $request->session()->regenerateToken();
+        //$id = $matter->id;
+        return  redirect($id.'/rewrite_ov');
+    }
+    public function update_request(Request $request,$id){
+        $request->validate([
+                'matter_change_date' => ['required', 'string', 'max:55'],
+                'order_content' => ['required', 'string', 'max:255'],
+
+        ]);
+        $request->merge(['status' =>2]);
+        $matter =matter::find($id)
+        ->fill($request->except('_token'))->save();
+        $request->session()->regenerateToken();
+        $id = $matter->id;
+        return  redirect($id.'/rewrite_ov');
+    }
     public function show_ov($id){
 
         $matter = matter::findOrFail($id);

@@ -58,7 +58,7 @@
 					<li><a href="/shinsei2/public/create_ov" >振替申請</a></li>
 					<li><a href="/shinsei2/public/user" >テレワーク申請(未実装)</a></li>
 
-					<li><a href="/tabusapo_lb/public/category" >申請一覧(未実装)</a></li>
+					<li><a href="/shinsei2/public/matter_search" >申請一覧</a></li>
 				</ul>
 				<div class='side_label'>
 					<span>貸出申請</span>

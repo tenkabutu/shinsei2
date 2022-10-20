@@ -24,20 +24,17 @@
 	});
 	</script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.css">
-
 </x-slot>
 
 <div class="main_right">
 	<div id="shinsei_wrap">
-
 		@if(isset($matter->status))
 		<h3>振替申請</h3>
 		<p>作成日:{{$matter->created_at}}　　更新日:{{$matter->updated_at}}</p>
-			<x-change-status/>
+			<x-change-status :matter="$matter" />
 		@else
 		<h3>新規振替申請</h3>
 		@endif
-
 			<ul>
 				@foreach($errors->all() as $err)
 				<li class="text-danger">{{ $err }}</li> @endforeach
@@ -62,17 +59,23 @@
 		<form  method="post" action="save_ov" class="repeater"  >
 			@csrf
 			<input type="hidden" name="user_id" value="{{Auth::user()->id}}">
-			<input type="hidden" name="matter_type" value="1">
-			<input type="hidden" name="starttime" value="@hour($user->worktype->setdate1):@minutes($user->worktype->setdate1):00">
-			<input type="hidden" name="endtime" value="@hour($user->worktype->setdate2):@minutes($user->worktype->setdate2):00">
+
+
 			<!-- onsubmit="return false;"  -->
 			@if(isset($matter))
+				<input type="hidden" name="starttime" value="@hour($matter->starttime):@minutes($matter->starttime):00">
+				<input type="hidden" name="endtime" value="@hour($matter->endtime):@minutes($matter->endtime):00">
+				<input type="hidden" name="allotted" value="{{$matter->allotted}}">
+				<!-- <input type="hidden" name="matter_type" value="{{$matter->matter_type}}"> -->
 				<x-matter-rewrite-box :userdata="$user" :matter="$matter"/>
+
 			@else
+				<input type="hidden" name="starttime" value="@hour($user->worktype->setdate1):@minutes($user->worktype->setdate1):00">
+				<input type="hidden" name="endtime" value="@hour($user->worktype->setdate2):@minutes($user->worktype->setdate2):00">
+				<input type="hidden" name="allotted" value="{{$user->worktype->hours*60+$user->worktype->minutes}}">
+				<input type="hidden" name="matter_type" value="1">
 				<x-matter-box :userdata="$user"/>
 			@endif
-
-
 			<section>
 			<h5>　振替休暇情報</h5>
 
@@ -97,7 +100,7 @@
 
 								<label class="g56">休憩時間</label>
 								<div class="g67">
-									<input type="number" name="break" autocomplete="off">
+									<input type="number" name="break1" autocomplete="off">
 								</div>
 							</div>
 							<div class="grid">
@@ -159,18 +162,19 @@ $(function(){
 			$('.mdef2').text(m1-30);
 		}
 		var m2 = $('select.minutes2').val()- 0;
-		var bt = $('input[name="break"]').val()- 0;
+		var bt = $('input[name="breaktime"]').val()- 0;
 		var mt = ((h2*60+m2)-(h1*60+m1))-bt;
 		var wt = Math.floor(mt/60);
 		var lt = mt%60;
 		if(wt>4){
-			$('input[name="break"]').val('60');
+			$('input[name="breaktime"]').val('60');
 			mt = ((h2*60+m2)-(h1*60+m1))-60;
 			wt = Math.floor(mt/60);
 			lt = mt%60;
 		}
 		$('label.hour3').text(wt+'時間');
 		$('label.minutes3').text(lt+'分');
+		$('input[name="allotted"]').val(mt);
 		$('input[name="starttime"]').val(h1+":"+m1+":00");
 		$('input[name="endtime"]').val(h2+":"+m2+":00");
 		if(wt>{{$user->worktype->hours}}){

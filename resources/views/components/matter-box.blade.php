@@ -23,7 +23,7 @@
 
 						<label class="g56">休憩時間</label>
 						<div class="g67">
-						<input type="number"  name="break" max="60" autocomplete="off" value="{{$userdata->worktype->break}}">
+						<input type="number"  name="breaktime" min="0" max="60" autocomplete="off" value="{{$userdata->worktype->break}}">
 
 						</div>
 					</div>

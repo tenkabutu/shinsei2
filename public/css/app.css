@@ -323,7 +323,7 @@ li{
 }
 
 
-#narrow li div {
+#narrow li>div {
     font-weight: bold;
     text-decoration: none;
     font-family: Arial;
@@ -348,6 +348,18 @@ li{
     border-color: #adb4ba;
     border-width: 1px;
     border-style: solid;}
+
+
+#narrow li div>label {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+
+#narrow li div>div {
+	display: inline-block;
+	vertical-align: middle;
+}
 
 
 .tablesorter-default .header,.tablesorter-default .tablesorter-header{background-image:url(data:image/gif;base64,R0lGODlhFQAJAIAAACMtMP///yH5BAEAAAEALAAAAAAVAAkAAAIXjI+AywnaYnhUMoqt3gZXPmVg94yJVQAAOw==);background-position:center right;background-repeat:no-repeat;cursor:pointer;white-space:normal;}

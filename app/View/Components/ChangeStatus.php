@@ -11,9 +11,10 @@ class ChangeStatus extends Component
      *
      * @return void
      */
-    public function __construct()
+    public $matter;
+    public function __construct($matter)
     {
-        //
+        $this->matter = $matter;
     }
 
     /**

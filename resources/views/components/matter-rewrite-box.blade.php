@@ -23,14 +23,14 @@
 
 						<label class="g56">休憩時間</label>
 						<div class="g67">
-						<input type="number"  name="break" max="60" autocomplete="off" value="{{$userdata->worktype->break}}">
+						<input type="number"  name="breaktime" min="0" max="60" autocomplete="off" value="{{$matter->breaktime}}">
 
 						</div>
 					</div>
 					<div>
 						<label class="g12">振替時間</label>
-						<label class="time_alert g23"></label><label class="hour3 g34">{{$userdata->worktype->hours}}時間</label>
-						<label class="minutes3 g45">{{$userdata->worktype->minutes}}分</label>
+						<label class="time_alert g23"></label><label class="hour3 g34">{{floor($matter->allotted/60)}}時間</label>
+						<label class="minutes3 g45">{{$matter->allotted%60}}分</label>
 					</div>
 					<div>
 
@@ -43,25 +43,6 @@
 						<label class="g12" for="work_content">予定業務内容：</label>
 						<textarea class="g23"id="work_content" name ="work_content"  rows="3" cols="60">{{$matter->work_content}}</textarea>
 					</div>
-					<!-- <div>
-						<div class="grid_wide">
-							<label for="device_model">オプション1</label>
-							<input id="device_model" name="etc1" type="hidden" value="null">
-							<input id="device_model" name="etc1" type="checkbox" value="1"
-							 @if(old('etc1')) checked="checked"@else @endif />
-							<label for="device_model">　オプション2</label>
-							<input id="device_model" name="etc2" type="hidden" value="null">
-							<input id="device_model" name="etc2" type="checkbox" value="1"
-							 @if(old('etc2')) checked="checked"@else @endif />
-							<label for="device_model">　オプション3</label>
-							<input id="device_model" name="etc3" type="hidden" value="null">
-							<input id="device_model" name="etc3" type="checkbox" value="1"
-							 @if(old('etc3'))checked="checked"@else @endif />
-							 <label for="device_model">　オプション4</label>
-							<input id="device_model" name="etc4" type="hidden" value="null">
-							<input id="device_model" name="etc4" type="checkbox" value="1"
-							 @if(old('etc4'))checked="checked"@else @endif />
-						</div>
-					</div> -->
+
 				</fieldset>
 			</section>

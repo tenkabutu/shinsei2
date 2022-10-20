@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\OverWorkController;
+use App\Http\Controllers\ShinseiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +25,11 @@ Route::post('save_request_ov',[OverWorkController::class,'save_request']);
 
 Route::post('{id}/save_ov',[OverWorkController::class,'save']);
 Route::post('{id}/save_request_ov',[OverWorkController::class,'save_request']);
+
+Route::post('{id}/update_ov',[OverWorkController::class,'update']);
+Route::post('{id}/update_request_ov',[OverWorkController::class,'update_request']);
+
+Route::get('matter_search',[ShinseiController::class,'matter_search']);
 
 Route::get('/', function () {
     return view('dashboard');

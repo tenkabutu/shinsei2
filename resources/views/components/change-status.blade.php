@@ -9,7 +9,9 @@
 				</div>
 				<div>
 					<div class="g12"><label>振替作業申請</label></div>
-					<div class="g23 text_right">許可済み</div>
+					<div class="g23 text_right">
+					@if($matter->status==1)未申請
+					@endif</div>
 				</div>
 			</fieldset>
 		</section>
