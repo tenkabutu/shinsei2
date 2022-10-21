@@ -28,6 +28,10 @@
 
 <div class="main_right">
 	<div id="shinsei_wrap">
+		@if (session('save_check'))
+    	<div class="alert alert-danger">{{ session('save_check') }}</div>
+		<x-save-box :status="$matter->status"/>
+		@endif
 		@if(isset($matter->status))
 		<h3>振替申請</h3>
 		<p>作成日:{{$matter->created_at}}　　更新日:{{$matter->updated_at}}</p>
@@ -66,7 +70,7 @@
 				<input type="hidden" name="starttime" value="@hour($matter->starttime):@minutes($matter->starttime):00">
 				<input type="hidden" name="endtime" value="@hour($matter->endtime):@minutes($matter->endtime):00">
 				<input type="hidden" name="allotted" value="{{$matter->allotted}}">
-				<!-- <input type="hidden" name="matter_type" value="{{$matter->matter_type}}"> -->
+				<input type="hidden" name="change_check" value="{{old('change_check',0)}}">
 				<x-matter-rewrite-box :userdata="$user" :matter="$matter"/>
 
 			@else

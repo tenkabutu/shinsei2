@@ -4,7 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
-class FormatServiceProvider extends ServiceProvider
+class ValidatorServiceProvider extends ServiceProvider
 {
     /**
      * Register services.

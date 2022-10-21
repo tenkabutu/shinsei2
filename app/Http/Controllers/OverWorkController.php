@@ -72,13 +72,17 @@ class OverWorkController extends Controller
         ]);
 
         $matter =matter::find($id);
-        $matter->fill($request->except('_token'))->save();
+        $matter->fill($request->except('_token'));
 
-        if($matter->wasChanged()){
-            print_r($matter->getChanges());
+        if($matter->isDirty()&&$request->change_check==1){
             $matter->status=1;
             $matter->save();
-            exit;
+            return  redirect($id.'/rewrite_ov');
+        }elseif($matter->isDirty()){
+
+            $request->merge(['change_check' =>1]);
+            return back()->withInput()->with('save_check', '申請済の内容が変更されています、保存する場合再申請が必要になりますがよろしいですか？');
+
         }
 
         $request->session()->regenerateToken();
@@ -95,7 +99,7 @@ class OverWorkController extends Controller
         $matter =matter::find($id)
         ->fill($request->except('_token'))->save();
         $request->session()->regenerateToken();
-        $id = $matter->id;
+       // $id = $matter->id;
         return  redirect($id.'/rewrite_ov');
     }
     public function show_ov($id){

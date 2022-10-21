@@ -23,7 +23,7 @@
 
 						<label class="g56">休憩時間</label>
 						<div class="g67">
-						<input type="number"  name="breaktime" min="0" max="60" autocomplete="off" value="{{$matter->breaktime}}">
+						<input type="number"  name="breaktime" min="0" max="60" autocomplete="off" value="{{old('breaktime',$matter->breaktime)}}">
 
 						</div>
 					</div>
@@ -41,7 +41,7 @@
 					<div>
 
 						<label class="g12" for="work_content">予定業務内容：</label>
-						<textarea class="g23"id="work_content" name ="work_content"  rows="3" cols="60">{{$matter->work_content}}</textarea>
+						<textarea class="g23"id="work_content" name ="work_content"  rows="3" cols="60">{{old('work_content',$matter->work_content)}}</textarea>
 					</div>
 
 				</fieldset>
