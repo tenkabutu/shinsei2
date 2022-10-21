@@ -39,14 +39,6 @@ class OverWorkController extends Controller
         } */
         $matter = new Matter();
         $matter ->fill($request->except('_token'))->save();
-        /* $id = $matter->id;
-        $category =new category();
-        if($request->device_id){
-            $category->cfg1=1;
-        }
-        $category->matter_id=$id;
-        $category->save(); */
-
 
         $request->session()->regenerateToken();
         $id = $matter->id;
@@ -78,11 +70,17 @@ class OverWorkController extends Controller
                 'order_content' => ['required', 'string', 'max:255'],
 
         ]);
-        $request->merge(['status' =>2]);
-        $date=Carbon::now()->toDateTimeString();
-        $request->merge(['matter_request_date' =>$date]);
-        $matter =matter::find($id)
-        ->fill($request->except('_token'))->save();
+
+        $matter =matter::find($id);
+        $matter->fill($request->except('_token'))->save();
+
+        if($matter->wasChanged()){
+            print_r($matter->getChanges());
+            $matter->status=1;
+            $matter->save();
+            exit;
+        }
+
         $request->session()->regenerateToken();
         //$id = $matter->id;
         return  redirect($id.'/rewrite_ov');
@@ -103,7 +101,6 @@ class OverWorkController extends Controller
     public function show_ov($id){
 
         $matter = matter::findOrFail($id);
-
         $user=user::with('roletag','approvaltag','areatag','worktype')->findOrFail(Auth::user()->id);
 
         return view('overwork.create_ov',compact('user','matter'));
