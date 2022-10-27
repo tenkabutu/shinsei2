@@ -1,4 +1,4 @@
-<section>
+<section id="matter_area">
 			<h5>　振替作業情報</h5>
 				<fieldset>
 					<div>

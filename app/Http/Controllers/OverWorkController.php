@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Matter;
+use App\Models\Task;
 
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
@@ -65,6 +66,10 @@ class OverWorkController extends Controller
     }
 
     public function update(Request $request,$id){
+
+        print_r($_REQUEST);
+        exit;
+
         $request->validate([
                 'matter_change_date' => ['required', 'string', 'max:55'],
                 'order_content' => ['required', 'string', 'max:255'],
@@ -95,12 +100,86 @@ class OverWorkController extends Controller
                 'order_content' => ['required', 'string', 'max:255'],
 
         ]);
-        $request->merge(['status' =>2]);
-        $matter =matter::find($id)
-        ->fill($request->except('_token'))->save();
+
+        $matter =matter::find($id);
+        $matter->fill($request->except('_token'));
+        if($matter->isDirty()&&$request->change_check==1){
+            $date=Carbon::now()->toDateTimeString();
+            $matter->matter_request_date=$date;
+            $matter->status=1;
+            $matter->save();
+            return  redirect($id.'/rewrite_ov');
+        }elseif($matter->isDirty()){
+
+            $request->merge(['change_check' =>2]);
+            return back()->withInput()->with('save_check', '申請済の内容が変更されています、保存する場合再申請が必要になりますがよろしいですか？');
+
+        }
+
+        $task = new Task();
+        foreach($request->task_group as $row){
+            if(isset($row['task_id'])){
+                $task::find($row['task_id']);
+                $task->fill($row);
+                //タスクが既存であれば更新があったかどうかと、申請済みかどうかをチェック
+                if($task->isDirty()&&$row['task_status']==2){
+                    if($request->change_check2==1){
+                        $request->merge(['change_check2' =>2]);
+                        return back()
+                            ->withInput()
+                            ->with('save_check', '申請済の内容が変更されています、保存する場合再申請が必要になりますがよろしいですか？'.$row["task_change_date"]);
+
+
+                    }
+
+                }elseif($task->isDirty()){
+                    //更新があって申請済みでなければ保存
+
+                    $task->save();
+                }
+
+            }elseif($row['task_change_date']){
+                //タスクが新規であればそのまま保存
+                $task::create($row);
+            }
+        }
+
+
+
         $request->session()->regenerateToken();
        // $id = $matter->id;
         return  redirect($id.'/rewrite_ov');
+    }
+    public function task_save($tasklist,$matter_id,$save_type,$change_check2){
+        $task = new Task();
+        foreach($tasklist as $row){
+            if(isset($row['task_id'])){
+                $task::find($row['task_id']);
+                $task->fill($row);
+                //タスクが既存であれば更新があったかどうかと、申請済みかどうかをチェック
+                if($task->isDirty()&&$row['task_status']==2){
+                    if($change_check2==1){
+
+                    }
+
+                }elseif($task->isDirty()){
+                //更新があって申請済みでなければ保存
+
+                    $task->save();
+                }
+
+            }else{
+                //タスクが新規であればそのまま保存
+                $task::create($row);
+            }
+        }
+
+        $matter = matter::findOrFail($id);
+        $user=user::with('roletag','approvaltag','areatag','worktype')->findOrFail(Auth::user()->id);
+
+        return view('overwork.create_ov',compact('user','matter'));
+
+
     }
     public function show_ov($id){
 

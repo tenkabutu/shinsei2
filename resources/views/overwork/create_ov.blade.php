@@ -71,6 +71,7 @@
 				<input type="hidden" name="endtime" value="@hour($matter->endtime):@minutes($matter->endtime):00">
 				<input type="hidden" name="allotted" value="{{$matter->allotted}}">
 				<input type="hidden" name="change_check" value="{{old('change_check',0)}}">
+				<input type="hidden" name="change_check" value="{{old('change_check2',0)}}">
 				<x-matter-rewrite-box :userdata="$user" :matter="$matter"/>
 
 			@else
@@ -80,35 +81,37 @@
 				<input type="hidden" name="matter_type" value="1">
 				<x-matter-box :userdata="$user"/>
 			@endif
-			<section>
+			<section id="task_area">
 			<h5>　振替休暇情報</h5>
 
 				<fieldset>
-					<div data-repeater-list>
-						<div data-repeater-item>
+					<div data-repeater-list="task_group">
+						<div class="task_form" data-repeater-item>
+						<input type="hidden" name="matter_id" value="{{$matter->id}}">
 							<div class="grid">
 								<label class="g12">振替予定日</label>
-								<input type="text" class="g23 target2" name="reception_date" autocomplete="off">
+								<input type="text" class="g23 target2" name='task_change_date' autocomplete="off" value="{{old('task_change_date')}}">
 							</div>
 							<div class="grid">
 								<label class="g12">開始時間</label>
 								<div class="g23">
-									<input type="number" name="hour4" autocomplete="off">
-									<input type="number" name="minutes4" autocomplete="off">
+									<input type="number" name="task_hour1" class="task_hour1" value="{{old('task_hour1')}}" autocomplete="off">
+									<input type="number" name="task_minutes1" class="task_minutes1" value="{{old('task_minutes1')}}" autocomplete="off">
 								</div>
 								<label class="g34">終了時間</label>
 								<div class="g45">
-									<input type="number" name="hour5" autocomplete="off">
-									<input type="number" step="30" name="minutes5" autocomplete="off">
+									<input type="number" name="task_hour2" value="{{old('task_hour2')}}" autocomplete="off">
+									<input type="number" step="30" name="task_minutes2" value="{{old('task_minutes2')}}" autocomplete="off">
 								</div>
 
 								<label class="g56">休憩時間</label>
 								<div class="g67">
-									<input type="number" name="break1" autocomplete="off">
+									<input type="number" class="task_break" name="task_break" value="{{old('task_break')}}" autocomplete="off">
 								</div>
 							</div>
 							<div class="grid">
-								<label class="g12">振替時間</label><label class="hour6 g34"></label><label class="minutes6 g45"></label>
+								<label class="g12">振替時間</label>
+								<label class="task_hour3 g34"></label><label class="task_minutes3 g45"></label>
 
 							</div>
 
@@ -154,7 +157,7 @@ $(function(){
 	}});
 
 
-	$('input[type="number"],select.minutes2').bind('input', function () {
+	$('#matter_area input[type="number"],select.minutes2').bind('input', function () {
 		var h1 = $('input.hour1').val()- 0;
 		var h2 = $('input.hour2').val()- 0;
 		var m1 = $('input.minutes1').val()- 0;
@@ -184,6 +187,47 @@ $(function(){
 		if(wt>{{$user->worktype->hours}}){
 			$('label.time_alert').text('設定時間オーバー');
 		}else if(wt=={{$user->worktype->hours}}&&lt>{{$user->worktype->minutes}}){
+			$('label.time_alert').text('設定時間オーバー');
+		}else{
+			$('label.time_alert').text('');
+			}
+	});
+	$('#task_area input[type="number"]').bind('input', function () {
+		var tf = $(this).closest('.task_form');
+		tf.css('color', 'red');
+
+		var th1 = tf.find('.task_hour1').val()- 0;
+
+		var th2 = tf.find('.task_hour2').val()- 0;
+		var tm1 = tf.find('.task_minutes1').val()- 0;
+		var tm2 = tf.find('.task_minutes2').val()- 0;
+		//var mdf1 =$('.mdef1').val()-0;
+		//$('.mdef1').text(m1);
+		//if(m1<30){
+		//	$('.mdef2').text(m1+30);
+		//}else{
+		//	$('.mdef2').text(m1-30);
+		//}
+		//var m2 = $('select.minutes2').val()- 0;
+		var tbt = tf.find('.task_break').val()- 0;
+		var tmt = ((th2*60+tm2)-(th1*60+tm1))-tbt;
+		alert(tmt);
+		var twt = Math.floor(tmt/60);
+		var tlt = tmt%60;
+		/* if(wt>4){
+			$('input[name="breaktime"]').val('60');
+			mt = ((h2*60+m2)-(h1*60+m1))-60;
+			wt = Math.floor(mt/60);
+			lt = mt%60;
+		} */
+		$('label.task_hour3').text(twt+'時間');
+		$('label.task_minutes3').text(tlt+'分');
+		$('input[name="allotted"]').val(tmt);
+		$('input[name="starttime"]').val(th1+":"+tm1+":00");
+		$('input[name="endtime"]').val(th2+":"+tm2+":00");
+		if(twt>{{$user->worktype->hours}}){
+			$('label.time_alert').text('設定時間オーバー');
+		}else if(twt=={{$user->worktype->hours}}&&tlt>{{$user->worktype->minutes}}){
 			$('label.time_alert').text('設定時間オーバー');
 		}else{
 			$('label.time_alert').text('');

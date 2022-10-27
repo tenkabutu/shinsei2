@@ -23,10 +23,14 @@ class ShinseiController extends Controller
             $join->on('matters.id','=','tasks.matter_id');
 
         });
-            $query->leftjoin('nametags',function($join){
-                $join->on('matters.matter_type','=','nametags.tagid')
-                ->where('nametags.groupid',4);
+            $query->leftjoin('nametags as nt1',function($join){
+                $join->on('matters.matter_type','=','nt1.tagid')
+                ->where('nt1.groupid',4);
             });
+                $query->leftjoin('nametags as nt2',function($join){
+                    $join->on('matters.status','=','nt2.tagid')
+                    ->where('nt2.groupid',5);
+                });
 
             $query->leftjoin('users as reception','matters.reception_id','reception.id');
             if($request->schooltype){
@@ -61,7 +65,7 @@ class ShinseiController extends Controller
             //$query->leftjoin('type_names','tasks.typename_id','type_names.id');
             $mskeys=$query->orderBy('matters.id','desc')->get(['matters.id'])->toArray();
 
-            $query->select('*','matters.id as matters_id','matters.created_at as matters_created_at');
+            $query->select('*','matters.id as matters_id','matters.created_at as matters_created_at','nt1.nametag as typename','nt2.nametag as statusname');
             $query->orderBy('matters.id','desc');
             //->select('matters.id','matters.created_at')
             //  ->get();

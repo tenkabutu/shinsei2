@@ -71,7 +71,6 @@
 				<th class="id">作業者</th>
 				<th class="id">作業</th>
 
-				<th class="auto"></th>
 
 
 			</tr>
@@ -80,15 +79,14 @@
 			@foreach ($records as $id =>$record)
 			<tr class="d{{$id+1}}">
 				<td><a href="/shinsei2/public/{{ $record->matters_id }}/rewrite_ov">{{ $record->matters_id}}</a></td>
-				<td>{{ $record->nametag}}</td>
+				<td>{{ $record->typename}}</td>
 				<td>{{ date('n/j',strtotime($record->matter_change_date))}}</td>
 				<td>{{ date('H：i',strtotime($record->starttime))}}</td>
 				<td>{{ date('H：i',strtotime($record->endtime))}}</td>
 
-				<td>{{ $record->reception_name}}</td>
-				<td>@if(isset($record->device_name)){{ $record->device_name}}@else 端末未入力　@endif</td>
-				<td>{{ $record->type_name}}</td>
-
+				<td>{{floor($record->allotted/60).'時間 '.($record->allotted%60).'分'}}</td>
+				<td>{{ $record->statusname}}</td>
+				<td>@if($record->status==2){{$record->matter_request_date}}@elseif($record->status>=3){{$record->matter_reply_date}}@endif</td>
 				<td>@isset($record->setdate1){{ date('n/j',strtotime($record->setdate1))}}@endisset</td>
 
 

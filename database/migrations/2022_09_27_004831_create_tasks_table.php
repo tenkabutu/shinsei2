@@ -17,11 +17,13 @@ class CreateTasksTable extends Migration
             $table->id();
             $table->timestamps();
             $table->biginteger('matter_id');
-            $table->string('subject');
-            $table->dateTime('setdate1');
-            $table->dateTime('setdate2')->nullable();
-            $table->string('info')->nullable();
-            $table->string('etc')->nullable();
+            $table->dateTime('task_request_date')->nullable();
+            $table->dateTime('task_reply_date')->nullable();
+            $table->dateTime('task_change_date');
+            $table->Time('task_starttime');
+            $table->Time('task_endtime');
+            $table->integer('task_breaktime');
+            $table->integer('task_allotted');
             $table->integer('task_status')->default(0)->nullable();
         });
     }
