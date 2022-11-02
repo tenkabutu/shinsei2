@@ -20,11 +20,13 @@ class CreateTasksTable extends Migration
             $table->dateTime('task_request_date')->nullable();
             $table->dateTime('task_reply_date')->nullable();
             $table->dateTime('task_change_date');
-            $table->Time('task_starttime');
-            $table->Time('task_endtime');
-            $table->integer('task_breaktime');
+            $table->integer('task_hour1');
+            $table->integer('task_hour2');
+            $table->integer('task_minutes1');
+            $table->integer('task_minutes2');
+            $table->integer('task_breaktime')->nullable();
             $table->integer('task_allotted');
-            $table->integer('task_status')->default(0)->nullable();
+            $table->integer('task_status');
         });
     }
 

@@ -22,14 +22,17 @@ class CreateMattersTable extends Migration
             $table->dateTime('matter_request_date')->nullable();
             $table->dateTime('matter_reply_date')->nullable();
             $table->dateTime('matter_change_date');
-            $table->Time('starttime');
-            $table->Time('endtime');
+            //$table->Time('starttime');
+            //$table->Time('endtime');
+            $table->integer('hour1');
+            $table->integer('hour2');
+            $table->integer('minutes1');
+            $table->integer('minutes2');
             $table->integer('breaktime');
             $table->integer('allotted');
             $table->string('order_content');
             $table->string('work_content')->nullable();
             $table->integer('status')->default(1)->nullable();
-
 
         });
     }

@@ -8,17 +8,13 @@
 					<div>
 						<label class="g12">開始時間</label>
 						<div class="g23">
-						<input type="number"  class="hour1"   autocomplete="off" value="@hour($userdata->worktype->setdate1)">
-						<input type="number"   class="minutes1" min="0" max="59" autocomplete="off" value="@minutes($userdata->worktype->setdate1)">
+						<input type="number"  name="hour1"  autocomplete="off" value="@hour($userdata->worktype->setdate1)">
+						<input type="number"  name="minutes1" class="minutes1" min="0" max="59" autocomplete="off" value="@minutes($userdata->worktype->setdate1)">
 						</div>
 						<label class="g34">終了時間</label>
 						<div class="g45">
-						<input type="number"   class="hour2"  autocomplete="off" value="@hour($userdata->worktype->setdate2)">
-
-						<select class="minutes2">
-							<option class="mdef1" @if($userdata->worktype->minutes==0) selected @endif>0</option>
-							<option class="mdef2" @if($userdata->worktype->minutes==30) selected @endif>30</option>
-						</select>
+						<input type="number" name="hour2"  class="hour2"  autocomplete="off" value="@hour($userdata->worktype->setdate2)">
+						<input type="number"  name="minutes2" min="0" max="59" autocomplete="off" value="{{$userdata->worktype->minutes}}">
 						</div>
 
 						<label class="g56">休憩時間</label>

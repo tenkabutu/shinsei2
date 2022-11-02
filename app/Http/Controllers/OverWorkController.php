@@ -53,7 +53,6 @@ class OverWorkController extends Controller
         $request->validate([
                 'matter_change_date' => ['required', 'string', 'max:55'],
                 'order_content' => ['required', 'string', 'max:255'],
-
         ]);
         $matter = new Matter();
         $request->merge(['status' =>2]);
@@ -116,6 +115,8 @@ class OverWorkController extends Controller
 
         }
 
+
+
         $task = new Task();
         foreach($request->task_group as $row){
             if(isset($row['task_id'])){
@@ -127,7 +128,7 @@ class OverWorkController extends Controller
                         $request->merge(['change_check2' =>2]);
                         return back()
                             ->withInput()
-                            ->with('save_check', '申請済の内容が変更されています、保存する場合再申請が必要になりますがよろしいですか？'.$row["task_change_date"]);
+                            ->with('save_check', '申請済の内容が変更されています、保存する場合再申請が必要になりますがよろしいですか？2'.$row["task_change_date"]);
 
 
                     }
@@ -139,12 +140,21 @@ class OverWorkController extends Controller
                 }
 
             }elseif($row['task_change_date']){
+               // $request->validate([
+                //        'matter_change_date' => ['required', 'string', 'max:55'],
+              //          'task_breaktime' => ['required', 'string', 'max:255'],
+               //
+           //     ]);
                 //タスクが新規であればそのまま保存
-                $task::create($row);
+                //$task->task_starttime = $row['task_hour1'].":".$row['task_minutes1'];
+                //$task->task_endtime = $row['task_hour2'].":".$row['task_minutes2'];
+                $task->task_allotted = ((int)$row['task_hour2']*60+(int)$row['task_minutes2'])-((int)$row['task_hour1']*60+(int)$row['task_minutes1']);
+                $task->task_status =2;
+                $task->matter_id =$id;
+
+                $task->fill($row)->save();
             }
         }
-
-
 
         $request->session()->regenerateToken();
        // $id = $matter->id;
@@ -183,7 +193,7 @@ class OverWorkController extends Controller
     }
     public function show_ov($id){
 
-        $matter = matter::findOrFail($id);
+        $matter = matter::with('tasklist')->findOrFail($id);
         $user=user::with('roletag','approvaltag','areatag','worktype')->findOrFail(Auth::user()->id);
 
         return view('overwork.create_ov',compact('user','matter'));

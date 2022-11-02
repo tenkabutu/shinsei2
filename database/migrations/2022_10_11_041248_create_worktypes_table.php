@@ -17,11 +17,14 @@ class CreateWorktypesTable extends Migration
             $table->id();
             $table->timestamps();
             $table->string('worktype');
-            $table->Time('setdate1')->nullable();
-            $table->Time('setdate2')->nullable();
-            $table->integer('hours')->default(0)->nullable();
-            $table->integer('minutes')->default(0)->nullable();
-            $table->integer('break')->default(60)->nullable();
+            //$table->Time('setdate1')->nullable();
+            //$table->Time('setdate2')->nullable();
+            $table->integer('def_hour1')->default(0)->nullable();
+            $table->integer('def_minutes1')->default(0)->nullable();
+            $table->integer('def_hour2')->default(0)->nullable();
+            $table->integer('def_minutes2')->default(0)->nullable();
+            $table->integer('def_breaktime')->default(60)->nullable();
+            $table->integer('def_allotted');
         });
     }
 
