@@ -14,11 +14,12 @@ class WorkTypesTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::insert("INSERT INTO `worktypes` (`id`, `created_at`, `updated_at`, `worktype`, `setdate1`, `setdate2`, `hours`,`minutes`, `break`) VALUES
-(1, NULL, NULL, '9時-18時', '09:00:00', '18:00:00', 8,0, 60),
-(2, NULL, NULL, '8時半-17時', '08:30:00', '17:00:00', 7,30, 60),
-(3, NULL, NULL, '9時-17時', '09:00:00', '17:00:00', 7,0, 60),
-(4, NULL, NULL, '10時-18時', '10:00:00', '18:00:00', 7,0, 60),
-(5, NULL, NULL, '8時半-16時半', '08:30:00', '16:30:00', 7,0, 60)");
+        DB::insert("INSERT INTO `worktypes` ( `worktype`, `def_hour1`, `def_hour2`, `def_minutes1`,`def_minutes2`,
+ `def_breaktime`,`def_allotted`) VALUES
+('9時-18時', 9,18,0,0,60,480),
+('8時半-17時',8,17,30,0,60,450),
+('9時-17時',9,17,0,0,60,420),
+('10時-18時',10,18,0,0,60,420),
+('8時半-16時半',8,16,30,30,60,420)");
 }
 }
