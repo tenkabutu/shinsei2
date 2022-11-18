@@ -12,10 +12,11 @@ class SaveBox extends Component
      * @return void
      */
     public $status;
-    public function __construct($status)
+    public $role;
+    public function __construct($status,$role)
     {
         $this->status = $status;
-        //
+        $this->role = $role;
     }
 
     /**

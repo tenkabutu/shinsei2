@@ -17,9 +17,7 @@ body {
 	padding:1px 0px;
 	font-size: 12px;
 }
-body > div {
-  display: flex;
-}
+
 .leftNavigation {
   width: 220px;
   text-align: left;
@@ -39,6 +37,7 @@ body > div {
 	position: relative;
 
 	box-shadow: 2px 2px 4px gray;
+	display: flex;
 }
 
 
@@ -325,6 +324,11 @@ span.position_right{
 	display: block;
 }
 /* || 申請ツール基本設定 */
+h3{margin:0;}
+h3 label{
+	font-size: 10px;
+
+}
 #wrap main {
   flex: 1;
   background-color: #e3e2ed;
@@ -369,7 +373,7 @@ input[type="number"]{
 	font-weight: bold;
 }
 select{
-	width:45px;
+
 	font-size:16px;
 	font-weight: bold;
 }

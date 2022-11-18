@@ -17,7 +17,7 @@
 				</div>
 			</fieldset>
 		</section>
-		<section>
+	<!-- 	<section>
 			<fieldset>
 			@foreach ($matter->tasklist as $task)
 				<div>
@@ -36,4 +36,4 @@
 				@endforeach
 			</fieldset>
 			<p>申請中・申請後に設定時間を変更すると再度申請が必要になります。</p>
-		</section>
+		</section> -->

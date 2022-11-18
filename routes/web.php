@@ -17,6 +17,8 @@ use App\Http\Controllers\ShinseiController;
 */
 
 Route::get('user',[UserController::class,'userlist']);
+Route::post('user/change',[UserController::class,'user_change']);
+
 Route::get('create_ov',[OverWorkController::class,'create']);
 Route::get('{id}/rewrite_ov',[OverWorkController::class,'show_ov']);
 
@@ -30,6 +32,7 @@ Route::post('{id}/update_ov',[OverWorkController::class,'update']);
 Route::post('{id}/update_request_ov',[OverWorkController::class,'update_request']);
 
 Route::get('matter_search',[ShinseiController::class,'matter_search']);
+Route::get('matter_ruling',[ShinseiController::class,'matter_ruling']);
 
 Route::get('/', function () {
     return view('dashboard');

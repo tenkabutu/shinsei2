@@ -28,13 +28,10 @@
 
 <div class="main_right">
 	<div id="shinsei_wrap">
-		@if (session('save_check'))
-    	<div class="alert alert-danger">{{ session('save_check') }}</div>
-		<x-save-box :status="$matter->status"/>
-		@endif
+
 		@if(isset($matter->status))
-		<h3>振替申請</h3>
-		<p>作成日:{{$matter->created_at}}　　更新日:{{$matter->updated_at}}</p>
+		<h3>振替申請<label>　(作成:{{$matter->created_at->format('Y/n/j')}}　更新:{{$matter->updated_at->format('Y/n/j')}})</label></h3>
+
 			<x-change-status :matter="$matter" />
 		@else
 		<h3>新規振替申請</h3>
@@ -43,25 +40,13 @@
 				@foreach($errors->all() as $err)
 				<li class="text-danger">{{ $err }}</li> @endforeach
 			</ul>
-
 		<x-user-box :userdata="$user"/>
-
-		<section>
-			<h5>　通知</h5>
-			<fieldset>
-				<div>
-					<div class="g12"><label>承認者</label></div>
-					<div class="g23 text_right">水田浩子</div>
-				</div>
-				<div>
-					<div class="g12"><label>通知先</label></div>
-					<div class="g23 text_right">松金秀司</div>
-				</div>
-
-			</fieldset>
-		</section>
 		<form  method="post" action="save_ov" class="repeater"  >
 			@csrf
+			@if (session('save_check'))
+    	<div class="alert alert-danger">{{ session('save_check') }}</div>
+		<x-save-box :status="$matter->status" :role="0"/>
+		@endif
 			<input type="hidden" name="user_id" value="{{Auth::user()->id}}">
 
 
@@ -81,13 +66,15 @@
 				<x-matter-box :userdata="$user"/>
 			@endif
 			<section id="task_area">
-			<h5>　振替休暇情報</h5>
+			<h5>　振替休暇情報 @isset($task_count) {{$task_count}} @endisset</h5>
 
 				<fieldset>
 					<div data-repeater-list="task_group">
+					@if(session('old_task_group'))
 
+					@else
 
-						@if(isset($matter->tasklist))
+						@isset($matter->tasklist)
 						@foreach ($matter->tasklist as $task)
 						<div class="task_form" data-repeater-item>
 							<input type="hidden" name="task_id" value="{{$task->id}}">
@@ -124,7 +111,8 @@
 						</div>
 
 						@endforeach
-						@endif
+						@endisset
+					@endif
 						<div class="task_form" data-repeater-item>
 							<div class="grid">
 								<label class="g12">振替予定日2</label>
@@ -170,10 +158,15 @@
 			</section>
 			@if(isset($matter))
 				@if($matter->user_id==Auth::user()->id)
-			<x-save-box :status="$matter->status"/>
+					<x-save-box :status="$matter->status" :role="0"/>
+				@elseif(Auth::user()->role==3)
+					<x-save-box :status="$matter->status" :role="3"/>
+
+				@else
+				<label>test</label>
 				@endif
 			@else
-			<x-save-box :status="0"/>
+			<x-save-box :status="0" :role="0"/>
 			@endif
 
 		</form>
@@ -199,13 +192,7 @@ $(function(){
 		var h1 = $('input[name="hour1"]').val()- 0;
 		var h2 = $('input[name="hour2"]').val()- 0;
 		var m1 = $('input[name="minutes1"]').val()- 0;
-		/* var mdf1 =$('.mdef1').val()-0;
-		$('.mdef1').text(m1);
-		if(m1<30){
-			$('.mdef2').text(m1+30);
-		}else{
-			$('.mdef2').text(m1-30);
-		} */
+
 		var m2 = $('input[name="minutes2"]').val()- 0;
 		var bt = $('input[name="breaktime"]').val()- 0;
 		var mt = ((h2*60+m2)-(h1*60+m1))-bt;

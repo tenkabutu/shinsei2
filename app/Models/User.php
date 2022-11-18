@@ -10,6 +10,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
+
     use HasApiTokens, HasFactory, Notifiable;
     public function roletag(){
         return $this->belongsTo('App\Models\Nametag','role','tagid')->where('groupid', '=', 1);
@@ -34,6 +35,10 @@ class User extends Authenticatable
         'name2',
         'email',
         'password',
+        'role',
+        'approval',
+        'area',
+        'worktype_id',
     ];
 
     /**
