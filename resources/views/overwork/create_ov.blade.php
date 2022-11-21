@@ -71,41 +71,42 @@
 				<fieldset>
 					<div data-repeater-list="task_group">
 					@if(session('old_task_group'))
+						<x-task-rewrite-box :tasklist="Session::get('old_task_group')" :type="0"/>
 
 					@else
 
 						@isset($matter->tasklist)
 						@foreach ($matter->tasklist as $task)
 						<div class="task_form" data-repeater-item>
-							<input type="hidden" name="task_id" value="{{$task->id}}">
-							<input type="hidden" name="task_status" value="{{old('task_status',$task->task_status)}}">
+							<input type="hidden" name="id" value="{{$task->id}}">
+							<input type="hidden" name="task_status" value="{{$task->task_status}}">
 							<div class="grid">
 								<label class="g12">振替予定日1</label>
-								<input type="text" class="g23 target2" name='task_change_date' autocomplete="off" value="{{old('task_change_date',$task->task_change_date)}}">
+								<input type="text" class="g23 target2" name='task_change_date' autocomplete="off" value="{{$task->task_change_date}}">
 							</div>
 
 							<div class="grid">
 								<label class="g12">開始時間</label>
 								<div class="g23">
-									<input type="number" name="task_hour1" class="task_hour1" value="{{old('task_hour1',$task->task_hour1)}}" autocomplete="off">
-									<input type="number" name="task_minutes1" class="task_minutes1" value="{{old('task_minutes1',$task->task_minutes1)}}" autocomplete="off">
+									<input type="number" name="task_hour1" class="task_hour1" value="{{$task->task_hour1}}" autocomplete="off">
+									<input type="number" name="task_minutes1" class="task_minutes1" value="{{$task->task_minutes1}}" autocomplete="off">
 								</div>
 								<label class="g34">終了時間</label>
 								<div class="g45">
-									<input type="number" name="task_hour2" class="task_hour2" value="{{old('task_hour2',$task->task_hour2)}}" autocomplete="off">
-									<input type="number" name="task_minutes2" class="task_minutes2" value="{{old('task_minutes2',$task->task_minutes2)}}" autocomplete="off">
+									<input type="number" name="task_hour2" class="task_hour2" value="{{$task->task_hour2}}" autocomplete="off">
+									<input type="number" name="task_minutes2" class="task_minutes2" value="{{$task->task_minutes2}}" autocomplete="off">
 								</div>
 
 								<label class="g56">休憩時間</label>
 								<div class="g67">
-									<input type="number" class="task_break" name="task_breaktime" value="0" min="0" max="60" value="{{old('task_breaktime',$task->task_breaktime)}}" autocomplete="off">
+									<input type="number" class="task_break" name="task_breaktime" value="0" min="0" max="60" value="{{$task->task_breaktime}}" autocomplete="off">
 								</div>
 							</div>
 							<div class="grid">
 								<label class="g12">振替時間</label>
-								<label class="task_hour3 g34">{{old('task_hour3',intdiv($task->task_allotted,60))}}時間</label>
+								<label class="task_hour3 g34">{{intdiv($task->task_allotted,60)}}時間</label>
 								<label class="task_minutes3 g45">{{$task->task_allotted%60}}分</label>
-								<input type="hidden" name="task_allotted" value="{{old('task_allotted',$task->task_allotted)}}">
+								<input type="hidden" name="task_allotted" value="{{$task->task_allotted}}">
 
 							</div>
 						</div>

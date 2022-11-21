@@ -120,8 +120,8 @@ class OverWorkController extends Controller
 
        // $task = new Task();
         foreach($request->task_group as $row){
-            if(isset($row['task_id'])){
-                $task =task::find($row['task_id']);
+            if(isset($row['id'])){
+                $task =task::find($row['id']);
                 $task->matter_id =$id;
                 $task->fill($row);
 
