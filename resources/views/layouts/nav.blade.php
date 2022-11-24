@@ -59,7 +59,7 @@
 					<li><a href="/shinsei2/public/user" >テレワーク申請(未実装)</a></li>
 
 					<li><a href="/shinsei2/public/matter_search">申請一覧</a></li>
-					<li><a href="/shinsei2/public/matter_ruling">申請一覧2</a></li>
+					<li><a href="/shinsei2/public/matter_ruling">全申請一覧<label>{{$order_count}}</label></a></li>
 				</ul>
 				<div class='side_label'>
 					<span>貸出申請</span>

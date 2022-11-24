@@ -176,5 +176,39 @@ class OverWorkController extends Controller
 
 
     }
+    public function accept($id){
+
+        /* $matter = matter::findOrFail($id); */
+        $matter = matter::with('tasklist')->findOrFail($id);
+        if($matter->status!=3){
+            $matter->status=3;
+            $date=Carbon::now()->toDateTimeString();
+            $matter->matter_reply_date=$date;
+            $matter->save();
+        }
+        foreach($matter->tasklist as $task){
+            if($task->task_status!=3){
+                $task->status=3;
+                $date=Carbon::now()->toDateTimeString();
+                $task->task_reply_date=$date;
+                $task->save();
+            }
+        }
+
+
+
+
+
+
+        return  redirect($id.'/rewrite_ov');
+
+
+    }
+    public function redo($id){
+        return  redirect($id.'/rewrite_ov');
+    }
+    public function reject($id){
+        return  redirect($id.'/rewrite_ov');
+    }
 
 }

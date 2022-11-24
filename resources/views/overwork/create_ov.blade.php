@@ -48,21 +48,16 @@
 		<x-save-box :status="$matter->status" :role="0"/>
 		@endif
 			<input type="hidden" name="user_id" value="{{Auth::user()->id}}">
-
+			<input type="hidden" name="matter_type" value="1">
 
 			<!-- onsubmit="return false;"  -->
 			@if(isset($matter))
-
 				<input type="hidden" name="allotted" value="{{old('allotted',$matter->allotted)}}">
 				<input type="hidden" name="change_check" value="{{old('change_check',$matter->status)}}">
 				<input type="hidden" name="change_check2" value="{{old('change_check2',1)}}">
-
 				<x-matter-rewrite-box :userdata="$user" :matter="$matter"/>
-
 			@else
-
 				<input type="hidden" name="allotted" value="{{old('allotted',$user->worktype->hours*60+$user->worktype->minutes)}}">
-				<input type="hidden" name="matter_type" value="1">
 				<x-matter-box :userdata="$user"/>
 			@endif
 			<section id="task_area">
@@ -72,9 +67,7 @@
 					<div data-repeater-list="task_group">
 					@if(session('old_task_group'))
 						<x-task-rewrite-box :tasklist="Session::get('old_task_group')" :type="0"/>
-
 					@else
-
 						@isset($matter->tasklist)
 						@foreach ($matter->tasklist as $task)
 						<div class="task_form" data-repeater-item>
@@ -113,7 +106,7 @@
 
 						@endforeach
 						@endisset
-					@endif
+
 						<div class="task_form" data-repeater-item>
 							<div class="grid">
 								<label class="g12">振替予定日2</label>
@@ -143,6 +136,7 @@
 							</div>
 
 						</div>
+						@endif
 					</div>
 					<div>
 

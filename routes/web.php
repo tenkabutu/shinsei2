@@ -31,6 +31,10 @@ Route::post('{id}/save_request_ov',[OverWorkController::class,'save_request']);
 Route::post('{id}/update_ov',[OverWorkController::class,'update']);
 Route::post('{id}/update_request_ov',[OverWorkController::class,'update_request']);
 
+Route::post('{id}/accept_ov',[OverWorkController::class,'accept']);
+Route::post('{id}/redo_ov',[OverWorkController::class,'redo']);
+Route::post('{id}/reject_ov',[OverWorkController::class,'reject']);
+
 Route::get('matter_search',[ShinseiController::class,'matter_search']);
 Route::get('matter_ruling',[ShinseiController::class,'matter_ruling']);
 

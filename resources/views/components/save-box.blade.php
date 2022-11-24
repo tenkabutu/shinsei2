@@ -2,15 +2,15 @@
 	<fieldset>
 		<div>
 			@if($role==3)
-			<input type="submit" class="g12" value="承認" onclick="setAction('update_ov')">
-			 <input type="submit" class="g23" value="再提出" onclick="setAction('update_request_ov')">
-			 <input type="submit" class="g34" value="却下" onclick="setAction('save_request_ov')">
+			<input type="submit" class="g12" value="承認" onclick="setAction('accept_ov')">
+			 <input type="submit" class="g23" value="再提出" onclick="setAction('redo_ov')">
+			 <input type="submit" class="g34" value="却下" onclick="setAction('reject_ov')">
 
 			@elseif($status==1)
 			 <input type="submit" class="g12" value="更新" onclick="setAction('update_ov')">
 			 <input type="submit" class="g23" value="更新&申請" onclick="setAction('update_request_ov')">
 			 <input type="submit" class="g34" value="削除" onclick="setAction('save_request_ov')">
-			@elseif($status==2)
+			@elseif($status==2||$status==3)
 				<input type="submit" class="g12" value="更新" onclick="setAction('update_ov')">
 				<input type="submit" class="g23" value="更新&申請" onclick="setAction('update_request_ov')">
 			@else
