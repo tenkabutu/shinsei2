@@ -61,7 +61,7 @@
 				<x-matter-box :userdata="$user"/>
 			@endif
 			<section id="task_area">
-			<h5>　振替休暇情報 @isset($task_count) {{$task_count}} @endisset</h5>
+			<h5>　振替休暇情報 @isset($task_data) {{$task_data[0]['task_count']}} @endisset</h5>
 
 				<fieldset>
 					<div data-repeater-list="task_group">
@@ -69,6 +69,7 @@
 						<x-task-rewrite-box :tasklist="Session::get('old_task_group')" :type="0"/>
 					@else
 						@isset($matter->tasklist)
+
 						@foreach ($matter->tasklist as $task)
 						<div class="task_form" data-repeater-item>
 							<input type="hidden" name="id" value="{{$task->id}}">
@@ -99,7 +100,7 @@
 								<label class="g12">振替時間</label>
 								<label class="task_hour3 g34">{{intdiv($task->task_allotted,60)}}時間</label>
 								<label class="task_minutes3 g45">{{$task->task_allotted%60}}分</label>
-								<input type="hidden" name="task_allotted" value="{{$task->task_allotted}}">
+								<input type="hidden" class="task_allotted" name="task_allotted" value="{{$task->task_allotted}}">
 
 							</div>
 						</div>
@@ -146,7 +147,12 @@
 					</div>
 					<div>
 						<label class="g12">合計振替休暇時間</label>
-						<div class="g23 text_right">○時間</div>
+
+						@isset($matter->tasklist)
+						<div class="g23 text_right"><label class="task_time_alert"></label><label class="task_total">{{intdiv($task_data[0]['task_total'],60)}}時間{{$task_data[0]['task_total']%60}}分</label></div>
+						@else
+						<div class="g23 text_right"><label class="task_total"></label></div>
+						@endisset
 					</div>
 				</fieldset>
 
@@ -243,12 +249,20 @@ $(function(){
 		tf.find('.task_hour3').text(twt+'時間');
 		tf.find('.task_minutes3').text(tlt+'分');
 		tf.find('.task_allotted').val(tmt);
+		var tt=0;
+		$('.task_allotted').each(function(){
+			tt+=$(this).val()-0;
+			});
+		$('.task_total').text(Math.floor(tt/60)+'時間'+tt%60+'分');
 
-		if(twt>{{$user->worktype->def_allotted}}){
-			$('label.task_time_alert').text('設定時間オーバー');
-		}else{
+		if(tt>{{$user->worktype->def_allotted}}){
+			$('label.task_time_alert').text('基本勤務時間オーバー');
+		}else if(tt>$('input[name="allotted"]').val()){
+			$('label.task_time_alert').text('振替勤務時間オーバー');
+		}
+		else{
 			$('label.task_time_alert').text('');
-			}
+		}
 	});
  });
 </script>

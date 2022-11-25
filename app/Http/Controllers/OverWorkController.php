@@ -8,6 +8,7 @@ use App\Models\Matter;
 use App\Models\Task;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
 class OverWorkController extends Controller
@@ -40,9 +41,18 @@ class OverWorkController extends Controller
         } */
         $matter = new Matter();
         $matter ->fill($request->except('_token'))->save();
+        $id = $matter->id;
+        foreach($request->task_group as $row){
+            if($row['task_change_date']){
+                $task = new Task();
+                $task->task_allotted = ((int)$row['task_hour2']*60+(int)$row['task_minutes2'])-((int)$row['task_hour1']*60+(int)$row['task_minutes1']);
+                $task->matter_id =$id;
+                $task->fill($row)->save();
+            }
+        }
 
         $request->session()->regenerateToken();
-        $id = $matter->id;
+
 
         //event(new Registered($user));
 
@@ -59,8 +69,20 @@ class OverWorkController extends Controller
         $date=Carbon::now()->toDateTimeString();
         $request->merge(['matter_request_date' =>$date]);
         $matter ->fill($request->except('_token'))->save();
-        $request->session()->regenerateToken();
         $id = $matter->id;
+        foreach($request->task_group as $row){
+            if($row['task_change_date']){
+                $task = new Task();
+                $task->task_allotted = ((int)$row['task_hour2']*60+(int)$row['task_minutes2'])-((int)$row['task_hour1']*60+(int)$row['task_minutes1']);
+                $task->task_status =2;
+                $date=Carbon::now()->toDateTimeString();
+                $task->task_request_date=$date;
+                $task->matter_id =$id;
+                $task->fill($row)->save();
+            }
+        }
+        $request->session()->regenerateToken();
+
         return  redirect($id.'/rewrite_ov');
     }
 
@@ -164,7 +186,8 @@ class OverWorkController extends Controller
     public function show_ov($id){
 
         $matter = matter::with('tasklist')->findOrFail($id);
-        $task_count = task::where('matter_id',$id)->where('task_status',2)->count();
+        //$task_count = task::where('matter_id',$id)->where('task_status',2)->count();
+        $task_data = task::select(DB::raw('sum(task_allotted) as task_total,count(id) as task_count'))->where('matter_id',$id)->where('task_status',2)->get()->all();
 
 
 
@@ -172,7 +195,7 @@ class OverWorkController extends Controller
         $user=user::with('roletag','approvaltag','areatag','worktype')->findOrFail(Auth::user()->id);
 
 
-        return view('overwork.create_ov',compact('user','matter','task_count'));
+        return view('overwork.create_ov',compact('user','matter','task_data'));
 
 
     }
@@ -188,7 +211,7 @@ class OverWorkController extends Controller
         }
         foreach($matter->tasklist as $task){
             if($task->task_status!=3){
-                $task->status=3;
+                $task->task_status=3;
                 $date=Carbon::now()->toDateTimeString();
                 $task->task_reply_date=$date;
                 $task->save();
