@@ -1,8 +1,8 @@
 <x-guest-layout>
-    <x-auth-card>
+
         <x-slot name="logo">
             <a href="/">
-                <img width="80" alt="" src="/shinsei2/public/img/shinsei.jpg">
+
             </a>
         </x-slot>
 
@@ -11,8 +11,11 @@
 
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
+        <div class="create_logo">
+        		<img width="50" alt="" src="/shinsei2/public/img/shinsei.jpg"><h2 class="create_header">申請つーる</h2>
+        	</div>
 
-        <form method="POST" action="{{ route('login') }}">
+        <form class="create_user_form" method="POST" action="{{ route('login') }}">
             @csrf
 
             <!-- Email Address -->
@@ -57,5 +60,5 @@
                 </x-button>
             </div>
         </form>
-    </x-auth-card>
+
 </x-guest-layout>
