@@ -160,11 +160,11 @@
 			@if(isset($matter))
 				@if($matter->user_id==Auth::user()->id)
 					<x-save-box :status="$matter->status" :role="0"/>
-				@elseif(Auth::user()->role==3)
-					<x-save-box :status="$matter->status" :role="3"/>
+				@elseif(Auth::user()->role==1)
+					<x-save-box :status="$matter->status" :role="1"/>
 
 				@else
-				<label>test</label>
+				<!-- <label>test</label> -->
 				@endif
 			@else
 			<x-save-box :status="0" :role="0"/>

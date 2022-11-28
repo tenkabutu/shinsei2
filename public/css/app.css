@@ -202,14 +202,6 @@ div.radio-group label,#load_template1, #load_template2{
 }
 
 
-div.radio-group label[for="process8"],div.radio-group label[for="process2"],div.radio-group label[for="process31"]{
-
-	box-sizing:border-box;
-	line-height:15px;
-	padding:3px 10px 1px 10px;
-}
-
-
 .result_table,.search_table,.task_table,.kitt_table,.device_table{
 	width:100%;
 	border:1px solid black;
@@ -269,11 +261,6 @@ th.auto,td.auto{
 	}
 
 
-.spare_here{
-	background-color: #e3f2ff;
-}
-
-
 ul {
     list-style: none;
     margin:0px;padding:0px;
@@ -301,6 +288,13 @@ li{
     box-sizing: border-box;
     font-size:14px;
 }
+
+
+.navbar_menu li a.double{
+display: inline-block;
+    border-radius: 5px;
+    background-color: rgba(255,255,255,0.3);
+    padding: 0 2px;}
 
 
 #narrow li>div {

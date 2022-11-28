@@ -45,7 +45,7 @@
 				@else
 				<td>{{ $record->roletag->nametag}}</td>
 				@endif
-				@if(Auth::user()->role==3)
+				@if(Auth::user()->role==1)
 				<td>
 					<select name="approval">
 					<option value=1 @if($record->approval==1)selected @endif >すべて</option>
@@ -57,7 +57,7 @@
 				@else
 				<td>{{ $record->approvaltag->nametag}}</td>
 				@endif
-				@if(Auth::user()->role==3)
+				@if(Auth::user()->role==1)
 				<td>
 					<select name="area">
 					<option value=0 @if($record->area==0)selected @endif >江越</option>
@@ -69,7 +69,7 @@
 				@else
 				<td>{{ $record->areatag->nametag}}</td>
 				@endif
-				@if(Auth::user()->role==3)
+				@if(Auth::user()->role==1)
 				<td>
 					<select name="worktype_id">
 					<option value=0 @if($record->worktype_id==0)selected @endif >未設定</option>
