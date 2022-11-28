@@ -57,7 +57,7 @@
 				<input type="hidden" name="change_check2" value="{{old('change_check2',1)}}">
 				<x-matter-rewrite-box :userdata="$user" :matter="$matter"/>
 			@else
-				<input type="hidden" name="allotted" value="{{old('allotted',$user->worktype->hours*60+$user->worktype->minutes)}}">
+				<input type="hidden" name="allotted" value="{{old('allotted',$user->worktype->def_allotted)}}">
 				<x-matter-box :userdata="$user"/>
 			@endif
 			<section id="task_area">

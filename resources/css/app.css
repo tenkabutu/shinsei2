@@ -201,19 +201,7 @@ th.auto,td.auto{
 	border-right:1px solid black;
 	border-bottom:1px solid black;
 }
-.circle1{
-	border:1px solid black;
-	border-radius: 5px;
-	padding-left:5px;
-	margin-left:5px;
-}
 
-.square1{
-	border:2px solid black;
-	padding-left:5px;
-	margin-left:5px;
-	font-size:30px;
-}
 
 .unselect{
 	user-select: none; /* CSS3 */
@@ -400,6 +388,34 @@ table select{
 	height:100%;
 }
 
+/* || 申請ツール新規登録 */
+
+.create_user{
+	width:400px;
+	margin:26px auto;
+}
+.create_user_form{
+	background: #ebebeb;
+    padding: 12px;
+}
+.create_header{
+
+    padding: 0px;
+    margin:0px;
+    font-weight: normal;
+    text-align: center;
+    text-transform: uppercase;
+    color: #fff;
+    display:inline-block;
+}
+.create_logo{
+	padding:10px;
+	text-align: center;
+	background-color: #004800;
+}
+.create_logo img{
+	display:inline-block;
+}
 /* || grid */
 .grid{
 	display: grid;

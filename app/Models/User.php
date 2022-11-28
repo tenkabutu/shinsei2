@@ -39,6 +39,7 @@ class User extends Authenticatable
         'approval',
         'area',
         'worktype_id',
+        'employee',
     ];
 
     /**

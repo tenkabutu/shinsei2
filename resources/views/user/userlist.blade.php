@@ -12,6 +12,7 @@
 		<table class="table">
 			<tr>
 				<th>ID</th>
+				<th>No</th>
 				<th>使用者</th>
 				<th>表示名</th>
 				<th>アドレス</th>
@@ -26,18 +27,21 @@
 			<tr class="d{{$id+1}}">
 
 				<td>{{ $id + 1 }}</td>
+				<td>{{ $record->employee}}</td>
 				<td>{{ $record->name}}</td>
 				<td>{{ $record->name2}}</td>
 				<td>{{ $record->email}}</td>
 				@if(Auth::user()->role==3)
 				<td>
-					<input type="button" name="id" value="{{ $record->id}}">
+					<input type="hidden" name="id" value="{{ $record->id}}">
 					<select name="role">
 					<option value=1 @if($record->role==1)selected @endif >管理者</option>
 					<option value=2 @if($record->role==2)selected @endif >リーダー</option>
 					<option value=3 @if($record->role==3)selected @endif >支援員</option>
 					</select>
 				</td>
+				@elseif(Auth::user()->role==2&&Auth::user()->approval==2)
+				<td>{{ $record->roletag->nametag}}</td>
 				@else
 				<td>{{ $record->roletag->nametag}}</td>
 				@endif

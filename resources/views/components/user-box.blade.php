@@ -8,7 +8,7 @@
 				</div> -->
 				<div>
 					<div class="g12"><label>社員番号</label></div>
-					<div class="g23 text_right">{{Auth::user()->id}}</div>
+					<div class="g23 text_right">{{Auth::user()->employee}}</div>
 				</div>
 				<div>
 					<div class="g12"><label>申請者</label></div>

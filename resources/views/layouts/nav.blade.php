@@ -14,7 +14,7 @@
 				<div id='account'>
 					<table>
 						<tr>
-							<th width='22'>ID</th>
+							<th width='22'>No</th>
 							<th>ユーザー</th>
 							<td rowspan='2' width='45'>
 								<form method="POST" action="{{ route('logout') }}">
@@ -26,7 +26,7 @@
 							</td>
 						</tr>
 						<tr>
-							<td>{{ Auth::user()->id }}</td>
+							<td>{{ Auth::user()->employee }}</td>
 							<td>{{ Auth::user()->name }}</td>
 						</tr>
 					</table>
