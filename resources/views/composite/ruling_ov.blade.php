@@ -30,13 +30,13 @@
 					</div>
 					<div><label>状態：</label>
 					 <div class="radio-group">
-					<input id="st1_1" type="radio" class="st1" name="search_type1" value="1" @if(Request::get('search_type1')==1) checked @endif />
+					<input id="st1_1" type="radio" class="st1" name="search_type" value="1" @if(Request::get('search_type')==1) checked @endif />
 					<label for="st1_1">全件</label>
-					<input id="st1_2" type="radio" class="st1" name="search_type1" value="2" @if(Request::get('search_type1')==2) checked @endif/>
+					<input id="st1_2" type="radio" class="st1" name="search_type" value="2" @if(Request::get('search_type')==2) checked @endif/>
 					<label for="st1_2">未申請</label>
-					<input id="st1_3" type="radio" class="st1" name="search_type1" value="3" @if(Request::get('search_type1')==3) checked @endif/>
+					<input id="st1_3" type="radio" class="st1" name="search_type" value="3" @if(Request::get('search_type')==3) checked @endif/>
 					<label for="st1_3">申請中</label>
-					<input id="st1_5" type="radio" class="st1" name="search_type1" value="5" @if(Request::get('search_type1')==5) checked @endif/>
+					<input id="st1_5" type="radio" class="st1" name="search_type" value="4" @if(Request::get('search_type')==4) checked @endif/>
 					<label for="st1_5">終了</label>
 					</div>
 					</div>

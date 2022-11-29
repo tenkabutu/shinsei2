@@ -60,7 +60,7 @@
 
 					<li><a href="/shinsei2/public/matter_search">申請一覧</a></li>
 					@if(Auth::user()->role==1)
-					<li ><a href="/shinsei2/public/matter_ruling">全申請一覧</a>　<a class="double" href="/shinsei2/public/matter_ruling?mode=search">申請{{$order_count}}件</a></li>
+					<li ><a href="/shinsei2/public/matter_ruling">全申請一覧</a>　<a class="double" href="/shinsei2/public/matter_ruling?mode=search&search_type=3">申請{{$order_count}}件</a></li>
 					@endif
 				</ul>
 				<div class='side_label'>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Collection;
 use App\Models\Matter;
 use App\Models\User;
@@ -99,6 +100,7 @@ class ShinseiController extends Controller
 
         //session()->forget('mskeys');
         if($request->mode){
+            $user=user::findOrFail(Auth::id());
         $query=matter::query();
 
         if($request->matter_type){
@@ -127,8 +129,47 @@ class ShinseiController extends Controller
                     if($request->typename!=0){
                         $query->where('tasks.typename_id',$request->typename);
                     }
-                    if($request->search_type1==2){
-                        $query->where('tasks.typename_id','!=',13);
+                    if($request->search_type==2){
+                        if($user->approval==2){
+                            $area_id=$user->area;
+                            $query->where(function($query2) use($area_id){
+                                $query2->Where('status',1)
+                                ->Where('users.area', $area_id)
+                                ->Where('users.id','!=',Auth::id());
+                            })->orwhere(function($query2) use($area_id){
+                                $query2->Where('task_status',1)
+                                ->Where('users.area', $area_id)
+                                ->Where('users.id','!=',Auth::id());
+                            })->orwhere(function($query2) use($area_id){
+                                $query2->select('sum(tasks.task_allotted) as task_total')
+                                ->Where('matters.allotted','>','task_total')
+                                ->Where('users.area', $area_id)
+                                ->Where('users.id','!=',Auth::id());
+                            });
+
+                        }
+
+                    }elseif($request->search_type==3){
+
+                        if($user->approval==2){
+                            $area_id=$user->area;
+                            $query->where(function($query2) use($area_id){
+                                $query2->Where('status',2)
+                                ->Where('users.area', $area_id)
+                                ->Where('users.id','!=',Auth::id());
+                            })->orwhere(function($query2) use($area_id){
+                                $query2->Where('task_status',2)
+                                ->Where('users.area', $area_id)
+                                ->Where('users.id','!=',Auth::id());
+                            });
+
+                        }
+                    }elseif($request->search_type==4){
+                    }elseif($request->search_type==1){
+
+
+                    }else{
+                        return back()->withInput();
                     }
                     if($request->user!=0){
                         $query->where('matters.user_id',$request->user);
