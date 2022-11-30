@@ -30,8 +30,25 @@ class TaskcountMiddleware
         if(Auth::id()){
         $user=user::findOrFail(Auth::id());
 
-        $order_count = $user->approval;
-        if($user->approval==2){
+        $order_count =0;
+
+        if($user->approval==1){
+
+            $order_count = DB::table('matters')
+            ->leftjoin('tasks','matters.id','tasks.matter_id')
+            ->join('users','matters.user_id','users.id')
+            ->where(function($query){
+                $query->Where('status',2)
+                ->Where('users.id','!=',Auth::id());
+            })->orwhere(function($query){
+                $query->Where('task_status',2)
+                ->Where('users.id','!=',Auth::id());
+            })
+
+            ->distinct('matters.id')->count('matters.id');
+
+
+        }elseif($user->approval==2){
             $area_id=$user->area;
 
 
