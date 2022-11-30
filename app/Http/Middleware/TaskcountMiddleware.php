@@ -27,12 +27,12 @@ class TaskcountMiddleware
 
     public function handle(Request $request, Closure $next)
     {
-        if(Auth::id()){
-        $user=user::findOrFail(Auth::id());
+
+        //$user=user::where('id',Auth::id());
 
         $order_count =0;
-
-        if($user->approval==1){
+        if(Auth::id()){
+            if(Auth::user()->approval==1){
 
             $order_count = DB::table('matters')
             ->leftjoin('tasks','matters.id','tasks.matter_id')
@@ -48,8 +48,8 @@ class TaskcountMiddleware
             ->distinct('matters.id')->count('matters.id');
 
 
-        }elseif($user->approval==2){
-            $area_id=$user->area;
+            }elseif(Auth::user()->approval==2){
+            $area_id=Auth::user()->area;
 
 
             $order_count = DB::table('matters')
@@ -66,12 +66,13 @@ class TaskcountMiddleware
             })
 
             ->distinct('matters.id')->count('matters.id');
+            }
         }
 
 
 
         $this->viewFactory->share('order_count', $order_count);
-        }
+
         return $next($request);
     }
 

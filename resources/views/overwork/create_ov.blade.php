@@ -40,7 +40,7 @@
 				@foreach($errors->all() as $err)
 				<li class="text-danger">{{ $err }}</li> @endforeach
 			</ul>
-		<x-user-box :userdata="$user"/>
+		<x-user-box :userdata="$user" :checker="$check_userlist"/>
 		<form  method="post" action="save_ov" class="repeater"  >
 			@csrf
 			@if (session('save_check'))

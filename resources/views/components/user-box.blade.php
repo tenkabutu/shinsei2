@@ -19,13 +19,20 @@
 					<div class="g23 text_right">{{ $userdata->areatag->nametag}}</div>
 				</div>
 				<div>
-					<div class="g12"><label>承認者</label></div>
-					<div class="g23 text_right">水田浩子</div>
+					<div class="g12"><label>承認通知先</label></div>
+					<div class="g23 text_right">
+					@foreach($checker as $record)
+						@if(!$loop->first)
+						,
+						@endif
+						{{$record->name}}
+					@endforeach
+					</div>
 				</div>
-				<div>
+				<!-- <div>
 					<div class="g12"><label>通知先</label></div>
 					<div class="g23 text_right">松金秀司</div>
-				</div>
+				</div> -->
 
 			</fieldset>
 </section>
