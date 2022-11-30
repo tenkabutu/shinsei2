@@ -31,7 +31,7 @@
 				<td>{{ $record->name}}</td>
 				<td>{{ $record->name2}}</td>
 				<td>{{ $record->email}}</td>
-				@if(Auth::user()->role==3)
+				@if(Auth::user()->role==1)
 				<td>
 					<input type="hidden" name="id" value="{{ $record->id}}">
 					<select name="role">
