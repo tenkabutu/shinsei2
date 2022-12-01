@@ -19,9 +19,20 @@ class OverWorkController extends Controller
 
     public function create(){
         $user=user::with('roletag','approvaltag','areatag','worktype')->findOrFail(Auth::user()->id);
+        $query=user::query();
+        $area_id=$user->area;
 
+        $query->where(function($query2) use($area_id){
+            $query2->whereIn('users.role',[1,2])
+            ->Where('users.area', $area_id)
+            ->Where('users.approval',2);
+        })->orwhere(function($query2){
+            $query2->whereIn('users.role',[1,2])
+            ->Where('users.approval',1);
+        });
+            $check_userlist=$query->get('name')->all();
 
-        return view('overwork.create_ov',compact('user'));
+        return view('overwork.create_ov',compact('user','check_userlist'));
 
     }
     public function save(Request $request){

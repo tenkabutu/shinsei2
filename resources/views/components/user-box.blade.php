@@ -19,7 +19,7 @@
 					<div class="g23 text_right">{{ $userdata->areatag->nametag}}</div>
 				</div>
 				<div>
-					<div class="g12"><label>承認通知先</label></div>
+					<div class="g12"><label>確認者</label></div>
 					<div class="g23 text_right">
 					@foreach($checker as $record)
 						@if(!$loop->first)

@@ -3,7 +3,7 @@
 				<fieldset>
 					<div>
 						<label class="g12">振替予定日</label>
-						<input type="text" class="target2 g23" name="matter_change_date" autocomplete="off" value="{{substr($matter->matter_change_date,0,10)}}">
+						<input type="text" class="target2 g23" name="matter_change_date" autocomplete="off" value="{{old('matter_change_date',substr($matter->matter_change_date,0,10))}}">
 					</div>
 					<div>
 						<label class="g12">開始時間</label>
