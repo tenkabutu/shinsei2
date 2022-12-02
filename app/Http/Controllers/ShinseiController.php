@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\DB;
 use App\Models\Matter;
 use App\Models\User;
 
@@ -141,10 +141,13 @@ class ShinseiController extends Controller
                                 ->Where('users.area', $area_id)
                                 ->Where('users.id','!=',Auth::id());
                             })->orwhere(function($query2) use($area_id){
-                                $query2->select('sum(tasks.task_allotted) as task_total')
+                                $query2->selectRaw('sum(task_allotted) as task_total')
+
+                                ->Where('task_status','!=',1)
                                 ->Where('matters.allotted','>','task_total')
                                 ->Where('users.area', $area_id)
-                                ->Where('users.id','!=',Auth::id());
+                                ->Where('users.id','!=',Auth::id())
+                                ->groupBy('tasks.matter_id');
                             });
 
                         }

@@ -69,7 +69,6 @@
 						<x-task-rewrite-box :tasklist="Session::get('old_task_group')" :type="0"/>
 					@else
 						@isset($matter->tasklist)
-
 						@foreach ($matter->tasklist as $task)
 						<div class="task_form" data-repeater-item>
 							<input type="hidden" name="id" value="{{$task->id}}">
@@ -101,7 +100,6 @@
 								<label class="task_hour3 g34">{{intdiv($task->task_allotted,60)}}時間</label>
 								<label class="task_minutes3 g45">{{$task->task_allotted%60}}分</label>
 								<input type="hidden" class="task_allotted" name="task_allotted" value="{{$task->task_allotted}}">
-
 							</div>
 						</div>
 
