@@ -56,7 +56,7 @@
 
 					<li><a href="/shinsei2/public/user" >休暇申請(未実装)</a></li>
 					<li><a href="/shinsei2/public/create_ov" >振替申請</a></li>
-					<li><a href="/shinsei2/public/user" >テレワーク申請(未実装)</a></li>
+					<li><a href="/shinsei2/public/create_te" >テレワーク申請</a></li>
 
 					<li><a href="/shinsei2/public/matter_search">申請一覧</a></li>
 					@if(Auth::user()->role==1)

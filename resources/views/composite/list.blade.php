@@ -22,35 +22,19 @@
 					</div>
 					<div><label>状態：</label>
 					 <div class="radio-group">
-					<input id="st1_1" type="radio" class="st1" name="search_type1" value="1" @if(Request::get('search_type1')==1) checked @endif />
+					<input id="st1_1" type="radio" class="st1" name="search_type" value="1" @if(Request::get('search_type')==1) checked @endif />
 					<label for="st1_1">全件</label>
-					<input id="st1_2" type="radio" class="st1" name="search_type1" value="2" @if(Request::get('search_type1')==2) checked @endif/>
+					<input id="st1_2" type="radio" class="st1" name="search_type" value="2" @if(Request::get('search_type')==2) checked @endif/>
 					<label for="st1_2">未申請</label>
-					<input id="st1_3" type="radio" class="st1" name="search_type1" value="3" @if(Request::get('search_type1')==3) checked @endif/>
+					<input id="st1_3" type="radio" class="st1" name="search_type" value="3" @if(Request::get('search_type')==3) checked @endif/>
 					<label for="st1_3">申請中</label>
-					<input id="st1_4" type="radio" class="st1" name="search_type1" value="4" @if(Request::get('search_type1')==4) checked @endif/>
-					<label for="st1_4">予約</label>
-					<input id="st1_5" type="radio" class="st1" name="search_type1" value="5" @if(Request::get('search_type1')==5) checked @endif/>
-					<label for="st1_5">終了</label>
+					<input id="st1_4" type="radio" class="st1" name="search_type" value="4" @if(Request::get('search_type')==4) checked @endif/>
+					<label for="st1_4">終了</label>
+
 					</div>
 					</div>
 
     			</li>
-    			<!-- <li><div><label>状態：</label>
-					 <div class="radio-group">
-					<input id="st1_1" type="radio" class="st1" name="search_type1" value="1" @if(Request::get('search_type1')==1) checked @endif />
-					<label for="st1_1">全件</label>
-					<input id="st1_2" type="radio" class="st1" name="search_type1" value="2" @if(Request::get('search_type1')==2) checked @endif/>
-					<label for="st1_2">未申請</label>
-					<input id="st1_3" type="radio" class="st1" name="search_type1" value="3" @if(Request::get('search_type1')==3) checked @endif/>
-					<label for="st1_3">申請中</label>
-					<input id="st1_4" type="radio" class="st1" name="search_type1" value="4" @if(Request::get('search_type1')==4) checked @endif/>
-					<label for="st1_4">予約</label>
-					<input id="st1_5" type="radio" class="st1" name="search_type1" value="5" @if(Request::get('search_type1')==5) checked @endif/>
-					<label for="st1_5">終了</label>
-					</div>
-					</div>
-    			</li> -->
     		</ul>
 
     	<div><button type="submit" name="mode" value="search">検索</button></div>
@@ -66,25 +50,34 @@
 				<th class="id">実施日</th>
 				<th>開始時間</th>
 				<th class="id">終了時間</th>
-				<th class="s3">勤務時間</th>
+				<th class="s3">時間</th>
+				<th>⇒</th>
+				<th>振替日</th>
+				<th>開始時間</th>
+				<th class="id">終了時間</th>
 				<th>案件状態</th>
 				<th class="id">作業者</th>
-				<th class="id">作業</th>
+
 
 
 
 			</tr>
 			</thead>
+			@if(isset($records))
 			{{-- @foreach ($records as $record) --}}
+			@php
+			 $back = 0;
+			@endphp
 			@foreach ($records as $id =>$record)
+			@if($back!=$record->matters_id)
 			<tr class="d{{$id+1}}">
 				<td><a href="/shinsei2/public/{{ $record->matters_id }}/rewrite_ov">{{ $record->matters_id}}</a></td>
 				<td>{{ $record->typename}}</td>
 				<td>{{ date('n/j',strtotime($record->matter_change_date))}}</td>
 				<td>{{ date('H：i',strtotime($record->starttime))}}</td>
 				<td>{{ date('H：i',strtotime($record->endtime))}}</td>
-
 				<td>{{floor($record->allotted/60).'時間 '.($record->allotted%60).'分'}}</td>
+				<td></td>
 				<td>{{ $record->statusname}}</td>
 				<td>@if($record->status==2){{$record->matter_request_date}}@elseif($record->status>=3){{$record->matter_reply_date}}@endif</td>
 				<td>@isset($record->setdate1){{ date('n/j',strtotime($record->setdate1))}}@endisset</td>
@@ -92,8 +85,39 @@
 
 
 			</tr>
+			@endif
+				@php
+					if($back!=$record->matters_id){
+						$back =$record->matters_id;
+					};
+				@endphp
+				@if($record->matter_id)
+				<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td>⇒</td>
+				<td>{{date('n/j',strtotime($record->task_change_date))}}</td>
+				<td>{{$record->task_hour1.":".$record->task_minutes1}}</td>
+				<td>{{$record->task_hour2.":".$record->task_minutes2}}</td>
+				<td>{{floor($record->task_allotted/60).'時間 '.($record->task_allotted%60).'分'}}</td>
+				@if($record->task_status==2)
+				<td>申請中</td><td>{{date('n/j',strtotime($record->task_request_date))}}</td>
+				@elseif($record->task_status>=3)
+				<td>確認済み</td><td>{{date('n/j',strtotime($record->task_reply_date))}}</td>
+				@else
+				<td></td><td></td>
+				@endif
+				<td>{{$record->task_total}}</td>
+				<td></td>
+				@endif
+
+
+
+			</tr>
 
 			@endforeach
+			@endif
 		</table>
 	</div>
 </div>

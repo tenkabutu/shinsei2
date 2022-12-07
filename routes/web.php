@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\OverWorkController;
+use App\Http\Controllers\TeleWorkController;
 use App\Http\Controllers\ShinseiController;
 
 /*
@@ -34,6 +35,9 @@ Route::post('{id}/update_request_ov',[OverWorkController::class,'update_request'
 Route::post('{id}/accept_ov',[OverWorkController::class,'accept']);
 Route::post('{id}/redo_ov',[OverWorkController::class,'redo']);
 Route::post('{id}/reject_ov',[OverWorkController::class,'reject']);
+
+Route::get('create_te',[TeleWorkController::class,'create']);
+Route::get('{id}/rewrite_te',[TeleWorkController::class,'show_te']);
 
 Route::get('matter_search',[ShinseiController::class,'matter_search']);
 Route::get('matter_ruling',[ShinseiController::class,'matter_ruling']);

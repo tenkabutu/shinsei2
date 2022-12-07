@@ -19,13 +19,15 @@ class ShinseiController extends Controller
         //session(['ms_request'=>$request->all()]);
         //$request->sesson()->put('ms_request',$request);
 
-        session()->forget('mskeys');
+        //session()->forget('mskeys');
+        if($request->mode){
         $query=matter::query();
 
         $query->leftjoin('tasks',function($join){
             $join->on('matters.id','=','tasks.matter_id');
 
         });
+            $query->leftjoin('users','matters.user_id','users.id');
             $query->leftjoin('nametags as nt1',function($join){
                 $join->on('matters.matter_type','=','nt1.tagid')
                 ->where('nt1.groupid',4);
@@ -36,9 +38,7 @@ class ShinseiController extends Controller
                 });
 
             $query->leftjoin('users as reception','matters.reception_id','reception.id');
-            if($request->schooltype){
-                $query->where('schools.schoolcategory',$request->schooltype);
-            }
+
             if($request->matter_id){
                 $query->where('matters.id',$request->matter_id);
             }
@@ -46,14 +46,29 @@ class ShinseiController extends Controller
             if($request->typename!=0){
                 $query->where('tasks.typename_id',$request->typename);
             }
-            if($request->search_type1==2){
-                $query->where('tasks.typename_id','!=',13);
-            }
-            if($request->worker!=0){
-                $query->where('tasks.user_id',$request->worker);
-            }
-            if($request->reception!=0){
-                $query->where('matters.reception_id',$request->reception);
+            if($request->search_type==2){
+
+                $query->Where('status',1)
+                ->orwhere('task_status',1)
+                ->orwhereColumn('allotted','!=','allotted2');
+            }elseif($request->search_type==3){
+                $query->where(function($query2){
+                    $query2->Where('status',2)
+                    ->Where('users.id','=',Auth::id());
+                })->orwhere(function($query2){
+                    $query2->Where('task_status',2)
+                    ->Where('users.id',Auth::id());
+                });
+            }elseif($request->search_type==4){
+                $query->Where('status',3)
+                ->where('task_status',3)
+                ->Where('users.id',Auth::id())
+                ->whereColumn('allotted','allotted2');
+            }elseif($request->search_type==1){
+                $query->Where('users.id','=',Auth::id());
+
+            }else{
+                return back()->withInput();
             }
 
             if($request->month!=0){
@@ -83,14 +98,14 @@ class ShinseiController extends Controller
             //var_dump($records->toArray());
 
             return view('composite.list', compact('records'));
+        }else{
+            return view('composite.list');
+        }
 
             //$matter ->fill($request->except('_token'))->save();
 
 
             //event(new Registered($user));
-
-            //@foreach ($records as $id =>$record)
-
     }
     public function matter_ruling(Request $request){
 
@@ -119,42 +134,19 @@ class ShinseiController extends Controller
                 });
 
                     $query->leftjoin('users as reception','matters.reception_id','reception.id');
-                    if($request->schooltype){
-                        $query->where('schools.schoolcategory',$request->schooltype);
-                    }
+
                     if($request->matter_id){
                         $query->where('matters.id',$request->matter_id);
                     }
 
-                    if($request->typename!=0){
-                        $query->where('tasks.typename_id',$request->typename);
-                    }
                     if($request->search_type==2){
-                        if($user->approval==2){
+
                             $area_id=$user->area;
-                            $query->where(function($query2) use($area_id){
-                                $query2->Where('status',1)
-                                ->Where('users.area', $area_id)
-                                ->Where('users.id','!=',Auth::id());
-                            })->orwhere(function($query2) use($area_id){
-                                $query2->Where('task_status',1)
-                                ->Where('users.area', $area_id)
-                                ->Where('users.id','!=',Auth::id());
-                            })->orwhere(function($query2) use($area_id){
-                                $query2->selectRaw('sum(task_allotted) as task_total')
-
-                                ->Where('task_status','!=',1)
-                                ->Where('matters.allotted','>','task_total')
-                                ->Where('users.area', $area_id)
-                                ->Where('users.id','!=',Auth::id())
-                                ->groupBy('tasks.matter_id');
-                            });
-
-                        }
-
+                            $query->Where('status',1)
+                            ->orwhere('task_status',1)
+                            ->orwhereColumn('allotted','!=','allotted2');
                     }elseif($request->search_type==3){
 
-                        if($user->approval==2){
                             $area_id=$user->area;
                             $query->where(function($query2) use($area_id){
                                 $query2->Where('status',2)
@@ -165,9 +157,11 @@ class ShinseiController extends Controller
                                 ->Where('users.area', $area_id)
                                 ->Where('users.id','!=',Auth::id());
                             });
-
-                        }
                     }elseif($request->search_type==4){
+
+                        $query->Where('status',3)
+                        ->where('task_status',3)
+                        ->whereColumn('allotted','allotted2');
                     }elseif($request->search_type==1){
 
 

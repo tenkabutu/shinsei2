@@ -30,6 +30,7 @@ class CreateMattersTable extends Migration
             $table->integer('minutes2');
             $table->integer('breaktime');
             $table->integer('allotted');
+            $table->integer('allotted2');
             $table->string('order_content');
             $table->string('work_content')->nullable();
             $table->integer('status')->default(1)->nullable();
