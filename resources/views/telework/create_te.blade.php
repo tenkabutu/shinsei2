@@ -30,11 +30,11 @@
 	<div id="shinsei_wrap">
 
 		@if(isset($matter->status))
-		<h3>振替申請<label>　(作成:{{$matter->created_at->format('Y/n/j')}}　更新:{{$matter->updated_at->format('Y/n/j')}})</label></h3>
+		<h3>テレワーク申請<label>　(作成:{{$matter->created_at->format('Y/n/j')}}　更新:{{$matter->updated_at->format('Y/n/j')}})</label></h3>
 
 			<x-change-status :matter="$matter" />
 		@else
-		<h3>新規振替申請</h3>
+		<h3>新規テレワーク申請</h3>
 		@endif
 			<ul>
 				@foreach($errors->all() as $err)
@@ -48,17 +48,16 @@
 		<x-save-box :status="$matter->status" :role="0"/>
 		@endif
 			<input type="hidden" name="user_id" value="{{Auth::user()->id}}">
-			<input type="hidden" name="matter_type" value="1">
+			<input type="hidden" name="matter_type" value="2">
 
 			<!-- onsubmit="return false;"  -->
 			@if(isset($matter))
 				<input type="hidden" name="allotted" value="{{old('allotted',$matter->allotted)}}">
 				<input type="hidden" name="change_check" value="{{old('change_check',$matter->status)}}">
-				<input type="hidden" name="change_check2" value="{{old('change_check2',1)}}">
-				<x-matter-rewrite-box :userdata="$user" :matter="$matter"/>
+				<x-matter-rewrite-box :userdata="$user" type="テレワーク" :matter="$matter"/>
 			@else
 				<input type="hidden" name="allotted" value="{{old('allotted',$user->worktype->def_allotted)}}">
-				<x-matter-box :userdata="$user"/>
+				<x-matter-box :userdata="$user" type="テレワーク"/>
 			@endif
 
 			@if(isset($matter))
@@ -122,52 +121,7 @@ $(function(){
 			$('label.time_alert').text('');
 		}
 	});
-	$('#task_area input[type="number"]').bind('input', function () {
-		var tf = $(this).closest('.task_form');
-		tf.css('color', 'red');
 
-		var th1 = tf.find('.task_hour1').val()- 0;
-
-		var th2 = tf.find('.task_hour2').val()- 0;
-		var tm1 = tf.find('.task_minutes1').val()- 0;
-		var tm2 = tf.find('.task_minutes2').val()- 0;
-		//var mdf1 =$('.mdef1').val()-0;
-		//$('.mdef1').text(m1);
-		//if(m1<30){
-		//	$('.mdef2').text(m1+30);
-		//}else{
-		//	$('.mdef2').text(m1-30);
-		//}
-		//var m2 = $('select.minutes2').val()- 0;
-		var tbt = tf.find('.task_break').val()- 0;
-		var tmt = ((th2*60+tm2)-(th1*60+tm1))-tbt;
-		//alert(tmt);
-		var twt = Math.floor(tmt/60);
-		var tlt = tmt%60;
-		/* if(wt>4){
-			$('input[name="breaktime"]').val('60');
-			mt = ((h2*60+m2)-(h1*60+m1))-60;
-			wt = Math.floor(mt/60);
-			lt = mt%60;
-		} */
-		tf.find('.task_hour3').text(twt+'時間');
-		tf.find('.task_minutes3').text(tlt+'分');
-		tf.find('.task_allotted').val(tmt);
-		var tt=0;
-		$('.task_allotted').each(function(){
-			tt+=$(this).val()-0;
-			});
-		$('.task_total').text(Math.floor(tt/60)+'時間'+tt%60+'分');
-
-		if(tt>{{$user->worktype->def_allotted}}){
-			$('label.task_time_alert').text('基本勤務時間オーバー');
-		}else if(tt>$('input[name="allotted"]').val()){
-			$('label.task_time_alert').text('振替勤務時間オーバー');
-		}
-		else{
-			$('label.task_time_alert').text('');
-		}
-	});
  });
 </script>
 </x-app-layout>

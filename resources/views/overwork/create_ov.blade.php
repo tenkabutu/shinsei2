@@ -55,10 +55,10 @@
 				<input type="hidden" name="allotted" value="{{old('allotted',$matter->allotted)}}">
 				<input type="hidden" name="change_check" value="{{old('change_check',$matter->status)}}">
 				<input type="hidden" name="change_check2" value="{{old('change_check2',1)}}">
-				<x-matter-rewrite-box :userdata="$user" :matter="$matter"/>
+				<x-matter-rewrite-box :userdata="$user" type="振替" :matter="$matter"/>
 			@else
 				<input type="hidden" name="allotted" value="{{old('allotted',$user->worktype->def_allotted)}}">
-				<x-matter-box :userdata="$user"/>
+				<x-matter-box :userdata="$user" type="振替"/>
 			@endif
 			<section id="task_area">
 			<h5>　振替休暇情報 @isset($task_data) {{$task_data[0]['task_count']}} @endisset</h5>

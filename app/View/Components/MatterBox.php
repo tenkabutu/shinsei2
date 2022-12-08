@@ -11,10 +11,11 @@ class MatterBox extends Component
      *
      * @return void
      */
-    public $userdata;
-    public function __construct($userdata)
+    public $userdata,$type;
+    public function __construct($userdata,$type)
     {
         $this->userdata = $userdata;
+        $this->type = $type;
     }
 
     /**
