@@ -13,10 +13,11 @@ class MatterRewriteBox extends Component
      */
     public $userdata;
     public $matter;
-    public function __construct($userdata,$matter)
+    public function __construct($userdata,$matter,$type)
     {
         $this->userdata = $userdata;
         $this->matter = $matter;
+        $this->type = $type;
     }
 
     /**

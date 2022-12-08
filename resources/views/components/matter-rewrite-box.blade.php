@@ -1,8 +1,8 @@
 <section id="matter_area">
-			<h5>　振替作業情報</h5>
+			<h5>　{{$type}}作業情報</h5>
 				<fieldset>
 					<div>
-						<label class="g12">振替予定日</label>
+						<label class="g12">{{$type}}予定日</label>
 						<input type="text" class="target2 g23" name="matter_change_date" autocomplete="off" value="{{old('matter_change_date',substr($matter->matter_change_date,0,10))}}">
 					</div>
 					<div>
@@ -25,13 +25,13 @@
 						</div>
 					</div>
 					<div>
-						<label class="g12">振替時間</label>
+						<label class="g12">{{$type}}時間</label>
 						<label class="time_alert g23"></label><label class="hour3 g34">{{old('hour3',intdiv($matter->allotted,60))}}時間</label>
 						<label class="minutes3 g45">{{$matter->allotted%60}}分</label>
 					</div>
 					<div>
 
-						<label class="g12" for="order_content">振替理由　　：</label>
+						<label class="g12" for="order_content">{{$type}}理由　　：</label>
 						<textarea class="g23"id="order_content" name ="order_content"  rows="2" cols="60">{{old('order_content',$matter->order_content)}}</textarea>
 					</div>
 
