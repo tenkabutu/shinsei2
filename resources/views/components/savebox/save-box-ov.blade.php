@@ -2,9 +2,9 @@
 	<fieldset>
 		<div>
 			@if($role==1)
-			<input type="submit" class="g12" value="承認" onclick="setAction('accept_ov')">
-			 <input type="submit" class="g23" value="再提出" onclick="setAction('redo_ov')">
-			 <input type="submit" class="g34" value="却下" onclick="setAction('reject_ov')">
+			<input type="submit" class="g12" value="承認" onclick="setAction('accept')">
+			 <input type="submit" class="g23" value="再提出" onclick="setAction('redo')">
+			 <input type="submit" class="g34" value="却下" onclick="setAction('reject')">
 
 			@elseif($status==1)
 			 <input type="submit" class="g12" value="更新" onclick="setAction('update_ov')">
