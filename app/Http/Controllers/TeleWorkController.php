@@ -32,7 +32,7 @@ class TeleWorkController extends Controller
 
     }
 
-    public function show_ov($id){
+    public function show_te($id){
 
         $matter = matter::with('tasklist')->findOrFail($id);
         //$task_count = task::where('matter_id',$id)->where('task_status',2)->count();
@@ -57,7 +57,7 @@ class TeleWorkController extends Controller
             //  with('roletag','approvaltag','areatag','worktype')->findOrFail(Auth::user()->id);
 
 
-            return view('overwork.create_ov',compact('user','matter','check_userlist'));
+            return view('telework.create_te',compact('user','matter','check_userlist'));
 
 
     }

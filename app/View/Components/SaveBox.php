@@ -11,12 +11,13 @@ class SaveBox extends Component
      *
      * @return void
      */
-    public $status;
-    public $role;
-    public function __construct($status,$role)
+    public $status,$role,$type;
+    //public $type;
+    public function __construct($status,$role,$type)
     {
         $this->status = $status;
         $this->role = $role;
+        $this->type = $type;
     }
 
     /**
@@ -26,6 +27,10 @@ class SaveBox extends Component
      */
     public function render()
     {
-        return view('components.save-box');
+        if($this->type==1){
+            return view('components.savebox.save-box-ov');
+        }elseif($this->type==2){
+            return view('components.savebox.save-box-te');
+        }
     }
 }
