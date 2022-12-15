@@ -4,7 +4,7 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class rulingBox extends Component
+class RulingBox extends Component
 {
     /**
      * Create a new component instance.
