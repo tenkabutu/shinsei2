@@ -109,7 +109,8 @@ class ShinseiController extends Controller
     }
     public function matter_ruling(Request $request){
 
-        //var_dump($request->toArray());
+        var_dump($request->toArray());
+
         //session(['ms_request'=>$request->all()]);
         //$request->sesson()->put('ms_request',$request);
 
@@ -208,8 +209,6 @@ class ShinseiController extends Controller
 
                     //header("Content-type: application/json; charset=UTF-8");
                     //var_dump($records->toArray());
-
-
 
                     //$matter ->fill($request->except('_token'))->save();
 

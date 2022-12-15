@@ -48,23 +48,23 @@
 		<x-save-box :status="$matter->status" :role="0" :type="2"/>
 		@endif
 			<input type="hidden" name="user_id" value="{{Auth::user()->id}}">
-			<input type="hidden" name="matter_type" value="2">
+			<input type="hidden" name="matter_type" value="3">
 
 			<!-- onsubmit="return false;"  -->
 			@if(isset($matter))
 				<input type="hidden" name="allotted" value="{{old('allotted',$matter->allotted)}}">
 				<input type="hidden" name="change_check" value="{{old('change_check',$matter->status)}}">
-				<x-matter-rewrite-box :userdata="$user" type="テレワーク" :matter="$matter"/>
+				<x-matter-rewrite-box :userdata="$user" typename="テレワーク" :matter="$matter"/>
 			@else
 				<input type="hidden" name="allotted" value="{{old('allotted',$user->worktype->def_allotted)}}">
-				<x-matter-box :userdata="$user" type="テレワーク"/>
+				<x-matter-box :userdata="$user" typename="テレワーク"/>
 			@endif
 
 			@if(isset($matter))
 				@if($matter->user_id==Auth::user()->id)
-					<x-save-box :status="$matter->status" :role="0"/>
+					<x-save-box :status="$matter->status" :role="0" :type="2"/>
 				@elseif(Auth::user()->role==1)
-					<x-save-box :status="$matter->status" :role="1"/>
+					<x-save-box :status="$matter->status" :role="1" :type="2"/>
 
 				@else
 				<!-- <label>test</label> -->

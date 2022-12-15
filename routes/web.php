@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\OverWorkController;
 use App\Http\Controllers\TeleWorkController;
 use App\Http\Controllers\ShinseiController;
+use App\Http\Controllers\AcceptController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,22 +23,25 @@ Route::post('user/change',[UserController::class,'user_change']);
 
 Route::get('create_ov',[OverWorkController::class,'create']);
 Route::get('{id}/rewrite_ov',[OverWorkController::class,'show_ov']);
-
 Route::post('save_ov',[OverWorkController::class,'save']);
 Route::post('save_request_ov',[OverWorkController::class,'save_request']);
-
 Route::post('{id}/save_ov',[OverWorkController::class,'save']);
 Route::post('{id}/save_request_ov',[OverWorkController::class,'save_request']);
-
 Route::post('{id}/update_ov',[OverWorkController::class,'update']);
 Route::post('{id}/update_request_ov',[OverWorkController::class,'update_request']);
 
-Route::post('{id}/accept',[OverWorkController::class,'accept']);
-Route::post('{id}/redo',[OverWorkController::class,'redo']);
-Route::post('{id}/reject',[OverWorkController::class,'reject']);
-
 Route::get('create_te',[TeleWorkController::class,'create']);
-Route::get('{id}/rewrite_te',[TeleWorkController::class,'show_te']);
+Route::get('{id}/show_te',[TeleWorkController::class,'show_te']);
+Route::post('save_te',[TeleWorkController::class,'save']);
+Route::post('save_request_te',[TeleWorkController::class,'save_request']);
+Route::post('{id}/save_te',[TeleWorkController::class,'save']);
+Route::post('{id}/save_request_te',[TeleWorkController::class,'save_request']);
+Route::post('{id}/update_te',[TeleWorkController::class,'update']);
+Route::post('{id}/update_request_te',[TeleWorkController::class,'update_request']);
+
+Route::post('{id}/accept',[AcceptController::class,'accept']);
+Route::post('{id}/redo',[AcceptController::class,'redo']);
+Route::post('{id}/reject',[AcceptController::class,'reject']);
 
 Route::get('matter_search',[ShinseiController::class,'matter_search']);
 Route::get('matter_ruling',[ShinseiController::class,'matter_ruling']);

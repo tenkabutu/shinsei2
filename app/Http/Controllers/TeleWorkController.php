@@ -31,6 +31,23 @@ class TeleWorkController extends Controller
             return view('telework.create_te',compact('user','check_userlist'));
 
     }
+    public function save(Request $request){
+
+        $request->validate([
+                'matter_change_date' => ['required', 'string', 'max:55'],
+                'order_content' => ['required', 'string', 'max:255'],
+        ]);
+
+        $matter = new Matter();
+        $matter ->fill($request->except('_token'))->save();
+        $id = $matter->id;
+
+
+        $request->session()->regenerateToken();
+
+        return  redirect($id.'/show_te');
+
+    }
 
     public function show_te($id){
 

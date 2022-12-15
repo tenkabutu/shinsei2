@@ -226,9 +226,9 @@ class OverWorkController extends Controller
 
 
     }
-    public function accept($id){
+    /* public function accept($id){
 
-        /* $matter = matter::findOrFail($id); */
+
         $matter = matter::with('tasklist')->findOrFail($id);
         $task_allotted_count=0;
         if($matter->status!=3){
@@ -259,6 +259,6 @@ class OverWorkController extends Controller
     }
     public function reject($id){
         return  redirect($id.'/rewrite_ov');
-    }
+    } */
 
 }
