@@ -109,7 +109,7 @@ class ShinseiController extends Controller
     }
     public function matter_ruling(Request $request){
 
-        var_dump($request->toArray());
+        //var_dump($request->toArray());
 
         //session(['ms_request'=>$request->all()]);
         //$request->sesson()->put('ms_request',$request);
@@ -117,10 +117,12 @@ class ShinseiController extends Controller
         //session()->forget('mskeys');
         if($request->mode){
             $user=user::findOrFail(Auth::id());
-        $query=matter::query();
+            $query=matter::query();
+            $matter_type=0;
 
         if($request->matter_type){
-            $query->where('matters.matter_type',$request->matter_type);
+            $matter_type=$request->matter_type;
+            $query->where('matters.matter_type',$matter_type);
         }
 
         $query->leftjoin('tasks',function($join){
@@ -202,7 +204,7 @@ class ShinseiController extends Controller
                     /* echo print_r($input_data);
                     exit; */
 
-                    return view('composite.ruling_ov', compact('records','input_data','userlist','records2'));
+                    return view('composite.ruling_ov', compact('records','input_data','userlist','records2','matter_type'));
 
                     //$mskeys=$query->get(['id']);
                    // session(['mskeys'=>$mskeys]);

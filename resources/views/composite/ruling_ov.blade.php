@@ -16,11 +16,10 @@
                 <legend>検索条件</legend>
     		<form action="" method="GET">
     		@csrf
-    		<!-- <input type="hidden" name="matter_type" value="1"> -->
+    		<input type="hidden" name="matter_type" value="1">
     		<ul>
 
-    			<li>
-    			<div>日時：<select id="year" name="year">
+    			<li><div>日時：<select id="year" name="year">
     				<option value="2022">2022</option><option value="2021">2021</option></select>年
 					<select id="month" name="month">
 						<option value="0">--</option>
@@ -28,17 +27,6 @@
 							<option value={{$i}} @if(isset($input_data['month'])&&$i==$input_data['month']) selected @endif>{{$i}}</option>
 						@endfor
 						</select>月
-					</div>
-						<div><label>状態：</label>
-					 <div class="radio-group">
-					<input id="st1_1" type="radio" class="st1" name="matter_type" value="1" @if(Request::get('matter_type')==1) checked @endif />
-					<label for="st1_1">振替</label>
-					<input id="st1_2" type="radio" class="st1" name="matter_type" value="2" @if(Request::get('matter_type')==2) checked @endif/>
-					<label for="st1_2">休暇</label>
-					<input id="st1_3" type="radio" class="st1" name="matter_type" value="3" @if(Request::get('matter_type')==3) checked @endif/>
-					<label for="st1_3">テレワ</label>
-
-					</div>
 					</div>
 					<div><label>状態：</label>
 					 <div class="radio-group">
@@ -63,9 +51,9 @@
     	</form>
     	</fieldset>
     </div>
-    <!-- @isset($records) -->
-    	<x-ruling-box :role="Auth::user()->role" type="振替" :records="$records"/>
-	<!-- @endisset -->
+	@isset($records)
+	<x-ruling-box :role="Auth::user()->role" :type="$matter_type" :records="$records"/>
+	@endisset
 </div>
 <script>
 $(function(){

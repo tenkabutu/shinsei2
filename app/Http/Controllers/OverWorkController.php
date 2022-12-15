@@ -159,7 +159,7 @@ class OverWorkController extends Controller
                 $task->fill($row);
 
                 //タスクが既存であれば更新があったかどうかと、申請済みかどうかをチェック
-                if($task->isDirty()&&$row['task_status']==2){
+                if($task->isDirty()&&$row['task_status']==3){
                     if($request->change_check2==1){
                         $request->merge(['change_check2' =>2]);
                             return back()
@@ -169,14 +169,17 @@ class OverWorkController extends Controller
                             ]);
 
                     }
-                    $task->update();
+                    $task->task_status=2;
+                }
 
-                }elseif($task->isDirty()){
+                $task->update();
+
+                /* }elseif($task->isDirty()){
                     //更新があって申請済みでなければ保存
 
                     $task->save();
                 }
-                $task->save();
+                $task->save(); */
 
             }elseif($row['task_change_date']){
                 $task = new Task();

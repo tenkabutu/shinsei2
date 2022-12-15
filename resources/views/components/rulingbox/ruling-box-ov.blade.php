@@ -17,7 +17,7 @@
 			</tr>
 			</thead>
 			@if(isset($records))
-			{{-- @foreach ($records as $record) --}}
+
 			@php
 			 $back = 0;
 			@endphp
