@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Matter;
 use App\Models\Task;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 
 class AcceptController extends Controller
@@ -24,6 +25,7 @@ class AcceptController extends Controller
             $matter->status=3;
             $date=Carbon::now()->toDateTimeString();
             $matter->matter_reply_date=$date;
+            $matter->reception_id=Auth::id();
 
         }
         if($matter->matter_type==1){

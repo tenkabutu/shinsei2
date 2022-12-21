@@ -14,11 +14,17 @@ class Matter extends Model
     public function user(){
         return $this->belongsTo('App\Models\User');
     }
+    public function reception(){
+        return $this->belongsTo('App\Models\User','reception_id');
+    }
     public function mattertag(){
         return $this->belongsTo('App\Models\Nametag','matter_type','tagid')->where('groupid', '=', 4);
     }
     public function tasklist(){
         return $this->hasMany('App\Models\Task');
     }
+   /*  public function task(){
+        return $this->hasOne('App\Models\Task')->latestOfMany()->where('opt5', '=', 0);
+    } */
 
 }

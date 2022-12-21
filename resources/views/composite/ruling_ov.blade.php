@@ -16,7 +16,7 @@
                 <legend>検索条件</legend>
     		<form action="" method="GET">
     		@csrf
-    		<input type="hidden" name="matter_type" value="1">
+    		<input type="hidden" name="mode" value="1">
     		<ul>
 
     			<li><div>日時：<select id="year" name="year">
@@ -30,14 +30,31 @@
 					</div>
 					<div><label>状態：</label>
 					 <div class="radio-group">
-					<input id="st1_1" type="radio" class="st1" name="search_type" value="1" @if(Request::get('search_type')==1) checked @endif />
-					<label for="st1_1">全件</label>
-					<input id="st1_2" type="radio" class="st1" name="search_type" value="2" @if(Request::get('search_type')==2) checked @endif/>
+					<input id="st1_1" type="radio" class="st1" name="matter_type" value="1" @if(Request::get('matter_type')==1) checked @endif />
+					<label for="st1_1">振替</label>
+					<input id="st1_2" type="radio" class="st1" name="matter_type" value="2" @if(Request::get('matter_type')==2) checked @endif/>
+					<label for="st1_2">休暇</label>
+					<input id="st1_3" type="radio" class="st1" name="matter_type" value="3" @if(Request::get('matter_type')==3) checked @endif/>
+					<label for="st1_3">テレワ</label>
+
+					</div>
+					</div>
+					<div><label>状態：</label>
+					 <div class="radio-group">
+					<!-- <input id="st2_1" type="radio" class="st2" name="search_type" value="1" @isset($input_data['search_type']) @if($input_data['search_type']==1) checked @endif @endisset />
+					<label for="st2_1">全件</label> -->
+					<!-- <input id="st1_2" type="radio" class="st1" name="search_type" value="2" @if(Request::get('search_type')==2) checked @endif/>
 					<label for="st1_2">未申請</label>
 					<input id="st1_3" type="radio" class="st1" name="search_type" value="3" @if(Request::get('search_type')==3) checked @endif/>
-					<label for="st1_3">申請中</label>
-					<input id="st1_5" type="radio" class="st1" name="search_type" value="4" @if(Request::get('search_type')==4) checked @endif/>
-					<label for="st1_5">終了</label>
+					<label for="st1_3">申請中</label> -->
+					<input id="st2_1" type="radio" class="st2" name="search_type" value="1" @if(Request::get('search_type')==1) checked @endif/>
+					<label for="st2_1">全件</label>
+					<input id="st2_2" type="radio" class="st2" name="search_type" value="2" @if(Request::get('search_type')==2) checked @endif/>
+					<label for="st2_2">未申請</label>
+					<input id="st2_3" type="radio" class="st2" name="search_type" value="3" @if(Request::get('search_type')==3) checked @endif/>
+					<label for="st2_3">申請中</label>
+					<input id="st2_4" type="radio" class="st2" name="search_type" value="4" @if(Request::get('search_type')==4) checked @endif />
+					<label for="st2_4">終了</label>
 					</div>
 					</div>
 
@@ -52,7 +69,7 @@
     	</fieldset>
     </div>
 	@isset($records)
-	<x-ruling-box :role="Auth::user()->role" :type="$matter_type" :records="$records"/>
+	<x-ruling-box :role="Auth::user()->role" :type="$input_data['matter_type']" :records="$records"/>
 	@endisset
 </div>
 <script>
