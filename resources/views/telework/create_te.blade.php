@@ -57,14 +57,14 @@
 				<x-matter-rewrite-box :userdata="$user" typename="テレワーク" :matter="$matter"/>
 			@else
 				<input type="hidden" name="allotted" value="{{old('allotted',$user->worktype->def_allotted)}}">
-				<x-matter-box :userdata="$user" typename="テレワーク"/>
+				<x-matter-box :userdata="$user" type="3"/>
 			@endif
 
 			@if(isset($matter))
 				@if($matter->user_id==Auth::user()->id)
-					<x-save-box :status="$matter->status" :role="0" :type="2"/>
+					<x-save-box :status="$matter->status" :role="0" :type="3"/>
 				@elseif(Auth::user()->role==1)
-					<x-save-box :status="$matter->status" :role="1" :type="2"/>
+					<x-save-box :status="$matter->status" :role="1" :type="3"/>
 
 				@else
 				<!-- <label>test</label> -->

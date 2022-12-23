@@ -54,7 +54,7 @@
 				</div>
 				<ul>
 
-					<li><a href="/shinsei2/public/user" >休暇申請(未実装)</a></li>
+					<li><a href="/shinsei2/public/create_pa" >休暇申請</a></li>
 					<li><a href="/shinsei2/public/create_ov" >振替申請</a></li>
 					<li><a href="/shinsei2/public/create_te" >テレワーク申請</a></li>
 

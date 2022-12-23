@@ -12,10 +12,10 @@ class MatterBox extends Component
      * @return void
      */
     public $userdata,$typename;
-    public function __construct($userdata,$typename)
+    public function __construct($userdata,$type)
     {
         $this->userdata = $userdata;
-        $this->typename = $typename;
+        $this->type = $type;
     }
 
     /**
@@ -25,6 +25,14 @@ class MatterBox extends Component
      */
     public function render()
     {
-        return view('components.matter-box');
+        if($this->type==1){
+            $this->typename = "振替";
+            return view('components.matter-box');
+        }elseif($this->type==2){
+            return view('components.matterbox.mb-pa');
+        }elseif($this->type==3){
+            $this->typename = "テレワーク";
+            return view('components.matter-box');
+        }
     }
 }

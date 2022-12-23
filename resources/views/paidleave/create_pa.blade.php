@@ -30,11 +30,11 @@
 	<div id="shinsei_wrap">
 
 		@if(isset($matter->status))
-		<h3>テレワーク申請<label>　(作成:{{$matter->created_at->format('Y/n/j')}}　更新:{{$matter->updated_at->format('Y/n/j')}})</label></h3>
+		<h3>休暇申請<label>　(作成:{{$matter->created_at->format('Y/n/j')}}　更新:{{$matter->updated_at->format('Y/n/j')}})</label></h3>
 
 			<x-change-status :matter="$matter" />
 		@else
-		<h3>新規テレワーク申請</h3>
+		<h3>新規休暇申請</h3>
 		@endif
 			<ul>
 				@foreach($errors->all() as $err)
@@ -48,16 +48,16 @@
 		<x-save-box :status="$matter->status" :role="0" :type="2"/>
 		@endif
 			<input type="hidden" name="user_id" value="{{Auth::user()->id}}">
-			<input type="hidden" name="matter_type" value="3">
+			<input type="hidden" name="matter_type" value="2">
 
 			<!-- onsubmit="return false;"  -->
 			@if(isset($matter))
 				<input type="hidden" name="allotted" value="{{old('allotted',$matter->allotted)}}">
 				<input type="hidden" name="change_check" value="{{old('change_check',$matter->status)}}">
-				<x-matter-rewrite-box :userdata="$user" typename="テレワーク" :matter="$matter"/>
+				<x-matter-rewrite-box :userdata="$user" type="2" :matter="$matter"/>
 			@else
 				<input type="hidden" name="allotted" value="{{old('allotted',$user->worktype->def_allotted)}}">
-				<x-matter-box :userdata="$user" typename="テレワーク"/>
+				<x-matter-box :userdata="$user" type="2"/>
 			@endif
 
 			@if(isset($matter))
@@ -85,11 +85,25 @@ function setAction(url) {
     $('form').submit();
 }
 $(function(){
-	$('.repeater').repeater({hide: function (deleteElement) {
-	      if(confirm('削除してもいいですか？')) {
-	          $(this).slideUp(deleteElement);
-	        }
-	}});
+	var radio = $('div.radio-group');
+	$('input', radio).css({'opacity': '0'})
+	//checkedだったら最初からチェックする
+	.each(function(){
+	    if ($(this).attr('checked') == 'checked') {
+	        $(this).next().addClass('checked');
+	    }
+	});
+	//クリックした要素にクラス割り当てる
+	$('label', radio).click(function() {
+	    $(this).parent().parent().each(function() {
+	        $('label',this).removeClass('checked');
+	    });
+	    $(this).addClass('checked');
+	  ////  if($(this).parent().hasClass('index_select')){
+	    //	alert($('input[name="index50"]:checked').val());
+	    //    }
+	});
+
 
 
 	$('#matter_area input[type="number"]').bind('input', function () {

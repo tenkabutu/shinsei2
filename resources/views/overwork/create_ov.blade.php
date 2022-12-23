@@ -58,7 +58,7 @@
 				<x-matter-rewrite-box :userdata="$user" typename="振替" :matter="$matter"/>
 			@else
 				<input type="hidden" name="allotted" value="{{old('allotted',$user->worktype->def_allotted)}}">
-				<x-matter-box :userdata="$user" typename="振替"/>
+				<x-matter-box :userdata="$user" type="1"/>
 			@endif
 			<section id="task_area">
 			<h5>　振替休暇情報 @isset($task_data) {{$task_data[0]['task_count']}} @endisset</h5>
