@@ -28,9 +28,10 @@ class RulingBox extends Component
     {
         if($this->type==1){
             return view('components.rulingbox.ruling-box-ov');
-
+        }elseif($this->type==2){
+            return view('components.rulingbox.ruling-box-pa');
         }elseif($this->type==3){
-        return view('components.rulingbox.ruling-box-te');
+            return view('components.rulingbox.ruling-box-te');
         }
     }
 }

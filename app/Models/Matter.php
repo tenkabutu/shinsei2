@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Matter extends Model
 {
     protected $fillable = ['user_id','reception_id','matter_type','matter_request_date','matter_reply_date','matter_change_date','order_content',
-            'work_content','status','hour1','hour2','minutes1','minutes2','breaktime','allotted','allotted2'];
+            'work_content','status','hour1','hour2','minutes1','minutes2','breaktime','allotted','allotted2','opt1','opt2'];
     protected $dates = ['matter_change_date','matter_request_date','matter_reply_date'];
     use HasFactory;
     public function user(){

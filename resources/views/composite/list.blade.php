@@ -71,7 +71,18 @@
 			@foreach ($records as $id =>$record)
 			@if($back!=$record->matters_id)
 			<tr class="d{{$id+1}}">
-				<td><a href="/shinsei2/public/{{ $record->matters_id }}/rewrite_ov">{{ $record->matters_id}}</a></td>
+				<td><a href="/shinsei2/public/{{ $record->matters_id }}/
+				@if($record->matter_type==1)
+				rewrite_ov
+				@elseif($record->matter_type==2)
+				show_pa
+				@else
+				show_te
+				@endif
+
+				">{{ $record->matters_id}}</a></td>
+
+
 				<td>{{ $record->typename}}</td>
 				<td>{{ date('n/j',strtotime($record->matter_change_date))}}</td>
 				<td>{{ date('H：i',strtotime($record->starttime))}}</td>

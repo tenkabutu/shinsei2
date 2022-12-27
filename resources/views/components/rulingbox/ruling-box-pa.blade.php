@@ -32,7 +32,7 @@
 				<td>{{ $record->statusname}}</td>
 				<td>@if($record->status==2){{date('n/j',strtotime($record->matter_request_date))}}@elseif($record->status>=3){{date('n/j',strtotime($record->matter_reply_date))}}@endif</td>
 				<td>{{ $record->username2}}</td>
-				<td><button class="show_ov" onclick="location.href='/shinsei2/public/{{ $record->matters_id }}/show_te'">詳細</button></td>
+				<td><button class="show_ov" onclick="location.href='/shinsei2/public/{{ $record->matters_id }}/show_pa'">詳細</button></td>
 				</tr>
 			@endforeach
 			@endif

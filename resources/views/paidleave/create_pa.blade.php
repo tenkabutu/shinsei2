@@ -54,7 +54,7 @@
 			@if(isset($matter))
 				<input type="hidden" name="allotted" value="{{old('allotted',$matter->allotted)}}">
 				<input type="hidden" name="change_check" value="{{old('change_check',$matter->status)}}">
-				<x-matter-rewrite-box :userdata="$user" type="2" :matter="$matter"/>
+				<x-matter-rewrite-box :userdata="$user" :type="2" :matter="$matter"/>
 			@else
 				<input type="hidden" name="allotted" value="{{old('allotted',$user->worktype->def_allotted)}}">
 				<x-matter-box :userdata="$user" type="2"/>
@@ -91,10 +91,22 @@ $(function(){
 	.each(function(){
 	    if ($(this).attr('checked') == 'checked') {
 	        $(this).next().addClass('checked');
+
+	        if($(this).val()!=4){
+		        $('.matter_date input').attr('readonly',true);
+		        $('.matter_date input').css('backgroundColor','#e9e9e9');
+		    };
 	    }
 	});
 	//クリックした要素にクラス割り当てる
 	$('label', radio).click(function() {
+		if($(this).prev().val()!=4){
+	        $('.matter_date input').attr('readonly',true);
+	        $('.matter_date input').css('backgroundColor','#e9e9e9');
+	    }else{
+	    	$('.matter_date input').attr('readonly',false);
+	        $('.matter_date input').css('backgroundColor','#fff');
+		    };
 	    $(this).parent().parent().each(function() {
 	        $('label',this).removeClass('checked');
 	    });

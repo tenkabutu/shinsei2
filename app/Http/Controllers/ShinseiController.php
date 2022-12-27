@@ -41,7 +41,6 @@ class ShinseiController extends Controller
                 $join->on('matters.status', '=', 'nt2.tagid')
                     ->where('nt2.groupid', 5);
             });
-
             if ($request->matter_id) {
                 $query->where('matters.id', $request->matter_id);
             }

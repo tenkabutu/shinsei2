@@ -11,12 +11,12 @@ class MatterRewriteBox extends Component
      *
      * @return void
      */
-    public $userdata,$matter,$typename;
-    public function __construct($userdata,$matter,$typename)
+    public $userdata,$matter,$type;
+    public function __construct($userdata,$matter,$type)
     {
         $this->userdata = $userdata;
         $this->matter = $matter;
-        $this->typename = $typename;
+        $this->type = $type;
     }
 
     /**
@@ -26,6 +26,15 @@ class MatterRewriteBox extends Component
      */
     public function render()
     {
-        return view('components.matter-rewrite-box');
+        //return view('components.matter-rewrite-box');
+        if($this->type==1){
+            $this->typename = "振替";
+            return view('components.matter-rewrite-box');
+        }elseif($this->type==2){
+            return view('components.matterbox.mrb-pa');
+        }elseif($this->type==3){
+            $this->typename = "テレワーク";
+            return view('components.matter-rewrite-box');
+        }
     }
 }
