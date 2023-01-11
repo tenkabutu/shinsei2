@@ -55,7 +55,7 @@
 				<input type="hidden" name="allotted" value="{{old('allotted',$matter->allotted)}}">
 				<input type="hidden" name="change_check" value="{{old('change_check',$matter->status)}}">
 				<input type="hidden" name="change_check2" value="{{old('change_check2',1)}}">
-				<x-matter-rewrite-box :userdata="$user" typename="振替" :matter="$matter"/>
+				<x-matter-rewrite-box :userdata="$user" type="1" :matter="$matter"/>
 			@else
 				<input type="hidden" name="allotted" value="{{old('allotted',$user->worktype->def_allotted)}}">
 				<x-matter-box :userdata="$user" type="1"/>

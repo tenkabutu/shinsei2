@@ -17,7 +17,7 @@
     		<form action="" method="GET">
     		<ul>
 
-    			<li><div>日時　：<select id="year" name="year"><option value="2022">2022</option><option value="2021">2021</option></select>年
+    			<li><div>日時　：<select id="year" name="year"><option value="2023">2023</option><option value="2022">2022</option></select>年
 					<select id="month" name="month"><option value="0">--</option></select>月
 					</div>
 					<div><label>状態：</label>
@@ -51,15 +51,11 @@
 				<th>開始時間</th>
 				<th class="id">終了時間</th>
 				<th class="s3">時間</th>
-				<th>⇒</th>
-				<th>振替日</th>
-				<th>開始時間</th>
-				<th class="id">終了時間</th>
 				<th>案件状態</th>
-				<th class="id">作業者</th>
+				<th>申請・確認日</th>
 
-
-
+				<th class="id">確認者</th>
+				<th></th>
 
 			</tr>
 			</thead>
@@ -85,10 +81,10 @@
 
 				<td>{{ $record->typename}}</td>
 				<td>{{ date('n/j',strtotime($record->matter_change_date))}}</td>
-				<td>{{ date('H：i',strtotime($record->starttime))}}</td>
-				<td>{{ date('H：i',strtotime($record->endtime))}}</td>
+				<td>{{$record->hour1."時".$record->minutes1}}分</td>
+				<td>{{$record->hour2."時".$record->minutes2}}分</td>
 				<td>{{floor($record->allotted/60).'時間 '.($record->allotted%60).'分'}}</td>
-				<td></td>
+
 				<td>{{ $record->statusname}}</td>
 				<td>@if($record->status==2){{$record->matter_request_date}}@elseif($record->status>=3){{$record->matter_reply_date}}@endif</td>
 				<td>@isset($record->setdate1){{ date('n/j',strtotime($record->setdate1))}}@endisset</td>
@@ -104,13 +100,12 @@
 				@endphp
 				@if($record->matter_id)
 				<tr>
-				<td></td>
-				<td></td>
-				<td></td>
+				<td colspan="1"></td>
+
 				<td>⇒</td>
 				<td>{{date('n/j',strtotime($record->task_change_date))}}</td>
-				<td>{{$record->task_hour1.":".$record->task_minutes1}}</td>
-				<td>{{$record->task_hour2.":".$record->task_minutes2}}</td>
+				<td>{{$record->task_hour1."時".$record->task_minutes1}}分</td>
+				<td>{{$record->task_hour2."時".$record->task_minutes2}}分</td>
 				<td>{{floor($record->task_allotted/60).'時間 '.($record->task_allotted%60).'分'}}</td>
 				@if($record->task_status==2)
 				<td>申請中</td><td>{{date('n/j',strtotime($record->task_request_date))}}</td>

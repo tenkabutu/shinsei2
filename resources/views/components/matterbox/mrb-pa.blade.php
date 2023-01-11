@@ -24,7 +24,7 @@
 				<input id="st1_5" type="radio" class="st1" name="opt1" value="5" {{old('opt1',$matter->opt1)=='5' ? 'checked':''}}/>
 				<label for="st1_5">特別</label>
 				<input id="st1_6" type="radio" class="st1" name="opt1" value="6" {{old('opt1',$matter->opt1)=='6' ? 'checked':''}}/>
-				<label for="st1_6">弔事</label>
+				<label for="st1_6">慶弔</label>
 
 			</div>
 		</div>
@@ -40,7 +40,7 @@
 
 				<input type="number" name="minutes2" min="0" max="59" autocomplete="off" value="{{old('minutes2',$matter->minutes2)}}">
 			</div>
-
+			
 			<label class="g56">休憩時間</label>
 			<div class="g67">
 				<input type="number" name="breaktime" min="0" max="60" autocomplete="off" value="{{old('breaktime',$matter->breaktime)}}">
