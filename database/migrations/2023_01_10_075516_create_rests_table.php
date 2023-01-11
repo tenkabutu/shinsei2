@@ -17,7 +17,7 @@ class CreateRestsTable extends Migration
             $table->id();
             $table->timestamps();
             $table->biginteger('user_id');
-            $table->dateTime('hiring_day')->nullable();
+            $table->integer('rest_year');
             $table->integer('rest_allotted');
             $table->integer('carry_over');
         });

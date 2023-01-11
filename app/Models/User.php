@@ -24,6 +24,9 @@ class User extends Authenticatable
     public function worktype(){
         return $this->belongsTo('App\Models\WorkType');
     }
+    public function rest(){
+        return $this->hasOne('App\Models\Rest')->orderBy('rest_year', 'desc');
+    }
 
     /**
      * The attributes that are mass assignable.
@@ -40,6 +43,11 @@ class User extends Authenticatable
         'area',
         'worktype_id',
         'employee',
+        'hiring_day',
+
+    ];
+    protected  $dates=[
+        'hiring_day',
     ];
 
     /**
