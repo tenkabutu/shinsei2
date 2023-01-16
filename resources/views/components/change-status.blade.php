@@ -4,15 +4,15 @@
 			<fieldset>
 
 				<div>
-					<div class="g12"><label>振替作業時間</label></div>
+					<div class="g12"><label>{{$typename}}時間</label></div>
 					<div class="g23 text_right">{{substr($matter->matter_change_date,0,10).":".intdiv($matter->allotted,60)."時間".($matter->allotted%60)."分"}}</div>
 				</div>
 				<div>
-					<div class="g12"><label>振替作業申請</label></div>
+					<div class="g12"><label>{{$typename}}申請</label></div>
 					<div class="g23 text_right">
 					@if($matter->status==1)未申請
-					@elseif($matter->status==2)申請中({{$matter->matter_request_date}})
-					@elseif($matter->status==3)許可済み({{$matter->matter_reply_date}})
+					@elseif($matter->status==2)申請中({{$matter->matter_request_date->format('Y/m/d')}})
+					@elseif($matter->status==3)許可済み({{$matter->matter_reply_date->format('Y/m/d')}})
 					@endif</div>
 				</div>
 			</fieldset>

@@ -32,7 +32,7 @@
 		@if(isset($matter->status))
 		<h3>テレワーク申請<label>　(作成:{{$matter->created_at->format('Y/n/j')}}　更新:{{$matter->updated_at->format('Y/n/j')}})</label></h3>
 
-			<x-change-status :matter="$matter" />
+			<x-change-status :matter="$matter" :type="3"/>
 		@else
 		<h3>新規テレワーク申請</h3>
 		@endif
@@ -41,11 +41,11 @@
 				<li class="text-danger">{{ $err }}</li> @endforeach
 			</ul>
 		<x-user-box :userdata="$user" :checker="$check_userlist"/>
-		<form  method="post" action="save_ov" class="repeater"  >
+		<form  method="post" action="" class="repeater"  >
 			@csrf
 			@if (session('save_check'))
     	<div class="alert alert-danger">{{ session('save_check') }}</div>
-		<x-save-box :status="$matter->status" :role="0" :type="2"/>
+		<x-save-box :status="$matter->status" :role="0" :type="3"/>
 		@endif
 			<input type="hidden" name="user_id" value="{{Auth::user()->id}}">
 			<input type="hidden" name="matter_type" value="3">
@@ -54,7 +54,7 @@
 			@if(isset($matter))
 				<input type="hidden" name="allotted" value="{{old('allotted',$matter->allotted)}}">
 				<input type="hidden" name="change_check" value="{{old('change_check',$matter->status)}}">
-				<x-matter-rewrite-box :userdata="$user" typename="テレワーク" :matter="$matter"/>
+				<x-matter-rewrite-box :userdata="$user" type="3" :matter="$matter"/>
 			@else
 				<input type="hidden" name="allotted" value="{{old('allotted',$user->worktype->def_allotted)}}">
 				<x-matter-box :userdata="$user" type="3"/>
@@ -70,7 +70,7 @@
 				<!-- <label>test</label> -->
 				@endif
 			@else
-			<x-save-box :status="0" :role="0" :type="2"/>
+			<x-save-box :status="0" :role="0" :type="3"/>
 			@endif
 
 		</form>

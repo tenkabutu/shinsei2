@@ -32,7 +32,7 @@
 		@if(isset($matter->status))
 		<h3>休暇申請<label>　(作成:{{$matter->created_at->format('Y/n/j')}}　更新:{{$matter->updated_at->format('Y/n/j')}})</label></h3>
 
-			<x-change-status :matter="$matter" />
+			<x-change-status :matter="$matter" :type="2"/>
 		@else
 		<h3>新規休暇申請</h3>
 		@endif
@@ -41,7 +41,7 @@
 				<li class="text-danger">{{ $err }}</li> @endforeach
 			</ul>
 		<x-user-box :userdata="$user" :checker="$check_userlist"/>
-		<form  method="post" action="save_ov" class="repeater"  >
+		<form  method="post" action="" class="repeater"  >
 			@csrf
 			@if (session('save_check'))
     	<div class="alert alert-danger">{{ session('save_check') }}</div>
