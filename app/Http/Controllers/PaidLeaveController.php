@@ -37,7 +37,6 @@ class PaidLeaveController extends Controller
                 'matter_change_date' => ['required', 'string', 'max:55'],
                 'order_content' => ['required', 'string', 'max:255'],
         ]);
-
         $matter = new matter();
         $matter ->fill($request->except('_token'))->save();
         $id = $matter->id;
@@ -46,7 +45,6 @@ class PaidLeaveController extends Controller
         $request->session()->regenerateToken();
 
         return  redirect($id.'/show_pa');
-
     }
     public function update(Request $request,$id){
 

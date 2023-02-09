@@ -35,7 +35,7 @@
 							<th colspan='2'>残有給(持越5日)</th>
 						</tr>
 						<tr>
-							<th width='100'>10日</th>
+							<th width='100'>{{$reside_day}}日</th>
 							<th>2時間</th>
 						</tr>
 					</table>

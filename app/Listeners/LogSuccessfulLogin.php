@@ -13,9 +13,11 @@ class LogSuccessfulLogin
      *
      * @return void
      */
+    //public $user;
     public function __construct()
     {
         //
+        //$this->user = $user;
     }
 
     /**
@@ -26,6 +28,7 @@ class LogSuccessfulLogin
      */
     public function handle(Login $event)
     {
-        //
+        //logger()->info(session()->all());
+
     }
 }

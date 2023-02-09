@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Matter;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -67,13 +68,22 @@ class TaskcountMiddleware
 
             ->distinct('matters.id')->count('matters.id');
             }
+        //最新の有給情報を読み込む
+        $user = user::with('rest')->findOrFail(Auth::id());
+        //消化時間を読み込む
+        $rest_day_list = Matter::where('matter_type',2)
+                            ->where('opt1',4)->sum('allotted');
+                           // header("Content-type: application/json; charset=UTF-8");
+                        //    echo $rest_day_list;
+                           // exit();
+
         }
-
-
-
+        $residue_day = $user->rest_allotted%3600;
+        $this->viewFactory->share('residue_day', $residue_day);
         $this->viewFactory->share('order_count', $order_count);
 
         return $next($request);
+
     }
 
 }
