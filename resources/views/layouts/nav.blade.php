@@ -35,8 +35,8 @@
 							<th colspan='2'>残有給(持越5日)</th>
 						</tr>
 						<tr>
-							<th width='100'>{{$reside_day}}日</th>
-							<th>2時間</th>
+							<th width='100'>{{$residue_day}}日</th>
+							<th>{{intdiv($rest_time%480,60)}}時間</th>
 						</tr>
 					</table>
 					<table>
@@ -46,6 +46,15 @@
 						<tr>
 							<th width='30'>9/10</th>
 							<th>5時間</th>
+						</tr>
+					</table>
+					<table>
+						<tr>
+							<th>勤務時間</th><td>{{(int)$userdata->worktype->def_allotted/60}}時間</td>
+						</tr>
+						<tr>
+							<th width='80'>付与有給時間</th>
+							<th>{{(int)$userdata->rest->rest_allotted/60}}時間</th>
 						</tr>
 					</table>
 				</div>

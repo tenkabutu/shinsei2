@@ -24,6 +24,7 @@ class CreateMattersTable extends Migration
             $table->dateTime('matter_change_date');
             //$table->Time('starttime');
             //$table->Time('endtime');
+            $table->integer('nendo');
             $table->integer('hour1');
             $table->integer('hour2');
             $table->integer('minutes1');

@@ -25,7 +25,7 @@ class User extends Authenticatable
         return $this->belongsTo('App\Models\WorkType');
     }
     public function rest(){
-        return $this->hasOne('App\Models\Rest')->orderBy('rest_year', 'desc');
+        return $this->hasOne('App\Models\Rest','user_id','employee')->orderBy('rest_year', 'desc');
     }
 
     /**
