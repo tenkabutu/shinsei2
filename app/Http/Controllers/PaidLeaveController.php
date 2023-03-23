@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Carbon\CarbonImmutable;
 
 class PaidLeaveController extends Controller
 {
@@ -38,6 +39,10 @@ class PaidLeaveController extends Controller
                 'order_content' => ['required', 'string', 'max:255'],
         ]);
         $matter = new matter();
+        //年度追加
+        $carbon = new CarbonImmutable($request->matter_change_date);
+        $request->merge(['nendo' =>$carbon->subMonthsNoOverflow(3)->format('Y')]);
+
         $matter ->fill($request->except('_token'))->save();
         $id = $matter->id;
 

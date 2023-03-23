@@ -30,15 +30,9 @@
 							<td>{{ Auth::user()->name }}</td>
 						</tr>
 					</table>
-					<table>
-						<tr>
-							<th colspan='2'>残有給(持越5日)</th>
-						</tr>
-						<tr>
-							<th width='100'>{{$residue_day}}日</th>
-							<th>{{intdiv($rest_time%480,60)}}時間</th>
-						</tr>
-					</table>
+					@if($userdata->rest)
+
+
 					<table>
 						<tr>
 							<th colspan='2'>未振替</th>
@@ -53,10 +47,48 @@
 							<th>勤務時間</th><td>{{(int)$userdata->worktype->def_allotted/60}}時間</td>
 						</tr>
 						<tr>
-							<th width='80'>付与有給時間</th>
-							<th>{{(int)$userdata->rest->rest_allotted/60}}時間</th>
+							<th width='80'>付与有給</th>
+							<th>{{$userdata->rest->rest_allotted_day}}日</th>
+						</tr>
+						<tr>
+							<th width='80'>持越有給</th>
+							<th>{{$userdata->rest->co_day}}日</th>
+						</tr>
+
+					</table>
+						<table>
+							<tr>
+							<th width='80'>取得有給</th>
+							<th>{{$used_rest_day}}日</th>
+						</tr>
+						<tr>
+							<th>取得時間給</th>
+							<td>{{$used_rest_time.'('.ceil($used_rest_time/8).'日分)'}}</td>
+						</tr>
+
+						<tr>
+							<th>消化半休</th>
+
+							<td>{{$used_harf_rest.'回('.ceil($used_harf_rest/2).'日分)'}}</td>
 						</tr>
 					</table>
+					<table>
+						<tr>
+							<th>残有給</th>
+							<td>{{$residue_rest_day}}日</td>
+						</tr>
+						<tr>
+							<th width='100'>残持越有給</th>
+							<th>{{max($residue_co_day,0)}}日</th>
+						</tr>
+						<tr>
+							<th>残時間給</th>
+							<td>{{40-$used_rest_time}}時間</td>
+						</tr>
+					</table>
+					@else
+					<label>有給データが設定されていません</label>
+					@endif
 				</div>
 				<div class='side_label'>
 					<span>勤務申請</span>

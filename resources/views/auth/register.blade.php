@@ -73,7 +73,10 @@
                	勤務地<select name="area">
 					<option value=0 >江越</option>
 					<option value=1 >八代</option>
-					<option value=2 >山鹿</option>
+					<option value=2 >熊本市</option>
+					<option value=3 >玉名</option>
+					<option value=4 >荒尾</option>
+					<option value=5 >天草</option>
 
 					</select>
             </div>

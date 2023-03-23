@@ -32,7 +32,7 @@
 		@if(isset($matter->status))
 		<h3>振替申請<label>　(作成:{{$matter->created_at->format('Y/n/j')}}　更新:{{$matter->updated_at->format('Y/n/j')}})</label></h3>
 
-			<x-change-status :matter="$matter" />
+			<x-change-status :matter="$matter" :type="1"/>
 		@else
 		<h3>新規振替申請</h3>
 		@endif

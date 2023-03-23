@@ -68,23 +68,68 @@ class TaskcountMiddleware
                         ->Where('users.area', $area_id)
                         ->Where('users.id', '!=', Auth::id());
                 })
-                    ->
-                distinct('matters.id')
+                    ->distinct('matters.id')
                     ->count('matters.id');
             }
+
             // 最新の有給情報を読み込む
             $user = user::with('rest','worktype')->findOrFail(Auth::id());
+            if($user->rest){
+
+
             // 消化時間を読み込む
-            $rest_time = Matter::where('matter_type', 2)->where('opt1', 4)->sum('allotted');
+            $used_rest_time = Matter::where('matter_type', 2)->where('opt1', 4)->sum('allotted')/60;
+            //取得時間給を日数に変換
+            $used_rest_day=intdiv($used_rest_time,8);
+            //取得時間給を8時間で割った日数に変換
+            $used_rest_time2=$used_rest_time%8;
+
+
+            //半休消化単位
+            $used_harf_rest= Matter::where('matter_type', 2)->whereIn('opt1',[2,3])->count();
+
+
+
+            $rest_allotted_day=$user->rest_allotted_day;
+
+
+            //時間給日にち換算
+            $used_rest_time_byday = ceil($used_rest_time/8);
+            //半休日にち換算
+            $used_harf_rest_byday = ceil($used_harf_rest/2);
+            //休暇日数
+            $used_rest_day=Matter::where('matter_type', 2)->where('opt1',1)->count();
+
+            $residue_co_day=$user->rest->co_day-$used_rest_time_byday-$used_harf_rest_byday-$used_rest_day;
+
+            $residue_rest_day =$user->rest->rest_allotted_day+$residue_co_day;
+
+
+
+
+
+
+
+
             // header("Content-type: application/json; charset=UTF-8");
             // echo $rest_day_list;
             // exit();
+        //付与休憩時間から時間給を引いて60分
+           // $residue_day = intdiv($user->rest->rest_allotted-$used_rest_time,480);
 
-        $residue_day = intdiv($user->rest->rest_allotted-$rest_time,480);
-        $this->viewFactory->share('userdata', $user);
-        $this->viewFactory->share('rest_time', $rest_time);
-        $this->viewFactory->share('residue_day', $residue_day);
+
+
+        $this->viewFactory->share('rest_time', $used_rest_time);
+        $this->viewFactory->share('used_rest_day', $used_rest_day);
+        $this->viewFactory->share('used_rest_time', $used_rest_time);
+        $this->viewFactory->share('used_harf_rest', $used_harf_rest);
+
+
+        $this->viewFactory->share('residue_rest_day', $residue_rest_day);
+        $this->viewFactory->share('residue_co_day', $residue_co_day);
         $this->viewFactory->share('order_count', $order_count);
+            };
+            $this->viewFactory->share('userdata', $user);
         }
 
         return $next($request);

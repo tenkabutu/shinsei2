@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use App\Models\Matter;
+use Carbon\CarbonImmutable;
+
 
 class TeleWorkController extends Controller
 {
@@ -39,6 +41,9 @@ class TeleWorkController extends Controller
         ]);
 
         $matter = new Matter();
+        $carbon = new CarbonImmutable($request->matter_change_date);
+        $request->merge(['nendo' =>$carbon->subMonthsNoOverflow(3)->format('Y')]);
+
         $matter ->fill($request->except('_token'))->save();
         $id = $matter->id;
 

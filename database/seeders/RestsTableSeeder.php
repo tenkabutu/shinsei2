@@ -14,7 +14,7 @@ class RestsTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::insert('INSERT INTO rests (user_id,rest_year,rest_allotted,carry_over)VALUES
-(101,2023,4800,2400)');
+        DB::insert('INSERT INTO rests (user_id,rest_year,rest_allotted_day,co_day,co_time,co_harf_rest)VALUES
+(101,2023,10,5,0,1)');
     }
 }

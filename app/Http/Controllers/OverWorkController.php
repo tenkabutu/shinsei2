@@ -10,6 +10,8 @@ use App\Models\Task;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Carbon\CarbonImmutable;
+
 
 class OverWorkController extends Controller
 {
@@ -51,12 +53,15 @@ class OverWorkController extends Controller
             $request->merge(['delivery_order' =>$date]);
         } */
         $matter = new Matter();
+        $carbon = new CarbonImmutable($request->matter_change_date);
+        $request->merge(['nendo' =>$carbon->subMonthsNoOverflow(3)->format('Y')]);
         $matter ->fill($request->except('_token'))->save();
         $id = $matter->id;
         foreach($request->task_group as $row){
             if($row['task_change_date']){
                 $task = new Task();
                 $task->task_allotted = ((int)$row['task_hour2']*60+(int)$row['task_minutes2'])-((int)$row['task_hour1']*60+(int)$row['task_minutes1']);
+                $task->task_status =1;
                 $task->matter_id =$id;
                 $task->fill($row)->save();
             }
@@ -79,6 +84,8 @@ class OverWorkController extends Controller
         $request->merge(['status' =>2]);
         $date=Carbon::now()->toDateTimeString();
         $request->merge(['matter_request_date' =>$date]);
+        $carbon = new CarbonImmutable($request->matter_change_date);
+        $request->merge(['nendo' =>$carbon->subMonthsNoOverflow(3)->format('Y')]);
         $matter ->fill($request->except('_token'))->save();
         $id = $matter->id;
         foreach($request->task_group as $row){

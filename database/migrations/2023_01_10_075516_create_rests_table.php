@@ -18,8 +18,10 @@ class CreateRestsTable extends Migration
             $table->timestamps();
             $table->biginteger('user_id');
             $table->integer('rest_year');
-            $table->integer('rest_allotted');
-            $table->integer('carry_over');
+            $table->integer('rest_allotted_day');
+            $table->integer('co_day');
+            $table->integer('co_time');
+            $table->integer('co_harf_rest');
         });
     }
 

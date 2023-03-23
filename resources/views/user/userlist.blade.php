@@ -62,7 +62,10 @@
 					<select name="area">
 					<option value=0 @if($record->area==0)selected @endif >江越</option>
 					<option value=1 @if($record->area==1)selected @endif >八代</option>
-					<option value=2 @if($record->area==2)selected @endif >山鹿</option>
+					<option value=2 @if($record->area==2)selected @endif >熊本市</option>
+					<option value=3 @if($record->area==3)selected @endif >玉名</option>
+					<option value=4 @if($record->area==4)selected @endif >荒尾</option>
+					<option value=5 @if($record->area==5)selected @endif >天草</option>
 
 					</select>
 				</td>
