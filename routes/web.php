@@ -58,6 +58,7 @@ Route::post('{id}/reject',[AcceptController::class,'reject']);
 Route::get('matter_search',[ShinseiController::class,'matter_search']);
 Route::get('matter_ruling',[ShinseiController::class,'matter_ruling']);
 Route::get('/',[DashboardController::class,'show_dash']);
+Route::get('/dashboard',[DashboardController::class,'show_dash']);
 
 //Route::get('/', function () { return view('dashboard');})->middleware(['auth'])->name('dashboard');
 

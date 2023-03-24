@@ -12,7 +12,7 @@
 				</ul>
 				</fieldset>
 	    <fieldset>
-				<legend>振替</legend>
+				<legend>未振替</legend>
 				<ul><li>
 				<table class="task_table sort-table">
 			<thead>
