@@ -8,11 +8,11 @@
 				</div> -->
 				<div>
 					<div class="g12"><label>社員番号</label></div>
-					<div class="g23 text_right">{{Auth::user()->employee}}</div>
+					<div class="g23 text_right">{{$userdata->employee}}</div>
 				</div>
 				<div>
 					<div class="g12"><label>申請者</label></div>
-					<div class="g23 text_right">{{Auth::user()->name}}</div>
+					<div class="g23 text_right">{{$userdata->name}}</div>
 				</div>
 				<div>
 					<div class="g12"><label>所属</label></div>

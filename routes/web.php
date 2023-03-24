@@ -7,6 +7,8 @@ use App\Http\Controllers\TeleWorkController;
 use App\Http\Controllers\ShinseiController;
 use App\Http\Controllers\AcceptController;
 use App\Http\Controllers\PaidLeaveController;
+use App\Http\Controllers\DashboardController;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,13 +57,10 @@ Route::post('{id}/reject',[AcceptController::class,'reject']);
 
 Route::get('matter_search',[ShinseiController::class,'matter_search']);
 Route::get('matter_ruling',[ShinseiController::class,'matter_ruling']);
+Route::get('/',[DashboardController::class,'show_dash']);
 
-Route::get('/', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+//Route::get('/', function () { return view('dashboard');})->middleware(['auth'])->name('dashboard');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+//Route::get('/dashboard', function () {return view('dashboard');})->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';

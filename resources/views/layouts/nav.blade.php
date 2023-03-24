@@ -32,16 +32,10 @@
 					</table>
 					@if($userdata->rest)
 
-
-					<table>
-						<tr>
-							<th colspan='2'>未振替</th>
-						</tr>
-						<tr>
-							<th width='30'>9/10</th>
-							<th>5時間</th>
-						</tr>
-					</table>
+<br>
+					<div class='side_label'>
+						<span>休暇申請情報</span>
+					</div>
 					<table>
 						<tr>
 							<th>勤務時間</th><td>{{(int)$userdata->worktype->def_allotted/60}}時間</td>

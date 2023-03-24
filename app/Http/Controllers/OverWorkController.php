@@ -123,16 +123,47 @@ class OverWorkController extends Controller
             $matter->save();
             return  redirect($id.'/rewrite_ov');
         }elseif($matter->isDirty()){
-
             $request->merge(['change_check' =>1]);
             return back()
             ->withInput()
             ->with('save_check', '申請済の内容が変更されています、保存する場合再申請が必要になりますがよろしいですか？');
 
         }
+        foreach($request->task_group as $row){
+            if(isset($row['id'])){
+                $task =task::find($row['id']);
+                $task->matter_id =$id;
+                $task->fill($row);
+
+                //タスクが既存であれば更新があったかどうかと、申請済みかどうかをチェック
+                if($task->isDirty()&&$row['task_status']==3){
+                    if($request->change_check2==1){
+                        $request->merge(['change_check2' =>2]);
+                        return back()
+                        ->withInput()
+                        ->with(['save_check'=>'申請済の内容が変更されています、保存する場合再申請が必要になりますがよろしいですか？'.$row["task_change_date"].':'.$row["task_minutes2"],
+                                'old_task_group'=>$request->task_group
+                        ]);
+
+                    }
+                    $task->task_status=2;
+                }
+
+                $task->update();
+
+
+            }elseif($row['task_change_date']){
+                $task = new Task();
+                $task->task_allotted = ((int)$row['task_hour2']*60+(int)$row['task_minutes2'])-((int)$row['task_hour1']*60+(int)$row['task_minutes1']);
+                $task->task_status =2;
+                $date=Carbon::now()->toDateTimeString();
+                $task->task_request_date=$date;
+                $task->matter_id =$id;
+                $task->fill($row)->save();
+            }
+        }
 
         $request->session()->regenerateToken();
-        //$id = $matter->id;
         return  redirect($id.'/rewrite_ov');
     }
     public function update_request(Request $request,$id){
@@ -213,7 +244,8 @@ class OverWorkController extends Controller
 
 
 
-        $user=user::with('roletag','approvaltag','areatag','worktype')->findOrFail(Auth::user()->id);
+        $user=user::with('roletag','approvaltag','areatag','worktype')->findOrFail($matter->user_id);
+        //$user=user::with('roletag','approvaltag','areatag','worktype')->findOrFail(Auth::user()->id);
 
         $query=user::query();
         $area_id=$user->area;

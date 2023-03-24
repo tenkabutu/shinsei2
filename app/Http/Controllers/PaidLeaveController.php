@@ -133,7 +133,8 @@ class PaidLeaveController extends Controller
         //$task_count = task::where('matter_id',$id)->where('task_status',2)->count();
 
 
-        $user=user::with('roletag','approvaltag','areatag','worktype')->findOrFail(Auth::user()->id);
+        //$user=user::with('roletag','approvaltag','areatag','worktype')->findOrFail(Auth::user()->id);
+        $user=user::with('roletag','approvaltag','areatag','worktype')->findOrFail($matter->user_id);
 
         $query=user::query();
         $area_id=$user->area;

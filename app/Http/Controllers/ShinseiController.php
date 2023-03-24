@@ -197,8 +197,7 @@ class ShinseiController extends Controller
             $query->orderBy('matters.id', 'desc');
             // ->select('matters.id','matters.created_at')
             // ->get();
-            $records = $query->
-            get();
+            $records = $query->get();
             $records2 = $records->groupBy('matters.id');
             $userlist = $this->create_userlist2($request->user);
             $input_data = [

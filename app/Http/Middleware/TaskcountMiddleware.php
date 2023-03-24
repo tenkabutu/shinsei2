@@ -127,8 +127,9 @@ class TaskcountMiddleware
 
         $this->viewFactory->share('residue_rest_day', $residue_rest_day);
         $this->viewFactory->share('residue_co_day', $residue_co_day);
-        $this->viewFactory->share('order_count', $order_count);
+
             };
+            $this->viewFactory->share('order_count', $order_count);
             $this->viewFactory->share('userdata', $user);
         }
 
