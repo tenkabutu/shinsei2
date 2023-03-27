@@ -66,6 +66,9 @@
 					<option value=3 @if($record->area==3)selected @endif >玉名</option>
 					<option value=4 @if($record->area==4)selected @endif >荒尾</option>
 					<option value=5 @if($record->area==5)selected @endif >天草</option>
+					<option value=6 @if($record->area==6)selected @endif >市町村A</option>
+					<option value=7 @if($record->area==7)selected @endif >市町村B</option>
+					<option value=8 @if($record->area==8)selected @endif >熊本県</option>
 
 					</select>
 				</td>

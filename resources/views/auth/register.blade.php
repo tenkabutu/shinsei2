@@ -77,6 +77,10 @@
 					<option value=3 >玉名</option>
 					<option value=4 >荒尾</option>
 					<option value=5 >天草</option>
+					<option value=6 >市町村A</option>
+					<option value=7 >市町村B</option>
+					<option value=8 >熊本県</option>
+
 
 					</select>
             </div>
