@@ -571,24 +571,28 @@ table select{
 .create_header{
 
     padding: 0px;
-    margin:0px;
+    margin:0px auto;
+    display: flex;
+    align-items: center;
     font-weight: normal;
-    text-align: center;
+
     text-transform: uppercase;
     color: #fff;
-    display:inline-block;
+
 }
 
 
 .create_logo{
 	padding:10px;
-	text-align: center;
+ display: flex;
+    align-items: center;
 	background-color: #004800;
+	 text-align: center;
 }
 
 
 .create_logo img{
-	display:inline-block;
+  margin-right: 10px;
 }
 
 

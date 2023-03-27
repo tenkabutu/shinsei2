@@ -11,8 +11,8 @@
 
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
-        <div class="create_logo">
-        		<img width="50" alt="" src="/shinsei2/public/img/shinsei.jpg"><h2 class="create_header">申請2号</h2>
+       		<div class="create_logo">
+        		<h2 class="create_header"><img width="50" alt="" src="/shinsei2/public/img/shinsei.jpg">申請2号</h2>
         	</div>
 
         <form class="create_user_form" method="POST" action="{{ route('login') }}">
