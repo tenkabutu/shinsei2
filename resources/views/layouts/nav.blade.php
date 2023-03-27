@@ -4,7 +4,7 @@
 		<h4>
 			<a href="/shinsei2/public">
 
-				<img width="70" alt="" src="/shinsei2/public/img/shinsei.jpg">申請つーる
+				<img width="70" alt="" src="/shinsei2/public/img/shinsei.jpg">申請2号
 
 			</a>
 		</h4>
