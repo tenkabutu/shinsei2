@@ -84,6 +84,8 @@
 					<option value=3 @if($record->worktype_id==3)selected @endif >9時-17時:7</option>
 					<option value=4 @if($record->worktype_id==4)selected @endif >10時-18時:7</option>
 					<option value=5 @if($record->worktype_id==5)selected @endif >8時半-16時半:7</option>
+					<option value=6 @if($record->worktype_id==6)selected @endif >8時半-17時半:8</option>
+					<option value=7 @if($record->worktype_id==7)selected @endif >9時-17時半:7.5</option>
 
 					</select>
 				</td>
