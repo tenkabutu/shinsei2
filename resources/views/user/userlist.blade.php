@@ -31,7 +31,7 @@
 				<td>{{ $record->name}}</td>
 				<td>{{ $record->name2}}</td>
 				<td>{{ $record->email}}</td>
-				@if(Auth::user()->role==1)
+				@if(Auth::user()->role<=2)
 				<td>
 					<input type="hidden" name="id" value="{{ $record->id}}">
 					<select name="role">
@@ -45,7 +45,7 @@
 				@else
 				<td>{{ $record->roletag->nametag}}</td>
 				@endif
-				@if(Auth::user()->role==1)
+				@if(Auth::user()->role<=2)
 				<td>
 					<select name="approval">
 					<option value=1 @if($record->approval==1)selected @endif >すべて</option>
@@ -57,7 +57,7 @@
 				@else
 				<td>{{ $record->approvaltag->nametag}}</td>
 				@endif
-				@if(Auth::user()->role==1)
+				@if(Auth::user()->role<=2)
 				<td>
 					<select name="area">
 					<option value=0 @if($record->area==0)selected @endif >江越</option>
@@ -75,7 +75,7 @@
 				@else
 				<td>{{ $record->areatag->nametag}}</td>
 				@endif
-				@if(Auth::user()->role==1)
+				@if(Auth::user()->role<=2)
 				<td>
 					<select name="worktype_id">
 					<option value=0 @if($record->worktype_id==0)selected @endif >未設定</option>
