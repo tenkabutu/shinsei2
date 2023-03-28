@@ -91,6 +91,8 @@ class PaidLeaveController extends Controller
         $request->merge(['status' =>2]);
         $date=Carbon::now()->toDateTimeString();
         $request->merge(['matter_request_date' =>$date]);
+        $carbon = new CarbonImmutable($request->matter_change_date);
+        $request->merge(['nendo' =>$carbon->subMonthsNoOverflow(3)->format('Y')]);
         $matter ->fill($request->except('_token'))->save();
         $id = $matter->id;
 
