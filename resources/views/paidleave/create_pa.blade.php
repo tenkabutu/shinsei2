@@ -110,8 +110,9 @@ $(function(){
 	        	$('input[name="minutes2"]').val({{$user->worktype->def_minutes2}});
 	        	$('input[name="breaktime"]').val('60');
 		    }else if($(this).prev().val()==2){
-			    var h2={{$user->worktype->def_hour1+intdiv(($user->worktype->def_allotted/2+$user->worktype->def_minutes2),60)}};
-		    	var m2={{($user->worktype->def_allotted/2+$user->worktype->def_minutes2)%60}};
+			    var h2={{$user->worktype->def_hour1+intdiv(($user->worktype->def_allotted/2+$user->worktype->def_minutes1),60)}};
+		    	var m2={{($user->worktype->def_allotted/2+$user->worktype->def_minutes1)%60}};
+
 		    	$('input[name="hour1"]').val({{$user->worktype->def_hour1}});
 	        	$('input[name="hour2"]').val(h2);
 	        	$('input[name="minutes1"]').val({{$user->worktype->def_minutes1}});
@@ -119,7 +120,7 @@ $(function(){
 	        	$('input[name="breaktime"]').val('0');
 	        	$('.mol_2').text('出勤')
 		    }else if($(this).prev().val()==3){
-			    var h1={{$user->worktype->def_hour1+intdiv(($user->worktype->def_allotted/2-$user->worktype->def_minutes1),60)+1}};
+			    var h1={{$user->worktype->def_hour1+intdiv(($user->worktype->def_allotted/2+$user->worktype->def_minutes1),60)+1}};
 		    	var m1={{($user->worktype->def_allotted/2+$user->worktype->def_minutes1)%60}};
 		    	$('input[name="hour1"]').val(h1);
 	        	$('input[name="hour2"]').val({{$user->worktype->def_hour2}});
