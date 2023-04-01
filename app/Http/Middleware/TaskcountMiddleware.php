@@ -78,7 +78,7 @@ class TaskcountMiddleware
 
 
             // 消化時間を読み込む
-            $used_rest_time = Matter::where('matter_type', 2)->where('opt1', 4)->sum('allotted')/60;
+                $used_rest_time = Matter::where([['matter_type', 2],['opt1', 4]],['user_id',Auth::id()])->sum('allotted')/60;
             //取得時間給を日数に変換
             $used_rest_day=intdiv($used_rest_time,8);
             //取得時間給を8時間で割った日数に変換
@@ -86,7 +86,7 @@ class TaskcountMiddleware
 
 
             //半休消化単位
-            $used_harf_rest= Matter::where('matter_type', 2)->whereIn('opt1',[2,3])->count();
+            $used_harf_rest= Matter::where([['matter_type', 2],['user_id',Auth::id()]])->whereIn('opt1',[2,3])->count();
 
 
 
@@ -98,7 +98,7 @@ class TaskcountMiddleware
             //半休日にち換算
             $used_harf_rest_byday = ceil($used_harf_rest/2);
             //休暇日数
-            $used_rest_day=Matter::where('matter_type', 2)->where('opt1',1)->count();
+            $used_rest_day=Matter::where([['matter_type', 2],['user_id',Auth::id()]])->where('opt1',1)->count();
 
             $residue_co_day=$user->rest->co_day-$used_rest_time_byday-$used_harf_rest_byday-$used_rest_day;
 
