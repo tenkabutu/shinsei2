@@ -78,7 +78,7 @@ class TaskcountMiddleware
 
 
             // 消化時間を読み込む
-                $used_rest_time = Matter::where([['matter_type', 2],['opt1', 4]],['user_id',Auth::id()])->sum('allotted')/60;
+                $used_rest_time = Matter::where([['matter_type', 2],['opt1', 4],['user_id',Auth::id()]])->sum('allotted')/60;
             //取得時間給を日数に変換
             $used_rest_day=intdiv($used_rest_time,8);
             //取得時間給を8時間で割った日数に変換
