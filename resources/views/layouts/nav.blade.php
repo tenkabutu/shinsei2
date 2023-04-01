@@ -116,6 +116,7 @@
 					<li><a href="/shinsei2/public/user" >購入申請(未実装)</a></li>
 
 				</ul>
+				@if(Auth::user()->role<=2)
 				<div class='side_label'>
 					<span>データ</span>
 				</div>
@@ -126,7 +127,7 @@
 					<li><a href="/tabusapo_lb/public/category" >カテゴリー(未実装)</a></li>
 				</ul>
 
-
+					@endif
 
 
 			@endauth
