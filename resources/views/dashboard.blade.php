@@ -7,8 +7,9 @@
     <h3>トップページ</h3>
      <fieldset>
 				<legend>info</legend>
-				<ul><li>
-				直近の貸出予定と休暇予定などを記載する予定</li>
+				<ul>
+				<li>2022年度分の持ち越しは秋吉さんが数えるので後日加算されます。</li>
+				<li>直近の貸出予定と休暇予定などを記載する予定</li>
 				</ul>
 				</fieldset>
 				  <fieldset>
