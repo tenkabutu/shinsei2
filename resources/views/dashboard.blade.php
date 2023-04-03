@@ -11,6 +11,13 @@
 				直近の貸出予定と休暇予定などを記載する予定</li>
 				</ul>
 				</fieldset>
+				  <fieldset>
+				<legend>改修予定</legend>
+				<ul><li>
+				申請一覧と申請承認画面が３つずつあるのは煩わしいかと思って一箇所にしたところ、分かりづらくなったので3種類の項目を切り分ける予定。</li>
+
+				</ul>
+				</fieldset>
 	    <fieldset>
 				<legend>未振替</legend>
 				<ul><li>
