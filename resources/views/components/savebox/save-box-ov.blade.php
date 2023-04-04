@@ -1,7 +1,10 @@
 <section>
 	<fieldset>
 		<div>
-			@if($role==1||$role==2)
+			@if($status==0)
+				<input type="submit" class="g12" value="保存" onclick="setAction('save_ov')">
+				<input type="submit" class="g23" value="保存&申請" onclick="setAction('save_request_ov')">
+			@elseif($role==1||$role==2)
 			<input type="submit" class="g12" value="承認" onclick="setAction('accept')">
 			 <input type="submit" class="g23" value="再提出" onclick="setAction('redo')">
 			 <input type="submit" class="g34" value="却下" onclick="setAction('reject')">
