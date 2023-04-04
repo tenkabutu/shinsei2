@@ -13,6 +13,7 @@
 					@if($matter->status==1)未申請
 					@elseif($matter->status==2)申請中({{$matter->matter_request_date->format('Y/m/d')}})
 					@elseif($matter->status==3)許可済み({{$matter->matter_reply_date->format('Y/m/d')}})
+					@elseif($matter->status==4)削除済み({{$matter->matter_request_date->format('Y/m/d')}})
 					@endif</div>
 				</div>
 			</fieldset>

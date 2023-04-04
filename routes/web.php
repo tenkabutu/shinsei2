@@ -44,12 +44,14 @@ Route::post('{id}/update_request_te',[TeleWorkController::class,'update_request'
 
 Route::get('create_pa',[PaidLeaveController::class,'create']);
 Route::get('{id}/show_pa',[PaidLeaveController::class,'show_pa']);
+Route::post('{id}/show_pa',[PaidLeaveController::class,'show_pa']);
 Route::post('save_pa',[PaidLeaveController::class,'save']);
 Route::post('save_request_pa',[PaidLeaveController::class,'save_request']);
 Route::post('{id}/save_pa',[PaidLeaveController::class,'save']);
 Route::post('{id}/save_request_pa',[PaidLeaveController::class,'save_request']);
 Route::post('{id}/update_pa',[PaidLeaveController::class,'update']);
 Route::post('{id}/update_request_pa',[PaidLeaveController::class,'update_request']);
+Route::post('{id}/delete_pa',[PaidLeaveController::class,'delete']);
 
 Route::post('{id}/accept',[AcceptController::class,'accept']);
 Route::post('{id}/redo',[AcceptController::class,'redo']);

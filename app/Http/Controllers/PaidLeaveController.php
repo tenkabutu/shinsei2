@@ -159,6 +159,25 @@ class PaidLeaveController extends Controller
 
 
     }
+    public function delete(Request $request,$id){
+        $matter =matter::find($id);
+
+        if($request->delete_check==1){
+            $date=Carbon::now()->toDateTimeString();
+            $matter->matter_request_date=$date;
+            $matter->status=4;
+            $matter->save();
+            return  redirect($id.'/show_pa');
+        }else{
+            $request->merge(['delete_check' =>1]);
+            return back()->withInput()->with('delete_check', 'この申請を削除します、よろしいですか？');
+
+        }
+
+
+
+
+    }
     public function rest_check($minutes,$type,$id){
 
         $matter = Matter::with('tasklist')->findOrFail($id);
