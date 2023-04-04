@@ -10,8 +10,12 @@
 			@elseif($status==1)
 			 <input type="submit" class="g12" value="更新" onclick="setAction('update_te')">
 			 <input type="submit" class="g23" value="更新&申請" onclick="setAction('update_request_te')">
-			 <input type="submit" class="g34" value="削除" onclick="setAction('save_request_te')">
-			@elseif($status==2||$status==3)
+			 <input type="submit" class="g34" value="削除" onclick="setAction('delete_te')">
+			@elseif($status==2)
+				<input type="submit" class="g12" value="更新" onclick="setAction('update_te')">
+				<input type="submit" class="g23" value="更新&申請" onclick="setAction('update_request_te')">
+				<input type="submit" class="g34" value="削除" onclick="setAction('delete_te')">
+			@elseif($status==3)
 				<input type="submit" class="g12" value="更新" onclick="setAction('update_te')">
 				<input type="submit" class="g23" value="更新&申請" onclick="setAction('update_request_te')">
 			@else

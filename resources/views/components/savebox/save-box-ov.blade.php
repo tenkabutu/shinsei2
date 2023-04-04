@@ -9,11 +9,11 @@
 			@elseif($status==1)
 			 <input type="submit" class="g12" value="更新" onclick="setAction('update_ov')">
 			 <input type="submit" class="g23" value="更新&申請" onclick="setAction('update_request_ov')">
-			 <input type="submit" class="g34" value="削除" onclick="setAction('save_request_ov')">
+			 <input type="submit" class="g34" value="削除" onclick="setAction('delete_ov')">
 			@elseif($status==2)
 				<input type="submit" class="g12" value="更新" onclick="setAction('update_ov')">
 				<input type="submit" class="g23" value="更新&申請" onclick="setAction('update_request_ov')">
-				<input type="submit" class="g34" value="削除" onclick="setAction('save_request_ov')">
+				<input type="submit" class="g34" value="削除" onclick="setAction('delete__ov')">
 			@elseif($status==3)
 				<input type="submit" class="g12" value="更新" onclick="setAction('update_ov')">
 				<input type="submit" class="g23" value="更新&申請" onclick="setAction('update_request_ov')">
