@@ -63,7 +63,7 @@
 			@if(session('delete_check'))
 				<input type="hidden" name="delete_check" value="{{old('delete_check')}}">
     			<div class="alert alert-danger">{{ session('delete_check') }}</div>
-				<x-save-box :status="5" :role="0" :type="2"/>
+				<x-save-box :status="7" :role="0" :type="2"/>
 			@elseif(isset($matter))
 				@if($matter->user_id==Auth::user()->id)
 					<x-save-box :status="$matter->status" :role="0" :type="2"/>

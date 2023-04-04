@@ -165,7 +165,7 @@ class PaidLeaveController extends Controller
         if($request->delete_check==1){
             $date=Carbon::now()->toDateTimeString();
             $matter->matter_request_date=$date;
-            $matter->status=4;
+            $matter->status=6;
             $matter->save();
             return  redirect($id.'/show_pa');
         }else{

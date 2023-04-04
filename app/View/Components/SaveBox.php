@@ -27,9 +27,9 @@ class SaveBox extends Component
      */
     public function render()
     {
-        if($this->status==5){
+        if($this->status==7){
             return view('components.savebox.delete-box');
-        }elseif($this->status==4){
+        }elseif($this->status==6){
 
         }elseif($this->type==1){
             return view('components.savebox.save-box-ov');

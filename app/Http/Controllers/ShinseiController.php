@@ -50,9 +50,24 @@ class ShinseiController extends Controller
             }
             if ($request->search_type == 2) {
 
-                $query->Where('status', 1)
-                    ->orwhere('task_status', 1)
-                    ->orwhereColumn('allotted', '!=', 'allotted2');
+
+                $query->where(function ($query2)
+                    {
+                        $query2->Where('status', 1)
+                        ->Where('users.id', '=', Auth::id());
+                    })
+                    ->orwhere(function ($query2){
+                        $query2->Where('task_status', 1)
+                        ->Where('users.id', Auth::id());
+
+                    })
+                    ->orwhere(function ($query2){
+
+                        $query2->whereColumn('allotted', '!=', 'allotted2')
+                        ->where('matter_type',1)
+                        ->Where('users.id', Auth::id());
+
+                    });
             } elseif ($request->search_type == 3) {
                 $query->where(function ($query2)
                 {
@@ -70,7 +85,8 @@ class ShinseiController extends Controller
                     ->Where('users.id', Auth::id())
                     ->whereColumn('allotted', 'allotted2');
             } elseif ($request->search_type == 1) {
-                $query->Where('users.id', '=', Auth::id());
+                $query->Where('users.id', '=', Auth::id())
+                    ->Where('status', '!=', 6);
             } else {
                 return back()->withInput();
             }
