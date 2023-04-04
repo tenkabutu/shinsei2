@@ -129,7 +129,7 @@ class ShinseiController extends Controller
     }
     public function matter_ruling (Request $request)
     {
-        var_dump($request->toArray());
+        //var_dump($request->toArray());
         if ($request->mode) {
             $user = user::findOrFail(Auth::id());
             $query = matter::query();
