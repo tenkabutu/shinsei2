@@ -155,6 +155,7 @@ class ShinseiController extends Controller
 
             if ($request->search_type) {
                 if ($request->search_type == 1) {
+                    $query->Where('status', '!=', 6);
 
                 }elseif ($request->search_type == 2) {
 
