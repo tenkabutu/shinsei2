@@ -31,7 +31,7 @@
 					<div>
 
 						<label class="g12" for="order_content">{{$typename}}理由　　：</label>
-						<textarea class="g23"id="order_content" name ="order_content"  rows="2" cols="60">{{old('order_content','test')}}</textarea>
+						<textarea class="g23"id="order_content" name ="order_content"  rows="2" cols="60">{{old('order_content')}}</textarea>
 					</div>
 					<div>
 
