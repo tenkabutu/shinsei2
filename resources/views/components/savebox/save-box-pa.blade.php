@@ -18,8 +18,7 @@
 				<input type="submit" class="g23" value="更新&申請" onclick="setAction('update_request_pa')">
 				<input type="submit" class="g34" value="削除" onclick="setAction('delete_pa')">
 			@elseif($status==3)
-				<input type="submit" class="g12" value="更新" onclick="setAction('update_pa')">
-				<input type="submit" class="g23" value="更新&申請" onclick="setAction('update_request_pa')">
+				<p>この申請は承認されています、変更したい場合は承認者に取り消しをして貰う必要があります。</p>
 			@elseif($status==4)
 				<input type="submit" class="g12" value="更新" onclick="setAction('update_pa')">
 				<input type="submit" class="g23" value="更新&申請" onclick="setAction('update_request_pa')">
