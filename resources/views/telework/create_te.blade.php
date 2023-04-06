@@ -69,6 +69,8 @@
 					<x-save-box :status="$matter->status" :role="0" :type="3"/>
 				@elseif(Auth::user()->role<3)
 					<x-save-box :status="$matter->status" :role="1" :type="3"/>
+				@elseif(Auth::user()->role==4)
+					<x-save-box :status="$matter->status" :role="4" :type="3"/>
 
 				@else
 				<!-- <label>test</label> -->

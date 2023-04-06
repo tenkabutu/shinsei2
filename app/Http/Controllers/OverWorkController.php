@@ -276,7 +276,7 @@ class OverWorkController extends Controller
             $matter->matter_request_date=$date;
             $matter->status=6;
             $matter->save();
-            return  redirect($id.'/show_ov');
+            return  redirect($id.'/rewrite_ov');
         }else{
             $request->merge(['delete_check' =>1]);
             return back()->withInput()->with('delete_check', 'この申請を削除します、よろしいですか？');

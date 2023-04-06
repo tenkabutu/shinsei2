@@ -8,7 +8,8 @@
 			<input type="submit" class="g12" value="承認" onclick="setAction('accept')">
 			 <input type="submit" class="g23" value="再提出" onclick="setAction('redo')">
 			 <input type="submit" class="g34" value="却下" onclick="setAction('reject')">
-
+			@elseif($role==4)
+			<input type="submit" class="g12" value="修正" onclick="setAction('fix_ov')">
 			@elseif($status==1)
 			 <input type="submit" class="g12" value="更新" onclick="setAction('update_ov')">
 			 <input type="submit" class="g23" value="更新&申請" onclick="setAction('update_request_ov')">
@@ -16,7 +17,7 @@
 			@elseif($status==2)
 				<input type="submit" class="g12" value="更新" onclick="setAction('update_ov')">
 				<input type="submit" class="g23" value="更新&申請" onclick="setAction('update_request_ov')">
-				<input type="submit" class="g34" value="削除" onclick="setAction('delete__ov')">
+				<input type="submit" class="g34" value="削除" onclick="setAction('delete_ov')">
 			@elseif($status==3)
 				<p>この申請は承認されています。(仕様検討中につき修正の必要があれば遠藤までご連絡ください。)</p>
 			@elseif($status==4)

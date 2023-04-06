@@ -28,6 +28,7 @@
 				<input type="submit" class="g23" value="更新&申請" onclick="setAction('update_request_te')">
 			@elseif($status==6)
 				<p>この申請は削除されました。</p>
+			@endif
 		</div>
 	</fieldset>
 	<p>申請前に責任者に電話で了解を取ってください。</p>
