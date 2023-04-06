@@ -67,7 +67,7 @@
 			@elseif(isset($matter))
 				@if($matter->user_id==Auth::user()->id)
 					<x-save-box :status="$matter->status" :role="0" :type="3"/>
-				@elseif(Auth::user()->role==1)
+				@elseif(Auth::user()->role<3)
 					<x-save-box :status="$matter->status" :role="1" :type="3"/>
 
 				@else
