@@ -92,10 +92,10 @@ class ShinseiController extends Controller
             }
 
             if ($request->month != 0) {
-                $query->whereMonth('matters.created_at', $request->month);
+                $query->whereMonth('matters.matter_change_date', $request->month);
             }
             if ($request->day != 0) {
-                $query->whereDay('matters.created_at', $request->day);
+                $query->whereDay('matters.matter_change_date', $request->day);
             }
             $mskeys = $query->orderBy('matters.id', 'desc')
                 ->get([
@@ -204,10 +204,10 @@ class ShinseiController extends Controller
             }
 
             if ($request->month != 0) {
-                $query->whereMonth('matters.created_at', $request->month);
+                $query->whereMonth('matters.matter_change_date', $request->month);
             }
             if ($request->day != 0) {
-                $query->whereDay('matters.created_at', $request->day);
+                $query->whereDay('matters.matter_change_date', $request->day);
             }
 
             $query->select('*', 'matters.id as matters_id', 'matters.created_at as matters_created_at', 'users.name as username', 'reception.name as username2', 'nt2.nametag as statusname');

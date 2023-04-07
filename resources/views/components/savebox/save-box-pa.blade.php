@@ -8,7 +8,8 @@
 			<input type="submit" class="g12" value="承認" onclick="setAction('accept')">
 			 <input type="submit" class="g23" value="再提出" onclick="setAction('redo')">
 			 <input type="submit" class="g34" value="却下" onclick="setAction('reject')">
-
+			@elseif($role==4)
+			<input type="submit" class="g12" value="修正" onclick="setAction('fix_pa')">
 			@elseif($status==1)
 			 <input type="submit" class="g12" value="更新" onclick="setAction('update_pa')">
 			 <input type="submit" class="g23" value="更新&申請" onclick="setAction('update_request_pa')">
