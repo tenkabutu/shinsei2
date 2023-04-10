@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Http\Requests\ShinseiRequest;
 use App\Models\User;
 use App\Models\Matter;
 use Carbon\CarbonImmutable;
@@ -34,12 +35,7 @@ class TeleWorkController extends Controller
             return view('telework.create_te',compact('user','check_userlist'));
 
     }
-    public function save(Request $request){
-
-        $request->validate([
-                'matter_change_date' => ['required', 'string', 'max:55'],
-                'order_content' => ['required', 'string', 'max:255'],
-        ]);
+    public function save(ShinseiRequest $request){
 
         $matter = new Matter();
         $carbon = new CarbonImmutable($request->matter_change_date);
@@ -54,11 +50,8 @@ class TeleWorkController extends Controller
         return  redirect($id.'/show_te');
 
     }
-    public function save_request(Request $request){
-        $request->validate([
-                'matter_change_date' => ['required', 'string', 'max:55'],
-                'order_content' => ['required', 'string', 'max:255'],
-        ]);
+    public function save_request(ShinseiRequest $request){
+
         $matter = new Matter();
         //新規作成後、ステータスを申請中に
         $request->merge(['status' =>2]);
@@ -76,16 +69,9 @@ class TeleWorkController extends Controller
 
         return  redirect($id.'/show_te');
     }
-    public function update(Request $request,$id){
-
+    public function update(ShinseiRequest $request,$id){
         /*  print_r($_REQUEST);
          exit; */
-
-        $request->validate([
-                'matter_change_date' => ['required', 'string', 'max:55'],
-                'order_content' => ['required', 'string', 'max:255'],
-
-        ]);
 
         $matter =matter::find($id);
         $matter->fill($request->except('_token'));
@@ -107,12 +93,7 @@ class TeleWorkController extends Controller
         //$id = $matter->id;
         return  redirect($id.'/show_te');
     }
-    public function update_request(Request $request,$id){
-        $request->validate([
-                'matter_change_date' => ['required', 'string', 'max:55'],
-                'order_content' => ['required', 'string', 'max:255'],
-
-        ]);
+    public function update_request(ShinseiRequest $request,$id){
 
         $matter =matter::find($id);
         $matter->fill($request->except('_token'));

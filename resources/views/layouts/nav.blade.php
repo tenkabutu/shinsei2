@@ -57,11 +57,11 @@
 						</tr>
 						<tr>
 							<th>取得時間給</th>
-							<td>{{$used_rest_time.'('.ceil($used_rest_time/8).'日分)'}}</td>
+							<td>{{$used_rest_time.'時間('.ceil($used_rest_time/8).'日分)'}}</td>
 						</tr>
 
 						<tr>
-							<th>消化半休</th>
+							<th>取得半休</th>
 
 							<td>{{$used_harf_rest.'回('.ceil($used_harf_rest/2).'日分)'}}</td>
 						</tr>

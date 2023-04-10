@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ShinseiRequest;
 use App\Models\Matter;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -32,12 +33,8 @@ class PaidLeaveController extends Controller
             return view('paidleave.create_pa',compact('user','check_userlist'));
 
     }
-    public function save(Request $request){
+    public function save(ShinseiRequest $request){
 
-        $request->validate([
-                'matter_change_date' => ['required', 'string', 'max:55'],
-                'order_content' => ['required', 'string', 'max:255'],
-        ]);
         $matter = new matter();
         //年度追加
         $carbon = new CarbonImmutable($request->matter_change_date);
@@ -51,16 +48,9 @@ class PaidLeaveController extends Controller
 
         return  redirect($id.'/show_pa');
     }
-    public function update(Request $request,$id){
-
+    public function update(ShinseiRequest $request,$id){
         /*  print_r($_REQUEST);
          exit; */
-
-        $request->validate([
-                'matter_change_date' => ['required', 'string', 'max:55'],
-                'order_content' => ['required', 'string', 'max:255'],
-
-        ]);
 
         $matter =matter::find($id);
         $matter->fill($request->except('_token'));
@@ -82,11 +72,8 @@ class PaidLeaveController extends Controller
         //$id = $matter->id;
         return  redirect($id.'/show_pa');
     }
-    public function save_request(Request $request){
-        $request->validate([
-                'matter_change_date' => ['required', 'string', 'max:55'],
-                'order_content' => ['required', 'string', 'max:255'],
-        ]);
+    public function save_request(ShinseiRequest $request){
+
         $matter = new Matter();
         $request->merge(['status' =>2]);
         $date=Carbon::now()->toDateTimeString();
@@ -100,12 +87,7 @@ class PaidLeaveController extends Controller
 
         return  redirect($id.'/show_pa');
     }
-    public function update_request(Request $request,$id){
-        $request->validate([
-                'matter_change_date' => ['required', 'string', 'max:55'],
-                'order_content' => ['required', 'string', 'max:255'],
-
-        ]);
+    public function update_request(ShinseiRequest $request,$id){
 
         $matter =matter::find($id);
         $matter->fill($request->except('_token'));

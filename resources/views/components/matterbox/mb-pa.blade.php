@@ -7,6 +7,7 @@
 		</div>
 		<div>
 			<label class="g12">取得1：</label>
+
 			<div class="radio-group g23">
 
 				<input id="st1_1" type="radio" class="st1" name="opt1" value="1" {{old('opt1')=='1' ? 'checked':''}} />

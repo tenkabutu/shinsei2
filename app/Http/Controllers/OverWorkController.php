@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\ShinseiRequest;
 use App\Models\User;
 use App\Models\Matter;
 use App\Models\Task;
@@ -37,15 +38,8 @@ class OverWorkController extends Controller
         return view('overwork.create_ov',compact('user','check_userlist'));
 
     }
-    public function save(Request $request){
+    public function save(ShinseiRequest $request){
 
-        $request->validate([
-                'matter_change_date' => ['required', 'string', 'max:55'],
-                'order_content' => ['required', 'string', 'max:255'],
-                //'user_id' => ['required', 'integer', 'max:255']
-                //'starttime' => ['required', 'string', 'email', 'max:255', 'unique:users']
-
-        ]);
         //var_dump($request->device_name);
         /* $date=Carbon::now()->toDateTimeString();
         $matter = new Matter();
@@ -75,11 +69,8 @@ class OverWorkController extends Controller
         //@foreach ($records as $id =>$record)
         return  redirect($id.'/rewrite_ov');
     }
-    public function save_request(Request $request){
-        $request->validate([
-                'matter_change_date' => ['required', 'string', 'max:55'],
-                'order_content' => ['required', 'string', 'max:255'],
-        ]);
+    public function save_request(ShinseiRequest $request){
+
         $matter = new Matter();
         $request->merge(['status' =>2]);
         $date=Carbon::now()->toDateTimeString();
@@ -104,16 +95,10 @@ class OverWorkController extends Controller
         return  redirect($id.'/rewrite_ov');
     }
 
-    public function update(Request $request,$id){
+    public function update(ShinseiRequest $request,$id){
 
        /*  print_r($_REQUEST);
         exit; */
-
-        $request->validate([
-                'matter_change_date' => ['required', 'string', 'max:55'],
-                'order_content' => ['required', 'string', 'max:255'],
-
-        ]);
 
         $matter =matter::find($id);
         $matter->fill($request->except('_token'));
@@ -166,7 +151,7 @@ class OverWorkController extends Controller
         $request->session()->regenerateToken();
         return  redirect($id.'/rewrite_ov');
     }
-    public function update_request(Request $request,$id){
+    public function update_request(ShinseiRequest $request,$id){
         $request->validate([
                 'matter_change_date' => ['required', 'string', 'max:55'],
                 'order_content' => ['required', 'string', 'max:255'],
@@ -287,39 +272,6 @@ class OverWorkController extends Controller
 
 
     }
-    /* public function accept($id){
 
-
-        $matter = matter::with('tasklist')->findOrFail($id);
-        $task_allotted_count=0;
-        if($matter->status!=3){
-            $matter->status=3;
-            $date=Carbon::now()->toDateTimeString();
-            $matter->matter_reply_date=$date;
-
-        }
-
-        foreach($matter->tasklist as $task){
-            if($task->task_status!=3){
-                $task->task_status=3;
-                $date=Carbon::now()->toDateTimeString();
-                $task->task_reply_date=$date;
-                $task->save();
-            }
-            $task_allotted_count+=$task->task_allotted;
-        }
-        $matter->allotted2=$task_allotted_count;
-        $matter->save();
-
-        return  redirect($id.'/rewrite_ov');
-
-
-    }
-    public function redo($id){
-        return  redirect($id.'/rewrite_ov');
-    }
-    public function reject($id){
-        return  redirect($id.'/rewrite_ov');
-    } */
 
 }
