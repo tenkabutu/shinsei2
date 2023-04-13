@@ -103,7 +103,7 @@
 				</div>
 				<ul>
 					<li><a href="/shinsei2/public/create_pa" >新規登録</a></li>
-					<li><a href="/shinsei2/public/matter_search">申請一覧</a></li>
+					<li><a href="/shinsei2/public/2/matter_search">申請一覧</a></li>
 					@if(Auth::user()->role<=2)
 					<li ><a href="/shinsei2/public/matter_ruling">全申請一覧</a>　<a class="double" href="/shinsei2/public/matter_ruling?mode=search&search_type=3">申請{{$order_count}}件</a></li>
 					@endif
@@ -113,7 +113,7 @@
 				</div>
 				<ul>
 					<li><a href="/shinsei2/public/create_ov" >新規登録</a></li>
-					<li><a href="/shinsei2/public/matter_search">申請一覧</a></li>
+					<li><a href="/shinsei2/public/1/matter_search">申請一覧</a></li>
 					@if(Auth::user()->role<=2)
 					<li ><a href="/shinsei2/public/matter_ruling">全申請一覧</a>　<a class="double" href="/shinsei2/public/matter_ruling?mode=search&search_type=3">申請{{$order_count}}件</a></li>
 					@endif
@@ -123,11 +123,22 @@
 				</div>
 				<ul>
 					<li><a href="/shinsei2/public/create_te" >新規登録</a></li>
-					<li><a href="/shinsei2/public/matter_search">申請一覧</a></li>
+					<li><a href="/shinsei2/public/3/matter_search">申請一覧</a></li>
 					@if(Auth::user()->role<=2)
 					<li ><a href="/shinsei2/public/matter_ruling">全申請一覧</a>　<a class="double" href="/shinsei2/public/matter_ruling?mode=search&search_type=3">申請{{$order_count}}件</a></li>
 					@endif
 				</ul>
+				@if(Auth::user()->role<=2)
+				<div class='side_label'>
+					<span>申請承認(改修中)</span>
+				</div>
+				<ul>
+					<li ><a href="/shinsei2/public/2/matter_ruling">休暇申請</a>　<a class="double" href="/shinsei2/public/matter_ruling?mode=search&search_type=3">申請{{$order_count}}件</a></li>
+					<li ><a href="/shinsei2/public/3/matter_ruling">テレワーク申請</a>　<a class="double" href="/shinsei2/public/matter_ruling?mode=search&search_type=3">申請{{$order_count}}件</a></li>
+					<li ><a href="/shinsei2/public/1/matter_ruling">振替申請</a>　<a class="double" href="/shinsei2/public/matter_ruling?mode=search&search_type=3">申請{{$order_count}}件</a></li>
+
+				</ul>
+				@endif
 				<div class='side_label'>
 					<span>貸出申請</span>
 				</div>
@@ -146,7 +157,7 @@
 					<li><a href="/shinsei2/public/user" >購入申請(未実装)</a></li>
 
 				</ul>
-				@if(Auth::user()->role<=2)
+				@if(Auth::user()->role!=3)
 				<div class='side_label'>
 					<span>データ</span>
 				</div>
@@ -154,7 +165,9 @@
 
 					<li><a href="/shinsei2/public/user" active="request()->routeIs('device')">ユーザー</a></li>
 
-					<li><a href="/tabusapo_lb/public/category" >カテゴリー(未実装)</a></li>
+					<li ><a href="/shinsei2/public/matter_ruling">申請修正</a>　<a class="double" href="/shinsei2/public/matter_ruling?mode=search&search_type=3">申請{{$order_count}}件</a></li>
+
+
 				</ul>
 
 					@endif

@@ -22,7 +22,7 @@
 					</div>
 					<div><label>状態：</label>
 					 <div class="radio-group">
-					<input id="st1_1" type="radio" class="st1" name="search_type" value="1" @if(Request::get('search_type')==1) checked @endif />
+					<input id="st1_1" type="radio" class="st1" name="search_type" value="1" @if(Request::get('search_type')==1) checked @elseif(isset($search_type)) checked @endif />
 					<label for="st1_1">全件</label>
 					<input id="st1_2" type="radio" class="st1" name="search_type" value="2" @if(Request::get('search_type')==2) checked @endif/>
 					<label for="st1_2">未申請</label>

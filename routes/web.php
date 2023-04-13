@@ -63,7 +63,9 @@ Route::post('{id}/redo',[AcceptController::class,'redo']);
 Route::post('{id}/reject',[AcceptController::class,'reject']);
 
 Route::get('matter_search',[ShinseiController::class,'matter_search']);
+Route::get('{type}/matter_search',[ShinseiController::class,'matter_search2']);
 Route::get('matter_ruling',[ShinseiController::class,'matter_ruling']);
+Route::get('{type}/matter_ruling',[ShinseiController::class,'matter_ruling2']);
 Route::get('/',[DashboardController::class,'show_dash']);
 Route::get('/dashboard',[DashboardController::class,'show_dash']);
 

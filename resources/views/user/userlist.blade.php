@@ -1,7 +1,12 @@
 <x-app-layout>
 <x-slot name="head">
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-
+	<script src='./js/jquery.tablesorter.js'></script>
+<script>
+$(document).ready(function(){
+	$('.sort-table').tablesorter();
+});
+</script>
 </x-slot>
 
 <div class="main_right">
@@ -9,11 +14,12 @@
 		<h2>ユーザー管理</h2>
 
 		<label class="success_label"></label>
-		<table class="table">
+		<table class="table  sort-table">
+			<thead>
 			<tr>
 				<th>ID</th>
 				<th>No</th>
-				<th>使用者</th>
+				<th >使用者</th>
 				<th>表示名</th>
 				<th>アドレス</th>
 				<th>権限</th>
@@ -22,6 +28,7 @@
 				<th>勤務時間</th>
 				<th></th>
 			</tr>
+			</thead>
 			{{-- @foreach ($userlist as $record) --}}
 			@foreach ($userlist as $id =>$record)
 			<tr class="d{{$id+1}}">
@@ -38,6 +45,7 @@
 					<option value=1 @if($record->role==1)selected @endif >管理者</option>
 					<option value=2 @if($record->role==2)selected @endif >リーダー</option>
 					<option value=3 @if($record->role==3)selected @endif >支援員</option>
+					<option value=4 @if($record->role==4)selected @endif >人事</option>
 					</select>
 				</td>
 				@elseif(Auth::user()->role==2&&Auth::user()->approval==2)
