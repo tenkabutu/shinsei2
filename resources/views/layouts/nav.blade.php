@@ -44,9 +44,19 @@
 							<th width='80'>付与有給</th>
 							<th>{{$userdata->rest->rest_allotted_day}}日</th>
 						</tr>
+					</table>
+						<table>
 						<tr>
 							<th width='80'>持越有給</th>
 							<th>{{$userdata->rest->co_day}}日</th>
+						</tr>
+						<tr>
+							<th>持越半休</th>
+							<th>{{$userdata->rest->co_harf_rest}}回</th>
+						</tr>
+						<tr>
+							<th>持越時間給</th>
+							<th>{{$userdata->rest->co_time}}時間</th>
 						</tr>
 
 					</table>
@@ -68,11 +78,11 @@
 					</table>
 					<table>
 						<tr>
-							<th>残有給</th>
+							<th width='80'>残有給</th>
 							<td>{{$residue_rest_day}}日</td>
 						</tr>
 						<tr>
-							<th width='100'>残持越有給</th>
+							<th>残持越有給</th>
 							<th>{{max($residue_co_day,0)}}日</th>
 						</tr>
 						<tr>
