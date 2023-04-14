@@ -61,6 +61,7 @@ Route::post('{id}/delete_pa',[PaidLeaveController::class,'delete']);
 Route::post('{id}/accept',[AcceptController::class,'accept']);
 Route::post('{id}/redo',[AcceptController::class,'redo']);
 Route::post('{id}/reject',[AcceptController::class,'reject']);
+Route::post('{id}/cancel',[AcceptController::class,'cancel']);
 
 Route::get('matter_search',[ShinseiController::class,'matter_search']);
 Route::get('{type}/matter_search',[ShinseiController::class,'matter_search2']);
