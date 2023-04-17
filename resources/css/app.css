@@ -39,7 +39,7 @@ body {
 	box-shadow: 2px 2px 4px gray;
 	display: flex;
 }
-
+//* 申請ツール　サイドエリア　*//
 
 #account {
   margin: 0px 5px 20px;
@@ -99,6 +99,7 @@ nav{
   color: white;
 }
 
+//* テーブル　*//
 table {
   border-collapse: collapse;
 }

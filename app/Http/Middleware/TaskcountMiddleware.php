@@ -34,6 +34,7 @@ class TaskcountMiddleware
         // $user=user::where('id',Auth::id());
         $order_count = 0;
         if (Auth::id()) {
+            //承認権限がすべてかエリアか
             if (Auth::user()->approval == 1) {
 
                 $order_count = DB::table('matters')->leftjoin('tasks', 'matters.id', 'tasks.matter_id')
@@ -50,6 +51,24 @@ class TaskcountMiddleware
                 })
                     ->
                 distinct('matters.id')
+                    ->count('matters.id');
+
+                $pa_count = DB::table('matters')
+                ->where('matter_type','2')
+                    ->leftjoin('tasks', 'matters.id', 'tasks.matter_id')
+                    ->join('users', 'matters.user_id', 'users.id')
+                    ->where(function ($query)
+                    {
+                        $query->Where('status', 2)
+                        ->Where('users.id', '!=', Auth::id());
+                    })
+                    ->orwhere(function ($query)
+                    {
+                        $query->Where('task_status', 2)
+                        ->Where('users.id', '!=', Auth::id());
+                    })
+                    ->
+                    distinct('matters.id')
                     ->count('matters.id');
             } elseif (Auth::user()->approval == 2) {
                 $area_id = Auth::user()->area;
@@ -68,6 +87,24 @@ class TaskcountMiddleware
                         ->Where('users.area', $area_id)
                         ->Where('users.id', '!=', Auth::id());
                 })
+                    ->distinct('matters.id')
+                    ->count('matters.id');
+                    $pa_count = DB::table('matters')
+                    ->where('matter_type','2')
+                    ->leftjoin('tasks', 'matters.id', 'tasks.matter_id')
+                    ->join('users', 'matters.user_id', 'users.id')
+                    ->where(function ($query) use ( $area_id)
+                    {
+                        $query->Where('status', 2)
+                        ->Where('users.area', $area_id)
+                        ->Where('users.id', '!=', Auth::id());
+                    })
+                    ->orwhere(function ($query) use ( $area_id)
+                    {
+                        $query->Where('task_status', 2)
+                        ->Where('users.area', $area_id)
+                        ->Where('users.id', '!=', Auth::id());
+                    })
                     ->distinct('matters.id')
                     ->count('matters.id');
             }
@@ -130,6 +167,7 @@ class TaskcountMiddleware
 
             };
             $this->viewFactory->share('order_count', $order_count);
+            $this->viewFactory->share('pa_count', $pa_count);
             $this->viewFactory->share('userdata', $user);
         }
 
