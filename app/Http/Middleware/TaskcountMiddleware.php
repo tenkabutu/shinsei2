@@ -33,6 +33,7 @@ class TaskcountMiddleware
 
         // $user=user::where('id',Auth::id());
         $order_count = 0;
+        $pa_count = 0;
         if (Auth::id()) {
             //承認権限がすべてかエリアか
             if (Auth::user()->approval == 1) {
