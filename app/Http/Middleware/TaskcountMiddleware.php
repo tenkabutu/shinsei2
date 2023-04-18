@@ -34,6 +34,8 @@ class TaskcountMiddleware
         // $user=user::where('id',Auth::id());
         $order_count = 0;
         $pa_count = 0;
+        $ov_count = 0;
+        $te_count = 0;
         if (Auth::id()) {
             //承認権限がすべてかエリアか
             if (Auth::user()->approval == 1) {
@@ -55,7 +57,25 @@ class TaskcountMiddleware
                     ->count('matters.id');
 
                 $pa_count = DB::table('matters')
-                ->where('matter_type','2')
+                ->where('matter_type',2)
+                    ->leftjoin('tasks', 'matters.id', 'tasks.matter_id')
+                    ->join('users', 'matters.user_id', 'users.id')
+                    ->where(function ($query)
+                    {
+                        $query->Where('status', 2)
+                        ->Where('users.id', '!=', Auth::id());
+                    })
+                    ->orwhere(function ($query)
+                    {
+                        $query->Where('task_status', 2)
+                        ->Where('users.id', '!=', Auth::id());
+                    })
+                    ->
+                    distinct('matters.id')
+                    ->count('matters.id');
+
+                 $ov_count = DB::table('matters')
+                    ->where('matter_type',1)
                     ->leftjoin('tasks', 'matters.id', 'tasks.matter_id')
                     ->join('users', 'matters.user_id', 'users.id')
                     ->where(function ($query)
@@ -90,8 +110,8 @@ class TaskcountMiddleware
                 })
                     ->distinct('matters.id')
                     ->count('matters.id');
-                    $pa_count = DB::table('matters')
-                    ->where('matter_type','2')
+                $pa_count = DB::table('matters')
+                    ->where('matter_type',2)
                     ->leftjoin('tasks', 'matters.id', 'tasks.matter_id')
                     ->join('users', 'matters.user_id', 'users.id')
                     ->where(function ($query) use ( $area_id)
@@ -169,6 +189,8 @@ class TaskcountMiddleware
             };
             $this->viewFactory->share('order_count', $order_count);
             $this->viewFactory->share('pa_count', $pa_count);
+            $this->viewFactory->share('ov_count', $ov_count);
+            $this->viewFactory->share('te_count', $te_count);
             $this->viewFactory->share('userdata', $user);
         }
 
