@@ -438,7 +438,7 @@ class ShinseiController extends Controller
                     }
                 }
             } else {
-                var_dump('test3');
+
                 $area_id = $user->area;
                 $query->where(function ($query2) use ( $area_id)
                 {
@@ -470,9 +470,10 @@ class ShinseiController extends Controller
             $input_data = [
                     'month' => $request->month,
                     'year' => $request->year,
-                    'matter_type' => $request->matter_type,
+                    'matter_type' => $type,
                     'search_type' => $request->search_type
             ];
+
             /*
              * echo print_r($input_data);
              * exit;

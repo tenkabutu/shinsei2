@@ -134,7 +134,7 @@
 					<span>申請承認(改修中)</span>
 				</div>
 				<ul>
-					<li class="nav_count"><a href="/shinsei2/public/2/matter_ruling">休暇申請</a>　　　　<a class="double" href="/shinsei2/public/matter_ruling?mode=search&search_type=3">申請{{$pa_count}}件</a></li>
+					<li class="nav_count"><a href="/shinsei2/public/2/matter_ruling">休暇申請</a>　　　　<a class="double" href="/shinsei2/public/2/matter_ruling">申請{{$pa_count}}件</a></li>
 					<li  class="nav_count"><a href="/shinsei2/public/3/matter_ruling">テレワーク申請</a>　<a class="double" href="/shinsei2/public/matter_ruling?mode=search&search_type=3">申請{{$te_count}}件</a></li>
 					<li  class="nav_count"><a href="/shinsei2/public/1/matter_ruling">振替申請</a>　　　　<a class="double" href="/shinsei2/public/matter_ruling?mode=search&search_type=3">申請{{$ov_count}}件</a></li>
 
