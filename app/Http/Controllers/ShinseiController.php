@@ -371,7 +371,6 @@ class ShinseiController extends Controller
     {
         //var_dump($request->toArray());
 
-        var_dump($type);
             $user = user::findOrFail(Auth::id());
             $query = matter::query();
             $query->where('matters.matter_type',$type);
