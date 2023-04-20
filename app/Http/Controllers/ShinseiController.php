@@ -413,22 +413,40 @@ class ShinseiController extends Controller
 
                     }else{
                         $query->Where('status', 1);
-                    }
-                } elseif ($request->search_type == 3) {
+                }
+            } elseif ($request->search_type == 3) {
 
-                    $area_id = $user->area;
+                $area_id = $user->area;
+                if ($user->approval == 1) {
+                    $query->where(function ($query2)
+                    {
+                        $query2->Where('status', 2)
+                            ->Where('users.id', '!=', Auth::id());
+                    })
+                        ->orwhere(function ($query2)
+                    {
+                        $query2->Where('task_status', 2)
+                            ->Where('users.id', '!=', Auth::id());
+                    });
+                } elseif ($user->approval == 2) {
                     $query->where(function ($query2) use ( $area_id)
                     {
                         $query2->Where('status', 2)
-                        ->Where('users.area', $area_id)
-                        ->Where('users.id', '!=', Auth::id());
+                            ->Where('users.area', $area_id)
+                            ->Where('users.id', '!=', Auth::id());
                     })
-                    ->orwhere(function ($query2) use ( $area_id)
+                        ->orwhere(function ($query2) use ( $area_id)
                     {
                         $query2->Where('task_status', 2)
-                        ->Where('users.area', $area_id)
+                            ->Where('users.area', $area_id)
                         ->Where('users.id', '!=', Auth::id());
                     });
+                }else{
+                    return view('composite.ruling_ov', compact( 'userlist'));
+                }
+
+
+
                 } elseif ($request->search_type == 4) {
                     if($type==1){
                         $query->Where('status', 3)
