@@ -371,6 +371,8 @@ class ShinseiController extends Controller
     {
         //var_dump($request->toArray());
 
+            $userlist = $this->create_userlist2($request->user);
+            $search_type=$request->search_type;
             $user = user::findOrFail(Auth::id());
             $query = matter::query();
             $query->where('matters.matter_type',$type);
@@ -436,9 +438,11 @@ class ShinseiController extends Controller
                         $query->Where('status', 3);
                     }
                 }
-            } else {
+//             } else {
+//                 var_dump('tes');
 
-                $area_id = $user->area;
+
+            /*     $area_id = $user->area;
                 $query->where(function ($query2) use ( $area_id)
                 {
                     $query2->Where('status', 2)
@@ -450,8 +454,8 @@ class ShinseiController extends Controller
                     $query2->Where('task_status', 2)
                     ->Where('users.area', $area_id)
                     ->Where('users.id', '!=', Auth::id());
-                });
-            }
+                }); */
+           /*  } */
             if ($request->user != 0) {
                 $query->where('matters.user_id', $request->user);
             }
@@ -465,12 +469,12 @@ class ShinseiController extends Controller
             // ->get();
             $records = $query->get();
             $records2 = $records->groupBy('matters.id');
-            $userlist = $this->create_userlist2($request->user);
+
             $input_data = [
                     'month' => $request->month,
                     'year' => $request->year,
                     'matter_type' => $type,
-                    'search_type' => $request->search_type
+                    'search_type' => $search_type
             ];
 
             /*
@@ -479,6 +483,9 @@ class ShinseiController extends Controller
              */
 
             return view('composite.ruling_ov', compact('records', 'input_data', 'userlist', 'records2'));
+          }else {
+              return view('composite.ruling_ov', compact( 'userlist'));
+          }
 
     }
 //     public function matter_ruling2 (Request $request,$type)
