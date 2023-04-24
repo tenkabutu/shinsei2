@@ -611,10 +611,10 @@ class ShinseiController extends Controller
 
     public static function create_userlist ()
     {
-        $userlist = User::select('id', 'name')->get();
+        $userlist = User::select('id','employee', 'name')->get();
         $create_userlist = "";
         foreach ($userlist as $us) {
-            $create_userlist .= '<option value="' . $us->id . '">' . $us->id . ':' . $us->name . '</option>';
+            $create_userlist .= '<option value="' . $us->id . '">' . $us->employee . ':' . $us->name . '</option>';
         }
         ;
         return $create_userlist;
@@ -622,13 +622,13 @@ class ShinseiController extends Controller
 
     public static function create_userlist2 ($id)
     {
-        $userlist = User::select('id', 'name')->get();
+        $userlist = User::select('id','employee', 'name')->get();
         $create_userlist = "";
         foreach ($userlist as $us) {
             if ($us->id == $id) {
-                $create_userlist .= '<option value="' . $us->id . '" selected>' . $us->id . ':' . $us->name . '</option>';
+                $create_userlist .= '<option value="' . $us->id . '" selected>' . $us->employee . ':' . $us->name . '</option>';
             } else {
-                $create_userlist .= '<option value="' . $us->id . '">' . $us->id . ':' . $us->name . '</option>';
+                $create_userlist .= '<option value="' . $us->id . '">' . $us->employee . ':' . $us->name . '</option>';
             }
         }
         ;
