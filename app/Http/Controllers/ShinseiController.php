@@ -442,7 +442,7 @@ class ShinseiController extends Controller
                         ->Where('users.id', '!=', Auth::id());
                     });
                 }else{
-                    return view('composite.ruling_ov', compact( 'userlist'));
+                    return view('composite.ruling_ov', compact( 'userlist','type'));
                 }
 
 
@@ -500,9 +500,9 @@ class ShinseiController extends Controller
              * exit;
              */
 
-            return view('composite.ruling_ov', compact('records', 'input_data', 'userlist', 'records2'));
+            return view('composite.ruling_ov', compact('records', 'input_data', 'userlist', 'records2','type'));
           }else {
-              return view('composite.ruling_ov', compact( 'userlist'));
+              return view('composite.ruling_ov', compact( 'userlist','type'));
           }
 
     }

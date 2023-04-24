@@ -11,6 +11,12 @@
 </x-slot>
 
 <div class="main_right">
+	@isset($type)
+	<h3>@if($type==1)振替申請
+		@elseif($type==2)休暇申請
+		@elseif($type==3)テレワーク申請
+		@endif</h3>
+	@endisset
 	<div id="narrow">
     		<fieldset>
                 <legend>検索条件</legend>
@@ -28,6 +34,7 @@
 						@endfor
 						</select>月
 					</div>
+					@if(!isset($type))
 					<div><label>状態：</label>
 					 <div class="radio-group">
 					<input id="st1_1" type="radio" class="st1" name="matter_type" value="1" @if(Request::get('matter_type')==1) checked @endif />
@@ -38,7 +45,9 @@
 					<label for="st1_3">テレワ</label>
 
 					</div>
+
 					</div>
+					@endif
 					<div><label>状態：</label>
 					 <div class="radio-group">
 					<!-- <input id="st2_1" type="radio" class="st2" name="search_type" value="1" @isset($input_data['search_type']) @if($input_data['search_type']==1) checked @endif @endisset />
