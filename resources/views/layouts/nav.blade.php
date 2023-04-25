@@ -97,7 +97,11 @@
 
 				@if(Auth::user()->role<=2)
 				<div class='side_label'>
+					@if(Auth::user()->role<=2)
 					<span>申請承認</span>
+					@else
+					<span>申請承認</span>
+					@endif
 				</div>
 				<ul>
 					<li class="nav_count"><a href="/shinsei2/public/2/matter_ruling">休暇申請</a>　　　　<a class="double" href="/shinsei2/public/2/matter_ruling?search_type=3">申請{{$pa_count1}}件</a></li>
