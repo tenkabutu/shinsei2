@@ -95,7 +95,7 @@
 					@endif
 				</div>
 
-				@if(Auth::user()->role<=2)
+				@if(Auth::user()->role!=3)
 				<div class='side_label'>
 					@if(Auth::user()->role<=2)
 					<span>申請承認</span>
