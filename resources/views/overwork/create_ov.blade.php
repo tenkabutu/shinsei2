@@ -92,7 +92,7 @@
 
 								<label class="g56">休憩時間</label>
 								<div class="g67">
-									<input type="number" class="task_break" name="task_breaktime" value="0" min="0" max="60" value="{{$task->task_breaktime}}" autocomplete="off">
+									<input type="number" class="task_break" name="task_breaktime"  min="0" max="60" value="{{$task->task_breaktime}}" autocomplete="off">
 								</div>
 							</div>
 							<div class="grid">
