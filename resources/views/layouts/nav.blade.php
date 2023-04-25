@@ -100,7 +100,7 @@
 					@if(Auth::user()->role<=2)
 					<span>申請承認</span>
 					@else
-					<span>申請承認</span>
+					<span>申請確認</span>
 					@endif
 				</div>
 				<ul>

@@ -22,7 +22,7 @@
 				<input type="submit" class="g23" value="更新&申請" onclick="setAction('update_request_ov')">
 				<input type="submit" class="g34" value="削除" onclick="setAction('delete_ov')">
 			@elseif($status==3)
-				<p>この申請は承認されています。(仕様検討中につき修正の必要があれば遠藤までご連絡ください。)</p>
+				<p>この申請は承認されています。確認者に承認を解除してもらうか、秋吉さんに修正を依頼してください。</p>
 			@elseif($status==4)
 				<input type="submit" class="g12" value="保存" onclick="setAction('save_ov')">
 				<input type="submit" class="g23" value="保存&申請" onclick="setAction('save_request_ov')">
