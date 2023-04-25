@@ -14,12 +14,13 @@ class DashboardController extends Controller
     }
     public function show_dash(){
 
-        $user = user::findOrFail(Auth::id());
+        //$user = user::findOrFail(Auth::id());
         $query = matter::query();
 
 
 
         $query->where('matter_type',1);
+        $query->where('user_id',Auth::id());
 
 
         $query->leftjoin('tasks', function ($join)
@@ -27,7 +28,7 @@ class DashboardController extends Controller
             $join->on('matters.id', '=', 'tasks.matter_id');
         });
         $query->leftjoin('users', 'matters.user_id', 'users.id');
-        $query->leftjoin('users as reception','matters.reception_id','reception.id');
+        //$query->leftjoin('users as reception','matters.reception_id','reception.id');
         $query->leftjoin('nametags as nt2', function ($join)
         {
             $join->on('matters.status', '=', 'nt2.tagid')
@@ -43,7 +44,7 @@ class DashboardController extends Controller
 
         });
 
-            $query->select('*', 'matters.id as matters_id', 'matters.created_at as matters_created_at', 'users.name as username', 'reception.name as username2', 'nt2.nametag as statusname');
+            $query->select('*', 'matters.id as matters_id', 'matters.created_at as matters_created_at', 'users.name as username', 'nt2.nametag as statusname');
             $query->orderBy('matters.id', 'desc');
             // ->select('matters.id','matters.created_at')
             // ->get();
