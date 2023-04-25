@@ -33,9 +33,12 @@ class TaskcountMiddleware
 
         // $user=user::where('id',Auth::id());
         $order_count = 0;
-        $pa_count = 0;
-        $ov_count = 0;
-        $te_count = 0;
+        $pa_count1 = 0;
+        $ov_count1 = 0;
+        $te_count1 = 0;
+        $pa_count2 = 0;
+        $ov_count2 = 0;
+        $te_count2 = 0;
         if (Auth::id()) {
             //承認権限がすべてかエリアか
             if (Auth::user()->approval == 1) {
@@ -56,7 +59,7 @@ class TaskcountMiddleware
                 distinct('matters.id')
                     ->count('matters.id');
 
-                $pa_count = DB::table('matters')
+                $pa_count1 = DB::table('matters')
                 ->where('matter_type',2)
                     ->leftjoin('tasks', 'matters.id', 'tasks.matter_id')
                     ->join('users', 'matters.user_id', 'users.id')
@@ -74,7 +77,25 @@ class TaskcountMiddleware
                     distinct('matters.id')
                     ->count('matters.id');
 
-                 $ov_count = DB::table('matters')
+                $te_count1 = DB::table('matters')
+                    ->where('matter_type',3)
+                    ->leftjoin('tasks', 'matters.id', 'tasks.matter_id')
+                    ->join('users', 'matters.user_id', 'users.id')
+                    ->where(function ($query)
+                    {
+                        $query->Where('status', 2)
+                        ->Where('users.id', '!=', Auth::id());
+                    })
+                    ->orwhere(function ($query)
+                    {
+                        $query->Where('task_status', 2)
+                        ->Where('users.id', '!=', Auth::id());
+                    })
+                    ->
+                    distinct('matters.id')
+                    ->count('matters.id');
+
+                 $ov_count1 = DB::table('matters')
                     ->where('matter_type',1)
                     ->leftjoin('tasks', 'matters.id', 'tasks.matter_id')
                     ->join('users', 'matters.user_id', 'users.id')
@@ -110,7 +131,7 @@ class TaskcountMiddleware
                 })
                     ->distinct('matters.id')
                     ->count('matters.id');
-                $pa_count = DB::table('matters')
+                $pa_count1 = DB::table('matters')
                     ->where('matter_type',2)
                     ->leftjoin('tasks', 'matters.id', 'tasks.matter_id')
                     ->join('users', 'matters.user_id', 'users.id')
@@ -128,7 +149,81 @@ class TaskcountMiddleware
                     })
                     ->distinct('matters.id')
                     ->count('matters.id');
+                 $ov_count1 = DB::table('matters')
+                    ->where('matter_type',1)
+                    ->leftjoin('tasks', 'matters.id', 'tasks.matter_id')
+                    ->join('users', 'matters.user_id', 'users.id')
+                    ->where(function ($query) use ( $area_id)
+                    {
+                        $query->Where('status', 2)
+                        ->Where('users.area', $area_id)
+                        ->Where('users.id', '!=', Auth::id());
+                    })
+                    ->orwhere(function ($query) use ( $area_id)
+                    {
+                        $query->Where('task_status', 2)
+                        ->Where('users.area', $area_id)
+                        ->Where('users.id', '!=', Auth::id());
+                    })
+                    ->distinct('matters.id')
+                    ->count('matters.id');
+
+                  $te_count1 = DB::table('matters')
+                    ->where('matter_type',3)
+                    ->leftjoin('tasks', 'matters.id', 'tasks.matter_id')
+                    ->join('users', 'matters.user_id', 'users.id')
+                    ->where(function ($query) use ( $area_id)
+                    {
+                        $query->Where('status', 2)
+                        ->Where('users.area', $area_id)
+                        ->Where('users.id', '!=', Auth::id());
+                    })
+                    ->orwhere(function ($query) use ( $area_id)
+                    {
+                        $query->Where('task_status', 2)
+                        ->Where('users.area', $area_id)
+                        ->Where('users.id', '!=', Auth::id());
+                    })
+                    ->distinct('matters.id')
+                    ->count('matters.id');
             }
+
+            $pa_count2 = DB::table('matters')
+            ->where('matter_type',2)
+            ->where('user_id',Auth::id())
+            ->leftjoin('tasks', 'matters.id', 'tasks.matter_id')
+            ->where(function ($query){
+                $query->Where('status', 2);
+            })
+            ->orwhere(function ($query){
+                $query->Where('task_status', 2);
+            })
+            ->distinct('matters.id')
+            ->count('matters.id');
+            $ov_count2 = DB::table('matters')
+            ->where('matter_type',1)
+            ->where('user_id',Auth::id())
+            ->leftjoin('tasks', 'matters.id', 'tasks.matter_id')
+            ->where(function ($query){
+                $query->Where('status', 2);
+            })
+            ->orwhere(function ($query){
+                $query->Where('task_status', 2);
+            })
+            ->distinct('matters.id')
+            ->count('matters.id');
+            $te_count2 = DB::table('matters')
+            ->where('matter_type',3)
+            ->where('user_id',Auth::id())
+            ->leftjoin('tasks', 'matters.id', 'tasks.matter_id')
+            ->where(function ($query){
+                $query->Where('status', 2);
+            })
+            ->orwhere(function ($query){
+                $query->Where('task_status', 2);
+            })
+            ->distinct('matters.id')
+            ->count('matters.id');
 
             // 最新の有給情報を読み込む
             $user = user::with('rest','worktype')->findOrFail(Auth::id());
@@ -188,9 +283,12 @@ class TaskcountMiddleware
 
             };
             $this->viewFactory->share('order_count', $order_count);
-            $this->viewFactory->share('pa_count', $pa_count);
-            $this->viewFactory->share('ov_count', $ov_count);
-            $this->viewFactory->share('te_count', $te_count);
+            $this->viewFactory->share('pa_count1', $pa_count1);
+            $this->viewFactory->share('ov_count1', $ov_count1);
+            $this->viewFactory->share('te_count1', $te_count1);
+            $this->viewFactory->share('pa_count2', $pa_count2);
+            $this->viewFactory->share('ov_count2', $ov_count2);
+            $this->viewFactory->share('te_count2', $te_count2);
             $this->viewFactory->share('userdata', $user);
         }
 
