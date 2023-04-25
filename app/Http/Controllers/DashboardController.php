@@ -23,11 +23,9 @@ class DashboardController extends Controller
         $query->where('user_id',Auth::id());
 
 
-        $query->leftjoin('tasks', function ($join)
-        {
-            $join->on('matters.id', '=', 'tasks.matter_id');
-        });
-        $query->leftjoin('users', 'matters.user_id', 'users.id');
+        $query->leftjoin('tasks', 'matters.id', 'tasks.matter_id');
+
+        $query->join('users', 'matters.user_id', 'users.id');
         //$query->leftjoin('users as reception','matters.reception_id','reception.id');
         $query->leftjoin('nametags as nt2', function ($join)
         {
@@ -35,11 +33,14 @@ class DashboardController extends Controller
             ->where('nt2.groupid', 5);
         });
         $query->where(function ($query2){
-            $query2->Where('status', 1)
+            $query2
+            ->where('user_id',Auth::id())
+            ->Where('status', 1)
             ->orwhere('task_status', 1);
+
         })->orwhere(function($query2){
-            $query2->Where('status', 3)
-            ->where('matter_type', 1)
+            $query2->where('user_id',Auth::id())
+            ->Where('status', 3)
             ->whereColumn('allotted', '!=', 'allotted2');
 
         });
