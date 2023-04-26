@@ -19,7 +19,7 @@ class DashboardController extends Controller
 
 
 
-        $query->where('matter_type',1);
+
         $query->where('user_id',Auth::id());
 
 
@@ -33,13 +33,12 @@ class DashboardController extends Controller
             ->where('nt2.groupid', 5);
         });
         $query->where(function ($query2){
-            $query2
-            ->where('user_id',Auth::id())
+            $query2->where('matter_type',1)->where('user_id',Auth::id())
             ->Where('status', 1)
             ->orwhere('task_status', 1);
 
         })->orwhere(function($query2){
-            $query2->where('user_id',Auth::id())
+            $query2->where('matter_type',1)->where('user_id',Auth::id())
             ->Where('status', 3)
             ->whereColumn('allotted', '!=', 'allotted2');
 

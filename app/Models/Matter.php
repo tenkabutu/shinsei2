@@ -20,6 +20,9 @@ class Matter extends Model
     public function mattertag(){
         return $this->belongsTo('App\Models\Nametag','matter_type','tagid')->where('groupid', '=', 4);
     }
+    public function opt1tag(){
+        return $this->belongsTo('App\Models\Nametag','opt1','tagid')->where('groupid', '=', 6);
+    }
     public function tasklist(){
         return $this->hasMany('App\Models\Task');
     }

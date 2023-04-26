@@ -4,6 +4,7 @@
 			<tr>
 				<th class="id" sortable>No</th>
 				<th>申請者</th>
+				<th>種類</th>
 				<th class="id">申請日</th>
 				<th class="id">実施日</th>
 				<th class="id">開始時間</th>

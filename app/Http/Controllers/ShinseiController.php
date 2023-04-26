@@ -384,6 +384,11 @@ class ShinseiController extends Controller
                 $join->on('matters.id', '=', 'tasks.matter_id');
             });
             $query->leftjoin('users', 'matters.user_id', 'users.id');
+            $query->leftjoin('nametags as nt3', function ($join)
+            {
+                $join->on('matters.opt1', '=', 'nt3.tagid')
+                ->where('nt3.groupid', 6);
+            });
             $query->leftjoin('users as reception','matters.reception_id','reception.id');
             $query->leftjoin('nametags as nt2', function ($join)
             {
@@ -481,7 +486,7 @@ class ShinseiController extends Controller
             if ($request->month != 0) {
                 $query->whereMonth('matters.matter_change_date', $request->month);
             }
-            $query->select('*', 'matters.id as matters_id', 'matters.created_at as matters_created_at', 'users.name as username', 'reception.name as username2', 'nt2.nametag as statusname');
+            $query->select('*', 'matters.id as matters_id', 'matters.created_at as matters_created_at', 'users.name as username', 'reception.name as username2','nt2.nametag as statusname','nt3.nametag as optname');
             $query->orderBy('matters.id', 'desc');
             // ->select('matters.id','matters.created_at')
             // ->get();
