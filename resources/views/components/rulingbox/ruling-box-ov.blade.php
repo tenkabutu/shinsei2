@@ -29,6 +29,7 @@
 
 				<td><a href="/shinsei2/public/{{ $record->matters_id }}/rewrite_ov">{{ $record->matters_id}}</a></td>
 				<td>{{ $record->username}}</td>
+				<td>{{ $record->optname}}</td>
 				<td>{{ date('n/j',strtotime($record->matter_request_date))}}</td>
 				<td>{{ date('n/j',strtotime($record->matter_change_date))}}</td>
 				<td>{{$record->hour1.":".$record->minutes1}}</td>
@@ -49,6 +50,7 @@
 				@endphp
 				@if($record->matter_id)
 				<tr>
+				<td></td>
 				<td></td>
 				<td></td>
 				<td>⇒</td>
