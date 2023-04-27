@@ -106,7 +106,7 @@
 				<ul>
 					<li class="nav_count"><a href="/shinsei2/public/2/matter_ruling">休暇申請</a>　　　　<a class="double" href="/shinsei2/public/2/matter_ruling?search_type=3">申請{{$pa_count1}}件</a></li>
 					<li  class="nav_count"><a href="/shinsei2/public/3/matter_ruling">テレワーク申請</a>　<a class="double" href="/shinsei2/public/3/matter_ruling?search_type=3">申請{{$te_count1}}件</a></li>
-					<li  class="nav_count"><a href="/shinsei2/public/1/matter_ruling">振替申請</a>　　　　<a class="double" href="/shinsei2/public/1/matter_ruling?search_type=3">申請{{$ov_count1}}件</a></li>
+					<li  class="nav_count"><a href="/shinsei2/public/1/matter_ruling">勤務申請</a>　　　　<a class="double" href="/shinsei2/public/1/matter_ruling?search_type=3">申請{{$ov_count1}}件</a></li>
 
 				</ul>
 				@endif
@@ -119,7 +119,7 @@
 					<li class="nav_count"><a href="/shinsei2/public/2/matter_search">申請一覧</a>　　　@if($pa_count2!=0)<a class="double">申請中{{$pa_count2}}件</a>@endif</li>
 				</ul>
 				<div class='side_label'>
-					<span>振替申請</span>
+					<span>勤務申請</span>
 				</div>
 				<ul>
 					<li><a href="/shinsei2/public/create_ov" >新規登録</a></li>
