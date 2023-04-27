@@ -29,7 +29,7 @@ class MatterRewriteBox extends Component
         //return view('components.matter-rewrite-box');
         if($this->type==1){
             $this->typename = "振替";
-            return view('components.matter-rewrite-box');
+            return view('components.matterbox.mrb-ov');
         }elseif($this->type==2){
             return view('components.matterbox.mrb-pa');
         }elseif($this->type==3){

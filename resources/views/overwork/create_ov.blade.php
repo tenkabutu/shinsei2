@@ -184,11 +184,37 @@ function setAction(url) {
     $('form').submit();
 }
 $(function(){
+	var radio = $('div.radio-group');
+	$('input', radio).css({'opacity': '0'})
+	//checkedだったら最初からチェックする
+	.each(function(){
+	    if ($(this).attr('checked') == 'checked') {
+	        $(this).next().addClass('checked');
+	        if($(this).val()==8){
+		        $('#task_area').hide();
+
+		    };
+
+
+	    }
+	});
 	$('.repeater').repeater({hide: function (deleteElement) {
 	      if(confirm('削除してもいいですか？')) {
 	          $(this).slideUp(deleteElement);
 	        }
 	}});
+
+	$('label', radio).click(function() {
+		if($(this).prev().val()==8){
+			$('#task_area').hide();
+		}else{
+			$('#task_area').show();
+		}
+		$(this).parent().parent().each(function() {
+	        $('label',this).removeClass('checked');
+	    });
+	    $(this).addClass('checked');
+	});
 
 
 	$('#matter_area input[type="number"]').bind('input', function () {

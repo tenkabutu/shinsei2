@@ -27,7 +27,7 @@ class MatterBox extends Component
     {
         if($this->type==1){
             $this->typename = "振替";
-            return view('components.matter-box');
+            return view('components.matterbox.mb-ov');
         }elseif($this->type==2){
             return view('components.matterbox.mb-pa');
         }elseif($this->type==3){
