@@ -26,7 +26,7 @@
 
 				<td>{{ $record->matters_id}}</td>
 				<td>{{ $record->optname}}</td>
-				<td>{{ $record->user_id}}</td>
+				<td>{{ $record->employee}}</td>
 				<td>{{ $record->username}}</td>
 
 				<td>{{ date('n/j',strtotime($record->matter_request_date))}}</td>

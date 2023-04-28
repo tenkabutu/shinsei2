@@ -486,7 +486,7 @@ class ShinseiController extends Controller
             if ($request->month != 0) {
                 $query->whereMonth('matters.matter_change_date', $request->month);
             }
-            $query->select('*', 'matters.id as matters_id', 'matters.created_at as matters_created_at', 'users.name as username', 'reception.name as username2','nt2.nametag as statusname','nt3.nametag as optname');
+            $query->select('*', 'matters.id as matters_id', 'matters.created_at as matters_created_at', 'users.name as username', 'users.employee as employee','reception.name as username2','nt2.nametag as statusname','nt3.nametag as optname');
             $query->orderBy('matters.id', 'desc');
             // ->select('matters.id','matters.created_at')
             // ->get();
@@ -517,7 +517,7 @@ class ShinseiController extends Controller
         $vacationTimeByUser = DB::table('users')
         ->join('matters', 'users.id', '=', 'matters.user_id')
         ->select('users.name', 'matters.matter_type', DB::raw('SUM(vacations.duration) as total_duration'))
-        ->groupBy('users.name', 'vacations.type')
+        ->groupBy('users.name', 'matters.matter_type')
         ->get();
 
         // 結果を表示する
