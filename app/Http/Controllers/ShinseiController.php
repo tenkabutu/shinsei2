@@ -511,6 +511,21 @@ class ShinseiController extends Controller
           }
 
     }
+    public function user_rest (Request $request,$type)
+    {
+
+        $vacationTimeByUser = DB::table('users')
+        ->join('matters', 'users.id', '=', 'matters.user_id')
+        ->select('users.name', 'matters.matter_type', DB::raw('SUM(vacations.duration) as total_duration'))
+        ->groupBy('users.name', 'vacations.type')
+        ->get();
+
+        // 結果を表示する
+        foreach ($vacationTimeByUser as $vacation) {
+            echo $vacation->name . ' ' . $vacation->type . ' ' . $vacation->total_duration . '時間' . PHP_EOL;
+        }
+
+    }
 //     public function matter_ruling2 (Request $request,$type)
 //     {
 //         //var_dump($request->toArray());
