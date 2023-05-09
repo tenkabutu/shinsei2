@@ -60,7 +60,7 @@ class ShinseiRequest extends FormRequest
                 $rules['work_content'] = 'required|string|max:250';
             }
         }
-        if ($this->matter_type==2) {
+        if ($this->matter_type!=3) {
             $rules['opt1'] = 'required';
         }
 
