@@ -3,8 +3,11 @@
 			<thead>
 			<tr>
 				<th class="id" sortable>No</th>
+					<th>エリア</th>
+					<th>UID</th>
 				<th>申請者</th>
 				<th>種類</th>
+
 				<th class="id">申請日</th>
 				<th class="id">実施日</th>
 				<th class="id">開始時間</th>
@@ -28,8 +31,11 @@
 
 
 				<td><a href="/shinsei2/public/{{ $record->matters_id }}/rewrite_ov">{{ $record->matters_id}}</a></td>
+				<td>{{ $record->area}}</td>
+				<td>{{ $record->employee}}</td>
 				<td>{{ $record->username}}</td>
 				<td>{{ $record->optname}}</td>
+
 				<td>{{ date('n/j',strtotime($record->matter_request_date))}}</td>
 				<td>{{ date('n/j',strtotime($record->matter_change_date))}}</td>
 				<td>{{$record->hour1.":".$record->minutes1}}</td>
@@ -50,10 +56,14 @@
 				@endphp
 				@if($record->matter_id)
 				<tr>
+				<td>{{ $record->matters_id}}</td>
 				<td></td>
+
+				<td>{{ $record->employee}}</td>
 				<td></td>
-				<td></td>
+
 				<td>⇒</td>
+				<td></td>
 				<td>{{date('n/j',strtotime($record->task_change_date))}}</td>
 				<td>{{$record->task_hour1.":".$record->task_minutes1}}</td>
 				<td>{{$record->task_hour2.":".$record->task_minutes2}}</td>
