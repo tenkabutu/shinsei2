@@ -31,65 +31,79 @@
 						</tr>
 					</table>
 					@if($userdata->rest)
-
-<br>
+				<br>
 					<div class='side_label'>
 						<span>休暇申請情報</span>
 					</div>
 					<table>
+
 						<tr>
-							<th>勤務時間</th><td>{{(int)$userdata->worktype->def_allotted/60}}時間</td>
-						</tr>
-						<tr>
-							<th width='80'>付与有給</th>
+							<th width='95'>付与有給</th>
 							<th>{{$userdata->rest->rest_allotted_day}}日</th>
 						</tr>
-					</table>
-						<table>
 						<tr>
-							<th width='80'>持越有給</th>
-							<th>{{$userdata->rest->co_day}}日</th>
+							<th>持越有給(消滅分)</th>
+							<th>{{$userdata->rest->co_day.'日(残'.max($residue_co_day,0)}}日)</th>
 						</tr>
 						<tr>
-							<th>持越半休</th>
-							<th>{{$userdata->rest->co_harf_rest}}回</th>
-						</tr>
-						<tr>
-							<th>持越時間給</th>
-							<th>{{$userdata->rest->co_time}}時間</th>
-						</tr>
-
-					</table>
-						<table>
-							<tr>
-							<th width='80'>取得有給</th>
+							<th>取得有給</th>
 							<th>{{$used_rest_day}}日</th>
 						</tr>
 						<tr>
-							<th>取得時間給</th>
-							<td>{{$used_rest_time.'時間('.ceil($used_rest_time/8).'日分)'}}</td>
+							<th>時間休・半休分</th>
+							<th>{{ceil($used_rest_time/8)+ceil(max(($used_harf_rest - $userdata->rest->co_harf_rest)/2,0))}}日</th>
 						</tr>
+							<tr>
+							<th>残有給</th>
+							<td>{{$residue_rest_day}}日</td>
+						</tr>
+
+					</table>
+						<table>
+
+						<tr>
+							<th>取得時間休</th>
+							<td>{{$used_rest_time}}時間</td>
+						</tr>
+						<tr>
+							<th>持越(消滅分)</th>
+							<th>{{$userdata->rest->co_time.'時間(残'.max($userdata->rest->co_time-$used_rest_time,0)}}時間)</th>
+						</tr>
+						<tr>
+							<th>時間休日数換算</th>
+							<th>{{max(ceil(($used_rest_time-$userdata->rest->co_time)/8),0)}}日</th>
+						</tr>
+						<tr>
+							<th>残時間休</th>
+							<th>{{8-$used_rest_time%8+$userdata->rest->co_time}}時間</th>
+						</tr>
+						<tr>
+							<th>取得可能総時間休</th>
+							<td>{{40-$used_rest_time}}時間</td>
+						</tr>
+
+					</table>
+						<table>
+
+
 
 						<tr>
 							<th>取得半休</th>
+							<td>{{$used_harf_rest}}回</td>
+						</tr>
+							<tr>
+							<th>持越半休(消滅分)</th>
+							<th>{{$userdata->rest->co_harf_rest.'回(残'.max($userdata->rest->co_harf_rest-$used_harf_rest,0)}}回)</th>
+						</tr>
+						<tr>
+							<th>半休日数換算</th>
+							<th>{{ceil(max(($used_harf_rest - $userdata->rest->co_harf_rest)/2,0)).'日分('.ceil(max($used_harf_rest - $userdata->rest->co_harf_rest,0))}}回)</th>
+						</tr>
 
-							<td>{{$used_harf_rest.'回('.ceil($used_harf_rest/2).'日分)'}}</td>
-						</tr>
+
+
 					</table>
-					<table>
-						<tr>
-							<th width='80'>残有給</th>
-							<td>{{$residue_rest_day}}日</td>
-						</tr>
-						<tr>
-							<th>残持越有給</th>
-							<th>{{max($residue_co_day,0)}}日</th>
-						</tr>
-						<tr>
-							<th>残時間給</th>
-							<td>{{40-$used_rest_time}}時間</td>
-						</tr>
-					</table>
+
 					@else
 					<label>有給データが設定されていません</label>
 					@endif
@@ -166,86 +180,9 @@
 
 					@endif
 
-					@if($userdata->rest)
-<div id='account'>
-<br>
-					<div class='side_label'>
-						<span>休暇申請情報</span>
-					</div>
-					<table>
-
-						<tr>
-							<th width='95'>付与有給</th>
-							<th>{{$userdata->rest->rest_allotted_day}}日</th>
-						</tr>
-						<tr>
-							<th>持越有給(消滅分)</th>
-							<th>{{$userdata->rest->co_day.'日(残'.max($residue_co_day,0)}}日)</th>
-						</tr>
-						<tr>
-							<th>取得有給</th>
-							<th>{{$used_rest_day}}日</th>
-						</tr>
-						<tr>
-							<th>時間休・半休分</th>
-							<th>{{ceil($used_rest_time/8)+ceil(max(($used_harf_rest - $userdata->rest->co_harf_rest)/2,0))}}日</th>
-						</tr>
-							<tr>
-							<th>残有給</th>
-							<td>{{$residue_rest_day}}日</td>
-						</tr>
-
-					</table>
-						<table>
-
-						<tr>
-							<th>取得時間休</th>
-							<td>{{$used_rest_time}}時間</td>
-						</tr>
-						<tr>
-							<th>持越(消滅分)</th>
-							<th>{{$userdata->rest->co_time.'時間(残'.max($userdata->rest->co_time-$used_rest_time,0)}}時間)</th>
-						</tr>
-						<tr>
-							<th>時間休日数換算</th>
-							<th>{{max(ceil(($used_rest_time-$userdata->rest->co_time)/8),0)}}日</th>
-						</tr>
-						<tr>
-							<th>残時間休</th>
-							<th>{{8-$used_rest_time%8+$userdata->rest->co_time}}時間</th>
-						</tr>
-						<tr>
-							<th>取得可能総時間休</th>
-							<td>{{40-$used_rest_time}}時間</td>
-						</tr>
-
-					</table>
-						<table>
 
 
 
-						<tr>
-							<th>取得半休</th>
-							<td>{{$used_harf_rest}}回</td>
-						</tr>
-							<tr>
-							<th>持越半休(消滅分)</th>
-							<th>{{$userdata->rest->co_harf_rest.'回(残'.max($userdata->rest->co_harf_rest-$used_harf_rest,0)}}回)</th>
-						</tr>
-						<tr>
-							<th>時間休日数換算</th>
-							<th>{{ceil(max(($used_harf_rest - $userdata->rest->co_harf_rest)/2,0)).'日分('.ceil(max($used_harf_rest - $userdata->rest->co_harf_rest,0))}}回)</th>
-						</tr>
-
-
-
-					</table>
-
-					@else
-					<label>有給データが設定されていません</label>
-					@endif
-
-</div>
 			@endauth
 		@endif
 
