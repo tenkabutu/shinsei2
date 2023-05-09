@@ -3,6 +3,7 @@
 			<thead>
 			<tr>
 				<th class="id" sortable>ID</th>
+					<th>エリア</th>
 				<th>申請者</th>
 
 				<th class="id">申請日</th>
@@ -24,7 +25,7 @@
 
 
 				<td>{{ $record->matters_id}}</td>
-
+				<td>{{ $record->area}}</td>
 				<td>{{ $record->username}}</td>
 				<td>{{ date('n/j',strtotime($record->matter_request_date))}}</td>
 				<td>{{ date('n/j',strtotime($record->matter_change_date))}}</td>
