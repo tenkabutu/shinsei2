@@ -1,4 +1,5 @@
 <x-app-layout>
+	<x-slot name="style"></x-slot>
     <x-slot name="head">
 
     </x-slot>

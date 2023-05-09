@@ -1,15 +1,15 @@
 <x-app-layout>
-<x-slot name="head">
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<x-slot name="style">wrap_wide</x-slot>
 
-<script src='../js/jquery.tablesorter.js'></script>
-
-<script>
- $(document).ready(function(){
-	$('.sort-table').tablesorter();
-});
-</script>
-</x-slot>
+	<x-slot name="head">
+		<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+		<script src='../js/jquery.tablesorter.js'></script>
+		<script>
+ 			$(document).ready(function(){
+				$('.sort-table').tablesorter();
+			});
+		</script>
+	</x-slot>
 
 <div class="main_right">
 	@isset($type)
@@ -68,7 +68,10 @@
 					</div>
 					</div>
 
-    			<div><label>氏名：</label>
+    			<div><label>エリア：</label>
+					<select id ="user" name="area"><option value="0">----</option>{{!!$arealist!!}}</select>
+					</div>
+				<div><label>氏名：</label>
 					<select id ="user" name="user"><option value="0">----</option>{{!!$userlist!!}}</select>
 					</div>
     			</li>

@@ -19,7 +19,7 @@
 
     </head>
     <body class="font-sans antialiased">
-        <div id="wrap">
+        <div id="wrap" class="{{$style}}">
             @include('layouts.nav')
 
             <!-- Page Heading -->

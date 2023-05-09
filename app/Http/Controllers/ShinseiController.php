@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\Matter;
+use App\Models\Nametag;
 use App\Models\User;
 
 class ShinseiController extends Controller
@@ -372,6 +373,7 @@ class ShinseiController extends Controller
         //var_dump($request->toArray());
 
             $userlist = $this->create_userlist2($request->user);
+            $arealist = $this->create_arealist();
             $search_type=$request->search_type;
             $user = user::findOrFail(Auth::id());
             $query = matter::query();
@@ -482,6 +484,9 @@ class ShinseiController extends Controller
             if ($request->user != 0) {
                 $query->where('matters.user_id', $request->user);
             }
+            if ($request->area != 0) {
+                $query->where('users.area', $request->area);
+            }
 
             if ($request->month != 0) {
                 $query->whereMonth('matters.matter_change_date', $request->month);
@@ -505,9 +510,9 @@ class ShinseiController extends Controller
              * exit;
              */
 
-            return view('composite.ruling_ov', compact('records', 'input_data', 'userlist', 'records2','type'));
+            return view('composite.ruling_ov', compact('records', 'input_data', 'userlist', 'records2','type','arealist'));
           }else {
-              return view('composite.ruling_ov', compact( 'userlist','type'));
+              return view('composite.ruling_ov', compact( 'userlist','type','arealist'));
           }
 
     }
@@ -638,6 +643,16 @@ class ShinseiController extends Controller
         }
         ;
         return $create_userlist;
+    }
+    public static function create_arealist ()
+    {
+        $arealist = Nametag::where('groupid','3')->select('tagid', 'nametag')->orderby('tagid','asc')->get();
+        $create_arealist = "";
+        foreach ($arealist as $us) {
+            $create_arealist .= '<option value="' . $us->tagid . '">'. $us->nametag . '</option>';
+        }
+        ;
+        return $create_arealist;
     }
 
     public static function create_userlist2 ($id)
