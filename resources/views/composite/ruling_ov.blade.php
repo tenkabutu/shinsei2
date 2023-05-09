@@ -72,7 +72,7 @@
 					<select id ="user" name="area"><option value="0">----</option>{{!!$arealist!!}}</select>
 					</div>
 				<div><label>氏名：</label>
-					<select id ="user" name="user"><option value="0">----</option>{{!!$userlist!!}}</select>
+					<select id ="user" name="user"><option value="100">----</option>{{!!$userlist!!}}</select>
 					</div>
     			</li>
     		</ul>

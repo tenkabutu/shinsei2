@@ -484,7 +484,7 @@ class ShinseiController extends Controller
             if ($request->user != 0) {
                 $query->where('matters.user_id', $request->user);
             }
-            if ($request->area != 0) {
+            if ($request->area != 100) {
                 $query->where('users.area', $request->area);
             }
 
