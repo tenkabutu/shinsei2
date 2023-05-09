@@ -28,9 +28,10 @@ class MatterRewriteBox extends Component
     {
         //return view('components.matter-rewrite-box');
         if($this->type==1){
-            $this->typename = "振替";
+            $this->typename = "作業";
             return view('components.matterbox.mrb-ov');
         }elseif($this->type==2){
+            $this->typename = "休暇";
             return view('components.matterbox.mrb-pa');
         }elseif($this->type==3){
             $this->typename = "テレワーク";

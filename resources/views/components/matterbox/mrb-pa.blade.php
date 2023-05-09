@@ -40,7 +40,7 @@
 
 				<input type="number" name="minutes2" min="0" max="59" autocomplete="off" value="{{old('minutes2',$matter->minutes2)}}">
 			</div>
-			
+
 			<label class="g56">休憩時間</label>
 			<div class="g67">
 				<input type="number" name="breaktime" min="0" max="60" autocomplete="off" value="{{old('breaktime',$matter->breaktime)}}">

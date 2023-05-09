@@ -1,5 +1,5 @@
 <section id="matter_area">
-			<h5>　{{$typename}}作業情報</h5>
+			<h5>　{{$typename}}情報</h5>
 				<fieldset>
 					<div>
 						<label class="g12">{{$typename}}予定日</label>

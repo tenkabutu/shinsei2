@@ -75,7 +75,7 @@
 							<input type="hidden" name="id" value="{{$task->id}}">
 							<input type="hidden" name="task_status" value="{{$task->task_status}}">
 							<div class="grid">
-								<label class="g12">振替予定日1</label>
+								<label class="g12">振替予定日</label>
 								<input type="text" class="g23 target2" name='task_change_date' autocomplete="off" value="{{$task->task_change_date}}">
 							</div>
 

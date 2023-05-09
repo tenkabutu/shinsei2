@@ -26,9 +26,10 @@ class MatterBox extends Component
     public function render()
     {
         if($this->type==1){
-            $this->typename = "振替";
+            $this->typename = "作業";
             return view('components.matterbox.mb-ov');
         }elseif($this->type==2){
+            $this->typename = "休暇";
             return view('components.matterbox.mb-pa');
         }elseif($this->type==3){
             $this->typename = "テレワーク";
