@@ -489,3 +489,7 @@ table select{
 .text_right{
 	text-align: right;
 }
+.text-danger{
+	color:red;
+	font-weight: bold;
+}

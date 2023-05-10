@@ -37,10 +37,7 @@
 		@else
 		<h3>新規振替申請</h3>
 		@endif
-			<ul>
-				@foreach($errors->all() as $err)
-				<li class="text-danger">{{ $err }}</li> @endforeach
-			</ul>
+
 		<x-user-box :userdata="$user" :checker="$check_userlist"/>
 		<form  method="post" action="save_ov" class="repeater"  >
 			@csrf
@@ -109,7 +106,7 @@
 
 						<div class="task_form" data-repeater-item>
 							<div class="grid">
-								<label class="g12">振替予定日2</label>
+								<label class="g12">振替予定日</label>
 								<input type="text" class="g23 target2" name='task_change_date' autocomplete="off" value="{{old('task_change_date')}}">
 							</div>
 							<div class="grid">
@@ -154,6 +151,16 @@
 				</fieldset>
 
 			</section>
+			@if($errors->all())
+			<fieldset>
+				<ul>
+				@foreach($errors->all() as $err)
+				<li class="text-danger">{{ $err }}</li>
+				@endforeach
+				</ul>
+			</fieldset>
+			<br>
+			@endif
 			@if(session('delete_check'))
 				<input type="hidden" name="delete_check" value="{{old('delete_check')}}">
     			<div class="alert alert-danger">{{ session('delete_check') }}</div>

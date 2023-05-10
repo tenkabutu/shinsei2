@@ -72,7 +72,7 @@ class ShinseiRequest extends FormRequest
                 'matter_change_date.required' => '予定日は必須です。',
                 'order_content.required'   => '理由は必須です。',
                 'work_content.required'   => '作業内容は必須です。',
-                'opt1.required'  => '休暇の種類を選択してください。',
+                'opt1.required'  => '申請種別を選択してください。',
                 'breaktime.integer'  => '休憩時間は0以上の数値を入力してください。',
                 'hour1.integer'  => '開始時間は0以上の数値を入力してください。',
                 'minutes1.integer'  => '開始時間は0以上の数値を入力してください。',

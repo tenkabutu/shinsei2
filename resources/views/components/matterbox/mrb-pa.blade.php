@@ -6,7 +6,7 @@
 			<input type="text" class="target2 g23" name="matter_change_date" autocomplete="off" value="{{old('matter_change_date',substr($matter->matter_change_date,0,10))}}">
 		</div>
 		<div>
-			<label class="g12">取得1：</label>
+			<label class="g12">申請種別1：</label>
 			<div class="radio-group g23">
 
 				<input id="st1_1" type="radio" class="st1" name="opt1" value="1" {{old('opt1',$matter->opt1)=='1' ? 'checked':''}} />
@@ -18,7 +18,7 @@
 				<input id="st1_4" type="radio" class="st1" name="opt1" value="4" {{old('opt1',$matter->opt1)=='4' ? 'checked':''}}/>
 				<label for="st1_4">時間休</label>
 			</div>
-			<label class="g34">取得2：</label>
+			<label class="g34">申請種別2：</label>
 			<div class="radio-group g45">
 
 				<input id="st1_5" type="radio" class="st1" name="opt1" value="5" {{old('opt1',$matter->opt1)=='5' ? 'checked':''}}/>
@@ -56,5 +56,5 @@
 			<textarea class="g23" id="order_content" name="order_content" rows="2" cols="60">{{old('order_content',$matter->order_content)}}</textarea>
 		</div>
 	</fieldset>
-	<p>取得1はリーダーに、取得2はリーダー及び水田に事前に電話で了解を取ってください。</p>
+	<p>申請種別1はリーダーに、申請種別2はリーダー及び水田に事前に電話で了解を取ってください。</p>
 </section>

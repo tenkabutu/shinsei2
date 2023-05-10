@@ -723,3 +723,9 @@ div.grid_wide{
 	text-align: right;
 }
 
+
+.text-danger{
+	color:red;
+	font-weight: bold;
+}
+

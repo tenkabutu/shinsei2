@@ -6,7 +6,7 @@
 			<input type="text" class="target2 g23" name="matter_change_date" autocomplete="off" value="{{old('matter_change_date',substr($matter->matter_change_date,0,10))}}">
 		</div>
 		<div>
-			<label class="g12">取得：</label>
+			<label class="g12">申請種別：</label>
 			<div class="radio-group g23">
 
 				<input id="st1_1" type="radio" class="st1" name="opt1" value="7" {{old('opt1',$matter->opt1)=='7' ? 'checked':''}} />
