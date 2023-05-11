@@ -208,7 +208,8 @@ class TaskcountMiddleware
                 $query->Where('status', 2);
             })
             ->orwhere(function ($query){
-                $query->Where('task_status', 2);
+                $query->Where('task_status', 2)
+                ->Where('status', 2);
             })
             ->distinct('matters.id')
             ->count('matters.id');
