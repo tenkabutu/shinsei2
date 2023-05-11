@@ -61,7 +61,6 @@ class TaskcountMiddleware
 
                 $pa_count1 = DB::table('matters')
                 ->where('matter_type',2)
-                    ->leftjoin('tasks', 'matters.id', 'tasks.matter_id')
                     ->join('users', 'matters.user_id', 'users.id')
                     ->Where('status', 2)
                     ->Where('users.id', '!=', Auth::id())
