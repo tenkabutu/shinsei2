@@ -37,7 +37,11 @@
 		@else
 		<h3>新規振替申請</h3>
 		@endif
-
+			<ul>
+				@foreach($errors->all() as $err)
+				<li class="text-danger">{{ $err }}</li>
+				@endforeach
+			</ul>
 		<x-user-box :userdata="$user" :checker="$check_userlist"/>
 		<form  method="post" action="save_ov" class="repeater"  >
 			@csrf
@@ -151,16 +155,6 @@
 				</fieldset>
 
 			</section>
-			@if($errors->all())
-			<fieldset>
-				<ul>
-				@foreach($errors->all() as $err)
-				<li class="text-danger">{{ $err }}</li>
-				@endforeach
-				</ul>
-			</fieldset>
-			<br>
-			@endif
 			@if(session('delete_check'))
 				<input type="hidden" name="delete_check" value="{{old('delete_check')}}">
     			<div class="alert alert-danger">{{ session('delete_check') }}</div>
