@@ -191,14 +191,7 @@ class TaskcountMiddleware
             $pa_count2 = DB::table('matters')
             ->where('matter_type',2)
             ->where('user_id',Auth::id())
-            ->leftjoin('tasks', 'matters.id', 'tasks.matter_id')
-            ->where(function ($query){
-                $query->Where('status', 2);
-            })
-            ->orwhere(function ($query){
-                $query->Where('task_status', 2);
-            })
-            ->distinct('matters.id')
+            ->Where('status', 2)
             ->count('matters.id');
 
             $ov_count2 = DB::table('matters')
@@ -219,14 +212,7 @@ class TaskcountMiddleware
             $te_count2 = DB::table('matters')
             ->where('matter_type',3)
             ->where('user_id',Auth::id())
-            ->leftjoin('tasks', 'matters.id', 'tasks.matter_id')
-            ->where(function ($query){
-                $query->Where('status', 2);
-            })
-            ->orwhere(function ($query){
-                $query->Where('task_status', 2);
-            })
-            ->distinct('matters.id')
+            ->Where('status', 2)
             ->count('matters.id');
 
             // 最新の有給情報を読み込む
