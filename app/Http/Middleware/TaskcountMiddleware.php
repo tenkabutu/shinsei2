@@ -86,10 +86,10 @@ class TaskcountMiddleware
                     ->orwhere(function ($query)
                     {
                         $query->Where('task_status', 2)
+                        ->Where('status', '!=',6)
                         ->Where('users.id', '!=', Auth::id());
                     })
-                    ->
-                    distinct('matters.id')
+                    ->distinct('matters.id')
                     ->count('matters.id');
             } elseif (Auth::user()->approval == 2) {
                 $area_id = Auth::user()->area;
@@ -132,6 +132,7 @@ class TaskcountMiddleware
                     ->orwhere(function ($query) use ( $area_id)
                     {
                         $query->Where('task_status', 2)
+                        ->Where('status', '!=',6)
                         ->Where('users.area', $area_id)
                         ->Where('users.id', '!=', Auth::id());
                     })
