@@ -63,18 +63,9 @@ class TaskcountMiddleware
                 ->where('matter_type',2)
                     ->leftjoin('tasks', 'matters.id', 'tasks.matter_id')
                     ->join('users', 'matters.user_id', 'users.id')
-                    ->where(function ($query)
-                    {
-                        $query->Where('status', 2)
-                        ->Where('users.id', '!=', Auth::id());
-                    })
-                    ->orwhere(function ($query)
-                    {
-                        $query->Where('task_status', 2)
-                        ->Where('users.id', '!=', Auth::id());
-                    })
-                    ->
-                    distinct('matters.id')
+                    ->Where('status', 2)
+                    ->Where('users.id', '!=', Auth::id())
+
                     ->count('matters.id');
 
                 $te_count1 = DB::table('matters')
@@ -135,19 +126,10 @@ class TaskcountMiddleware
                     ->where('matter_type',2)
                     ->leftjoin('tasks', 'matters.id', 'tasks.matter_id')
                     ->join('users', 'matters.user_id', 'users.id')
-                    ->where(function ($query) use ( $area_id)
-                    {
-                        $query->Where('status', 2)
-                        ->Where('users.area', $area_id)
-                        ->Where('users.id', '!=', Auth::id());
-                    })
-                    ->orwhere(function ($query) use ( $area_id)
-                    {
-                        $query->Where('task_status', 2)
-                        ->Where('users.area', $area_id)
-                        ->Where('users.id', '!=', Auth::id());
-                    })
-                    ->distinct('matters.id')
+                    ->Where('status', 2)
+                    ->Where('users.area', $area_id)
+                     ->Where('users.id', '!=', Auth::id())
+
                     ->count('matters.id');
                  $ov_count1 = DB::table('matters')
                     ->where('matter_type',1)
