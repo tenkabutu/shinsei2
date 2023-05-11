@@ -1,8 +1,8 @@
 <section id="matter_area">
-	<h5>休暇情報</h5>
+	<h5>作業情報</h5>
 	<fieldset>
 		<div>
-			<label class="g12">休暇予定日</label>
+			<label class="g12">作業予定日</label>
 			<input type="text" class="target2 g23" name="matter_change_date" autocomplete="off" value="{{old('matter_change_date',substr($matter->matter_change_date,0,10))}}">
 		</div>
 		<div>
