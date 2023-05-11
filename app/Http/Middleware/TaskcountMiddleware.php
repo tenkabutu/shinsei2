@@ -200,19 +200,22 @@ class TaskcountMiddleware
             })
             ->distinct('matters.id')
             ->count('matters.id');
+
             $ov_count2 = DB::table('matters')
             ->where('matter_type',1)
-            ->where('user_id',Auth::id())
             ->leftjoin('tasks', 'matters.id', 'tasks.matter_id')
             ->where(function ($query){
-                $query->Where('status', 2);
+                $query->Where('status', 2)
+                ->where('user_id',Auth::id());
             })
             ->orwhere(function ($query){
                 $query->Where('task_status', 2)
-                ->Where('status', 2);
+                ->where('user_id',Auth::id());
             })
             ->distinct('matters.id')
             ->count('matters.id');
+
+
             $te_count2 = DB::table('matters')
             ->where('matter_type',3)
             ->where('user_id',Auth::id())
