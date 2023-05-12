@@ -261,6 +261,12 @@ class OverWorkController extends Controller
             $matter->matter_request_date=$date;
             $matter->status=6;
             $matter->save();
+            $tasklist = $matter->tasklist;
+            foreach ($tasklist as $us) {
+                $us->task_status=6;
+                $us->save();
+            }
+            $matter->tasklist();
             return  redirect($id.'/rewrite_ov');
         }else{
             $request->merge(['delete_check' =>1]);
