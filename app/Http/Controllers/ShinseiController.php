@@ -419,6 +419,7 @@ class ShinseiController extends Controller
                         })->orwhere(function($query2){
                             $query2->Where('status', 3)
                             ->where('matter_type', 1)
+                            ->where('opt1',7)
                             ->whereColumn('allotted', '!=', 'allotted2');
 
                         });
