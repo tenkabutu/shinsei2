@@ -152,15 +152,8 @@ class OverWorkController extends Controller
         return  redirect($id.'/rewrite_ov');
     }
     public function update_request(ShinseiRequest $request,$id){
-        $request->validate([
-                'matter_change_date' => ['required', 'string', 'max:55'],
-                'order_content' => ['required', 'string', 'max:255'],
-
-        ]);
-
         $matter =matter::find($id);
         $matter->fill($request->except('_token'));
-        $matter->status=2;
         if($matter->isDirty()&&$request->change_check==1){
             $date=Carbon::now()->toDateTimeString();
             $matter->matter_request_date=$date;
@@ -168,8 +161,7 @@ class OverWorkController extends Controller
             $matter->save();
             return  redirect($id.'/rewrite_ov');
         }elseif($matter->isDirty()){
-
-            $request->merge(['change_check' =>1]);
+            $request->change_check=1;
             return back()->withInput()->with('save_check', '申請済の内容が変更されています、保存する場合再申請が必要になりますがよろしいですか？');
 
         }
