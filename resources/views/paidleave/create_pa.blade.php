@@ -54,7 +54,11 @@
 			<!-- onsubmit="return false;"  -->
 			@if(isset($matter))
 				<input type="hidden" name="allotted" value="{{old('allotted',$matter->allotted)}}">
+				@if (session('save_check'))
+				<input type="hidden" name="change_check" value="1">
+				@else
 				<input type="hidden" name="change_check" value="{{old('change_check',$matter->status)}}">
+				@endif
 				<x-matter-rewrite-box :userdata="$user" :type="2" :matter="$matter"/>
 			@else
 				<input type="hidden" name="allotted" value="{{old('allotted',$user->worktype->def_allotted)}}">

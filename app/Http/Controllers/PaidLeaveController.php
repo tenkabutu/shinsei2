@@ -88,10 +88,8 @@ class PaidLeaveController extends Controller
         return  redirect($id.'/show_pa');
     }
     public function update_request(ShinseiRequest $request,$id){
-
         $matter =matter::find($id);
         $matter->fill($request->except('_token'));
-        $matter->status=2;
         if($matter->isDirty()&&$request->change_check==1){
             $date=Carbon::now()->toDateTimeString();
             $matter->matter_request_date=$date;
@@ -99,13 +97,9 @@ class PaidLeaveController extends Controller
             $matter->save();
             return  redirect($id.'/show_pa');
         }elseif($matter->isDirty()){
-
-            $request->merge(['change_check' =>1]);
+            $request->change_check=1;
             return back()->withInput()->with('save_check', '申請済の内容が変更されています、保存する場合再申請が必要になりますがよろしいですか？');
-
         }
-
-
 
         $request->session()->regenerateToken();
         // $id = $matter->id;
