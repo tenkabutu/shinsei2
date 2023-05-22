@@ -217,7 +217,7 @@ $(function(){
 	}});
 
 	$('label', radio).click(function() {
-		if($(this).prev().val()==8){
+		if($(this).prev().val()!=7){
 			$('#task_area').hide();
 		}else{
 			$('#task_area').show();

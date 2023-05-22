@@ -13,6 +13,8 @@
 				<label for="st1_1">振替</label>
 				<input id="st1_2" type="radio" class="st1" name="opt1" value="8" {{old('opt1')=='8' ? 'checked':''}}/>
 				<label for="st1_2">時間外</label>
+				<input id="st1_2" type="radio" class="st1" name="opt1" value="9" {{old('opt1')=='9' ? 'checked':''}}/>
+				<label for="st1_2">欠勤</label>
 
 			</div>
 
