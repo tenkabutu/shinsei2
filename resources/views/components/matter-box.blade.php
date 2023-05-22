@@ -30,12 +30,12 @@
 					</div>
 					<div>
 
-						<label class="g12" for="order_content">{{$typename}}理由　　：</label>
+						<label class="g12" for="order_content">{{$typename}}理由：</label>
 						<textarea class="g23"id="order_content" name ="order_content"  rows="2" cols="60">{{old('order_content')}}</textarea>
 					</div>
 					<div>
 
-						<label class="g12" for="work_content">予定業務内容：</label>
+						<label class="g12" for="work_content">予定業務内容　：</label>
 						<textarea class="g23"id="work_content" name ="work_content"  rows="2" cols="60">{{old('work_content')}}</textarea>
 					</div>
 					<!-- <div>

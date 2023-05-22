@@ -76,7 +76,34 @@ class AcceptController extends Controller
         return back();
 
     }
-    public function reject($id){
-        return  redirect($id.'/rewrite_ov');
+    public function reject($id,Request $request){
+
+        $matter = matter::with('tasklist')->findOrFail($id);
+
+        $task_allotted_count=0;
+
+            $matter->status=5;
+            $date=Carbon::now()->toDateTimeString();
+            $matter->matter_reply_date=$date;
+            $matter->reception_id=Auth::id();
+            $matter->reject_content=$request->reject_content;
+
+
+        if($matter->matter_type==1){
+            foreach($matter->tasklist as $task){
+                if($task->task_status==3){
+                    $task->task_status=1;
+                    $date=Carbon::now()->toDateTimeString();
+                    $task->task_reply_date=$date;
+                    $task->save();
+                }
+                $task_allotted_count+=$task->task_allotted;
+            }
+            $matter->allotted2=$task_allotted_count;
+        }
+
+        $matter->save();
+        return back();
+
     }
 }
