@@ -157,8 +157,14 @@
 						@endisset
 					</div>
 				</fieldset>
-
 			</section>
+			@isset($matter)
+			@if($matter->status==5 && isset($matter->reject_content))
+				<fieldset>
+				<label class="text-danger">修正願い：{{$matter->reject_content}}</label>
+				</fieldset><br>
+			@endif
+			@endisset
 			@if(session('delete_check'))
 				<input type="hidden" name="delete_check" value="{{old('delete_check')}}">
     			<div class="alert alert-danger">{{ session('delete_check') }}</div>

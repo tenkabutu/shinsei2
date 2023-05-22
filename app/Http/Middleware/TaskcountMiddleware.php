@@ -170,9 +170,16 @@ class TaskcountMiddleware
             })
             ->orwhere(function ($query){
                 $query->Where('task_status', 2)
+                ->Where('status','!=', 5)
                 ->where('user_id',Auth::id());
             })
             ->distinct('matters.id')
+            ->count('matters.id');
+
+            $ov_count3 = DB::table('matters')
+            ->where('matter_type',1)
+            ->Where('status', 5)
+            ->where('user_id',Auth::id())
             ->count('matters.id');
 
             $te_count2 = DB::table('matters')
@@ -244,7 +251,7 @@ class TaskcountMiddleware
             $this->viewFactory->share('ov_count2', $ov_count2);
             $this->viewFactory->share('te_count2', $te_count2);
             $this->viewFactory->share('pa_count3', $pa_count3);
-            //$this->viewFactory->share('ov_count3', $ov_count3);
+            $this->viewFactory->share('ov_count3', $ov_count3);
             $this->viewFactory->share('te_count3', $te_count3);
             $this->viewFactory->share('userdata', $user);
         }

@@ -137,7 +137,7 @@
 				</div>
 				<ul>
 					<li><a href="/shinsei2/public/create_ov" >新規登録</a></li>
-					<li class="nav_count"><a href="/shinsei2/public/1/matter_search">申請一覧</a>　　　　@if($ov_count2!=0)<a class="double">申請中{{$ov_count2}}</a>@endif</li>
+					<li class="nav_count"><a href="/shinsei2/public/1/matter_search">申請一覧</a>　@if($ov_count3!=0)<a class="double2">要修正</a>@else　　　@endif @if($ov_count2!=0)<a class="double">申請中{{$ov_count2}}</a>@endif</li>
 				</ul>
 				<div class='side_label'>
 					<span>テレワーク申請</span>
