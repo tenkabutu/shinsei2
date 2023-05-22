@@ -12,7 +12,7 @@
 				<input type="submit" class="g23" value="再提出" onclick="setAction('reject')">
 				<div class="g13 grid">
 					<label class="g12">再提出理由　　：</label>
-					<textarea name="reject_content" rows="2" cols="60" class="g23">まだ動きません</textarea>
+					<textarea name="reject_content" rows="2" cols="60" class="g23" placeholder="理由を記入"></textarea>
 				</div>
 				@endif
 			@elseif($role==4)
