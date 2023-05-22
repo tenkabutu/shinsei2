@@ -10,7 +10,10 @@
 				@else
 				<input type="submit" class="g12" value="承認" onclick="setAction('accept')">
 				<input type="submit" class="g23" value="再提出" onclick="setAction('reject')">
-
+				<div class="g13 grid">
+					<label class="g12">再提出理由　　：</label>
+					<textarea name="reject_content" rows="2" cols="60" class="g23">まだ動きません</textarea>
+				</div>
 				@endif
 			@elseif($role==4)
 			<input type="submit" class="g12" value="修正" onclick="setAction('fix_pa')">

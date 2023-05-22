@@ -136,7 +136,7 @@ nav{
 
 
 .navbar_menu li {
-    margin: 0px 0 0px 20px;
+    margin: 0px 0 0px 15px;
     box-sizing: border-box;
     font-size:14px;
 }
@@ -146,6 +146,13 @@ nav{
 	display: inline-block;
     border-radius: 5px;
     background-color: rgba(255,255,255,0.3);
+    padding: 0 2px;}
+
+
+.navbar_menu li a.double2{
+	display: inline-block;
+    border-radius: 5px;
+    background-color: red;
     padding: 0 2px;}
 
 

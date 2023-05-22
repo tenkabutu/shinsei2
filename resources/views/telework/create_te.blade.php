@@ -60,10 +60,18 @@
 				<input type="hidden" name="change_check" value="{{old('change_check',$matter->status)}}">
 				@endif
 				<x-matter-rewrite-box :userdata="$user" type="3" :matter="$matter"/>
+
+				@if($matter->status==5 && isset($matter->reject_content))
+				<fieldset>
+				<label class="text-danger">修正願い：{{$matter->reject_content}}</label>
+				</fieldset><br>
+				@endif
 			@else
 				<input type="hidden" name="allotted" value="{{old('allotted',$user->worktype->def_allotted)}}">
 				<x-matter-box :userdata="$user" type="3"/>
 			@endif
+
+
 
 			@if(session('delete_check'))
 				<input type="hidden" name="delete_check" value="{{old('delete_check')}}">

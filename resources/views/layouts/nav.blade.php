@@ -130,21 +130,21 @@
 				</div>
 				<ul>
 					<li><a href="/shinsei2/public/create_pa" >新規登録</a></li>
-					<li class="nav_count"><a href="/shinsei2/public/2/matter_search">申請一覧</a>　　　@if($pa_count2!=0)<a class="double">申請中{{$pa_count2}}件</a>@endif</li>
+					<li class="nav_count"><a href="/shinsei2/public/2/matter_search">申請一覧</a>　@if($pa_count3!=0)<a class="double2">要修正</a>@else　　　@endif @if($pa_count2!=0)<a class="double">申請中{{$pa_count2}}</a>@endif</li>
 				</ul>
 				<div class='side_label'>
 					<span>勤務申請</span>
 				</div>
 				<ul>
 					<li><a href="/shinsei2/public/create_ov" >新規登録</a></li>
-					<li class="nav_count"><a href="/shinsei2/public/1/matter_search">申請一覧</a>　　　@if($ov_count2!=0)<a class="double">申請中{{$ov_count2}}件</a>@endif</li>
+					<li class="nav_count"><a href="/shinsei2/public/1/matter_search">申請一覧</a>　　　　@if($ov_count2!=0)<a class="double">申請中{{$ov_count2}}</a>@endif</li>
 				</ul>
 				<div class='side_label'>
 					<span>テレワーク申請</span>
 				</div>
 				<ul>
 					<li><a href="/shinsei2/public/create_te" >新規登録</a></li>
-					<li class="nav_count"><a href="/shinsei2/public/3/matter_search">申請一覧</a>　　　@if($te_count2!=0)<a class="double">申請中{{$te_count2}}件</a>@endif</li>
+					<li class="nav_count"><a href="/shinsei2/public/3/matter_search">申請一覧</a>　@if($te_count3!=0)<a class="double2">要修正</a>@else　　　@endif @if($te_count2!=0)<a class="double">申請中{{$te_count2}}</a>@endif</li>
 				</ul>
 
 				<div class='side_label'>

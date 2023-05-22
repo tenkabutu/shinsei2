@@ -155,6 +155,11 @@ class TaskcountMiddleware
             ->where('user_id',Auth::id())
             ->Where('status', 2)
             ->count('matters.id');
+            $pa_count3 = DB::table('matters')
+            ->where('matter_type',2)
+            ->where('user_id',Auth::id())
+            ->Where('status', 5)
+            ->count('matters.id');
 
             $ov_count2 = DB::table('matters')
             ->where('matter_type',1)
@@ -170,11 +175,15 @@ class TaskcountMiddleware
             ->distinct('matters.id')
             ->count('matters.id');
 
-
             $te_count2 = DB::table('matters')
             ->where('matter_type',3)
             ->where('user_id',Auth::id())
             ->Where('status', 2)
+            ->count('matters.id');
+            $te_count3 = DB::table('matters')
+            ->where('matter_type',3)
+            ->where('user_id',Auth::id())
+            ->Where('status', 5)
             ->count('matters.id');
 
             // 最新の有給情報を読み込む
@@ -234,6 +243,9 @@ class TaskcountMiddleware
             $this->viewFactory->share('pa_count2', $pa_count2);
             $this->viewFactory->share('ov_count2', $ov_count2);
             $this->viewFactory->share('te_count2', $te_count2);
+            $this->viewFactory->share('pa_count3', $pa_count3);
+            //$this->viewFactory->share('ov_count3', $ov_count3);
+            $this->viewFactory->share('te_count3', $te_count3);
             $this->viewFactory->share('userdata', $user);
         }
 

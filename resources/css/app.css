@@ -113,7 +113,7 @@ nav{
     margin: 5px 0 20px 0;
 }
 .navbar_menu li {
-    margin: 0px 0 0px 20px;
+    margin: 0px 0 0px 15px;
     box-sizing: border-box;
     font-size:14px;
 }
@@ -121,6 +121,11 @@ nav{
 	display: inline-block;
     border-radius: 5px;
     background-color: rgba(255,255,255,0.3);
+    padding: 0 2px;}
+.navbar_menu li a.double2{
+	display: inline-block;
+    border-radius: 5px;
+    background-color: red;
     padding: 0 2px;}
 .navbar_menu li.nav_count a{
 	display: inline-block;
@@ -143,7 +148,6 @@ nav{
     background: -ms-linear-gradient(#d8e3e8, #94aab7);
     background: linear-gradient(#d8e3e8, #94aab7);
     text-indent: 0px;
-
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
     border-radius: 3px;
