@@ -119,7 +119,7 @@
 				</div>
 				<ul>
 					<li class="nav_count"><a href="/shinsei2/public/2/matter_ruling">休暇申請</a>　　　　<a class="double" href="/shinsei2/public/2/matter_ruling?search_type=3">申請{{$pa_count1}}件</a></li>
-					<li  class="nav_count"><a href="/shinsei2/public/3/matter_ruling">テレワーク申請</a>　<a class="double" href="/shinsei2/public/3/matter_ruling?search_type=3">申請{{$te_count1}}件</a></li>
+					<li  class="nav_count"><a href="/shinsei2/public/3/matter_ruling">テレワ申請</a>　<a class="double" href="/shinsei2/public/3/matter_ruling?search_type=3">申請{{$te_count1}}件</a></li>
 					<li  class="nav_count"><a href="/shinsei2/public/1/matter_ruling">勤務申請</a>　　　　<a class="double" href="/shinsei2/public/1/matter_ruling?search_type=3">申請{{$ov_count1}}件</a></li>
 
 				</ul>
