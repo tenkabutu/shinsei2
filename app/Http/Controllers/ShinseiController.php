@@ -142,8 +142,8 @@ class ShinseiController extends Controller
             $query->leftjoin('users as reception','matters.reception_id','reception.id');
             $query->leftjoin('nametags as nt1', function ($join)
             {
-                $join->on('matters.matter_type', '=', 'nt1.tagid')
-                ->where('nt1.groupid', 4);
+                $join->on('matters.opt1', '=', 'nt1.tagid')
+                ->where('nt1.groupid', 6);
             });
             $query->leftjoin('nametags as nt2', function ($join)
             {
@@ -223,8 +223,8 @@ class ShinseiController extends Controller
             $query->leftjoin('users as reception','matters.reception_id','reception.id');
             $query->leftjoin('nametags as nt1', function ($join)
             {
-                $join->on('matters.matter_type', '=', 'nt1.tagid')
-                ->where('nt1.groupid', 4);
+                $join->on('matters.opt1', '=', 'nt1.tagid')
+                ->where('nt1.groupid', 6);
             });
             $query->leftjoin('nametags as nt2', function ($join)
             {
