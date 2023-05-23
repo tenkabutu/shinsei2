@@ -89,6 +89,7 @@
 				@if($record->status==5)<td class="text-danger">@else<td>@endif{{ $record->statusname}}</td>
 				<td>@if($record->status==2){{$record->matter_request_date}}@elseif($record->status>=3){{$record->matter_reply_date}}@endif</td>
 				<td>@isset($record->setdate1){{ date('n/j',strtotime($record->setdate1))}}@endisset</td>
+				<td>{{ $record->username2}}</td>
 
 
 
