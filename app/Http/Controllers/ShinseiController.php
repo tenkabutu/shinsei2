@@ -204,7 +204,7 @@ class ShinseiController extends Controller
                 $query->whereDay('matters.matter_change_date', $request->day);
             }
 
-            $query->select('*', 'matters.id as matters_id', 'matters.created_at as matters_created_at', 'nt1.nametag as typename', 'nt2.nametag as statusname');
+            $query->select('*', 'matters.id as matters_id', 'matters.created_at as matters_created_at', 'reception.name as username2', 'nt1.nametag as typename', 'nt2.nametag as statusname');
             $query->orderBy('matters.id', 'desc');
 
             $records = $query->get();
