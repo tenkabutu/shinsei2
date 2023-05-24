@@ -34,14 +34,20 @@
 		<h3>休暇申請<label>　(作成:{{$matter->created_at->format('Y/n/j')}}　更新:{{$matter->updated_at->format('Y/n/j')}})</label></h3>
 
 			<x-change-status :matter="$matter" :type="2"/>
-		@else
-		<h3>新規休暇申請</h3>
-		@endif
 			<ul>
 				@foreach($errors->all() as $err)
 				<li class="text-danger">{{ $err }}</li> @endforeach
 			</ul>
-		<x-user-box :userdata="$user" :checker="$check_userlist"/>
+		<x-user-box :userdata="$user" :checker="$check_userlist" :mcheck="1"/>
+		@else
+		<h3>新規休暇申請</h3>
+		<ul>
+				@foreach($errors->all() as $err)
+				<li class="text-danger">{{ $err }}</li> @endforeach
+			</ul>
+		<x-user-box :userdata="$user" :checker="$check_userlist" :mcheck="2"/>
+		@endif
+
 		<form  method="post" action="" class="repeater"  >
 			@csrf
 			@if (session('save_check'))
@@ -67,7 +73,7 @@
 				@endif
 			@else
 				<input type="hidden" name="allotted" value="{{old('allotted',$user->worktype->def_allotted)}}">
-				<x-matter-box :userdata="$user" type="2"/>
+				<x-matter-box :userdata="$user" :type="2"/>
 			@endif
 
 			@if(session('delete_check'))
@@ -210,6 +216,17 @@ $(function(){
 			$('label.time_alert').text('');
 		}
 	});
+	@empty($matter)
+	$('.proxy_check').click(function() {
+
+		$('.proxy_user').html('<select class="select_proxy"><option>---</option>{!!$userlist!!}</select')
+		$('.select_proxy').change(function(){
+			$('input[name="user_id"]').val($(this).val());
+			});
+
+
+		});
+	@endisset
 
  });
 </script>

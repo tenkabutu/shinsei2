@@ -13,10 +13,12 @@ class UserBox extends Component
      */
     public $userdata;
     public $checker;
-    public function __construct($userdata,$checker)
+    public $mcheck;
+    public function __construct($userdata,$checker,$mcheck)
     {
         $this->userdata = $userdata;
         $this->checker = $checker;
+        $this->mcheck = $mcheck;
     }
 
     /**

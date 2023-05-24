@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ShinseiRequest;
 use App\Models\Matter;
+use App\Models\Nametag;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -17,6 +18,7 @@ class PaidLeaveController extends Controller
     }
     public function create(){
         $user=User::with('roletag','approvaltag','areatag','worktype')->findOrFail(Auth::user()->id);
+        $userlist = $this->create_userlist();
         $query=user::query();
         $area_id=$user->area;
 
@@ -30,7 +32,7 @@ class PaidLeaveController extends Controller
         });
             $check_userlist=$query->get('name')->all();
 
-            return view('paidleave.create_pa',compact('user','check_userlist'));
+            return view('paidleave.create_pa',compact('user','check_userlist','userlist'));
 
     }
     public function save(ShinseiRequest $request){
@@ -182,5 +184,15 @@ class PaidLeaveController extends Controller
             return view('paidleave.create_pa',compact('user','matter','check_userlist'));
 
 
+    }
+    public static function create_userlist ()
+    {
+        $userlist = User::select('id','employee', 'name')->orderby('employee','asc')->get();
+        $create_userlist = "";
+        foreach ($userlist as $us) {
+            $create_userlist .= '<option value="' . $us->id . '">' . $us->employee . ':' . $us->name . '</option>';
+        }
+        ;
+        return $create_userlist;
     }
 }

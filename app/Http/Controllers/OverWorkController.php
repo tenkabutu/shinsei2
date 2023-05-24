@@ -22,6 +22,7 @@ class OverWorkController extends Controller
 
     public function create(){
         $user=user::with('roletag','approvaltag','areatag','worktype')->findOrFail(Auth::user()->id);
+        $userlist = $this->create_userlist();
         $query=user::query();
         $area_id=$user->area;
 
@@ -35,7 +36,7 @@ class OverWorkController extends Controller
         });
             $check_userlist=$query->get('name')->all();
 
-        return view('overwork.create_ov',compact('user','check_userlist'));
+            return view('overwork.create_ov',compact('user','check_userlist','userlist'));
 
     }
     public function save(ShinseiRequest $request){
@@ -265,10 +266,15 @@ class OverWorkController extends Controller
             return back()->withInput()->with('delete_check', 'この申請を削除します、よろしいですか？');
 
         }
-
-
-
-
+    }
+    public static function create_userlist ()
+    {
+        $userlist = User::select('id','employee', 'name')->orderby('employee','asc')->get();
+        $create_userlist = "";
+        foreach ($userlist as $us) {
+            $create_userlist .= '<option value="' . $us->id . '">' . $us->employee . ':' . $us->name . '</option>';
+        }
+        return $create_userlist;
     }
 
 
