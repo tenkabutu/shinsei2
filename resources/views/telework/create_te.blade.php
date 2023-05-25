@@ -150,6 +150,7 @@ $(function(){
 	$('.proxy_check').click(function() {
 
 		$('.proxy_user').html('<select class="select_proxy"><option>---</option>{!!$userlist!!}</select')
+		$('#matter_area').append('<input type="hidden" name="proxy_id" value="'+{{Auth::user()->id}}+'">')
 		$('.select_proxy').change(function(){
 			$('input[name="user_id"]').val($(this).val());
 			});
