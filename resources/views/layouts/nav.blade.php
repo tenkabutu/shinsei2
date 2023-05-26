@@ -38,7 +38,7 @@
 					<table>
 
 						<tr>
-							<th width='95'>付与有給</th>
+							<th width='98'>付与有給</th>
 							<th>{{$userdata->rest->rest_allotted_day}}日</th>
 						</tr>
 						<tr>
@@ -57,7 +57,7 @@
 							<th>時間休日数換算</th>
 							<th>{{max(ceil(($used_rest_time-$userdata->rest->co_time)/8),0).'日分('.($used_rest_time-$userdata->rest->co_time)}}時間)</th>
 						</tr>
-						<tr>
+						<tr class="rest">
 							<th>残有給</th>
 							<td>{{$residue_rest_day}}日</td>
 						</tr>
@@ -67,7 +67,7 @@
 						<table>
 
 						<tr>
-							<th>取得時間休</th>
+							<th width='98'>取得時間休</th>
 							<td>{{$used_rest_time}}時間</td>
 						</tr>
 						<tr>
@@ -75,12 +75,12 @@
 							<th>{{$userdata->rest->co_time.'時間(残'.max($userdata->rest->co_time-$used_rest_time,0)}}時間)</th>
 						</tr>
 
-						<tr>
+						<tr class="rest">
 							<th>残時間休</th>
 							<th>{{(8-($used_rest_time-$userdata->rest->co_time)%8)%8}}時間</th>
 						</tr>
 						<tr>
-							<th>取得可能総時間休</th>
+							<th>取得可能総時間</th>
 							<td>{{40-$used_rest_time}}時間</td>
 						</tr>
 
