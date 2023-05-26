@@ -37,7 +37,7 @@
 				</fieldset>
 
 	    		<fieldset>
-				<legend>未振替</legend>
+				<legend>未振替(仮)</legend>
 				<ul><li>
 				<table class="task_table sort-table">
 			<thead>

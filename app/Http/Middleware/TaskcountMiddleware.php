@@ -208,14 +208,10 @@ class TaskcountMiddleware
             $used_harf_rest= Matter::where([['matter_type', 2],['user_id',Auth::id()],['status','!=',6]])->whereIn('opt1',[2,3])->count();
 
 
-
-            $rest_allotted_day=$user->rest_allotted_day;
-
-
             //時間給日にち換算
-            $used_rest_time_byday = ceil($used_rest_time/8);
+            $used_rest_time_byday = ceil(($used_rest_time-$user->rest->co_time)/8);
             //半休日にち換算
-            $used_harf_rest_byday = ceil($used_harf_rest/2);
+            $used_harf_rest_byday = ($used_harf_rest-$user->rest->co_harf_rest)/2;
             //休暇日数
             $used_rest_day=Matter::where([['matter_type', 2],['user_id',Auth::id()],['status','!=',6]])->where('opt1',1)->count();
 
