@@ -74,10 +74,7 @@
 							<th>持越(消滅分)</th>
 							<th>{{$userdata->rest->co_time.'時間(残'.max($userdata->rest->co_time-$used_rest_time,0)}}時間)</th>
 						</tr>
-						<tr>
-							<th>時間休日数換算</th>
-							<th>{{max(ceil(($used_rest_time-$userdata->rest->co_time)/8),0)}}日</th>
-						</tr>
+
 						<tr>
 							<th>残時間休</th>
 							<th>{{(8-($used_rest_time-$userdata->rest->co_time)%8)%8}}時間</th>
