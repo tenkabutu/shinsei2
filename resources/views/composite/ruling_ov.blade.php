@@ -71,9 +71,9 @@
 						@if($type==1)
 						<div><label>種別：</label>
 					 <div class="radio-group">
-					<input id="st1_1" type="radio" class="st1" name="matter_opt" value="3" @if(Request::get('matter_opt')==1) checked @endif />
+					<input id="st1_1" type="radio" class="st1" name="matter_opt" value="3" @if(Request::get('matter_opt')==3) checked @endif />
 					<label for="st1_1">振替</label>
-					<input id="st1_2" type="radio" class="st1" name="matter_opt" value="4" @if(Request::get('matter_opt')==2) checked @endif/>
+					<input id="st1_2" type="radio" class="st1" name="matter_opt" value="4" @if(Request::get('matter_opt')==4) checked @endif/>
 					<label for="st1_2">時間外</label>
 					</div>
 					</div>
