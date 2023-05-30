@@ -67,11 +67,23 @@
 					<label for="st2_4">終了</label>
 					</div>
 					</div>
-
-    			<div><label>エリア：</label>
+					@isset($type)
+						@if($type==1)
+						@elseif($type==2)
+					<div><label>種別：</label>
+					 <div class="radio-group">
+					<input id="st1_1" type="radio" class="st1" name="matter_opt" value="1" @if(Request::get('matter_opt')==1) checked @endif />
+					<label for="st1_1">有給</label>
+					<input id="st1_2" type="radio" class="st1" name="matter_opt" value="2" @if(Request::get('matter_opt')==2) checked @endif/>
+					<label for="st1_2">欠勤</label>
+					</div>
+					</div>
+					@endif
+					@endisset
+    				<div><label>地域：</label>
 					<select id ="user" name="area"><option value="100">----</option>{!!$arealist!!}</select>
 					</div>
-				<div><label>氏名：</label>
+					<div><label>氏名：</label>
 					<select id ="user" name="user"><option value="0">----</option>{!!$userlist!!}</select>
 					</div>
     			</li>

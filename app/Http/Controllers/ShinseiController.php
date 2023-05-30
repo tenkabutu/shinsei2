@@ -375,6 +375,7 @@ class ShinseiController extends Controller
             $userlist = $this->create_userlist2($request->user);
             $arealist = $this->create_arealist();
             $search_type=$request->search_type;
+            if(isset($request->matter_opt)){}
             $user = user::findOrFail(Auth::id());
             $query = matter::query();
             $query->where('matters.matter_type',$type);
