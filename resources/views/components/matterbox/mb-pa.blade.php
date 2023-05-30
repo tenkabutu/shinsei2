@@ -6,10 +6,8 @@
 			<input type="text" class="target2 g23" name="matter_change_date" autocomplete="off">
 		</div>
 		<div>
-			<label class="g12">申請種別1：</label>
-
+			<label class="g12">種別1:</label>
 			<div class="radio-group g23">
-
 				<input id="st1_1" type="radio" class="st1" name="opt1" value="1" {{old('opt1')=='1' ? 'checked':''}} />
 				<label for="st1_1">全日</label>
 				<input id="st1_2" type="radio" class="st1" name="opt1" value="2" {{old('opt1')=='2' ? 'checked':''}}/>
@@ -19,14 +17,22 @@
 				<input id="st1_4" type="radio" class="st1" name="opt1" value="4" {{old('opt1')=='4' ? 'checked':''}}/>
 				<label for="st1_4">時間休</label>
 			</div>
-			<label class="g34">申請種別2：</label>
+			<label class="g34">種別2:</label>
 			<div class="radio-group g45">
 
 				<input id="st1_5" type="radio" class="st1" name="opt1" value="5" {{old('opt1')=='5' ? 'checked':''}}/>
 				<label for="st1_5">特別</label>
 				<input id="st1_6" type="radio" class="st1" name="opt1" value="6" {{old('opt1')=='6' ? 'checked':''}}/>
 				<label for="st1_6">慶弔</label>
-
+			</div>
+			<label class="g56">種別3:</label>
+			<div class="radio-group g67 radio_red">
+				<input id="st1_7" type="radio" class="st1" name="opt1" value="9" {{old('opt1')=='9' ? 'checked':''}}/>
+				<label for="st1_7">欠勤</label>
+				<input id="st1_8" type="radio" class="st1" name="opt1" value="10" {{old('opt1')=='10' ? 'checked':''}}/>
+				<label for="st1_8">遅刻</label>
+				<input id="st1_9" type="radio" class="st1" name="opt1" value="11" {{old('opt1')=='11' ? 'checked':''}}/>
+				<label for="st1_9">早退</label>
 			</div>
 		</div>
 		<div class="matter_date">

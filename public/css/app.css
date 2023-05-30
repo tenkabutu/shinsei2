@@ -251,6 +251,12 @@ div.radio-group label.checked {
 }
 
 
+div.radio-group.radio_red label.checked {
+    color: #fff;
+    background: #ff0000;
+}
+
+
 div.radio-group div {
     position: relative;
 

@@ -213,8 +213,6 @@ $(function(){
 		        $('#task_area').hide();
 
 		    };
-
-
 	    }
 	});
 	$('.repeater').repeater({hide: function (deleteElement) {

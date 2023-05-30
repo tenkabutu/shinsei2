@@ -122,10 +122,11 @@ $(function(){
 	});
 	//クリックした要素にクラス割り当てる
 	$('label', radio).click(function() {
-		if($(this).prev().val()!=4){
+		var cr =$(this).prev().val();
+		if($(this).prev().val()!=4&&$(this).prev().val()<10){
 	        $('.matter_date input').attr('readonly',true);
 	        $('.matter_date input').css('backgroundColor','#e9e9e9');
-	        if($(this).prev().val()==1){
+	        if($(this).prev().val()==1||cr==5||cr==6||cr==9){
 	        	$('input[name="hour1"]').val({{$user->worktype->def_hour1}});
 	        	$('input[name="hour2"]').val({{$user->worktype->def_hour2}});
 	        	$('input[name="minutes1"]').val({{$user->worktype->def_minutes1}});
@@ -155,7 +156,7 @@ $(function(){
 	    }else{
 	    	$('.matter_date input').attr('readonly',false);
 	        $('.matter_date input').css('backgroundColor','#fff');
-		    };
+		};
 	    $(this).parent().parent().each(function() {
 	        $('label',this).removeClass('checked');
 	    });
