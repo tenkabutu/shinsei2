@@ -514,10 +514,12 @@ class ShinseiController extends Controller
                 $query->whereMonth('matters.matter_change_date', $request->month);
             }
             $query->select('*', 'matters.id as matters_id', 'matters.created_at as matters_created_at', 'users.name as username', 'users.employee as employee','reception.name as username2','nt2.nametag as statusname','nt4.nametag as area','nt3.nametag as optname');
-            $query->orderBy('matters.id', 'desc');
+            $query->orderByRaw('users.employee asc','matters.id desc');
+            //$query->orderBy('matters.id', 'desc');
             // ->select('matters.id','matters.created_at')
             // ->get();
             $records = $query->get();
+
             $records2 = $records->groupBy('matters.id');
 
             $input_data = [
@@ -532,7 +534,7 @@ class ShinseiController extends Controller
              * exit;
              */
 
-            return view('composite.ruling_ov', compact('records', 'input_data', 'userlist', 'records2','type','arealist'));
+            return view('composite.ruling_ov', compact('records', 'input_data', 'userlist','type','arealist'));
           }else {
               return view('composite.ruling_ov', compact( 'userlist','type','arealist'));
           }
