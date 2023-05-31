@@ -371,14 +371,17 @@ class ShinseiController extends Controller
     public function matter_ruling2 (Request $request,$type)
     {
         //var_dump($request->toArray());
-
+        $type2=$type;
+        if($type>3){
+            $type2=$type-3;
+        }
             $userlist = $this->create_userlist2($request->user);
             $arealist = $this->create_arealist();
             $search_type=$request->search_type;
 
             $user = user::findOrFail(Auth::id());
             $query = matter::query();
-            $query->where('matters.matter_type',$type);
+            $query->where('matters.matter_type',$type2);
 
 
 
@@ -425,7 +428,7 @@ class ShinseiController extends Controller
                 }elseif ($request->search_type == 2) {
 
                     $area_id = $user->area;
-                    if($type==1){
+                    if($type2==1){
                         $query->where(function ($query2){
                             $query2->Where('status', 1)
                             ->orwhere('task_status', 1);
@@ -474,7 +477,7 @@ class ShinseiController extends Controller
 
 
                 } elseif ($request->search_type == 4) {
-                    if($type==1){
+                    if($type2==1){
                         $query->Where('status', 3)
                         ->where('task_status', 3)
                         ->whereColumn('allotted', 'allotted2');

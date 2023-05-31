@@ -32,6 +32,12 @@ class RulingBox extends Component
             return view('components.rulingbox.ruling-box-pa');
         }elseif($this->type==3){
             return view('components.rulingbox.ruling-box-te');
+        }elseif($this->type==4){
+            return view('components.rulingbox.ruling-box-ovc');
+        }elseif($this->type==5){
+            return view('components.rulingbox.ruling-box-pac');
+        }elseif($this->type==6){
+            return view('components.rulingbox.ruling-box-tec');
         }
     }
 }

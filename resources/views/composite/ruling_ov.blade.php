@@ -13,9 +13,9 @@
 
 <div class="main_right">
 	@isset($type)
-	<h3>@if($type==1)振替申請
-		@elseif($type==2)休暇申請
-		@elseif($type==3)テレワーク申請
+	<h3>@if($type==1||$type==4)振替申請
+		@elseif($type==2||$type==5)休暇申請
+		@elseif($type==3||$type==6)テレワーク申請
 		@endif</h3>
 	@endisset
 	<div id="narrow">
@@ -68,7 +68,7 @@
 					</div>
 					</div>
 					@isset($type)
-						@if($type==1)
+						@if($type==1||$type==4)
 						<div><label>種別：</label>
 					 <div class="radio-group">
 					<input id="st1_1" type="radio" class="st1" name="matter_opt" value="3" @if(Request::get('matter_opt')==3) checked @endif />
@@ -77,7 +77,7 @@
 					<label for="st1_2">時間外</label>
 					</div>
 					</div>
-						@elseif($type==2)
+						@elseif($type==2||$type==5)
 					<div><label>種別：</label>
 					 <div class="radio-group">
 					<input id="st1_1" type="radio" class="st1" name="matter_opt" value="1" @if(Request::get('matter_opt')==1) checked @endif />

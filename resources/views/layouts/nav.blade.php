@@ -157,6 +157,9 @@
 					<li><a href="/shinsei2/public/user" active="request()->routeIs('device')">ユーザー</a></li>
 
 					<li ><a href="/shinsei2/public/matter_ruling">申請修正</a>　<a class="double" href="/shinsei2/public/matter_ruling?mode=search&search_type=3">申請{{$order_count}}件</a></li>
+					<li><a href="/shinsei2/public/4/matter_ruling">勤務申請</a></li>
+					<li><a href="/shinsei2/public/5/matter_ruling">休暇申請</a></li>
+					<li><a href="/shinsei2/public/6/matter_ruling">テレワ申請</a></li>
 
 
 				</ul>
