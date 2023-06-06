@@ -32,7 +32,7 @@
 				<td>{{ date('n/j',strtotime($record->matter_change_date))}}</td>
 				@if($record->opt1==1)
 				<td>1</td><td></td><td></td>
-				@elseif($record->opt1==1||$record->opt1==3)
+				@elseif($record->opt1==2||$record->opt1==3)
 				<td>0.5</td><td></td><td></td>
 				@elseif($record->opt1==4)
 				<td></td><td>{{floor($record->allotted/60)}}@if($record->allotted%60>0)時間{{$record->allotted%60}}分@endif</td><td></td>

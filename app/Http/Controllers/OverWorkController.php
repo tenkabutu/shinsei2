@@ -83,7 +83,7 @@ class OverWorkController extends Controller
         foreach($request->task_group as $row){
             if($row['task_change_date']){
                 $task = new Task();
-                $task->task_allotted = ((int)$row['task_hour2']*60+(int)$row['task_minutes2'])-((int)$row['task_hour1']*60+(int)$row['task_minutes1']);
+                $task->task_allotted = ((int)$row['task_hour2']*60+(int)$row['task_minutes2'])-((int)$row['task_hour1']*60+(int)$row['task_minutes1'])-(int)$row['task_breaktime'];
                 $task->task_status =2;
                 $date=Carbon::now()->toDateTimeString();
                 $task->task_request_date=$date;
