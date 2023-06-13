@@ -14,9 +14,7 @@
 
 					<div class="g12"><label>申請者</label></div>
 					<div class="g23 text_right"><span class="proxy_user">{{$userdata->name}}</span>
-					@if($userdata->role==1&&$userdata->id==Auth::id()&& $mcheck==2)
-					<button class="proxy_check">代理申請</button>
-					@endif
+
 
 					</div>
 

@@ -372,7 +372,7 @@ class ShinseiController extends Controller
     {
         //var_dump($request->toArray());
         $type2=$type;
-        if($type>3){
+        if($type<7&&$type>3){
             $type2=$type-3;
         }
             $userlist = $this->create_userlist2($request->user);

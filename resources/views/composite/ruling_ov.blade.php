@@ -16,6 +16,7 @@
 	<h3>@if($type==1||$type==4)振替申請
 		@elseif($type==2||$type==5)休暇申請
 		@elseif($type==3||$type==6)テレワーク申請
+		@elseif($type==7)購入申請
 		@endif</h3>
 	@endisset
 	<div id="narrow">

@@ -3,7 +3,7 @@
 		<div>
 			@if($status==0)
 
-			<input type="submit" class="g12" value="申請" onclick="setAction('save_request_pa')">
+			<input type="submit" class="g23" value="申請" onclick="setAction('save_request_pa')">
 			@elseif($role==1||$role==2)
 				@if($status==3)
 				<input type="submit" class="g12" value="承認解除" onclick="setAction('cancel')">

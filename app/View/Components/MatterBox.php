@@ -34,6 +34,9 @@ class MatterBox extends Component
         }elseif($this->type==3){
             $this->typename = "テレワーク";
             return view('components.matter-box');
+        }elseif($this->type==4){
+            $this->typename = "購入";
+            return view('components.matterbox.mb-pu');
         }
     }
 }

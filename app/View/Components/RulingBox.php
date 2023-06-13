@@ -38,6 +38,8 @@ class RulingBox extends Component
             return view('components.rulingbox.ruling-box-pac');
         }elseif($this->type==6){
             return view('components.rulingbox.ruling-box-tec');
+        }elseif($this->type==7){
+            return view('components.rulingbox.ruling-box-pu');
         }
     }
 }

@@ -102,9 +102,11 @@
 				</div>
 				<ul>
 					<li class="nav_count"><a href="/shinsei2/public/2/matter_ruling">休暇申請</a>　　　　<a class="double" href="/shinsei2/public/2/matter_ruling?search_type=3">申請{{$pa_count1}}件</a></li>
-					<li  class="nav_count"><a href="/shinsei2/public/3/matter_ruling">テレワ申請</a>　　　<a class="double" href="/shinsei2/public/3/matter_ruling?search_type=3">申請{{$te_count1}}件</a></li>
-					<li  class="nav_count"><a href="/shinsei2/public/1/matter_ruling">勤務申請</a>　　　　<a class="double" href="/shinsei2/public/1/matter_ruling?search_type=3">申請{{$ov_count1}}件</a></li>
-
+					<li class="nav_count"><a href="/shinsei2/public/3/matter_ruling">テレワ申請</a>　　　<a class="double" href="/shinsei2/public/3/matter_ruling?search_type=3">申請{{$te_count1}}件</a></li>
+					<li class="nav_count"><a href="/shinsei2/public/1/matter_ruling">勤務申請</a>　　　　<a class="double" href="/shinsei2/public/1/matter_ruling?search_type=3">申請{{$ov_count1}}件</a></li>
+					@if(Auth::user()->role==1)
+					<li class="nav_count"><a href="/shinsei2/public/7/matter_ruling">購入申請</a>　　　　<a class="double" href="/shinsei2/public/7/matter_ruling?search_type=3">申請{{$ov_count1}}件</a></li>
+					@endif
 				</ul>
 				@endif
 
@@ -145,7 +147,7 @@
 				</div>
 				<ul>
 
-					<li><a href="/shinsei2/public/user" >購入申請(未実装)</a></li>
+					<li><a href="/shinsei2/public/create_pu" >新規申請</a></li>
 
 				</ul>
 				@if(Auth::user()->role!=3)

@@ -9,6 +9,7 @@ use App\Http\Controllers\AcceptController;
 use App\Http\Controllers\PaidLeaveController;
 use App\Http\Controllers\DashboardController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
+use App\Http\Controllers\PurchaseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,6 +58,17 @@ Route::post('{id}/update_pa',[PaidLeaveController::class,'update']);
 Route::post('{id}/fix_pa',[PaidLeaveController::class,'update']);
 Route::post('{id}/update_request_pa',[PaidLeaveController::class,'update_request']);
 Route::post('{id}/delete_pa',[PaidLeaveController::class,'delete']);
+
+Route::get('create_pu',[PurchaseController::class,'create']);
+Route::get('{id}/show_pu',[PurchaseController::class,'show_pu']);
+Route::post('{id}/show_pu',[PurchaseController::class,'show_pu']);
+Route::post('save_request_pu',[PurchaseController::class,'save_request']);
+Route::post('{id}/save_pu',[PurchaseController::class,'save']);
+Route::post('{id}/save_request_pu',[PurchaseController::class,'save_request']);
+Route::post('{id}/update_pu',[PurchaseController::class,'update']);
+Route::post('{id}/fix_pa',[PurchaseController::class,'update']);
+Route::post('{id}/update_request_pu',[PurchaseController::class,'update_request']);
+Route::post('{id}/delete_pu',[PurchaseController::class,'delete']);
 
 Route::post('{id}/accept',[AcceptController::class,'accept']);
 Route::post('{id}/reject',[AcceptController::class,'reject']);

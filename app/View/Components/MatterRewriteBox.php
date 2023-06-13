@@ -36,6 +36,9 @@ class MatterRewriteBox extends Component
         }elseif($this->type==3){
             $this->typename = "テレワーク";
             return view('components.matter-rewrite-box');
+        }elseif($this->type==7){
+            $this->typename = "購入";
+            return view('components.matterbox.mrb-pu');
         }
     }
 }
