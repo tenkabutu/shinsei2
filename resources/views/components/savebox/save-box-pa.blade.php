@@ -5,7 +5,9 @@
 
 			<input type="submit" class="g12" value="申請" onclick="setAction('save_request_pa')">
 			@elseif($role==1||$role==2)
-				@if($status==3)
+				@if($checker==1)
+				<p>この申請は確定されています。</p>
+				@elseif($status==3)
 				<input type="submit" class="g12" value="承認解除" onclick="setAction('cancel')">
 				@else
 				<input type="submit" class="g12" value="承認" onclick="setAction('accept')">

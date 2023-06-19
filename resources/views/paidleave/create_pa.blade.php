@@ -82,11 +82,11 @@
 				<x-save-box :status="7" :role="0" :type="2"/>
 			@elseif(isset($matter))
 				@if($matter->user_id==Auth::user()->id)
-					<x-save-box :status="$matter->status" :role="0" :type="2"/>
+					<x-save-box :status="$matter->status" :role="0" :type="2" :checker="$matter->opt2"/>
 				@elseif(Auth::user()->role<3)
-					<x-save-box :status="$matter->status" :role="1" :type="2"/>
+					<x-save-box :status="$matter->status" :role="1" :type="2" :checker="$matter->opt2"/>
 				@elseif(Auth::user()->role==4)
-					<x-save-box :status="$matter->status" :role="4" :type="2"/>
+					<x-save-box :status="$matter->status" :role="4" :type="2" :checker="$matter->opt2"/>
 
 				@else
 				<!-- <label>test</label> -->

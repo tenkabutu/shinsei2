@@ -11,13 +11,14 @@ class SaveBox extends Component
      *
      * @return void
      */
-    public $status,$role,$type;
+    public $status,$role,$type,$checker;
     //public $type;
-    public function __construct($status,$role,$type)
+    public function __construct($status,$role,$type,$checker=null)
     {
         $this->status = $status;
         $this->role = $role;
         $this->type = $type;
+        $this->checker = $checker;
     }
 
     /**
