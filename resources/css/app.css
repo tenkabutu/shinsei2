@@ -517,3 +517,9 @@ table select{
 	color:red;
 	font-weight: bold;
 }
+.unselect {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}

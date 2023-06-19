@@ -761,3 +761,10 @@ div.grid_wide{
 	font-weight: bold;
 }
 
+
+.unselect {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+

@@ -8,15 +8,11 @@
 				<th>エリア</th>
 				<th>申請者</th>
 				<th class="id">実施日</th>
-
 				<th class="s3">有給日</th>
 				<th class="s3">有給時</th>
 				<th class="s3">その他</th>
-
 				<th class="id">承認</th>
-
-
-
+				<th></th>
 			</tr>
 			</thead>
 			@if(isset($records))
@@ -42,10 +38,11 @@
 				<td></td><td></td><td></td>
 				@endif
 				<td>@if($record->status==3)○@endif</td>
+				<td class="unselect"><input type="checkbox" class="end_check" @if($record->opt2==1)checked @endif data-number="{{$record->matters_id}}"></td>
 				</tr>
 			@endforeach
 			@endif
 
 
 		</table>
-	</div>
+</div>

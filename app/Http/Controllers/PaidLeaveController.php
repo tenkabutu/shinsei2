@@ -152,8 +152,16 @@ class PaidLeaveController extends Controller
 
         }
 
+    }
+    public function end_check(Request $request){
+       // $request->matter_id;
+        $matter =matter::find($request->matter_id);
+        $matter->opt2=$request->isChecked;
+        $matter->checker_id=Auth::id();
+        $matter->save();
+        echo $request->matter_id;
 
-
+        exit;
 
     }
     public function rest_check($minutes,$type,$id){

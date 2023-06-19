@@ -127,6 +127,29 @@ $('label', radio).click(function() {
     //    }
 });
 
+$(".end_check").change(function() {
+    var isChecked = $(this).is(":checked") ? 1 : 0; // チェックされている場合は1、そうでない場合は0
+    var matter_id = $(this).data("number"); // チェックボックスの番号を取得
+
+    // サーバーに値を送信する処理をここに記述する
+    //alert(isChecked+number);
+    $.ajax({
+      url: "end_check_pa", // サーバーのエンドポイントを指定
+      method: "POST", // POSTメソッドを使用
+      dataType: "json",
+      data: { matter_id:matter_id, isChecked: isChecked,  _token: '{{csrf_token()}}'}, // 送信するデータを指定
+      success: function(response) {
+        console.log("値を送信しました。");
+        // 成功時の処理をここに記述する
+      },
+      error: function(xhr, status, error) {
+        console.error("エラーが発生しました。");
+        // エラー時の処理をここに記述する
+      }
+    });
+  });
+
+
 
 
 });
