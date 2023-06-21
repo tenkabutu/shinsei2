@@ -1,6 +1,8 @@
 <x-print-layout>
 <x-slot name="style"></x-slot>
-@section('reception_id', $user->id) <x-slot name="head"> <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script> <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script> <script src='/tabusapo_lb/public/js/jquery.repeater.js'></script> <script>$(function() {
+@section('reception_id', $user->id) <x-slot name="head"> <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script>$(function() {
 	   $.datetimepicker.setLocale('ja');
 		  $('.target').datetimepicker().datepicker('setDate','today');
 	});</script>
