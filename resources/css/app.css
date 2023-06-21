@@ -491,14 +491,20 @@ table select{
 .g45{grid-column:4/5;}
 .g56{grid-column:5/6;}
 .g67{grid-column:6/7;}
+.g78{grid-column:7/8;}
+.g89{grid-column:8/9;}
 .g13{grid-column:1/3;}
 .g35{grid-column:3/5;}
 .g14{grid-column:1/4;}
+.g19{grid-column:1/9;}
 .g57{grid-column:5/7;}
+.g79{grid-column:7/9;}
 .gr12{grid-row:1/2;}
 .gr23{grid-row:2/3;}
 .gr34{grid-row:3/4;}
 .gr45{grid-row:4/5;}
+.gr56{grid-row:5/6;}
+.gr67{grid-row:6/7;}
 .gr24{grid-row:2/4;}
 .gr35{grid-row:3/5;}
 

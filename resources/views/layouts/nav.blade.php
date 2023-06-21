@@ -162,6 +162,7 @@
 					<li><a href="/shinsei2/public/4/matter_ruling">勤務申請</a></li>
 					<li><a href="/shinsei2/public/5/matter_ruling">休暇申請</a></li>
 					<li><a href="/shinsei2/public/6/matter_ruling">テレワ申請</a></li>
+					<li><a href="/shinsei2/public/total_pa">個人有給集計</a></li>
 
 
 				</ul>

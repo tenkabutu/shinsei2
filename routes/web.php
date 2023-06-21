@@ -10,6 +10,7 @@ use App\Http\Controllers\PaidLeaveController;
 use App\Http\Controllers\DashboardController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\MatterTotalController;
 
 /*
 |--------------------------------------------------------------------------
@@ -73,6 +74,9 @@ Route::post('{id}/delete_pu',[PurchaseController::class,'delete']);
 Route::post('{id}/accept',[AcceptController::class,'accept']);
 Route::post('{id}/reject',[AcceptController::class,'reject']);
 Route::post('{id}/cancel',[AcceptController::class,'cancel']);
+
+Route::get('total_pa',[MatterTotalController::class,'total_pa']);
+Route::get('{id}/print_total_pa/{year}/{month}',[MatterTotalController::class,'print_total_pa']);
 
 Route::get('matter_search',[ShinseiController::class,'matter_search']);
 Route::get('{type}/matter_search',[ShinseiController::class,'matter_search2']);

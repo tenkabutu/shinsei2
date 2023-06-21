@@ -513,6 +513,9 @@ class ShinseiController extends Controller
             if ($request->month != 0) {
                 $query->whereMonth('matters.matter_change_date', $request->month);
             }
+            if ($request->year != 0) {
+                $query->whereYear('matters.matter_change_date', $request->year);
+            }
             $query->select('*', 'matters.id as matters_id', 'matters.created_at as matters_created_at', 'users.name as username', 'users.employee as employee','reception.name as username2','nt2.nametag as statusname','nt4.nametag as area','nt3.nametag as optname');
             $query->orderByRaw('users.employee asc','matters.id desc');
             //$query->orderBy('matters.id', 'desc');
