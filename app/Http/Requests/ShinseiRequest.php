@@ -44,22 +44,25 @@ class ShinseiRequest extends FormRequest
         if ($this->has('breaktime')) {
             $rules['breaktime'] = 'integer';
         }
-        if ($this->has('order_content')) {
-            $rules['order_content'] = 'required|string|max:250';
-        }
+
         if ($this->has('work_content')) {
             $rules['work_content'] = 'required|string|max:250';
         }
         if ($this->matter_type==1) {
+            if ($this->has('order_content')) {
+                $rules['order_content'] = 'required|string|max:250';
+            }
 
             $rules['opt1'] = 'required';
         }elseif ($this->matter_type==2) {
 
             $rules['opt1'] = 'required';
         }
-        /* if ($this->matter_type!=3) {
-            $rules['opt1'] = 'required';
-        } */
+        if ($this->matter_type!=3) {
+            if ($this->has('order_content')) {
+            $rules['order_content'] = 'required|string|max:250';
+            }
+        }
 
         return $rules;
     }
