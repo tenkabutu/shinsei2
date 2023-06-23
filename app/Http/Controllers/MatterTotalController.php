@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Matter;
 use App\Models\User;
+use App\Models\Rest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -32,6 +33,7 @@ class MatterTotalController extends Controller
 
 
         $user = User::leftJoin('matters', 'users.id', '=', 'matters.user_id')
+        ->leftjoin('rests','users.id','rests.user_id')
         ->select(
             'users.id','users.name','users.employee',
             DB::raw('SUM(CASE WHEN matters.opt1 = 1 THEN 1 ELSE 0 END) AS rest_day'),
@@ -40,6 +42,7 @@ class MatterTotalController extends Controller
             )
             ->where('users.id', $id)
             ->groupBy('users.id','users.name','users.employee')
+            ->with('rest')
             ->first();
 
             $query = Matter::query();

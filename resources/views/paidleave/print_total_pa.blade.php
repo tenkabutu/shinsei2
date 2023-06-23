@@ -14,11 +14,11 @@
 			 <tr>
     <td></td>
     <th class="square_4_1"><label>職員番号</label></th>
-    <td class="square_4_2" colspan="2">{{$user->id}}</td>
+    <td class="square_4_2" colspan="2">{{$user->employee}}</td>
      <td></td>
     <th class="square_4_1" colspan="2">前年度残日</th>
 
-    <td class="square_4_2"></td>
+    <td class="square_4_2">{{$user->rest->co_day+$user->rest->co_harf_rest*0.5}}</td>
   </tr>
   <tr>
 
@@ -27,14 +27,14 @@
     <td  class="square_4_4" colspan="2">{{$user->name}}</td>
      <td></td>
     <th class="square_4_3" colspan="2">前年度残時間</th>
-    <td class="square_4_4"></td>
+    <td class="square_4_4">{{$user->rest->co_time}}</td>
 
 
   </tr>
   <tr>
   	 <td colspan="5"></td>
   	 <th class="square_4_3" colspan="2">今年度付与日</th>
-  	 <td class="square_4_4"></td>
+  	 <td class="square_4_4">{{$user->rest->rest_allotted_day}}</td>
   	 </tr>
   	 <tr><td>　</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
   <tr>
@@ -44,8 +44,8 @@
     <td class="square_4_2" colspan="2"></td>
     <td></td>
     <th class="square_6_1">有給休暇</th>
-    <td class="square_6_2">日</td>
-    <td class="square_6_3">時間</td>
+    <td class="square_6_2">{{$user->rest->co_day+$user->rest->co_harf_rest*0.5+$user->rest->rest_allotted_day}}日</td>
+    <td class="square_6_3">{{$user->rest->co_time}}時間</td>
   </tr>
   <tr>
 
@@ -115,6 +115,7 @@
 
 			</tr>
 			</thead>
+
 			@php
 
   $missingRecordsCount = max(0, 34 - count($records));
@@ -122,8 +123,11 @@
     'matters_id' => '',
     'matter_change_date' => '',
     'opt1' => '',
-    'allotted' => ''
+    'allotted' => 0
   ];
+  $lap_rest_time =$user->rest->co_time*60 ;
+  $lap_rest_day = 0;
+  $residue_rest_time = 0;
 
   for ($i = 0; $i < $missingRecordsCount; $i++) {
     $records[] = $defaultRecord;
@@ -131,6 +135,17 @@
 @endphp
 			@if(isset($records))
 			@foreach ($records as $id =>$record)
+			<!-- 時間給のときだけ積み上げ-->
+				@if($record->opt1==4)
+					@php
+                        $lap_rest_time += $record->allotted;
+                        if($lap_rest_time>480){
+                        	$lap_rest_time=$lap_rest_time-480;
+                        	$lap_rest_day+=1;
+                        }
+
+                    @endphp
+                @endif
 			<tr class="d{{$id+1}}">
 
 
@@ -149,7 +164,7 @@
 				@else
 				<td></td><td></td><td></td>
 				@endif
-				<td></td>
+				<td>@if($record->matters_id){{floor($lap_rest_time/60)}}@endif</td>
 				<td></td><td></td>
 				</tr>
 			@endforeach
