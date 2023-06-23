@@ -12,7 +12,7 @@ $(document).ready(function(){
 
 <div class="main_right">
 	<div class="">
-		<h2>ユーザー管理</h2>
+		<h2>年休取得状況一覧</h2>
 	<select id="yearSelect">
   <!-- 年の選択肢はJavaScriptで生成されます -->
 </select>
