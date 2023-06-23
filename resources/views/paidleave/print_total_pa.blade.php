@@ -1,5 +1,5 @@
 <x-print-layout>
-<x-slot name="style"></x-slot>
+<x-slot name="style">main_print</x-slot>
 @section('reception_id', $user->id) <x-slot name="head">
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
@@ -7,25 +7,74 @@
 
 </x-slot>
 
-<div class="main_right">
-	<div class="grid_wrap5">
-		<div class="g19 gr12">
-			<div class="grid_wrap2" id="grid_reception">
-				<div class="g23 gr12 middle_label2">
+
+	<div class="">
+
+			<table class="info_table">
+			 <tr>
+    <td></td>
+    <td class="square_4_1"><label>職員番号</label></td>
+    <td class="square_4_2" colspan="2">{{$user->id}}</td>
+     <td></td>
+    <td class="square_4_1" colspan="2">前年度残日</td>
+
+    <td class="square_4_2"></td>
+  </tr>
+  <tr>
+
+    <td></td>
+    <td class="square_4_3"><label>氏名</label></td>
+    <td  class="square_4_4" colspan="2">{{$user->name}}</td>
+     <td></td>
+    <td class="square_4_3" colspan="2">前年度残時間</td>
+    <td class="square_4_4"></td>
+
+
+  </tr>
+  <tr>
+  	 <td colspan="5"></td>
+  	 <td class="square_4_3" colspan="2">今年度付与日</td>
+  	 <td class="square_4_4"></td>
+  	 </tr>
+  	 <tr><td>　</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+  <tr>
+
+    <td></td>
+    <td class="square_4_1"><label>備考</label></td>
+    <td class="square_4_2" colspan="2"></td>
+    <td></td>
+    <td class="square_6_1">有給休暇</td>
+    <td class="square_6_2">日</td>
+    <td class="square_6_3">時間</td>
+  </tr>
+  <tr>
+
+    <td></td>
+    <td class="middle_label2"><label>時間累計</label></td>
+    <td colspan="2"></td>
+     <td></td>
+    <td class="square_6_4">有給残</td>
+    <td class="square_6_5">日</td>
+    <td class="square_6_6">時間</td>
+  </tr>
+   <tr><td>　</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+</table>
+			<!-- <div class="grid_wrap2" id="grid_reception">
+				<div class="g23 gr12 square_4_1">
 						<label>職員番号</label>
 				</div>
-				<div class="g35 gr12 ps{{Auth::user()->id}}_1">
+				<div class="g35 gr12 square_4_2">
 						{{$user->id}}
 				</div>
-				<div class="g67 gr12">前年残日</div>
+				<div class="g67 gr12">前年度残日</div>
 				<div class="g79 gr12"></div>
-				<div class="g23 gr23 middle_label2">
+				<div class="g23 gr23 square_4_3">
 						<label>氏名</label>
 				</div>
-				<div class="g35 gr23 ps{{Auth::user()->id}}_1">
+				<div class="g35 gr23 square_4_4">
 						{{$user->name}}
 				</div>
-				<div class="g67 gr23">前年残時間</div>
+				<div class="g67 gr23">前年度残時間</div>
 				<div class="g79 gr23"></div>
 				<div class="g67 gr34">今年度付与日</div>
 				<div class="g79 gr34"></div>
@@ -48,14 +97,12 @@
 				<div class="g89 gr67">時間</div>
 
 
-			</div>
-		</div>
-		<div class="g19 gr23">
-			<table class="task_table">
+			</div> -->
+
+			<table class="total_table">
 			<thead>
 			<tr>
 				<th class="id" sortable>ID</th>
-				<th class="id">種類</th>
 				<th class="id">実施日</th>
 
 				<th>取得日数</th>
@@ -68,15 +115,29 @@
 
 			</tr>
 			</thead>
+			@php
+
+  $missingRecordsCount = max(0, 34 - count($records));
+  $defaultRecord = (object) [
+    'matters_id' => '',
+    'matter_change_date' => '',
+    'opt1' => '',
+    'allotted' => ''
+  ];
+
+  for ($i = 0; $i < $missingRecordsCount; $i++) {
+    $records[] = $defaultRecord;
+  }
+@endphp
 			@if(isset($records))
 			@foreach ($records as $id =>$record)
 			<tr class="d{{$id+1}}">
 
 
 				<td><a href="/shinsei2/public/{{ $record->matters_id }}/show_pa">{{ $record->matters_id}}</a></td>
-				<td>{{ $record->optname}}</td>
-
-				<td>{{ date('n/j',strtotime($record->matter_change_date))}}</td>
+				<td>@if($record->matter_change_date)
+						{{ date('n/j', strtotime($record->matter_change_date)) }}
+					@endif</td>
 				@if($record->opt1==1)
 				<td>1</td><td></td><td></td>
 				@elseif($record->opt1==2||$record->opt1==3)
@@ -94,8 +155,8 @@
 			@endforeach
 			@endif
 		</table>
-		</div>
-	</div>
+
+
 </div>
 
 <script>

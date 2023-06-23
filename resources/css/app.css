@@ -259,7 +259,7 @@ div.radio-group label,#load_template1, #load_template2{
 
 .result_table,.search_table,.task_table,.kitt_table,.device_table{
 	width:100%;
-	border:1px solid black;
+	/* border:1px solid black; */
 	font-size:12px;
 	white-space: nowrap;
 }
@@ -411,12 +411,12 @@ select{
 	color:gray;
 }
 /* || table */
-table {
+.task_table {
 	font-size:12px;
 	border-top: 1px solid black;
 	border-left: 1px solid black;
 }
-td,th {
+.task_table td,th {
 	border-bottom: 1px solid black;
 	border-right: 1px solid black;
 }
@@ -456,9 +456,55 @@ table select{
 .create_logo img{
   margin-right: 10px;
 }
+
+/* || 年休取得状況 */
+#wrap.main_print{
+  box-shadow:none;
+  width:690px;
+}
+#wrap.main_print main {
+  flex: 1;
+  background: none;
+  border-radius: 0 5px 5px 0;
+  box-shadow:none;
+
+  padding:10px 10px 10px 10px;
+  box-sizing: border-box;
+}
+
+.total_table,.info_table{
+	border-collapse: collapse;
+	width:100%;
+}
+.total_table th,.total_table td,.info_table th,.info_table td {
+	font-size:14px;
+	width: calc(100% / 8);height:calc(850px/42);
+}
+.total_table th,.total_table td{
+	border-right:1px solid black;border-bottom:1px solid black;
+}
+.total_table{
+	border-left:1px solid black;border-top:1px solid black;
+}
+.square_4_1{border-top:2px solid black;border-bottom:2px solid black;border-left:2px solid black;border-right:1px solid black;}
+.square_4_2{border-top:2px solid black;border-bottom:2px solid black;border-right:2px solid black;}
+.square_4_3{border-bottom:2px solid black;border-left:2px solid black;}
+.square_4_4{border-bottom:2px solid black;border-right:2px solid black;border-left:1px solid black;}
+
+.square_6_1{border-top:2px solid black;border-bottom:2px solid black;border-left:2px solid black;border-right:2px solid black;}
+.square_6_2{border-top:2px solid black;border-bottom:2px solid black;border-right:1px solid black;}
+.square_6_3{border-top:2px solid black;border-bottom:2px solid black;border-right:2px solid black;}
+.square_6_4{border-bottom:2px solid black;border-left:2px solid black;}
+.square_6_5{border-bottom:2px solid black;border-left:2px solid black;}
+.square_6_6{border-bottom:2px solid black;border-right:2px solid black;border-left:1px solid black;}
+
+
+
+
 /* || grid */
 .grid{
 	display: grid;
+	height:100%;
 }
 .grid_wrap ,.grid_wrap2,.grid_wrap3,.grid_wrap4{
     display: grid;
