@@ -416,7 +416,7 @@ select{
 	border-top: 1px solid black;
 	border-left: 1px solid black;
 }
-.task_table td,th {
+.task_table td,.task_table th {
 	border-bottom: 1px solid black;
 	border-right: 1px solid black;
 }
@@ -477,14 +477,32 @@ table select{
 	width:100%;
 }
 .total_table th,.total_table td,.info_table th,.info_table td {
+	padding:0 3px;
 	font-size:14px;
-	width: calc(100% / 8);height:calc(850px/42);
+	width: calc(100% / 8);height:calc(950px/42);
 }
 .total_table th,.total_table td{
+
 	border-right:1px solid black;border-bottom:1px solid black;
+}
+.info_table td,.total_table td{
+	text-align: right;
+}
+.info_table th{
+
+	text-align: left;
+	font-weight: normal;
 }
 .total_table{
 	border-left:1px solid black;border-top:1px solid black;
+}
+.total_table a{
+	color: inherit;
+	text-decoration: none;
+	display:inline-block;
+	width:100%;
+	height:100%;
+
 }
 .square_4_1{border-top:2px solid black;border-bottom:2px solid black;border-left:2px solid black;border-right:1px solid black;}
 .square_4_2{border-top:2px solid black;border-bottom:2px solid black;border-right:2px solid black;}
@@ -564,6 +582,12 @@ table select{
 
 .text_right{
 	text-align: right;
+}
+.text_left{
+	text-align: left;
+}
+.text_center{
+	text-align: center;
 }
 .text-danger{
 	color:red;

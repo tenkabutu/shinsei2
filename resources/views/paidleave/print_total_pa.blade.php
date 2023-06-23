@@ -13,47 +13,47 @@
 			<table class="info_table">
 			 <tr>
     <td></td>
-    <td class="square_4_1"><label>職員番号</label></td>
+    <th class="square_4_1"><label>職員番号</label></th>
     <td class="square_4_2" colspan="2">{{$user->id}}</td>
      <td></td>
-    <td class="square_4_1" colspan="2">前年度残日</td>
+    <th class="square_4_1" colspan="2">前年度残日</th>
 
     <td class="square_4_2"></td>
   </tr>
   <tr>
 
     <td></td>
-    <td class="square_4_3"><label>氏名</label></td>
+    <th class="square_4_3"><label>氏名</label></th>
     <td  class="square_4_4" colspan="2">{{$user->name}}</td>
      <td></td>
-    <td class="square_4_3" colspan="2">前年度残時間</td>
+    <th class="square_4_3" colspan="2">前年度残時間</th>
     <td class="square_4_4"></td>
 
 
   </tr>
   <tr>
   	 <td colspan="5"></td>
-  	 <td class="square_4_3" colspan="2">今年度付与日</td>
+  	 <th class="square_4_3" colspan="2">今年度付与日</th>
   	 <td class="square_4_4"></td>
   	 </tr>
   	 <tr><td>　</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
   <tr>
 
     <td></td>
-    <td class="square_4_1"><label>備考</label></td>
+    <th class="square_4_1"><label>備考</label></th>
     <td class="square_4_2" colspan="2"></td>
     <td></td>
-    <td class="square_6_1">有給休暇</td>
+    <th class="square_6_1">有給休暇</th>
     <td class="square_6_2">日</td>
     <td class="square_6_3">時間</td>
   </tr>
   <tr>
 
     <td></td>
-    <td class="middle_label2"><label>時間累計</label></td>
+    <th><label>時間累計</label></th>
     <td colspan="2"></td>
      <td></td>
-    <td class="square_6_4">有給残</td>
+    <th class="square_6_4">有給残</th>
     <td class="square_6_5">日</td>
     <td class="square_6_6">時間</td>
   </tr>
