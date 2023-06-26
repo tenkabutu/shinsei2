@@ -57,8 +57,7 @@ class ShinseiRequest extends FormRequest
         }elseif ($this->matter_type==2) {
 
             $rules['opt1'] = 'required';
-        }
-        if ($this->matter_type!=3) {
+        }elseif($this->matter_type==3) {
             if ($this->has('order_content')) {
             $rules['order_content'] = 'required|string|max:250';
             }
