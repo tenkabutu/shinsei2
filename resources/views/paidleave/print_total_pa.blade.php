@@ -51,9 +51,9 @@
 
     <td></td>
     <th><label>時間累計</label></th>
-    <td colspan="2"></td>
+    <td colspan="2">{{$user->rest_time/60}}</td>
      <td></td>
-    <th class="square_6_4">有給残</th>
+    <th class="square_6_4">有給残{{$user->harf_rest_day}}</th>
     <td class="square_6_5">日</td>
     <td class="square_6_6">時間</td>
   </tr>
@@ -125,9 +125,9 @@
     'opt1' => '',
     'allotted' => 0
   ];
-  $lap_rest_time =$user->rest->co_time*60 ;
+  $lap_rest_time =0; ;
   $lap_rest_day = 0;
-  $residue_rest_time = 0;
+  $residue_rest_time = $userdata->rest->co_time;
 
   for ($i = 0; $i < $missingRecordsCount; $i++) {
     $records[] = $defaultRecord;
@@ -139,12 +139,25 @@
 				@if($record->opt1==4)
 					@php
                         $lap_rest_time += $record->allotted;
-                        if($lap_rest_time>480){
+                        if($lap_rest_time>479){
                         	$lap_rest_time=$lap_rest_time-480;
                         	$lap_rest_day+=1;
                         }
-
+                        $residue_rest_time=$residue_rest_time-$record->allotted/60;
+                        if($residue_rest_time<0){
+                        	$residue_rest_time=$residue_rest_time+8;
+                        }
                     @endphp
+                @elseif($record->opt1==1)
+                	@php
+                        	$lap_rest_day+=1;
+                    @endphp
+
+                @elseif($record->opt1==2||$record->opt1==3)
+                	@php
+                        	$lap_rest_day+=0.5;
+                    @endphp
+
                 @endif
 			<tr class="d{{$id+1}}">
 
@@ -154,18 +167,23 @@
 						{{ date('n/j', strtotime($record->matter_change_date)) }}
 					@endif</td>
 				@if($record->opt1==1)
-				<td>1</td><td></td><td></td>
+				<td>1</td><td></td>
 				@elseif($record->opt1==2||$record->opt1==3)
-				<td>0.5</td><td></td><td></td>
+				<td>0.5</td><td></td>
 				@elseif($record->opt1==4)
-				<td></td><td>{{floor($record->allotted/60)}}@if($record->allotted%60>0)時間{{$record->allotted%60}}分@endif</td><td></td>
-				@elseif($record->opt1==5||$record->opt1==6)
-				<td></td><td></td><td>1</td>
+				<td></td><td>{{floor($record->allotted/60)}}@if($record->allotted%60>0)時間{{$record->allotted%60}}分@endif</td>
 				@else
-				<td></td><td></td><td></td>
-				@endif
-				<td>@if($record->matters_id){{floor($lap_rest_time/60)}}@endif</td>
 				<td></td><td></td>
+				@endif
+				@if($record->matters_id)
+				<td>@if($record->matters_id){{$lap_rest_day}}@endif</td>
+				<td>@if($record->matters_id){{$lap_rest_time}}@endif</td>
+				<td>{{$user->rest->co_day+$user->rest->co_harf_rest*0.5+$user->rest->rest_allotted_day-$lap_rest_day}}</td>
+				<td>{{$residue_rest_time}}</td>
+				@else
+					<td></td><td></td><td></td><td></td>
+				@endif
+
 				</tr>
 			@endforeach
 			@endif

@@ -32,7 +32,7 @@ class MatterTotalController extends Controller
     public function print_total_pa($id,$year,$month){
 
 
-        $user = User::leftJoin('matters', 'users.id', '=', 'matters.user_id')
+        $query1 = User::leftJoin('matters', 'users.id', '=', 'matters.user_id')
         ->leftjoin('rests','users.id','rests.user_id')
         ->select(
             'users.id','users.name','users.employee',
@@ -41,14 +41,22 @@ class MatterTotalController extends Controller
             DB::raw('SUM(CASE WHEN matters.opt1 IN (2,3) THEN 1 ELSE 0 END) AS harf_rest_day')
             )
             ->where('users.id', $id)
+            ->where('matters.status','!=', 6)
             ->groupBy('users.id','users.name','users.employee')
-            ->with('rest')
-            ->first();
+            ->with('rest');
+            if($month==0){
+                $query1->where('matters.nendo', $year);
+            }else{
+                $query1->whereMonth('matters.matter_change_date', $month);
+                $query1->whereYear('matters.matter_change_date', $year);
+            }
+            $user = $query1->first();
+
 
             $query = Matter::query();
             $query->WhereIn('matters.opt1',[1,2,3,4]);
-
             $query->where('matters.user_id', $id);
+            $query->where('matters.status','!=', 6);
 
             $query->leftjoin('nametags as nt3', function ($join)
             {
