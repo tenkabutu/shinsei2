@@ -44,7 +44,10 @@
     <td class="square_4_2" colspan="2"></td>
     <td></td>
     <th class="square_6_1">有給休暇</th>
-    <td class="square_6_2">{{$user->rest->co_day+$user->rest->co_harf_rest*0.5+$user->rest->rest_allotted_day}}日</td>
+    @php
+    	$uq = $user->rest->co_day+$user->rest->co_harf_rest*0.5+$user->rest->rest_allotted_day;
+    @endphp
+    <td class="square_6_2">{{$uq}}日</td>
     <td class="square_6_3">{{$user->rest->co_time}}時間</td>
   </tr>
   <tr>
@@ -53,9 +56,9 @@
     <th><label>時間累計</label></th>
     <td colspan="2">{{$user->rest_time/60}}</td>
      <td></td>
-    <th class="square_6_4">有給残{{$user->harf_rest_day}}</th>
-    <td class="square_6_5">日</td>
-    <td class="square_6_6">時間</td>
+    <th class="square_6_4">有給残</th>
+    <td class="square_6_5">{{$uq-$user->harf_rest_day*0.5-$user->rest_day-floor(($user->rest_time/60+$user->rest->co_time)/8)}}日</td>
+    <td class="square_6_6">{{($user->rest_time/60+$user->rest->co_time)%8}}時間</td>
   </tr>
    <tr><td>　</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
 </table>
