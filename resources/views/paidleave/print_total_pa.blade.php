@@ -12,6 +12,10 @@
 
 			<table class="info_table">
 			 <tr>
+			 <th colspan="8" rowspan="2"><div><span class="print_h2">年次有給取得情報</span></div></th>
+			 </tr>
+			 <tr></tr>
+			 <tr>
     <td></td>
     <th class="square_4_1"><label>職員番号</label></th>
     <td class="square_4_2" colspan="2">{{$user->employee}}</td>
@@ -60,47 +64,9 @@
     <td class="square_6_5">{{$uq-$user->harf_rest_day*0.5-$user->rest_day-floor(($user->rest_time/60+$user->rest->co_time)/8)}}日</td>
     <td class="square_6_6">{{($user->rest_time/60+$user->rest->co_time)%8}}時間</td>
   </tr>
-   <tr><td>　</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+   <tr><td>{{$user->rest->rest_year}}年度</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
 </table>
-			<!-- <div class="grid_wrap2" id="grid_reception">
-				<div class="g23 gr12 square_4_1">
-						<label>職員番号</label>
-				</div>
-				<div class="g35 gr12 square_4_2">
-						{{$user->id}}
-				</div>
-				<div class="g67 gr12">前年度残日</div>
-				<div class="g79 gr12"></div>
-				<div class="g23 gr23 square_4_3">
-						<label>氏名</label>
-				</div>
-				<div class="g35 gr23 square_4_4">
-						{{$user->name}}
-				</div>
-				<div class="g67 gr23">前年度残時間</div>
-				<div class="g79 gr23"></div>
-				<div class="g67 gr34">今年度付与日</div>
-				<div class="g79 gr34"></div>
 
-				<div class="g23 gr56 middle_label2">
-						<label>備考</label>
-				</div>
-				<div class="g35 gr56">
-				</div>
-				<div class="g67 gr56">有給休暇</div>
-				<div class="g78 gr56">日</div>
-				<div class="g89 gr56">時間</div>
-				<div class="g23 gr67 middle_label2">
-						<label>時間累計</label>
-				</div>
-				<div class="g35 gr67">
-				</div>
-				<div class="g67 gr67">有給残</div>
-				<div class="g78 gr67">日</div>
-				<div class="g89 gr67">時間</div>
-
-
-			</div> -->
 
 			<table class="total_table">
 			<thead>
@@ -121,7 +87,7 @@
 
 			@php
 
-  $missingRecordsCount = max(0, 34 - count($records));
+  $missingRecordsCount = max(0, 32 - count($records));
   $defaultRecord = (object) [
     'matters_id' => '',
     'matter_change_date' => '',
@@ -130,7 +96,7 @@
   ];
   $lap_rest_time =0; ;
   $lap_rest_day = 0;
-  $residue_rest_time = $userdata->rest->co_time;
+  $residue_rest_time = $user->rest->co_time;
 
   for ($i = 0; $i < $missingRecordsCount; $i++) {
     $records[] = $defaultRecord;

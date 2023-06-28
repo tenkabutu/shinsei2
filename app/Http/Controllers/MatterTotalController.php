@@ -42,8 +42,8 @@ class MatterTotalController extends Controller
             )
             ->where('users.id', $id)
             ->where('matters.status','!=', 6)
-            ->groupBy('users.id','users.name','users.employee')
-            ->with('rest');
+            ->groupBy('users.id','users.name','users.employee');
+
             if($month==0){
                 $query1->where('matters.nendo', $year);
             }else{

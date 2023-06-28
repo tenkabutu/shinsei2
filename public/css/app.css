@@ -646,6 +646,15 @@ table select{
 /* || 年休取得状況 */
 
 
+.print_h2{
+	height:42px;
+
+	text-align: center;
+	font-size: 28px;
+
+}
+
+
 #wrap.main_print{
   box-shadow:none;
   width:690px;
@@ -660,6 +669,11 @@ table select{
 
   padding:10px 10px 10px 10px;
   box-sizing: border-box;
+}
+
+
+.info_table div{
+	text-align: center;
 }
 
 
