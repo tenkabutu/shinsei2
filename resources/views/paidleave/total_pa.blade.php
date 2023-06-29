@@ -27,6 +27,9 @@ $(document).ready(function(){
 			<tr>
 				<th>No</th>
 				<th>使用者</th>
+				<th colspan="2">今年度有給</th>
+				<th colspan="2">取得有給</th>
+				<th colspan="2">残有給</th>
 				<th>有給取得日数</th>
 				<th>阪急取得回数</th>
 				<th>取得時間給</th>
@@ -37,9 +40,19 @@ $(document).ready(function(){
 			</thead>
 			{{-- @foreach ($userlist as $record) --}}
 			@foreach ($userlist as $id =>$record)
+
+			@php
+
+        		$uq = $record->rest ? $record->rest->co_day+$record->rest->co_harf_rest*0.5+$record->rest->rest_allotted_day :'nodata';
+        		$ruq=$record->harf_rest_day*0.5+$record->rest_day+floor(($record->rest_time/60+optional($record->rest)->co_time)/8);
+   			@endphp
 			<tr class="d{{$id+1}}">
 				<td>{{ $record->employee}}</td>
 				<td>{{ $record->name}}</td>
+				<td>{{$uq}}日</td>
+				<td>{{optional($record->rest)->co_time}}時間</td>
+				<td>{{$ruq}}日</td>
+				<td>{{($record->rest_time/60+optional($record->rest)->co_time)%8}}時間</td>
 				<td>{{ $record->rest_day}}</td>
 				<td>{{ $record->harf_rest_day}}</td>
 				<td>{{ $record->rest_time}}</td>

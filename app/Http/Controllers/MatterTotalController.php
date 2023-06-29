@@ -17,6 +17,7 @@ class MatterTotalController extends Controller
 
 
         $userlist = User::leftJoin('matters', 'users.id', '=', 'matters.user_id')
+        ->with('rest')
         ->select(
             'users.id','users.name','users.employee',
             DB::raw('SUM(CASE WHEN matters.opt1 = 1 THEN 1 ELSE 0 END) AS rest_day'),
@@ -25,6 +26,7 @@ class MatterTotalController extends Controller
             )
             ->groupBy('users.id','users.name','users.employee')
             ->orderby('users.employee')
+
             ->get();
         return view('paidleave.total_pa',compact('userlist'));
 
