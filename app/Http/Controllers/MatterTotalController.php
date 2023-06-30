@@ -20,9 +20,9 @@ class MatterTotalController extends Controller
         ->with('rest')
         ->select(
             'users.id','users.name','users.employee',
-            DB::raw('SUM(CASE WHEN matters.opt1 = 1 THEN 1 ELSE 0 END) AS rest_day'),
-            DB::raw('SUM(CASE WHEN matters.opt1 = 4 THEN matters.allotted ELSE 0 END) AS rest_time'),
-            DB::raw('SUM(CASE WHEN matters.opt1 IN (2,3) THEN 1 ELSE 0 END) AS harf_rest_day')
+            DB::raw('SUM(CASE WHEN matters.opt1 = 1 AND matters.status != 6 THEN 1 ELSE 0 END) AS rest_day'),
+            DB::raw('SUM(CASE WHEN matters.opt1 = 4 AND matters.status != 6 THEN matters.allotted ELSE 0 END) AS rest_time'),
+            DB::raw('SUM(CASE WHEN matters.opt1 IN (2,3) AND matters.status != 6 THEN 1 ELSE 0 END) AS harf_rest_day')
             )
             ->groupBy('users.id','users.name','users.employee')
             ->orderby('users.employee')
@@ -38,9 +38,9 @@ class MatterTotalController extends Controller
         ->leftjoin('rests','users.id','rests.user_id')
         ->select(
             'users.id','users.name','users.employee',
-            DB::raw('SUM(CASE WHEN matters.opt1 = 1 THEN 1 ELSE 0 END) AS rest_day'),
-            DB::raw('SUM(CASE WHEN matters.opt1 = 4 THEN matters.allotted ELSE 0 END) AS rest_time'),
-            DB::raw('SUM(CASE WHEN matters.opt1 IN (2,3) THEN 1 ELSE 0 END) AS harf_rest_day')
+            DB::raw('SUM(CASE WHEN matters.opt1 = 1 AND matters.status != 6 THEN 1 ELSE 0 END) AS rest_day'),
+            DB::raw('SUM(CASE WHEN matters.opt1 = 4 AND matters.status != 6 THEN matters.allotted ELSE 0 END) AS rest_time'),
+            DB::raw('SUM(CASE WHEN matters.opt1 IN (2,3) AND matters.status != 6 THEN 1 ELSE 0 END) AS harf_rest_day')
             )
             ->where('users.id', $id)
             ->where('matters.status','!=', 6)

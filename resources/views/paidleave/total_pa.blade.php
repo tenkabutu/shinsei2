@@ -59,10 +59,15 @@ $(document).ready(function(){
 				<td>@if(is_numeric($uq) && is_numeric($ruq))
 					{{ $uq - $ruq }}日
 					@endif</td>
-				<td> @if(isset($record->rest))
-				{{(8-($record->rest_time/60-optional($record->rest)->co_time)%8)%8}}時間
-				  @endif</td>
-				<td></td>
+				 @if(isset($record->rest))
+				<td>{{(8-($record->rest_time/60-optional($record->rest)->co_time)%8)%8}}時間</td>
+				<td>@if($ruq>=5)
+				◯
+				@endif</td>
+				  @else
+				  <td></td><td></td>
+				  @endif
+
 				<td><input type="button" value="印刷" id='{{$record->id}}' ></td>
 			</tr>
 			@endforeach
