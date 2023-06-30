@@ -146,7 +146,7 @@
 				@endif
 				@if($record->matters_id)
 				<td>@if($record->matters_id){{$lap_rest_day}}@endif</td>
-				<td>@if($record->matters_id){{$lap_rest_time}}@endif</td>
+				<td>@if($record->matters_id){{$lap_rest_time/60}}@endif</td>
 				<td>{{$user->rest->co_day+$user->rest->co_harf_rest*0.5+$user->rest->rest_allotted_day-$lap_rest_day}}</td>
 				<td>{{$residue_rest_time}}</td>
 				@else
