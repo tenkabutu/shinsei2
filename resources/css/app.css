@@ -535,7 +535,7 @@ table select{
 /* || grid */
 .grid{
 	display: grid;
-	height:100%;
+
 }
 .grid_wrap ,.grid_wrap2,.grid_wrap3,.grid_wrap4{
     display: grid;
