@@ -108,7 +108,7 @@
 				@if($record->opt1==4)
 					@php
                         $lap_rest_time += $record->allotted;
-                        if($lap_rest_time>479){
+                        if($lap_rest_time-$user->rest->co_time*60>479){
                         	$lap_rest_time=$lap_rest_time-480;
                         	$lap_rest_day+=1;
                         }
@@ -145,9 +145,22 @@
 				<td></td><td></td>
 				@endif
 				@if($record->matters_id)
-				<td>@if($record->matters_id){{$lap_rest_day}}@endif</td>
+				<td>
+						@if(is_int(($lap_rest_time/60-$user->rest->co_time)/8))
+						{{$lap_rest_day}}
+						@else
+						{{$lap_rest_day+1}}
+						@endif
+
+
+				</td>
 				<td>@if($record->matters_id){{$lap_rest_time/60}}@endif</td>
-				<td>{{$user->rest->co_day+$user->rest->co_harf_rest*0.5+$user->rest->rest_allotted_day-$lap_rest_day}}</td>
+				<td>@if(is_int(($lap_rest_time/60-$user->rest->co_time)/8))
+						{{$user->rest->co_day+$user->rest->co_harf_rest*0.5+$user->rest->rest_allotted_day-$lap_rest_day}}
+						@else
+						{{$user->rest->co_day+$user->rest->co_harf_rest*0.5+$user->rest->rest_allotted_day-$lap_rest_day-1}}
+						@endif
+					</td>
 				<td>{{$residue_rest_time}}</td>
 				@else
 					<td></td><td></td><td></td><td></td>
