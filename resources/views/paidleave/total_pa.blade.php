@@ -64,11 +64,13 @@ $(document).ready(function(){
 				<td>@if($ruq>=5)
 				◯
 				@endif</td>
+				<td><input type="button" value="印刷" id='{{$record->id}}' ></td>
+
 				  @else
-				  <td></td><td></td>
+				  <td></td><td></td><td></td>
 				  @endif
 
-				<td><input type="button" value="印刷" id='{{$record->id}}' ></td>
+
 			</tr>
 			@endforeach
 		</table>
