@@ -1,8 +1,8 @@
 <x-print-layout>
 <x-slot name="style">main_print</x-slot>
-@section('reception_id', $user->id) <x-slot name="head">
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<x-slot name="head">
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
 
 </x-slot>
@@ -62,7 +62,7 @@
      <td></td>
     <th class="square_6_4">有給残</th>
     <td class="square_6_5">{{$uq-$user->harf_rest_day*0.5-$user->rest_day-floor(($user->rest_time/60+$user->co_time)/8)}}日</td>
-    <td class="square_6_6">{{(8-($user->rest_time/60-$user->rest->co_time)%8)}}時間</td>
+    <td class="square_6_6">{{(8-($user->rest_time/60-$user->rest->co_time)%8)%8}}時間</td>
   </tr>
    <tr><td>{{$user->rest->rest_year}}年度</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
 </table>

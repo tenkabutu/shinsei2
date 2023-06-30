@@ -53,6 +53,10 @@ class MatterTotalController extends Controller
                 $query1->whereYear('matters.matter_change_date', $year);
             }
             $user = $query1->first();
+            if(!$user){
+                $user = user::with('rest','worktype')->findOrFail($id);
+            }
+
 
 
             $query = Matter::query();

@@ -5,7 +5,11 @@
 	<script src='./js/jquery.tablesorter.js'></script>
 <script>
 $(document).ready(function(){
-	$('.sort-table').tablesorter();
+	$('.sort-table').tablesorter({
+		headers: {
+			6: { sorter: false }
+		}
+		});
 });
 </script>
 </x-slot>
@@ -13,6 +17,8 @@ $(document).ready(function(){
 <div class="main_right">
 	<div class="">
 		<h2>年休取得状況一覧</h2>
+	<fieldset id="print_set">
+		<legend>印刷時年月設定</legend>
 	<select id="yearSelect">
   <!-- 年の選択肢はJavaScriptで生成されます -->
 </select>
@@ -20,9 +26,9 @@ $(document).ready(function(){
 <select id="monthSelect">
   <!-- 月の選択肢はJavaScriptで生成されます -->
 </select>
-
+</fieldset>
 		<label class="success_label"></label>
-		<table class="table  sort-table">
+		<table class="user_table  sort-table">
 			<thead>
 			<tr>
 				<th>No</th>
@@ -30,11 +36,7 @@ $(document).ready(function(){
 				<th colspan="2">今年度有給</th>
 				<th colspan="2">取得有給</th>
 				<th colspan="2">残有給</th>
-				<th>有給取得日数</th>
-				<th>阪急取得回数</th>
-				<th>取得時間給</th>
-
-
+				<th>5日</th>
 				<th></th>
 			</tr>
 			</thead>
@@ -43,7 +45,7 @@ $(document).ready(function(){
 
 			@php
 
-        		$uq = $record->rest ? $record->rest->co_day+$record->rest->co_harf_rest*0.5+$record->rest->rest_allotted_day :'nodata';
+        		$uq = $record->rest ? $record->rest->co_day+$record->rest->co_harf_rest*0.5+$record->rest->rest_allotted_day :'';
         		$ruq=$record->harf_rest_day*0.5+$record->rest_day+floor(($record->rest_time/60+optional($record->rest)->co_time)/8);
    			@endphp
 			<tr class="d{{$id+1}}">
@@ -53,9 +55,14 @@ $(document).ready(function(){
 				<td>{{optional($record->rest)->co_time}}時間</td>
 				<td>{{$ruq}}日</td>
 				<td>{{($record->rest_time/60+optional($record->rest)->co_time)%8}}時間</td>
-				<td>{{ $record->rest_day}}</td>
-				<td>{{ $record->harf_rest_day}}</td>
-				<td>{{ $record->rest_time}}</td>
+
+				<td>@if(is_numeric($uq) && is_numeric($ruq))
+					{{ $uq - $ruq }}日
+					@endif</td>
+				<td> @if(isset($record->rest))
+				{{(8-($record->rest_time/60-optional($record->rest)->co_time)%8)%8}}時間
+				  @endif</td>
+				<td></td>
 				<td><input type="button" value="印刷" id='{{$record->id}}' ></td>
 			</tr>
 			@endforeach

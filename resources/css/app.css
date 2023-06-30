@@ -458,6 +458,7 @@ table select{
 }
 
 /* || 年休取得状況 */
+
 .print_h2{
 	height:42px;
 
@@ -481,7 +482,10 @@ table select{
 .info_table div{
 	text-align: center;
 }
-.total_table,.info_table{
+.user_table{
+
+}
+.total_table,.info_table,.user_table{
 	border-collapse: collapse;
 	width:100%;
 }
@@ -490,7 +494,7 @@ table select{
 	font-size:14px;
 	width: calc(100% / 8);height:calc(950px/42);
 }
-.total_table th,.total_table td{
+.total_table th,.total_table td,.user_table th,.user_table td{
 
 	border-right:1px solid black;border-bottom:1px solid black;
 }
@@ -502,7 +506,7 @@ table select{
 	text-align: left;
 	font-weight: normal;
 }
-.total_table{
+.total_table,.user_table{
 	border-left:1px solid black;border-top:1px solid black;
 }
 .total_table a{

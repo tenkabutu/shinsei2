@@ -677,7 +677,12 @@ table select{
 }
 
 
-.total_table,.info_table{
+.user_table{
+
+}
+
+
+.total_table,.info_table,.user_table{
 	border-collapse: collapse;
 	width:100%;
 }
@@ -690,7 +695,7 @@ table select{
 }
 
 
-.total_table th,.total_table td{
+.total_table th,.total_table td,.user_table th,.user_table td{
 
 	border-right:1px solid black;border-bottom:1px solid black;
 }
@@ -708,7 +713,7 @@ table select{
 }
 
 
-.total_table{
+.total_table,.user_table{
 	border-left:1px solid black;border-top:1px solid black;
 }
 
