@@ -61,7 +61,7 @@
     <td colspan="2">{{$user->rest_time/60}}</td>
      <td></td>
     <th class="square_6_4">有給残</th>
-    <td class="square_6_5">{{$uq-$user->harf_rest_day*0.5-$user->rest_day-floor(($user->rest_time/60+$user->co_time)/8)}}日</td>
+    <td class="square_6_5">{{$uq-$user->harf_rest_day*0.5-$user->rest_day-ceil(($user->rest_time/60+$user->co_time)/8)}}日</td>
     <td class="square_6_6">{{(8-($user->rest_time/60-$user->rest->co_time)%8)%8}}時間</td>
   </tr>
    <tr><td>{{$user->rest->rest_year}}年度</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
