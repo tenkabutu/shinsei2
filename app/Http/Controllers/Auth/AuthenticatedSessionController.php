@@ -32,6 +32,12 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        if (auth()->user()->role == 5) {
+            auth()->logout();
+            return redirect()->back()->withInput($request->only('email'))
+            ->withErrors(['status' => '該当のユーザーは現在ログインできません。']);
+        }
+
         return redirect()->intended(RouteServiceProvider::HOME);
     }
 

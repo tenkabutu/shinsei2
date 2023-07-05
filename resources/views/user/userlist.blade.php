@@ -45,6 +45,7 @@ $(document).ready(function(){
 					<option value=2 @if($record->role==2)selected @endif >リーダー</option>
 					<option value=3 @if($record->role==3)selected @endif >支援員</option>
 					<option value=4 @if($record->role==4)selected @endif >人事</option>
+					<option value=5 @if($record->role==5)selected @endif >退職者</option>
 					</select>
 				</td>
 				@elseif(Auth::user()->role==2&&Auth::user()->approval==2)
