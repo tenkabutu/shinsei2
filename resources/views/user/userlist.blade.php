@@ -15,14 +15,13 @@ $(document).ready(function(){
 		<h2>ユーザー管理</h2>
 
 		<label class="success_label"></label>
-		<table class="table  sort-table">
+		<table class="user_table  sort-table">
 			<thead>
 			<tr>
 				<th>ID</th>
 				<th>No</th>
 				<th >使用者</th>
-				<th>表示名</th>
-				<th>アドレス</th>
+
 				<th>権限</th>
 				<th>承認</th>
 				<th>地域</th>
@@ -37,8 +36,7 @@ $(document).ready(function(){
 				<td>{{ $id + 1 }}</td>
 				<td>{{ $record->employee}}</td>
 				<td>{{ $record->name}}</td>
-				<td>{{ $record->name2}}</td>
-				<td>{{ $record->email}}</td>
+
 				@if(Auth::user()->role<=2)
 				<td>
 					<input type="hidden" name="id" value="{{ $record->id}}">
@@ -88,13 +86,13 @@ $(document).ready(function(){
 				<td>
 					<select name="worktype_id">
 					<option value=0 @if($record->worktype_id==0)selected @endif >未設定</option>
-					<option value=1 @if($record->worktype_id==1)selected @endif >9時-18時:8</option>
-					<option value=2 @if($record->worktype_id==2)selected @endif >8時半-17時:7.5</option>
-					<option value=3 @if($record->worktype_id==3)selected @endif >9時-17時:7</option>
-					<option value=4 @if($record->worktype_id==4)selected @endif >10時-18時:7</option>
-					<option value=5 @if($record->worktype_id==5)selected @endif >8時半-16時半:7</option>
-					<option value=6 @if($record->worktype_id==6)selected @endif >8時半-17時半:8</option>
-					<option value=7 @if($record->worktype_id==7)selected @endif >9時-17時半:7.5</option>
+					<option value=1 @if($record->worktype_id==1)selected @endif >9時-18時</option>
+					<option value=2 @if($record->worktype_id==2)selected @endif >8時半-17時</option>
+					<option value=3 @if($record->worktype_id==3)selected @endif >9時-17時</option>
+					<option value=4 @if($record->worktype_id==4)selected @endif >10時-18時</option>
+					<option value=5 @if($record->worktype_id==5)selected @endif >8時半-16時半</option>
+					<option value=6 @if($record->worktype_id==6)selected @endif >8時半-17時半</option>
+					<option value=7 @if($record->worktype_id==7)selected @endif >9時-17時半</option>
 
 					</select>
 				</td>
