@@ -53,7 +53,7 @@
 		<form  method="post" action="save_ov" class="repeater"  >
 			@csrf
 			@if (session('save_check'))
-    	<div class="alert alert-danger">{{ session('save_check') }}</div>
+    	<div class="alert text-danger">{{ session('save_check') }}</div>
 		<x-save-box :status="$matter->status" :role="0" :type="1"/>
 		@endif
 			<input type="hidden" name="user_id" value="{{Auth::user()->id}}">
