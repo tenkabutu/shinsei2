@@ -35,7 +35,15 @@ class MatterTotalController extends Controller
 
 
         $query1 = User::leftJoin('matters', 'users.id', '=', 'matters.user_id')
-        ->leftjoin('rests','users.id','rests.user_id')
+        ->leftJoin('rests', function ($join) use ($month, $year) {
+            $join->on('users.employee', '=', 'rests.user_id');
+            if ($month == 0) {
+                $join->where('rests.rest_year', $year);
+            } else {
+                $restYear = ($month <= 4) ? ($year - 1) : $year;
+                $join->where('rests.rest_year', $restYear);
+            }
+        })
         ->select(
             'users.id','users.name','users.employee',
             DB::raw('SUM(CASE WHEN matters.opt1 = 1 AND matters.status != 6 THEN 1 ELSE 0 END) AS rest_day'),
@@ -47,23 +55,29 @@ class MatterTotalController extends Controller
             ->groupBy('users.id','users.name','users.employee');
 
             if($month==0){
-                $query1->where('matters.nendo', $year);
+               $query1->where('matters.nendo', $year);
+
             }else{
                 $query1->whereMonth('matters.matter_change_date', $month);
                 $query1->whereYear('matters.matter_change_date', $year);
+
             }
             $user = $query1->first();
-            if(!$user){
-                $user = user::with('rest','worktype')->findOrFail($id);
-            }
 
-
+                $user_rest = user::leftJoin('rests', function ($join) use ($month, $year) {
+                    $join->on('users.employee', '=', 'rests.user_id');
+                    if ($month == 0) {
+                        $join->where('rests.rest_year', $year);
+                    } else {
+                        $restYear = ($month <= 4) ? ($year - 1) : $year;
+                        $join->where('rests.rest_year', $restYear);
+                    }
+                })->where('users.id', $id)->first();;
 
             $query = Matter::query();
             $query->WhereIn('matters.opt1',[1,2,3,4]);
             $query->where('matters.user_id', $id);
             $query->where('matters.status','!=', 6);
-
             $query->leftjoin('nametags as nt3', function ($join)
             {
                 $join->on('matters.opt1', '=', 'nt3.tagid')
@@ -77,16 +91,9 @@ class MatterTotalController extends Controller
             }
             $query->select('*', 'matters.id as matters_id', 'matters.created_at as matters_created_at','nt3.nametag as optname');
             $query->orderBy('matters.matter_change_date','asc');
-
             $records = $query->get();
 
-
-
-
-
-
-
-            return view('paidleave.print_total_pa',compact('user','records'));
+            return view('paidleave.print_total_pa',compact('user','records','user_rest'));
 
     }
 
