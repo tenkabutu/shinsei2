@@ -8,8 +8,13 @@
 				<th>エリア</th>
 				<th>申請者</th>
 				<th class="id">実施日</th>
-				<th class="s3">有給日</th>
-				<th class="s3">有給時</th>
+				@if(Request::get('matter_opt')==2)
+					<th class="s3">欠勤日</th>
+					<th class="s3">欠勤時</th>
+				@else
+					<th class="s3">有給日</th>
+					<th class="s3">有給時</th>
+				@endif
 				<th class="s3">その他</th>
 				<th class="id">承認</th>
 				<th></th>
@@ -26,11 +31,11 @@
 				<td>{{ $record->area}}</td>
 				<td>{{ $record->username}}</td>
 				<td>{{ date('n/j',strtotime($record->matter_change_date))}}</td>
-				@if($record->opt1==1)
+				@if($record->opt1==1||$record->opt1==9)
 				<td>1</td><td></td><td></td>
 				@elseif($record->opt1==2||$record->opt1==3)
 				<td>0.5</td><td></td><td></td>
-				@elseif($record->opt1==4)
+				@elseif($record->opt1==4||$record->opt1==10||$record->opt1==11)
 				<td></td><td>{{floor($record->allotted/60)}}@if($record->allotted%60>0)時間{{$record->allotted%60}}分@endif</td><td></td>
 				@elseif($record->opt1==5||$record->opt1==6)
 				<td></td><td></td><td>1</td>
