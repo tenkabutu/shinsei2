@@ -66,18 +66,8 @@ class PurchaseController extends Controller
         //$user=user::with('roletag','approvaltag','areatag','worktype')->findOrFail(Auth::user()->id);
         $user=user::with('roletag','approvaltag','areatag','worktype')->findOrFail($matter->user_id);
 
-        $query=user::query();
-        $area_id=$user->area;
 
-        $query->where(function($query2) use($area_id){
-            $query2->whereIn('users.role',[1,2])
-            ->Where('users.area', $area_id)
-            ->Where('users.approval',2);
-        })->orwhere(function($query2){
-            $query2->whereIn('users.role',[1,2])
-            ->Where('users.approval',1);
-        });
-            $check_userlist=$query->get('name')->all();
+        $check_userlist=check_userlist();
 
 
             //  with('roletag','approvaltag','areatag','worktype')->findOrFail(Auth::user()->id);
@@ -87,4 +77,12 @@ class PurchaseController extends Controller
 
 
     }
+    public static function check_userlist(){
+        $check_userlist = user::where('users.role','1')
+            ->where('users.approval','1')
+            ->get('name')->all();
+
+        return $check_userlist;
+    }
+
 }

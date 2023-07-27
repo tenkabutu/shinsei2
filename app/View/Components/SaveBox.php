@@ -38,6 +38,8 @@ class SaveBox extends Component
             return view('components.savebox.save-box-pa');
         }elseif($this->type==3){
             return view('components.savebox.save-box-te');
+        }elseif($this->type==4){
+            return view('components.savebox.save-box-pu');
         }
     }
 }

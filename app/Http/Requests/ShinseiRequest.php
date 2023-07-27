@@ -61,13 +61,17 @@ class ShinseiRequest extends FormRequest
             if ($this->has('order_content')) {
             $rules['order_content'] = 'required|string|max:250';
             }
+        }elseif($this->matter_type==7) {
+            if ($this->has('matter_name')) {
+                $rules['matter_name'] = 'required|string|max:250';
+            }
         }
 
         return $rules;
     }
     public function messages()
     {
-        return [
+        $messages = [
                 'matter_change_date.required' => '予定日は必須です。',
                 'order_content.required'   => '理由は必須です。',
                 'work_content.required'   => '作業内容は必須です。',
@@ -77,6 +81,14 @@ class ShinseiRequest extends FormRequest
                 'minutes1.integer'  => '開始時間は0以上の数値を入力してください。',
                 'hour2.integer'  => '終了時間は0以上の数値を入力してください。',
                 'minutes2.integer'  => '終了時間は0以上の数値を入力してください。',
+                'matter_name.required'  => '品名は必須です。',
         ];
+
+        if ($this->matter_type == 7) {
+            $messages['order_content.required'] = "目的は必須です。";
+            $messages['work_content.required'] = "目的は必須です。";
+        }
+
+        return $messages;
     }
 }

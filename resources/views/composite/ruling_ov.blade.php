@@ -52,12 +52,6 @@
 					@endif
 					<div><label>状態：</label>
 					 <div class="radio-group">
-					<!-- <input id="st2_1" type="radio" class="st2" name="search_type" value="1" @isset($input_data['search_type']) @if($input_data['search_type']==1) checked @endif @endisset />
-					<label for="st2_1">全件</label> -->
-					<!-- <input id="st1_2" type="radio" class="st1" name="search_type" value="2" @if(Request::get('search_type')==2) checked @endif/>
-					<label for="st1_2">未申請</label>
-					<input id="st1_3" type="radio" class="st1" name="search_type" value="3" @if(Request::get('search_type')==3) checked @endif/>
-					<label for="st1_3">申請中</label> -->
 					<input id="st2_1" type="radio" class="st2" name="search_type" value="1" @if(Request::get('search_type')==1) checked @endif/>
 					<label for="st2_1">全件</label>
 					<input id="st2_2" type="radio" class="st2" name="search_type" value="2" @if(Request::get('search_type')==2) checked @endif/>

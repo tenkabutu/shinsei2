@@ -39,28 +39,8 @@
 			<textarea class="g23" id="purchase_content" name="purchase_content" rows="2" cols="60">{{old('purchase_content',$matter->purchase_content)}}</textarea>
 		</div>
 
-		<div class="matter_date">
-			<label class="g12">開始時間</label>
-			<div class="g23">
-				<input type="number" name="hour1" autocomplete="off" value="{{old('hour1',$matter->hour1)}}">
-				<input type="number" name="minutes1" min="0" max="59" autocomplete="off" value="{{old('minutes1',$matter->minutes1)}}">
-			</div>
-			<label class="g34">終了時間</label>
-			<div class="g45">
-				<input type="number" name="hour2" autocomplete="off" value="{{old('hour2',$matter->hour2)}}">
 
-				<input type="number" name="minutes2" min="0" max="59" autocomplete="off" value="{{old('minutes2',$matter->minutes2)}}">
-			</div>
 
-			<label class="g56">休憩時間</label>
-			<div class="g67">
-				<input type="number" name="breaktime" min="0" max="60" autocomplete="off" value="{{old('breaktime',$matter->breaktime)}}">
-
-			</div>
-		</div>
-		<div>
-			<label class="g12">休暇時間</label> <label class="time_alert g23"></label><label class="hour3 g34">{{old('hour3',intdiv($matter->allotted,60))}}時間</label> <label class="minutes3 g45">{{$matter->allotted%60}}分</label>
-		</div>
 
 	</fieldset>
 	<p>申請種別1はリーダーに、申請種別2はリーダー及び水田に事前に電話で了解を取ってください。</p>

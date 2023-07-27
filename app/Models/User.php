@@ -10,6 +10,7 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 {
 
+
     use HasApiTokens, HasFactory, Notifiable;
     public function roletag(){
         return $this->belongsTo('App\Models\Nametag','role','tagid')->where('groupid', '=', 1);
@@ -27,6 +28,7 @@ class User extends Authenticatable
         return $this->hasOne('App\Models\Rest','user_id','employee')->orderBy('rest_year', 'desc');
     }
 
+
     /**
      * The attributes that are mass assignable.
      *
@@ -43,6 +45,7 @@ class User extends Authenticatable
         'worktype_id',
         'employee',
         'hiring_day',
+        'permissions',
 
     ];
     protected  $dates=[

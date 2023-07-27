@@ -193,14 +193,12 @@ class PaidLeaveController extends Controller
 
 
     }
-    public static function create_userlist ()
-    {
+    public static function create_userlist (){
         $userlist = User::select('id','employee', 'name')->orderby('employee','asc')->get();
         $create_userlist = "";
         foreach ($userlist as $us) {
             $create_userlist .= '<option value="' . $us->id . '">' . $us->employee . ':' . $us->name . '</option>';
         }
-        ;
         return $create_userlist;
     }
 }

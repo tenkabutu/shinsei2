@@ -160,6 +160,26 @@ class TaskcountMiddleware
             ->where('user_id',Auth::id())
             ->Where('status', 5)
             ->count('matters.id');
+            $pu_count2 = DB::table('matters')
+            ->where('matter_type',7)
+            ->where('user_id',Auth::id())
+            ->Where('status', 2)
+            ->count('matters.id');
+            $pu_count3 = DB::table('matters')
+            ->where('matter_type',7)
+            ->where('user_id',Auth::id())
+            ->Where('status', 5)
+            ->count('matters.id');
+            $te_count2 = DB::table('matters')
+            ->where('matter_type',3)
+            ->where('user_id',Auth::id())
+            ->Where('status', 2)
+            ->count('matters.id');
+            $te_count3 = DB::table('matters')
+            ->where('matter_type',3)
+            ->where('user_id',Auth::id())
+            ->Where('status', 5)
+            ->count('matters.id');
 
             $ov_count2 = DB::table('matters')
             ->where('matter_type',1)
@@ -182,16 +202,7 @@ class TaskcountMiddleware
             ->where('user_id',Auth::id())
             ->count('matters.id');
 
-            $te_count2 = DB::table('matters')
-            ->where('matter_type',3)
-            ->where('user_id',Auth::id())
-            ->Where('status', 2)
-            ->count('matters.id');
-            $te_count3 = DB::table('matters')
-            ->where('matter_type',3)
-            ->where('user_id',Auth::id())
-            ->Where('status', 5)
-            ->count('matters.id');
+
 
             // 最新の有給情報を読み込む
             $user = user::with('rest','worktype')->findOrFail(Auth::id());

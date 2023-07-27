@@ -26,6 +26,7 @@ $(document).ready(function(){
 				<th>承認</th>
 				<th>地域</th>
 				<th>勤務時間</th>
+				<th>購</th>
 				<th></th>
 			</tr>
 			</thead>
@@ -53,6 +54,7 @@ $(document).ready(function(){
 				@else
 				<td>{{ $record->roletag->nametag}}</td>
 				@endif
+
 				@if(Auth::user()->role<=2)
 				<td>
 					<select name="approval">
@@ -62,10 +64,6 @@ $(document).ready(function(){
 
 					</select>
 				</td>
-				@else
-				<td>{{ $record->approvaltag->nametag}}</td>
-				@endif
-				@if(Auth::user()->role<=2)
 				<td>
 					<select name="area">
 					<option value=0 @if($record->area==0)selected @endif >江越</option>
@@ -80,10 +78,6 @@ $(document).ready(function(){
 
 					</select>
 				</td>
-				@else
-				<td>{{ $record->areatag->nametag}}</td>
-				@endif
-				@if(Auth::user()->role<=2)
 				<td>
 					<select name="worktype_id">
 					<option value=0 @if($record->worktype_id==0)selected @endif >未設定</option>
@@ -98,9 +92,12 @@ $(document).ready(function(){
 					</select>
 				</td>
 				@else
+				<td>{{ $record->approvaltag->nametag}}</td>
+				<td>{{ $record->areatag->nametag}}</td>
 				<td>{{optional( $record->worktype)->worktype}}</td>
-
 				@endif
+				<td><input type="checkbox" name="p1" value="1" @if($record->permissions & 1) checked @endif></td>
+
 
 
 				<td><input type="button" class="user_change" value="変更"></td>
@@ -117,15 +114,21 @@ $(document).ready(function(){
 		var approval = str.find('select[name="approval"]').val();
 		var area = str.find('select[name="area"]').val();
 		var wt = str.find('select[name="worktype_id"]').val();
+		var pe=0;
+		if(str.find('input[name="p1"]').prop('checked')){
+			pe |= 1;
+			}
+
 		$.ajax({
 	        url: "user/change",
 	        dataType: "json",
 	        type: "POST",
-	        data:{id:id,role:role,approval:approval,area:area,worktype_id:wt, _token: '{{csrf_token()}}'},
+	        data:{id:id,role:role,approval:approval,area:area,worktype_id:wt,permissions:pe, _token: '{{csrf_token()}}'},
 	        success: function(data) {
 
 	         	var resp ="ID:"+data.id+" "+data.name+"さんの情報を書き換えました。";
 	        	$('.success_label').append(resp);
+	        	console.log(data);
 
 
 
