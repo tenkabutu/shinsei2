@@ -18,7 +18,6 @@ $(document).ready(function(){
 		<table class="user_table  sort-table">
 			<thead>
 			<tr>
-				<th>ID</th>
 				<th>No</th>
 				<th >使用者</th>
 
@@ -27,14 +26,13 @@ $(document).ready(function(){
 				<th>地域</th>
 				<th>勤務時間</th>
 				<th>購</th>
+				<th>購</th>
 				<th></th>
 			</tr>
 			</thead>
 			{{-- @foreach ($userlist as $record) --}}
 			@foreach ($userlist as $id =>$record)
 			<tr class="d{{$id+1}}">
-
-				<td>{{ $id + 1 }}</td>
 				<td>{{ $record->employee}}</td>
 				<td>{{ $record->name}}</td>
 
@@ -91,16 +89,22 @@ $(document).ready(function(){
 
 					</select>
 				</td>
+				<td><input type="checkbox" name="p1" value="1" @if($record->permissions & 1) checked @endif></td>
+				<td><input type="checkbox" name="p2" value="2" @if($record->permissions & 2) checked @endif></td>
+				<td><input type="button" class="user_change" value="変更"></td>
 				@else
 				<td>{{ $record->approvaltag->nametag}}</td>
 				<td>{{ $record->areatag->nametag}}</td>
 				<td>{{optional( $record->worktype)->worktype}}</td>
+
+				<td>@if($record->permissions & 1) ◯ @endif</td><td>@if($record->permissions & 2) ◯ @endif</td>
+				<td></td>
 				@endif
-				<td><input type="checkbox" name="p1" value="1" @if($record->permissions & 1) checked @endif></td>
 
 
 
-				<td><input type="button" class="user_change" value="変更"></td>
+
+
 			</tr>
 			@endforeach
 		</table>
@@ -117,6 +121,9 @@ $(document).ready(function(){
 		var pe=0;
 		if(str.find('input[name="p1"]').prop('checked')){
 			pe |= 1;
+			}
+		if(str.find('input[name="p2"]').prop('checked')){
+			pe |= 2;
 			}
 
 		$.ajax({
@@ -142,6 +149,19 @@ $(document).ready(function(){
 	    // }else{
 	      //   alert("端末が選択されていません");
 	       //  }
+	});
+	$('input[type="checkbox"]').on('click', function() {
+	    // クリックされたチェックボックスのname属性とチェック状態を取得します
+	    var isCheckedP1 = $(this).attr('name') === 'p1' && $(this).prop('checked');
+	    var isCheckedP2 = $(this).attr('name') === 'p2' && $(this).prop('checked');
+
+	    if (isCheckedP1) {
+	        // p1Checkboxにチェックがついたらp2Checkboxのチェックを外す
+	        $(this).closest('tr').find('input[name="p2"]').prop('checked', false);
+	    } else if (isCheckedP2) {
+	        // p2Checkboxにチェックがついたらp1Checkboxのチェックを外す
+	        $(this).closest('tr').find('input[name="p1"]').prop('checked', false);
+	    }
 	});
    	</script>
 </x-app-layout>

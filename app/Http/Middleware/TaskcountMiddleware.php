@@ -40,6 +40,7 @@ class TaskcountMiddleware
         $ov_count2 = 0;
         $te_count2 = 0;
         if (Auth::id()) {
+            $pu_count1=0;
             //承認権限がすべてかエリアか
             if (Auth::user()->approval == 1) {
 
@@ -149,7 +150,7 @@ class TaskcountMiddleware
 
                     ->count('matters.id');
             }
-
+/*
             $pa_count2 = DB::table('matters')
             ->where('matter_type',2)
             ->where('user_id',Auth::id())
@@ -179,7 +180,29 @@ class TaskcountMiddleware
             ->where('matter_type',3)
             ->where('user_id',Auth::id())
             ->Where('status', 5)
-            ->count('matters.id');
+            ->count('matters.id'); */
+            $authId = Auth::id();
+
+            $countQuery = DB::table('matters')
+            ->where('user_id', $authId)
+            ->whereIn('matter_type', [2, 7, 3])
+            ->whereIn('status', [2, 5])
+            ->select('matter_type', 'status', DB::raw('COUNT(id) as count'))
+            ->groupBy('matter_type', 'status')
+            ->get();
+
+            $counts = [];
+
+            foreach ($countQuery as $row) {
+                $counts[$row->matter_type][$row->status] = $row->count;
+            }
+
+            $pa_count2 = $counts[2][2] ?? 0;
+            $pa_count3 = $counts[2][5] ?? 0;
+            $pu_count2 = $counts[7][2] ?? 0;
+            $pu_count3 = $counts[7][5] ?? 0;
+            $te_count2 = $counts[3][2] ?? 0;
+            $te_count3 = $counts[3][5] ?? 0;
 
             $ov_count2 = DB::table('matters')
             ->where('matter_type',1)
@@ -235,31 +258,31 @@ class TaskcountMiddleware
             // header("Content-type: application/json; charset=UTF-8");
             // echo $rest_day_list;
             // exit();
-        //付与休憩時間から時間給を引いて60分
+            //付与休憩時間から時間給を引いて60分
            // $residue_day = intdiv($user->rest->rest_allotted-$used_rest_time,480);
 
 
 
-        $this->viewFactory->share('rest_time', $used_rest_time);
-        $this->viewFactory->share('used_rest_day', $used_rest_day);
-        $this->viewFactory->share('used_rest_time', $used_rest_time);
-        $this->viewFactory->share('used_harf_rest', $used_harf_rest);
+            $this->viewFactory->share('rest_time', $used_rest_time);
+            $this->viewFactory->share('used_rest_day', $used_rest_day);
+            $this->viewFactory->share('used_rest_time', $used_rest_time);
+            $this->viewFactory->share('used_harf_rest', $used_harf_rest);
 
 
-        $this->viewFactory->share('residue_rest_day', $residue_rest_day);
-        $this->viewFactory->share('residue_co_day', $residue_co_day);
+            $this->viewFactory->share('residue_rest_day', $residue_rest_day);
+            $this->viewFactory->share('residue_co_day', $residue_co_day);
 
             };
-            $this->viewFactory->share('order_count', $order_count);
-            $this->viewFactory->share('pa_count1', $pa_count1);
-            $this->viewFactory->share('ov_count1', $ov_count1);
-            $this->viewFactory->share('te_count1', $te_count1);
-            $this->viewFactory->share('pa_count2', $pa_count2);
-            $this->viewFactory->share('ov_count2', $ov_count2);
-            $this->viewFactory->share('te_count2', $te_count2);
-            $this->viewFactory->share('pa_count3', $pa_count3);
-            $this->viewFactory->share('ov_count3', $ov_count3);
-            $this->viewFactory->share('te_count3', $te_count3);
+
+
+            $this->viewFactory->share(compact(
+                'order_count','pa_count1',
+                'ov_count1','te_count1',
+                'pa_count2', 'ov_count2',
+                'te_count2', 'pa_count3',
+                'ov_count3', 'te_count3',
+                'pu_count2','pu_count3',
+                ));
             $this->viewFactory->share('userdata', $user);
         }
 

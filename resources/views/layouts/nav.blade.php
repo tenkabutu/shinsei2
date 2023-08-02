@@ -104,8 +104,8 @@
 					<li class="nav_count"><a href="/shinsei2/public/2/matter_ruling">休暇申請</a>　　　　<a class="double" href="/shinsei2/public/2/matter_ruling?search_type=3">申請{{$pa_count1}}件</a></li>
 					<li class="nav_count"><a href="/shinsei2/public/3/matter_ruling">テレワ申請</a>　　　<a class="double" href="/shinsei2/public/3/matter_ruling?search_type=3">申請{{$te_count1}}件</a></li>
 					<li class="nav_count"><a href="/shinsei2/public/1/matter_ruling">勤務申請</a>　　　　<a class="double" href="/shinsei2/public/1/matter_ruling?search_type=3">申請{{$ov_count1}}件</a></li>
-					@if(Auth::user()->permissions & 1)
-					<li class="nav_count"><a href="/shinsei2/public/7/matter_ruling">購入申請(仮)</a>　　　　<a class="double" href="/shinsei2/public/7/matter_ruling?search_type=3"></a></li>
+					@if(Auth::user()->permissions & 1||Auth::user()->permissions & 2)
+					<li class="nav_count"><a href="/shinsei2/public/7/matter_ruling">購入申請</a>　　　　<a class="double" href="/shinsei2/public/7/matter_ruling?search_type=3"></a></li>
 					@endif
 				</ul>
 				@endif
