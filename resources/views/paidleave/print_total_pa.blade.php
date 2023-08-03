@@ -148,7 +148,7 @@
 				@if($record->matters_id)
 				<td>
 						@if(is_int(($lap_rest_time/60-$user_rest->co_time)/8))
-						{{$lap_rest_day}}
+						{{$lap_rest_day}}◯
 						@else
 						{{$lap_rest_day+1}}
 						@endif
