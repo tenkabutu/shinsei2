@@ -32,7 +32,7 @@ class PaidLeaveController extends Controller
         });
             $check_userlist=$query->get('name')->all();
 
-            return view('paidleave.create_pa',compact('user','check_userlist','userlist'));
+            return view('paidleave.create_pa',compact('user','check_userlist'));
 
     }
     public function save(ShinseiRequest $request){
