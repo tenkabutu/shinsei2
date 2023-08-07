@@ -41,6 +41,7 @@ class TaskcountMiddleware
         $te_count2 = 0;
         if (Auth::id()) {
             $pu_count1=0;
+
             //承認権限がすべてかエリアか
             if (Auth::user()->approval == 1) {
 
@@ -182,6 +183,9 @@ class TaskcountMiddleware
             ->Where('status', 5)
             ->count('matters.id'); */
             $authId = Auth::id();
+            $pu_count1=Matter::where('matter_type', 7)
+            ->where('status', 2)
+            ->count();
 
             $countQuery = DB::table('matters')
             ->where('user_id', $authId)
