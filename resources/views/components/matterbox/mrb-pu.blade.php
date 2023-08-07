@@ -1,5 +1,5 @@
 <section id="matter_area">
-	<h5>休暇情報</h5>
+	<h5>購入希望情報</h5>
 	<fieldset>
 		<div>
 			<label class="g12" for="matter_name">品名　　：</label>
@@ -12,15 +12,15 @@
 		<div>
 			<label class="g12">設置場所:</label>
 			<div class="radio-group g23">
-				<input id="st1_1" type="radio" class="st1" name="opt1" value="1" {{old('opt1',$matter->opt1)=='1' ? 'checked':''}} />
+				<input id="st1_1" type="radio" class="st1" name="opt1" value="12" {{old('opt1',$matter->opt1)=='12' ? 'checked':''}} />
 				<label for="st1_1">江越事務所</label>
-				<input id="st1_2" type="radio" class="st1" name="opt1" value="2" {{old('opt1',$matter->opt1)=='2' ? 'checked':''}}/>
+				<input id="st1_2" type="radio" class="st1" name="opt1" value="13" {{old('opt1',$matter->opt1)=='13' ? 'checked':''}}/>
 				<label for="st1_2">熊本市</label>
-				<input id="st1_3" type="radio" class="st1" name="opt1" value="3" {{old('opt1',$matter->opt1)=='3' ? 'checked':''}}/>
+				<input id="st1_3" type="radio" class="st1" name="opt1" value="14" {{old('opt1',$matter->opt1)=='14' ? 'checked':''}}/>
 				<label for="st1_3">八代市</label>
-				<input id="st1_4" type="radio" class="st1" name="opt1" value="4" {{old('opt1',$matter->opt1)=='4' ? 'checked':''}}/>
+				<input id="st1_4" type="radio" class="st1" name="opt1" value="15" {{old('opt1',$matter->opt1)=='15' ? 'checked':''}}/>
 				<label for="st1_4">天草市</label>
-				<input id="st1_5" type="radio" class="st1" name="opt1" value="5" {{old('opt1',$matter->opt1)=='5' ? 'checked':''}}/>
+				<input id="st1_5" type="radio" class="st1" name="opt1" value="16" {{old('opt1',$matter->opt1)=='16' ? 'checked':''}}/>
 				<label for="st1_5">荒尾市</label>
 			</div>
 		</div>
@@ -43,5 +43,22 @@
 
 
 	</fieldset>
-	<p>申請種別1はリーダーに、申請種別2はリーダー及び水田に事前に電話で了解を取ってください。</p>
+	<p>納品日に猶予がない場合は電話をしてください。</p>
 </section>
+<seciton>
+	<fieldset>
+
+		<div>
+
+			<div class="approval-checkboxes">
+    		<label for="opt1">承認１</label>
+    		<input type="checkbox" id="opt1" name="opt1" value="{{ $matter->opt1 }}" data-opt="opt1" data-value="{{ $matter->opt1 }}" class="check-opt">
+    		<label for="opt2">承認２</label>
+    		<input type="checkbox" id="opt2" name="opt2" value="{{ $matter->opt2 }}" data-opt="opt2" data-value="{{ $matter->opt2 }}" class="check-opt">
+    		<label for="opt3">承認３</label>
+    		<input type="checkbox" id="opt3" name="opt3" value="{{ $matter->opt3 }}" data-opt="opt3" data-value="{{ $matter->opt3 }}" class="check-opt">
+			</div>
+		</div>
+
+	</fieldset>
+</seciton>

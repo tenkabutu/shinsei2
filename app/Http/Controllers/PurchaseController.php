@@ -20,9 +20,9 @@ class PurchaseController extends Controller
     public function create(){
 
         $user=User::with('roletag','approvaltag','areatag','worktype')->findOrFail(Auth::user()->id);
-        $userlist = $this->create_userlist();
-        $check_userlist=$this->create_check_userlist();
-        return view('purchase.create_pu',compact('user','check_userlist','userlist'));
+
+        $check_userlist=$this->pu_check_userlist();
+        return view('purchase.create_pu',compact('user','check_userlist'));
     }
     public function save_request(ShinseiRequest $request){
 
@@ -67,7 +67,7 @@ class PurchaseController extends Controller
         $user=user::with('roletag','approvaltag','areatag','worktype')->findOrFail($matter->user_id);
 
 
-        $check_userlist=check_userlist();
+        $check_userlist=$this->pu_check_userlist();
 
 
             //  with('roletag','approvaltag','areatag','worktype')->findOrFail(Auth::user()->id);
@@ -77,10 +77,9 @@ class PurchaseController extends Controller
 
 
     }
-    public static function check_userlist(){
-        $check_userlist = user::where('users.role','1')
-            ->where('users.approval','1')
-            ->get('name')->all();
+    public static function pu_check_userlist(){
+        $check_userlist = User::where('permissions', '&',2)
+        ->get(['id', 'name']);
 
         return $check_userlist;
     }

@@ -141,6 +141,60 @@ $(function(){
 		});
 	@endisset
 
+	 // ページが読み込まれたときに、各チェックボックスの状態を設定する
+    $('.check-opt').each(function() {
+        var opt = $(this).data('opt'); // opt1, opt2, opt3 のいずれか
+        var value = $(this).data('value'); // 初期値
+        if (value == 0) {
+            // opt の値が 0 であれば未チェック
+            $(this).prop('checked', false);
+        } else {
+            // opt の値が 0 以外であればチェック済み
+            $(this).prop('checked', true);
+        }
+    });
+
+    // チェックボックスがクリックされたときに、承認権限を持つユーザーであれば以下の処理を行う
+    $('.check-opt').click(function() {
+        var user_id = {{ Auth::user()->id }}; // ログインユーザーのID
+        var user_role = {{ Auth::user()->role }}; // ログインユーザーの役割
+        var opt = $(this).data('opt'); // opt1, opt2, opt3 のいずれか
+        var value = $(this).data('value'); // 初期値
+        var checked = $(this).prop('checked'); // チェック状態
+
+        if (user_role == 'approver') {
+            // 承認権限を持つユーザーであれば
+            if (checked) {
+                // チェックボックスが未チェックからチェック済みになった場合
+                $(this).val(user_id); // チェックボックスのvalueにユーザーIDをセットする
+                $(this).attr('disabled', true); // そのチェックをそのユーザー以外が外せないようにする
+                $('.check-opt').not(this).attr('disabled', true); // 既にいずれかのチェックボックスにチェックをいれたユーザーは他の２つのチェックボックスの操作はできないようにする
+            } else {
+                // チェックボックスがチェック済みから未チェックになった場合
+                $(this).val(value); // チェックボックスのvalueを初期値に戻す
+                $(this).attr('disabled', false); // そのチェックを外せるようにする
+                $('.check-opt').not(this).attr('disabled', false); // 他の２つのチェックボックスの操作もできるようにする
+
+                $('.check-opt').each(function() {
+                    if ($(this).val() == user_id) {
+                        $(this).attr('disabled', false);
+                    }
+                });
+
+
+            }
+
+            // ３つのチェックボックスがチェックされた場合、以降チェックボックスの操作はできないようにする
+            if ($('.check-opt:checked').length == 3) {
+                $('.check-opt').attr('disabled', true);
+            }
+        } else {
+            // 承認権限を持たないユーザーであれば、チェックボックスの操作はできないようにする
+            $(this).prop('checked', !checked); // チェック状態を元に戻す
+            $(this).attr('disabled', true); // チェックボックスを無効化する
+        }
+    });
+
  });
 </script>
 </x-app-layout>
