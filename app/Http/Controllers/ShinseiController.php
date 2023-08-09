@@ -446,7 +446,10 @@ class ShinseiController extends Controller
             } elseif ($request->search_type == 3) {
 
                 $area_id = $user->area;
-                if ($user->approval == 1) {
+                if($type2==7){
+                    $query->where('status', 2);
+
+                }elseif ($user->approval == 1) {
                     $query->where(function ($query2)
                     {
                         $query2->Where('status', 2)
@@ -457,7 +460,7 @@ class ShinseiController extends Controller
                         $query2->Where('task_status', 2)
                             ->Where('users.id', '!=', Auth::id());
                     });
-                } elseif ($user->approval == 2) {
+                }elseif ($user->approval == 2) {
                     $query->where(function ($query2) use ( $area_id)
                     {
                         $query2->Where('status', 2)

@@ -39,8 +39,9 @@ class TaskcountMiddleware
         $pa_count2 = 0;
         $ov_count2 = 0;
         $te_count2 = 0;
+        $pu_count1=0;
         if (Auth::id()) {
-            $pu_count1=0;
+
 
             //承認権限がすべてかエリアか
             if (Auth::user()->approval == 1) {
@@ -281,7 +282,7 @@ class TaskcountMiddleware
 
             $this->viewFactory->share(compact(
                 'order_count','pa_count1',
-                'ov_count1','te_count1',
+                'ov_count1','pu_count1','te_count1',
                 'pa_count2', 'ov_count2',
                 'te_count2', 'pa_count3',
                 'ov_count3', 'te_count3',
