@@ -18,7 +18,6 @@
 					<button class="proxy_check">代理申請</button>
 					@endif
 
-
 					</div>
 
 				</div>
