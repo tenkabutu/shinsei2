@@ -94,6 +94,16 @@ class TeleWorkController extends Controller
         //$id = $matter->id;
         return  redirect($id.'/show_te');
     }
+    public function fix(ShinseiRequest $request,$id){
+        $matter =matter::find($id);
+        $request->merge(['proxy_id' =>Auth::id()]);
+        $matter->fill($request->except('_token','user_id'));
+        $matter->status=1;
+        $matter->save();
+
+        $request->session()->regenerateToken();
+        return  redirect($id.'/show_te');
+    }
     public function update_request(ShinseiRequest $request,$id){
         $matter =matter::find($id);
         $matter->fill($request->except('_token'));
