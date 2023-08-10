@@ -97,10 +97,6 @@ class OverWorkController extends Controller
     }
 
     public function update(ShinseiRequest $request,$id){
-
-       /*  print_r($_REQUEST);
-        exit; */
-
         $matter =matter::find($id);
         $matter->fill($request->except('_token'));
 
@@ -147,6 +143,39 @@ class OverWorkController extends Controller
                 $task->matter_id =$id;
                 $task->fill($row)->save();
             }
+        }
+
+        $request->session()->regenerateToken();
+        return  redirect($id.'/rewrite_ov');
+    }
+    public function fix(ShinseiRequest $request,$id){
+        $matter =matter::find($id);
+        $request->merge(['proxy_id' =>Auth::id()]);
+        $matter->fill($request->except('_token','user_id'));
+        $matter->save();
+
+        foreach($request->task_group as $row){
+            if(isset($row['id'])){
+                $task =task::find($row['id']);
+                $task->matter_id =$id;
+                $task->fill($row);
+                $task->update();
+            }elseif($row['task_change_date']){
+
+                $task = new Task();
+                $task->task_allotted = ((int)$row['task_hour2']*60+(int)$row['task_minutes2'])-((int)$row['task_hour1']*60+(int)$row['task_minutes1'])-(int)$row['task_breaktime'];
+                $task->task_status =2;
+                $date=Carbon::now()->toDateTimeString();
+                $task->task_request_date=$date;
+                $task->matter_id =$id;
+                $task->fill($row)->save();
+
+
+
+            }/* elseif($row['id']){
+                $task->task_status=6;
+                $task->save();
+            } */
         }
 
         $request->session()->regenerateToken();
