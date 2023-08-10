@@ -14,9 +14,10 @@
 				<input type="submit" class="g23" value="再提出" onclick="setAction('reject')">
 				@if(Auth::user()->permissions & 4)
 				<input type="submit" class="g34" value="代理修正" onclick="setAction('fix_pa')">
-				<div class="g14 grid">
+				<input type="submit" class="g45" value="削除" onclick="setAction('delete_pa')">
+				<div class="g15 grid">
 					<label class="g12">再提出理由　　：</label>
-					<textarea name="reject_content" rows="2" cols="60" class="g24" placeholder="理由を記入"></textarea>
+					<textarea name="reject_content" rows="2" cols="60" class="g25" placeholder="理由を記入"></textarea>
 				</div>
 				@else
 				<div class="g13 grid">

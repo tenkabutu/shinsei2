@@ -53,7 +53,7 @@ class AcceptController extends Controller
 
         $task_allotted_count=0;
         if($matter->status==3){
-            $matter->status=1;
+            $matter->status=2;
             $date=Carbon::now()->toDateTimeString();
             $matter->matter_reply_date=$date;
             $matter->reception_id=Auth::id();
@@ -62,7 +62,7 @@ class AcceptController extends Controller
         if($matter->matter_type==1){
             foreach($matter->tasklist as $task){
                 if($task->task_status==3){
-                    $task->task_status=1;
+                    $task->task_status=2;
                     $date=Carbon::now()->toDateTimeString();
                     $task->task_reply_date=$date;
                     $task->save();
