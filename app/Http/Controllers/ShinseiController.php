@@ -451,29 +451,33 @@ class ShinseiController extends Controller
                     //dd($request);
 
                 }elseif ($user->approval == 1) {
-                    $query->where(function ($query2)
-                    {
-                        $query2->Where('status', 2)
-                            ->Where('users.id', '!=', Auth::id());
-                    })
-                        ->orwhere(function ($query2)
-                    {
-                        $query2->Where('task_status', 2)
-                            ->Where('users.id', '!=', Auth::id());
+                    $query->where(function ($query) use ($type2) {
+                        $query->where('matters.matter_type', '=', $type2)
+                        ->where(function ($query) {
+                            $query->where('status', '=', 2)
+                            ->where('users.id', '!=', Auth::id());
+                        })
+                        ->orWhere(function ($query) {
+                            $query->where('task_status', '=', 2)
+                            ->where('users.id', '!=', Auth::id());
+                        });
                     });
                 }elseif ($user->approval == 2) {
-                    $query->where(function ($query2) use ( $area_id)
-                    {
-                        $query2->Where('status', 2)
-                            ->Where('users.area', $area_id)
-                            ->Where('users.id', '!=', Auth::id());
-                    })
-                        ->orwhere(function ($query2) use ( $area_id)
-                    {
-                        $query2->Where('task_status', 2)
-                            ->Where('users.area', $area_id)
-                        ->Where('users.id', '!=', Auth::id());
+                    $query->where(function ($query) use ($type2,$area_id) {
+                        $query->where('matters.matter_type', '=', $type2)
+                        ->Where('users.area', $area_id)
+                        ->where(function ($query) {
+                            $query->where('status', '=', 2)
+                            ->where('users.id', '!=', Auth::id());
+                        })
+                        ->orWhere(function ($query) {
+                            $query->where('task_status', '=', 2)
+                            ->where('users.id', '!=', Auth::id());
+                        });
                     });
+
+
+
                 }else{
                     return view('composite.ruling_ov', compact( 'userlist','type'));
                 }
