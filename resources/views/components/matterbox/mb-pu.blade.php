@@ -37,11 +37,6 @@
 			<textarea class="g23" id="purchase_content" name="purchase_content" rows="2" cols="60">{{old('purchase_content')}}</textarea>
 		</div>
 
-				<input type="hidden" name="hour1" autocomplete="off" value="{{old('hour1',$userdata->worktype->def_hour1)}}">
-				<input type="hidden" name="minutes1" class="minutes1" min="0" max="59" autocomplete="off" value="{{old('minutes1',$userdata->worktype->def_minutes1)}}">
-
-				<input type="hidden" name="hour2" class="hour2" autocomplete="off" value="{{old('hour2',$userdata->worktype->def_hour2)}}">
-				<input type="hidden" name="minutes2" min="0" max="59" autocomplete="off" value="{{old('minutes2',$userdata->worktype->def_minutes2)}}">
 
 				<input type="hidden" name="breaktime" min="0" max="60" autocomplete="off" value="{{old('breaktime',$userdata->worktype->def_breaktime)}}">
 

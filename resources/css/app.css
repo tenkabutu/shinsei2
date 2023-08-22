@@ -586,6 +586,47 @@ table select{
 .gr24{grid-row:2/4;}
 .gr35{grid-row:3/5;}
 
+/* 承認チェックボックス*/
+.approval-checkboxes label {
+    margin-right: -1px; /* ボタン同士の間隔を微調整 */
+    display: inline-block; /* ボタン要素をインラインブロック要素として表示 */
+}
+
+.approval-checkboxes label input {
+    display: none; /* デフォルトのinputは非表示にする */
+}
+
+.approval-checkboxes label span {
+    color: #FFF; /* 文字色を白に */
+    font-size: 14px; /* 文字サイズを14pxに */
+    width: 80px; /* ボタンの幅 */
+    height: 40px; /* ボタンの高さ */
+    line-height: 40px; /* ボタン内のテキストの垂直位置調整 */
+    text-align: center; /* テキストを中央寄せ */
+    border-radius: 5px; /* 角丸を指定 */
+    cursor: pointer; /* カーソルをポインターに変更 */
+    background: linear-gradient(to bottom, #00AEEF, #0077CC); /* 青色のグラデーション */
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1); /* 軽い浮き上がりの影 */
+    margin: 1px; /* ボタン同士の間隔 */
+    padding: 0 20px; /* ボタン内の余白を設定 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.approval-checkboxes label input:checked + span {
+    background: linear-gradient(to bottom, #FF5A5F, #FF0A10); /* チェック済みの場合のグラデーション */
+    border: 1px solid #FF5A5F; /* チェック済みの場合の淵の線 */
+}
+
+/* 操作不可のスタイル */
+.approval-checkboxes label input:disabled + span {
+    background: linear-gradient(to bottom, #AAA, #888); /* 操作不可の場合のグラデーション */
+    border: 1px solid #AAA; /* 操作不可の場合の淵の線 */
+    cursor: not-allowed; /* カーソルを禁止に変更 */
+}
+
+
 /* || 汎用 */
 .display_none{
 	display:none;

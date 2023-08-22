@@ -92,7 +92,7 @@
 				<!-- <label>test</label> -->
 				@endif
 			@else
-			<x-save-box :status="0" :role="0" :type="2"/>
+			<x-save-box :status="0" :role="0" :type="4"/>
 			@endif
 
 		</form>
@@ -106,6 +106,8 @@ function setAction(url) {
 
     $('form').submit();
 }
+var user_id = {{ Auth::user()->id }};
+var user_role = {{Auth::user()->permissions}} & 2; // ログインユーザーの役割
 $(function(){
 	var radio = $('div.radio-group');
 	$('input', radio).css({'opacity': '0'})
@@ -137,38 +139,40 @@ $(function(){
         if (value == 0) {
             // opt の値が 0 であれば未チェック
             $(this).prop('checked', false);
+            if (!user_role) {
+                $(this).prop('disabled', true); // ユーザー権限がない場合、未チェックのチェックボックスも無効にする
+              }
         } else {
             // opt の値が 0 以外であればチェック済み
             $(this).prop('checked', true);
+            if (!user_role || value != user_id) {
+                $(this).prop('disabled', true); // 自分以外のチェックボックスを無効にする
+              }else if(value == user_id){
+            	  $('.check-opt').not(this).prop('disabled', true);
+            	  }
+
         }
     });
 
     // チェックボックスがクリックされたときに、承認権限を持つユーザーであれば以下の処理を行う
     $('.check-opt').click(function() {
-        var user_id = {{ Auth::user()->id }}; // ログインユーザーのID
-        var user_role = {{ Auth::user()->role }}; // ログインユーザーの役割
         var opt = $(this).data('opt'); // opt1, opt2, opt3 のいずれか
         var value = $(this).data('value'); // 初期値
         var checked = $(this).prop('checked'); // チェック状態
 
-        if (user_role == 'approver') {
+        if (user_role) {
+
             // 承認権限を持つユーザーであれば
             if (checked) {
+
                 // チェックボックスが未チェックからチェック済みになった場合
                 $(this).val(user_id); // チェックボックスのvalueにユーザーIDをセットする
-                $(this).attr('disabled', true); // そのチェックをそのユーザー以外が外せないようにする
-                $('.check-opt').not(this).attr('disabled', true); // 既にいずれかのチェックボックスにチェックをいれたユーザーは他の２つのチェックボックスの操作はできないようにする
+                $('.check-opt').not(this).attr('disabled', true);
             } else {
                 // チェックボックスがチェック済みから未チェックになった場合
-                $(this).val(value); // チェックボックスのvalueを初期値に戻す
-                $(this).attr('disabled', false); // そのチェックを外せるようにする
-                $('.check-opt').not(this).attr('disabled', false); // 他の２つのチェックボックスの操作もできるようにする
-
-                $('.check-opt').each(function() {
-                    if ($(this).val() == user_id) {
-                        $(this).attr('disabled', false);
-                    }
-                });
+                $(this).val(0); // チェックボックスのvalueを初期値に戻す
+                $(this).attr('data-value', '0');
+                $('.check-opt[data-value="0"]').attr('disabled', false);
 
 
             }
@@ -182,6 +186,12 @@ $(function(){
             $(this).prop('checked', !checked); // チェック状態を元に戻す
             $(this).attr('disabled', true); // チェックボックスを無効化する
         }
+    });
+    $('.check-opt').change(function() {
+        var hiddenInput = $(this).closest('.approval-checkboxes').find('.hidden-opt[name="' + $(this).attr('name') + '"]');
+        hiddenInput.val($(this).val());
+
+
     });
 
  });

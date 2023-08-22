@@ -46,17 +46,66 @@
 	<p>納品日に猶予がない場合は電話をしてください。</p>
 </section>
 <seciton>
+	@php
+        $user1_id = old('hour1', $matter->hour1); // 表示したいユーザーのIDを設定
+        $user1 = null;
+
+        if ($user1_id !== 0) {
+            $user1 = App\Models\User::find($user1_id);
+        }
+        $user2_id = old('hour2', $matter->hour2); // 表示したいユーザーのIDを設定
+        $user2 = null;
+
+        if ($user2_id !== 0) {
+            $user2 = App\Models\User::find($user2_id);
+        }
+        $user3_id = old('minutes1', $matter->minutes1); // 表示したいユーザーのIDを設定
+        $user3 = null;
+
+        if ($user3_id !== 0) {
+            $user3 = App\Models\User::find($user3_id);
+        }
+    @endphp
 	<fieldset>
 
 		<div>
 
-			<div class="approval-checkboxes">
+			<!-- <div class="approval-checkboxes">
     		<label for="opt1">承認１</label>
-    		<input type="checkbox" id="opt1" name="opt1" value="{{ $matter->opt1 }}" data-opt="opt1" data-value="{{ $matter->opt1 }}" class="check-opt">
+    		<input type="checkbox" id="opt1" name="hour1" value="{{old('hour1', $matter->hour1) }}" data-opt="opt1" data-value="{{old('hour1', $matter->hour1) }}" class="check-opt">
+    		<input type="hidden" name="hour1" value="{{ old('hour1', $matter->hour1) }}" class="hidden-opt">
     		<label for="opt2">承認２</label>
-    		<input type="checkbox" id="opt2" name="opt2" value="{{ $matter->opt2 }}" data-opt="opt2" data-value="{{ $matter->opt2 }}" class="check-opt">
+    		<input type="checkbox" id="opt2" name="hour2" value="{{old('hour2', $matter->hour2) }}" data-opt="opt2" data-value="{{old('hour2', $matter->hour2) }}" class="check-opt">
+    		<input type="hidden" name="hour2" value="{{ old('hour2', $matter->hour2) }}" class="hidden-opt">
     		<label for="opt3">承認３</label>
-    		<input type="checkbox" id="opt3" name="opt3" value="{{ $matter->opt3 }}" data-opt="opt3" data-value="{{ $matter->opt3 }}" class="check-opt">
+    		<input type="checkbox" id="opt3" name="minutes1" value="{{old('minutes1', $matter->minutes1) }}" data-opt="opt3" data-value="{{ old('minutes1', $matter->minutes1)  }}" class="check-opt">
+			<input type="hidden" name="minutes1" value="{{ old('minutes1', $matter->minutes1) }}" class="hidden-opt">
+			</div> -->
+			<div class="approval-checkboxes">
+    		<label for="opt1">
+    		<input type="checkbox" id="opt1" name="hour1" value="{{old('hour1', $matter->hour1) }}" data-opt="opt1" data-value="{{old('hour1', $matter->hour1) }}" class="check-opt"><span>
+    		@if ($user1)
+        		{{ $user1->name }}
+   			 @else
+       			承認
+   			 @endif</span></label>
+    		<input type="hidden" name="hour1" value="{{ old('hour1', $matter->hour1) }}" class="hidden-opt">
+    		<label for="opt2">
+    		<input type="checkbox" id="opt2" name="hour2" value="{{old('hour2', $matter->hour2) }}" data-opt="opt2" data-value="{{old('hour2', $matter->hour2) }}" class="check-opt"><span>
+    		@if ($user2)
+        		{{ $user2->name }}
+   			 @else
+       			承認
+   			 @endif</span></label>
+    		<input type="hidden" name="hour2" value="{{ old('hour2', $matter->hour2) }}" class="hidden-opt">
+    		<label for="opt3">
+    		<input type="checkbox" id="opt3" name="minutes1" value="{{old('minutes1', $matter->minutes1) }}" data-opt="opt3" data-value="{{ old('minutes1', $matter->minutes1)  }}" class="check-opt"><span>
+    		@if ($user3)
+        		{{ $user3->name }}
+   			 @else
+       			承認
+   			 @endif</span></label>
+			<input type="hidden" name="minutes1" value="{{ old('minutes1', $matter->minutes1) }}" class="hidden-opt">
 			</div>
 		</div>
 
