@@ -106,7 +106,8 @@ function setAction(url) {
 
     $('form').submit();
 }
-var user_id = {{ Auth::user()->id }};
+var user_id = {{ Auth::id() }};
+var user_name = "{{ Auth::user()->name }}";
 var user_role = {{Auth::user()->permissions}} & 2; // ログインユーザーの役割
 $(function(){
 	var radio = $('div.radio-group');
@@ -168,6 +169,7 @@ $(function(){
                 // チェックボックスが未チェックからチェック済みになった場合
                 $(this).val(user_id); // チェックボックスのvalueにユーザーIDをセットする
                 $('.check-opt').not(this).attr('disabled', true);
+                $(this).next('span').text(user_name);
             } else {
                 // チェックボックスがチェック済みから未チェックになった場合
                 $(this).val(0); // チェックボックスのvalueを初期値に戻す
@@ -190,8 +192,31 @@ $(function(){
     $('.check-opt').change(function() {
         var hiddenInput = $(this).closest('.approval-checkboxes').find('.hidden-opt[name="' + $(this).attr('name') + '"]');
         hiddenInput.val($(this).val());
+        var isChecked = $(this).prop('checked');
+        var $spanElement = $(this).next('span');
+        var checkid = $(this).val();
 
-
+        if (!isChecked) {
+            $spanElement.text('承認'); // チェックが外れた場合、spanのテキストを空にする
+        }
+        var name = $(this).attr('name'); // チェックボックスのname属性を取得
+		//alert(name);
+        $.ajax({
+            method: 'POST',
+            dataType: "json",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') // CSRFトークンを取得してヘッダに含める
+            },
+            url: 'purcher_accept', // コントローラーのアクションに対応するURLを指定
+            data: {
+                name: name,
+                //matter_id: {{$matter->id}},
+                user_id: checkid
+            },
+            success: function(response) {
+                // 更新が成功したら、必要な処理をここに記述
+            }
+        });
     });
 
  });

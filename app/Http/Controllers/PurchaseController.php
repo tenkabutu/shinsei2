@@ -77,6 +77,17 @@ class PurchaseController extends Controller
 
 
     }
+    public function purcher_accept(Request $request,$id){
+
+        $matter = Matter::findOrFail($id);
+        $userId = $request->input('user_id');
+        $name = $request->input('name');
+        $matter->update([$name => $userId]);
+
+
+        return response()->json(['status' => 'success']);
+
+    }
     public static function pu_check_userlist(){
         $check_userlist = User::where('permissions', '&',2)
         ->get(['id', 'name']);

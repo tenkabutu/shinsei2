@@ -599,7 +599,7 @@ table select{
 .approval-checkboxes label span {
     color: #FFF; /* 文字色を白に */
     font-size: 14px; /* 文字サイズを14pxに */
-    width: 80px; /* ボタンの幅 */
+    width: 70px; /* ボタンの幅 */
     height: 40px; /* ボタンの高さ */
     line-height: 40px; /* ボタン内のテキストの垂直位置調整 */
     text-align: center; /* テキストを中央寄せ */

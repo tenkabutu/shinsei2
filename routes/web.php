@@ -64,6 +64,7 @@ Route::get('create_pu',[PurchaseController::class,'create']);
 Route::get('{id}/show_pu',[PurchaseController::class,'show_pu']);
 Route::post('{id}/show_pu',[PurchaseController::class,'show_pu']);
 Route::post('save_request_pu',[PurchaseController::class,'save_request']);
+Route::post('{id}/purcher_accept',[PurchaseController::class,'purcher_accept']);
 Route::post('{id}/save_pu',[PurchaseController::class,'save']);
 Route::post('{id}/save_request_pu',[PurchaseController::class,'save_request']);
 Route::post('{id}/update_pu',[PurchaseController::class,'update']);
