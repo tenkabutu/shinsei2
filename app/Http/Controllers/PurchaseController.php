@@ -83,6 +83,10 @@ class PurchaseController extends Controller
         $userId = $request->input('user_id');
         $name = $request->input('name');
         $matter->update([$name => $userId]);
+        if($matter->minutes1!=0 && $matter->hour1!=0 && $matter->hour2 !=0){
+            $matter->status=3;
+            return  redirect($id.'/show_pu');
+        }
 
 
         return response()->json(['status' => 'success']);

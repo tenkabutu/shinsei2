@@ -106,6 +106,7 @@
        			承認
    			 @endif</span></label>
 			<input type="hidden" name="minutes1" value="{{ old('minutes1', $matter->minutes1) }}" class="hidden-opt">
+
 			</div>
 		</div>
 

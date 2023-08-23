@@ -8,8 +8,8 @@
 				@if($status==3)
 				<input type="submit" class="g12" value="承認解除" onclick="setAction('cancel')">
 				@else
-				<input type="submit" class="g12" value="承認" onclick="setAction('accept')">
-				<input type="submit" class="g23" value="再提出" onclick="setAction('reject')">
+
+				<input type="submit" class="g13" value="再提出" onclick="setAction('reject')">
 				<div class="g13 grid">
 					<label class="g12">再提出理由　　：</label>
 					<textarea name="reject_content" rows="2" cols="60" class="g23" placeholder="理由を記入"></textarea>
