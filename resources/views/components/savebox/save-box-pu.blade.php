@@ -26,7 +26,7 @@
 			<input type="submit" class="g23" value="再申請" onclick="setAction('update_request_pu')">
 			<input type="submit" class="g34" value="削除" onclick="setAction('delete_pu')">
 			@elseif($status==3)
-			<p>この申請は承認されています。確認者に承認を解除してもらうか、秋吉さんに修正を依頼してください。</p>
+			<p>この申請は承認されています。</p>
 			@elseif($status==4)
 
 			<input type="submit" class="g23" value="再申請" onclick="setAction('update_request_pu')">
