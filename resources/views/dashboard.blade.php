@@ -9,6 +9,7 @@
      <fieldset>
 				<legend>info</legend>
 				<ul>
+					<li>・気づいた点があればサイボウズなどでご連絡ください。</li>
 					<li>・振替は許可済みであっても、作業時間と振替先の作業時間が一致しないと完了扱いになりません</li>
 
 				</ul>
@@ -28,13 +29,13 @@
 
 					</ul>
 				</fieldset>
-				 <fieldset>
+				<!--  <fieldset>
 					<legend>不具合</legend>
 					<ul>
 
 						<li>・気づいた点があればサイボウズなどでご連絡ください。</li>
 					</ul>
-				</fieldset>
+				</fieldset> -->
 
 
 
