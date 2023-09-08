@@ -53,7 +53,7 @@
 						@else
 						<div class="user_car" >
 							<span class="car_owner">{{optional($park->user)->name2}}</span>
-							<span class="time_stamp">{{optional($park->updated_at)->format('n/j h:i')}}</span>
+							<span class="time_stamp">{{optional($park->updated_at)->format('n/j G:i')}}</span>
 						</div>
 						@endif
 						<label for="p{{$index+1}}"></label>
@@ -73,7 +73,7 @@
 						@else
 						<div class="user_car" >
 							<span class="car_owner">{{optional($park->user)->name2}}</span>
-							<span class="time_stamp">{{optional($park->updated_at)->format('n/j h:i')}}</span>
+							<span class="time_stamp">{{optional($park->updated_at)->format('n/j G:i')}}</span>
 						</div>
 						@endif
 
@@ -222,7 +222,12 @@
                          user_id: checkbox.val()
                      },
                      success: function(response) {
-                         // 更新が成功したら、必要な処理をここに記述
+                    	 if (response.status === 'success') {
+                             // 更新が成功したら、必要な処理をここに記述
+                         } else {
+                             // 更新が中断された場合、メッセージを表示するか処理を行う
+                             alert(response.message);
+                         }
                      }
                  });
 
@@ -249,7 +254,12 @@
                          user_id: checkbox.val()
                      },
                      success: function(response) {
-                         // 更新が成功したら、必要な処理をここに記述
+                    	 if (response.status === 'success') {
+                             // 更新が成功したら、必要な処理をここに記述
+                         } else {
+                             // 更新が中断された場合、メッセージを表示するか処理を行う
+                             alert(response.message);
+                         }
                      }
                  });
 

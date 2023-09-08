@@ -63,7 +63,7 @@ class DashboardController extends Controller
                 $matter->update();
                 return response()->json(['status' => 'success']);
             }else{
-                return  redirect('dashboard');
+                return response()->json(['status' => 'error', 'message' => '他のユーザーが解除処理を行いました。']);
             }
 
         }elseif($matter->user_id!=0){
@@ -72,7 +72,7 @@ class DashboardController extends Controller
                 $matter->update();
                 return response()->json(['status' => 'success']);
             }else{
-                return  redirect('dashboard');
+                return response()->json(['status' => 'error', 'message' => '先に駐車した方がいます、ページを更新してください。']);
             }
         }
        // return  redirect('dashboard');
