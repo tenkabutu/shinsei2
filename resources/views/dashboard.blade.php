@@ -16,15 +16,15 @@
 				<fieldset>
 				<legend>update</legend>
 				<ul>
-					<li>・申請の未申請状態を削除し、保存＝申請に変更しました</li>
-					<li>・リーダーの承認機能で、再提出機能を追加。</li>
+					<li>・トップページに第二駐車の登録機能を追加。</li>
 				</ul>
 				</fieldset>
 				 <fieldset>
 					<legend>改修予定</legend>
 					<ul>
+						<li>・駐車機能に、入れ忘れ出し忘れ用の代理操作機能を追加予定</li>
 						<li>・入力エラーがでたときに入力欄の情報を保持する</li>
-						<li>・この画面には直近の貸出予定と休暇予定などを記載する予定</li>
+
 
 					</ul>
 				</fieldset>
@@ -36,7 +36,56 @@
 					</ul>
 				</fieldset>
 
-	    		<fieldset>
+
+
+				<fieldset id="park_status">
+				<legend>駐車場</legend>
+				<div id ="park_figure" class="grid">
+					@foreach ($park_list->take(5) as $index =>$park)
+					<div class="park_upper g{{$index+1}}{{$index+2}}">
+
+						<p>{{ $park->nendo }}</p>
+						@if($park->user_id==0)
+						<div class="no_use user_car" >
+						<span class="car_owner">{{$userdata->name2}}</span>
+						<span class="time_stamp">{{optional($park->updated_at)->format('m/d h:i')}}</span></div>
+						@else
+						<div class="user_car" >
+							<span class="car_owner">{{optional($park->user)->name2}}</span>
+							<span class="time_stamp">{{optional($park->updated_at)->format('n/j h:i')}}</span>
+						</div>
+						@endif
+						<label for="p{{$index+1}}"></label>
+						<input id="p{{$index+1}}" type="checkbox" name="user_id" value="{{old('user_id', $park->user_id) }}"  data-id="{{$park->id}}" class="check-opt">
+
+					</div>
+					@endforeach
+
+					@foreach ($park_list->skip(5)->take(5) as $index =>$park)
+					<div class="park_lower g{{$index-4}}{{$index-3}}">
+
+						<p>{{ $park->nendo }}</p>
+						@if($park->user_id==0)
+						<div class="no_use user_car" >
+						<span class="car_owner">{{$userdata->name2}}</span>
+						<span class="time_stamp">{{optional($park->updated_at)->format('m/d h:i')}}</span></div>
+						@else
+						<div class="user_car" >
+							<span class="car_owner">{{optional($park->user)->name2}}</span>
+							<span class="time_stamp">{{optional($park->updated_at)->format('n/j h:i')}}</span>
+						</div>
+						@endif
+
+						<label for="p{{$index+1}}"></label>
+						<input id="p{{$index+1}}" type="checkbox" name="user_id" value="{{old('user_id', $park->user_id) }}" data-id="{{$park->id}}" class="check-opt">
+
+
+					</div>
+					@endforeach
+
+
+				</div></fieldset>
+					<fieldset>
 				<legend>未振替(仮)</legend>
 				<ul><li>
 				<table class="task_table sort-table">
@@ -117,53 +166,6 @@
 		</table></li>
 				</ul>
 				</fieldset>
-				<fieldset id="park_status">
-				<legend>駐車場</legend>
-				<div id ="park_figure" class="grid">
-					@foreach ($park_list->take(5) as $index =>$park)
-					<div class="park_upper g{{$index+1}}{{$index+2}}">
-
-						<p>{{ $park->nendo }}</p>
-						@if($park->user_id==0)
-						<div class="no_use user_car" >
-						<span class="car_owner">{{$userdata->name2}}</span>
-						<span class="time_stamp">{{optional($park->updated_at)->format('m/d h:i')}}</span></div>
-						@else
-						<div class="user_car" >
-							<span class="car_owner">{{optional($park->user)->name2}}</span>
-							<span class="time_stamp">{{optional($park->updated_at)->format('n/j h:i')}}</span>
-						</div>
-						@endif
-						<label for="p{{$index+1}}"></label>
-						<input id="p{{$index+1}}" type="checkbox" name="user_id" value="{{old('user_id', $park->user_id) }}"  data-id="{{$park->id}}" class="check-opt">
-
-					</div>
-					@endforeach
-
-					@foreach ($park_list->skip(5)->take(5) as $index =>$park)
-					<div class="park_lower g{{$index-4}}{{$index-3}}">
-
-						<p>{{ $park->nendo }}</p>
-						@if($park->user_id==0)
-						<div class="no_use user_car" >
-						<span class="car_owner">{{$userdata->name2}}</span>
-						<span class="time_stamp">{{optional($park->updated_at)->format('m/d h:i')}}</span></div>
-						@else
-						<div class="user_car" >
-							<span class="car_owner">{{optional($park->user)->name2}}</span>
-							<span class="time_stamp">{{optional($park->updated_at)->format('n/j h:i')}}</span>
-						</div>
-						@endif
-
-						<label for="p{{$index+1}}"></label>
-						<input id="p{{$index+1}}" type="checkbox" name="user_id" value="{{old('user_id', $park->user_id) }}" data-id="{{$park->id}}" class="check-opt">
-
-
-					</div>
-					@endforeach
-
-
-				</div></fieldset>
 
 
 
