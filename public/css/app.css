@@ -1023,7 +1023,11 @@ div.user_car{
 	background-size:auto 80% ;
 	background-repeat: no-repeat;
 
+}
 
+
+#emergency_form{
+	display:none;
 }
 
 

@@ -696,7 +696,9 @@ div.user_car{
 	background-size:auto 80% ;
 	background-repeat: no-repeat;
 
-
+}
+#emergency_form{
+	display:none;
 }
 div.user_car span.car_owner{
 	padding:5px;

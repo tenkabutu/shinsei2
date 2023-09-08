@@ -41,6 +41,17 @@
 
 				<fieldset id="park_status">
 				<legend>駐車場</legend>
+				<buton id="emergency">修正</buton>
+				<div id="emergency_form">
+					<select name="park_place">
+					@foreach ($park_list as $park)
+					<option value="{{ $park->id }}">{{ $park->nendo }}</option>
+					@endforeach
+					</select>に車が
+					<select name="user_id"><option value="25">ある</option><option value="0">ない</option>
+					</select>
+					<button id="emergency_submit">送信</button>
+				</div>
 				<div id ="park_figure" class="grid">
 					@foreach ($park_list->take(5) as $index =>$park)
 					<div class="park_upper g{{$index+1}}{{$index+2}}">
@@ -265,14 +276,43 @@
 
              }
 
-
-
-
-
-            // ここでAjaxリクエストを送信して、サーバーに駐車情報を更新することができます
         });
 
         // 出車ボタンのクリックイベント
+        $('#emergency').click(function(){
+            if(confirm('駐車場機能のデータを強制的に書き換えます。')){
+			$('#emergency_form').show();
+			 $("#emergency_submit").click(function () {
+		            // フォームから選択された値を取得
+		            var parkId = $("select[name='park_place']").val();
+		            var userId = $("select[name='user_id']").val();
+
+		            // Ajaxリクエストを送信
+		            $.ajax({
+		            	method: 'POST',
+	                     dataType: "json",
+	                     headers: {
+	                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') // CSRFトークンを取得してヘッダに含める
+	                     },
+	                     url: 'car_park', // コントローラーのアクションに対応するURLを指定
+	                     data: {
+	                         id: parkId,
+	                         user_id: userId
+	                     },
+		                success: function (response) {
+		                    // 成功時の処理
+		                    console.log("成功", response);
+		                },
+		                error: function (xhr, status, error) {
+		                    // エラー時の処理
+		                    console.error("エラー", error);
+		                }
+		            });
+		        });
+
+
+        }
+  });
 
 
         function initializeParking() {
