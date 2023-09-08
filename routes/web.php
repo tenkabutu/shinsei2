@@ -84,8 +84,10 @@ Route::get('{type}/matter_search',[ShinseiController::class,'matter_search2']);
 Route::get('matter_ruling',[ShinseiController::class,'matter_ruling']);
 Route::get('{type}/matter_ruling',[ShinseiController::class,'matter_ruling2']);
 Route::post('{type}/end_check_pa',[PaidLeaveController::class,'end_check']);
+
 Route::get('/',[DashboardController::class,'show_dash']);
 Route::get('/dashboard',[DashboardController::class,'show_dash']);
+Route::post('car_park',[DashboardController::class,'car_park']);
 
 //Route::get('/', function () { return view('dashboard');})->middleware(['auth'])->name('dashboard');
 

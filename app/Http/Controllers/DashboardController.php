@@ -49,7 +49,35 @@ class DashboardController extends Controller
             // ->select('matters.id','matters.created_at')
             // ->get();
             $records = $query->get();
+        $park_list = matter::with('user')->where('matter_type',8)->get();
 
-            return view('dashboard', compact('records'));
+            return view('dashboard', compact('records','park_list'));
+    }
+    public function car_park(Request $request){
+
+        $matter = Matter::findOrFail($request->id);
+       // $userId = $request->input('user_id');
+        if($matter->user_id==0){
+            if($request->user_id!=0){
+                $matter->user_id = $request->user_id;
+                $matter->update();
+                return response()->json(['status' => 'success']);
+            }else{
+                return  redirect('dashboard');
+            }
+
+        }elseif($matter->user_id!=0){
+            if($request->user_id==0){
+                $matter->user_id = $request->user_id;
+                $matter->update();
+                return response()->json(['status' => 'success']);
+            }else{
+                return  redirect('dashboard');
+            }
+        }
+       // return  redirect('dashboard');
+
+
+
     }
 }

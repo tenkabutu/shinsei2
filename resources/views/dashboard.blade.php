@@ -1,7 +1,7 @@
 <x-app-layout>
 	<x-slot name="style"></x-slot>
     <x-slot name="head">
-
+		<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     </x-slot>
 
     <div class="main_right">
@@ -117,8 +117,174 @@
 		</table></li>
 				</ul>
 				</fieldset>
+				<fieldset id="park_status">
+				<legend>駐車場</legend>
+				<div id ="park_figure" class="grid">
+					@foreach ($park_list->take(5) as $index =>$park)
+					<div class="park_upper g{{$index+1}}{{$index+2}}">
+
+						<p>{{ $park->nendo }}</p>
+						@if($park->user_id==0)
+						<div class="no_use user_car" >
+						<span class="car_owner">{{$userdata->name2}}</span>
+						<span class="time_stamp">{{optional($park->updated_at)->format('m/d h:i')}}</span></div>
+						@else
+						<div class="user_car" >
+							<span class="car_owner">{{optional($park->user)->name2}}</span>
+							<span class="time_stamp">{{optional($park->updated_at)->format('n/j h:i')}}</span>
+						</div>
+						@endif
+						<label for="p{{$index+1}}"></label>
+						<input id="p{{$index+1}}" type="checkbox" name="user_id" value="{{old('user_id', $park->user_id) }}"  data-id="{{$park->id}}" class="check-opt">
+
+					</div>
+					@endforeach
+
+					@foreach ($park_list->skip(5)->take(5) as $index =>$park)
+					<div class="park_lower g{{$index-4}}{{$index-3}}">
+
+						<p>{{ $park->nendo }}</p>
+						@if($park->user_id==0)
+						<div class="no_use user_car" >
+						<span class="car_owner">{{$userdata->name2}}</span>
+						<span class="time_stamp">{{optional($park->updated_at)->format('m/d h:i')}}</span></div>
+						@else
+						<div class="user_car" >
+							<span class="car_owner">{{optional($park->user)->name2}}</span>
+							<span class="time_stamp">{{optional($park->updated_at)->format('n/j h:i')}}</span>
+						</div>
+						@endif
+
+						<label for="p{{$index+1}}"></label>
+						<input id="p{{$index+1}}" type="checkbox" name="user_id" value="{{old('user_id', $park->user_id) }}" data-id="{{$park->id}}" class="check-opt">
+
+
+					</div>
+					@endforeach
+
+
+				</div></fieldset>
 
 
 
     </div>
+    <script>
+    $(document).ready(function () {
+    	var images = [
+    		  'url("/shinsei2/public/img/red_car.png")',
+    		  'url("/shinsei2/public/img/blue_car.png")',
+    		  'url("/shinsei2/public/img/yellow_car.png")',
+    		  'url("/shinsei2/public/img/white_car.png")'
+    		];
+
+    		// div要素を取得する
+    		var divs = document.getElementsByClassName("user_car");
+
+    		// div要素の数だけ繰り返す
+    		for (var i = 0; i < divs.length; i++) {
+    		  // 配列の長さ（4）から0～3の整数をランダムに生成する
+    		  var number = Math.floor(Math.random() * images.length);
+    		  // 配列からランダムに選ばれた画像のパスを取得する
+    		  var selectedImg = images[number];
+    		  // div要素の背景画像として設定する
+    		  divs[i].style.backgroundImage = selectedImg;
+    		}
+        // 初期化
+        initializeParking();
+
+        // 駐車ボタンのクリックイベント
+        $('#park_figure label').on('click', function () {
+        	 var label = $(this);
+             var checkbox = label.siblings('input[type="checkbox"]');
+             var id = checkbox.data('id');
+
+
+             if(checkbox.val()==0&&!label.hasClass('blocked')){
+            	 label.addClass('checked');
+            	 checkbox.prop('checked', true);
+            	 checkbox.val({{ Auth::id() }});
+            	 var car = label.siblings('.user_car').show();
+            	 $('#park_figure label').not(label).addClass('blocked');
+
+            	 $.ajax({
+                     method: 'POST',
+                     dataType: "json",
+                     headers: {
+                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') // CSRFトークンを取得してヘッダに含める
+                     },
+                     url: 'car_park', // コントローラーのアクションに対応するURLを指定
+                     data: {
+                        // name: name,
+                         id:id,
+                         user_id: checkbox.val()
+                     },
+                     success: function(response) {
+                         // 更新が成功したら、必要な処理をここに記述
+                     }
+                 });
+
+             }else if(label.hasClass('checked')){
+            	 var car = label.siblings('.user_car').hide();
+            	 checkbox.prop('checked', false);
+                 checkbox.val(0);
+                 label.removeClass('checked');
+                 // 他の駐車ボタンを有効化
+                 $('#park_figure input[type="checkbox"]').prop('disabled', false);
+                 // 他の駐車ボタンのブロックを解除
+                 $('#park_figure label').removeClass('blocked');
+
+
+                 $.ajax({
+                     method: 'POST',
+                     dataType: "json",
+                     headers: {
+                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') // CSRFトークンを取得してヘッダに含める
+                     },
+                     url: 'car_park', // コントローラーのアクションに対応するURLを指定
+                     data: {
+                         id:id,
+                         user_id: checkbox.val()
+                     },
+                     success: function(response) {
+                         // 更新が成功したら、必要な処理をここに記述
+                     }
+                 });
+
+             }
+
+
+
+
+
+            // ここでAjaxリクエストを送信して、サーバーに駐車情報を更新することができます
+        });
+
+        // 出車ボタンのクリックイベント
+
+
+        function initializeParking() {
+            $('#park_figure input[type="checkbox"]').each(function () {
+                var checkbox = $(this);
+                var label = checkbox.siblings('label');
+                var user_id = checkbox.val();
+
+                if (user_id !== '0') {
+                    if (user_id === '{{ Auth::id() }}') {
+                        // 自分が駐車している場合
+                        checkbox.prop('checked', true);
+                        label.addClass('checked');
+                        // 他の駐車ボタンを無効化
+                        $('#park_figure input[type="checkbox"]').not(checkbox).prop('disabled', true);
+                        // 他の駐車ボタンをブロック
+                        $('#park_figure label').not(label).addClass('blocked');
+                    } else {
+                        // 他のユーザーが駐車している場合
+                        checkbox.prop('checked', true);
+                        label.addClass('blocked2');
+                    }
+                }
+            });
+        }
+    });
+    </script>
 </x-app-layout>
