@@ -386,7 +386,7 @@ h3 label{
 }
 #shinsei_wrap fieldset>div{
 	padding:5px 20px 5px 0;
-	display:grid;
+	display:grid;grid-gap: 5px;
 }
 #shinsei_wrap fieldset>div:not(:last-child){
 	border-bottom:1px solid #b1b1be;
@@ -566,6 +566,7 @@ table select{
 .g25{ grid-column:2/5;}
 .g34{ grid-column:3/4;}
 .g45{grid-column:4/5;}
+.g46{grid-column:4/6;}
 .g56{grid-column:5/6;}
 .g67{grid-column:6/7;}
 .g78{grid-column:7/8;}
@@ -587,6 +588,12 @@ table select{
 .gr35{grid-row:3/5;}
 
 /* 承認チェックボックス*/
+
+/* .approval-checkboxes{
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(35%, 1fr));
+	grid-gap: 5px;
+} */
 .approval-checkboxes label {
     margin-right: -1px; /* ボタン同士の間隔を微調整 */
     display: inline-block; /* ボタン要素をインラインブロック要素として表示 */
