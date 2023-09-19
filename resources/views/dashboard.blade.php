@@ -40,7 +40,7 @@
 
 
 				<fieldset id="park_status">
-				<legend>駐車場</legend>
+				<legend>駐車申請</legend>
 				<buton id="emergency">修正</buton>
 				<div id="emergency_form">
 					<select name="park_place">

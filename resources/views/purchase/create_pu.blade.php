@@ -189,6 +189,7 @@ $(function(){
             $(this).attr('disabled', true); // チェックボックスを無効化する
         }
     });
+    @isset($matter)
     $('.check-opt').change(function() {
         var hiddenInput = $(this).closest('.approval-checkboxes').find('.hidden-opt[name="' + $(this).attr('name') + '"]');
         hiddenInput.val($(this).val());
@@ -210,7 +211,7 @@ $(function(){
             url: 'purcher_accept', // コントローラーのアクションに対応するURLを指定
             data: {
                 name: name,
-                //matter_id: {{$matter->id}},
+                matter_id: {{$matter->id}},
                 user_id: checkid
             },
             success: function(response) {
@@ -218,6 +219,7 @@ $(function(){
             }
         });
     });
+    @endisset
 
  });
 </script>
