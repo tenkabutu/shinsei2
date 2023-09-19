@@ -83,8 +83,12 @@ class PurchaseController extends Controller
         $userId = $request->input('user_id');
         $name = $request->input('name');
         $matter->update([$name => $userId]);
-        if($matter->minutes1!=0 && $matter->hour1!=0 && $matter->hour2 !=0){
+       // $matter = Matter::findOrFail($id);
+        if($matter->hour1!=0 && $matter->hour2 !=0){
             $matter->status=3;
+            $date=Carbon::now()->toDateTimeString();
+            $matter->matter_reply_date=$date;
+            $matter->update();
             return  redirect($id.'/show_pu');
         }
 

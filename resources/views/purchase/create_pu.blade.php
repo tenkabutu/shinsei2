@@ -109,6 +109,11 @@ function setAction(url) {
 var user_id = {{ Auth::id() }};
 var user_name = "{{ Auth::user()->name }}";
 var user_role = {{Auth::user()->permissions}} & 2; // ログインユーザーの役割
+@isset($matter)
+	@if($matter->status==3||$matter->user_id==Auth::id())
+		var user_role=0;
+	@endif
+@endisset
 $(function(){
 	var radio = $('div.radio-group');
 	$('input', radio).css({'opacity': '0'})
@@ -180,7 +185,7 @@ $(function(){
             }
 
             // ３つのチェックボックスがチェックされた場合、以降チェックボックスの操作はできないようにする
-            if ($('.check-opt:checked').length == 3) {
+            if ($('.check-opt:checked').length == 2) {
                 $('.check-opt').attr('disabled', true);
             }
         } else {

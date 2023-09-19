@@ -70,17 +70,7 @@
 
 		<div>
 
-			<!-- <div class="approval-checkboxes">
-    		<label for="opt1">承認１</label>
-    		<input type="checkbox" id="opt1" name="hour1" value="{{old('hour1', $matter->hour1) }}" data-opt="opt1" data-value="{{old('hour1', $matter->hour1) }}" class="check-opt">
-    		<input type="hidden" name="hour1" value="{{ old('hour1', $matter->hour1) }}" class="hidden-opt">
-    		<label for="opt2">承認２</label>
-    		<input type="checkbox" id="opt2" name="hour2" value="{{old('hour2', $matter->hour2) }}" data-opt="opt2" data-value="{{old('hour2', $matter->hour2) }}" class="check-opt">
-    		<input type="hidden" name="hour2" value="{{ old('hour2', $matter->hour2) }}" class="hidden-opt">
-    		<label for="opt3">承認３</label>
-    		<input type="checkbox" id="opt3" name="minutes1" value="{{old('minutes1', $matter->minutes1) }}" data-opt="opt3" data-value="{{ old('minutes1', $matter->minutes1)  }}" class="check-opt">
-			<input type="hidden" name="minutes1" value="{{ old('minutes1', $matter->minutes1) }}" class="hidden-opt">
-			</div> -->
+
 			<div class="approval-checkboxes">
     		<label for="opt1">
     		<input type="checkbox" id="opt1" name="hour1" value="{{old('hour1', $matter->hour1) }}" data-opt="opt1" data-value="{{old('hour1', $matter->hour1) }}" class="check-opt"><span>
@@ -98,14 +88,6 @@
        			承認
    			 @endif</span></label>
     		<input type="hidden" name="hour2" value="{{ old('hour2', $matter->hour2) }}" class="hidden-opt">
-    		<label for="opt3">
-    		<input type="checkbox" id="opt3" name="minutes1" value="{{old('minutes1', $matter->minutes1) }}" data-opt="opt3" data-value="{{ old('minutes1', $matter->minutes1)  }}" class="check-opt"><span>
-    		@if ($user3)
-        		{{ $user3->name }}
-   			 @else
-       			承認
-   			 @endif</span></label>
-			<input type="hidden" name="minutes1" value="{{ old('minutes1', $matter->minutes1) }}" class="hidden-opt">
 
 			</div>
 		</div>
