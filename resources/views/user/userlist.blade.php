@@ -18,17 +18,18 @@ $(document).ready(function(){
 		<table class="user_table  sort-table">
 			<thead>
 			<tr>
-				<th>No</th>
+				<th  data-sorter="false">No</th>
 				<th >使用者</th>
 
 				<th>権限</th>
 				<th>承認</th>
 				<th>地域</th>
 				<th>勤務時間</th>
-				<th>購</th>
-				<th>購</th>
+				<th>購確</th>
+				<th>購承</th>
+				<th>購買</th>
 				<th>編</th>
-				<th></th>
+				<th  data-sorter="false"></th>
 			</tr>
 			</thead>
 			{{-- @foreach ($userlist as $record) --}}
@@ -93,6 +94,7 @@ $(document).ready(function(){
 				<td><input type="checkbox" name="p1" value="1" @if($record->permissions & 1) checked @endif></td>
 				<td><input type="checkbox" name="p2" value="2" @if($record->permissions & 2) checked @endif></td>
 				<td><input type="checkbox" name="p3" value="4" @if($record->permissions & 4) checked @endif></td>
+				<td><input type="checkbox" name="p4" value="8" @if($record->permissions & 8) checked @endif></td>
 				<td><input type="button" class="user_change" value="変更"></td>
 				@else
 				<td>{{ $record->approvaltag->nametag}}</td>
@@ -102,6 +104,7 @@ $(document).ready(function(){
 				<td>@if($record->permissions & 1) ◯ @endif</td>
 				<td>@if($record->permissions & 2) ◯ @endif</td>
 				<td>@if($record->permissions & 4) ◯ @endif</td>
+				<td>@if($record->permissions & 8) ◯ @endif</td>
 				<td></td>
 				@endif
 
@@ -131,6 +134,9 @@ $(document).ready(function(){
 			}
 		if(str.find('input[name="p3"]').prop('checked')){
 			pe |= 4;
+			}
+		if(str.find('input[name="p4"]').prop('checked')){
+			pe |= 8;
 			}
 
 		$.ajax({

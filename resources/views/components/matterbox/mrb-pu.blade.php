@@ -102,7 +102,7 @@
 			</div>
 			<div class="approval-checkboxes g23 text_right">
     		<label for="opt3">
-    		<input type="checkbox" id="opt3" name="hour1" value="{{old('hour1', $matter->hour1) }}" data-opt="opt1" data-value="{{old('hour1', $matter->hour1) }}" class="check-opt2"><span>
+    		<input type="checkbox" id="opt3" name="minutes1" value="{{old('minutes1', $matter->minutes1) }}" data-opt="opt3" data-value="{{old('minutes1', $matter->minutes1) }}" class="check-opt2"><span>
     		@if ($user3)
         		{{ $user3->name }}
    			 @else
@@ -110,7 +110,7 @@
    			 @endif</span></label>
     		<input type="hidden" name="minutes1" value="{{ old('minutes1', $matter->minutes1) }}" class="hidden-opt">
     		<label for="opt4">
-    		<input type="checkbox" id="opt4" name="minutes2" value="{{old('minutes2', $matter->minutes2) }}" data-opt="opt2" data-value="{{old('hour2', $matter->hour2) }}" class="check-opt2"><span>
+    		<input type="checkbox" id="opt4" name="minutes2" value="{{old('minutes2', $matter->minutes2) }}" data-opt="opt4" data-value="{{old('minutes2', $matter->minutes2) }}" class="check-opt3"><span>
     		@if ($user4)
         		{{ $user4->name }}
    			 @else
