@@ -49,7 +49,7 @@ class DashboardController extends Controller
             // ->select('matters.id','matters.created_at')
             // ->get();
             $records = $query->get();
-        $park_list = matter::with('user')->where('matter_type',8)->get();
+            $park_list = matter::with('user')->where('matter_type',8)->orderby('matters.id', 'asc')->get();
 
             return view('dashboard', compact('records','park_list'));
     }

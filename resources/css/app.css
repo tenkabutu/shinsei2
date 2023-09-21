@@ -640,8 +640,8 @@ table select{
 
 	margin:20px;
 	background-color: #dedede;
-	border-top:2px solid black;
-	border-right:2px solid black;
+
+
 	border-bottom:2px solid black;
 }
 #park_figure div{
@@ -728,13 +728,21 @@ div.no_use{
 	display:none;
 }
 
-.park_upper ,.park_lower{
-
+.park_upper ,.park_lower,.park_ahead{
 	height:170px;
 	border-left:2px solid black;
+
+}
+.park_upper:nth-child(7),.park_lower:nth-child(12){
+	border-right:2px solid black;
 }
 .park_upper{
 	margin-bottom:30px;
+	border-top:2px solid black;
+}
+.park_ahead{
+	border-top:2px solid black;
+	border-right:2px solid black;
 }
 
 /* || 汎用 */

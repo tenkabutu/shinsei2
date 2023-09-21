@@ -53,6 +53,28 @@
 					<button id="emergency_submit">送信</button>
 				</div>
 				<div id ="park_figure" class="grid">
+					@foreach ($park_list->skip(10)->take(2) as $index =>$park)
+					<div class="park_ahead g{{$index-9+($index-10)*3}}{{$index-8+($index-10)*3}}">
+
+						<p>{{ $park->nendo }}</p>
+						@if($park->user_id==0)
+						<div class="no_use user_car" >
+						<span class="car_owner">{{$userdata->name2}}</span>
+						<span class="time_stamp">{{optional($park->updated_at)->format('m/d h:i')}}</span></div>
+						@else
+						<div class="user_car" >
+							<span class="car_owner">{{optional($park->user)->name2}}</span>
+							<span class="time_stamp">{{optional($park->updated_at)->format('n/j G:i')}}</span>
+						</div>
+						@endif
+
+						<label for="p{{$index+1}}"></label>
+						<input id="p{{$index+1}}" type="checkbox" name="user_id" value="{{old('user_id', $park->user_id) }}" data-id="{{$park->id}}" class="check-opt">
+
+
+					</div>
+					@endforeach
+
 					@foreach ($park_list->take(5) as $index =>$park)
 					<div class="park_upper g{{$index+1}}{{$index+2}}">
 
