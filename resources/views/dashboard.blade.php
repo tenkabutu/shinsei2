@@ -211,7 +211,7 @@
     		  { url: 'url("/shinsei2/public/img/blue_car.png")', weight: 1 },
     		  { url: 'url("/shinsei2/public/img/yellow_car.png")', weight: 1 },
     		  { url: 'url("/shinsei2/public/img/white_car.png")', weight: 1 },
-    		  { url: 'url("/shinsei2/public/img/black_car.png")', weight: 0.0001 }
+    		  { url: 'url("/shinsei2/public/img/black_car.png")', weight: 0.0002 }
     		];
 
     		// div要素を取得する
