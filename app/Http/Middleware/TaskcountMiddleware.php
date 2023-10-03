@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\Factory;
 use Closure;
+use Carbon\Carbon;
 
 class TaskcountMiddleware
 {
@@ -231,6 +232,16 @@ class TaskcountMiddleware
             ->count('matters.id');
 
 
+            // 現在の年を取得
+            $currentYear = Carbon::now()->year;
+
+            // 今年度の開始日（4月1日）を設定
+            $startDate = Carbon::create($currentYear, 4, 1);
+
+            // 今年度の終了日（翌年の3月31日）を設定
+            $endDate = Carbon::create($currentYear + 1, 3, 31);
+
+
 
             // 最新の有給情報を読み込む
             $user = user::with('rest','worktype')->findOrFail(Auth::id());
@@ -238,21 +249,24 @@ class TaskcountMiddleware
 
 
             // 消化時間を読み込む
-            $used_rest_time = Matter::where([['matter_type', 2],['opt1', 4],['user_id',Auth::id()],['status','!=',6]])->sum('allotted')/60;
+                $used_rest_time = Matter::where([['matter_type', 2],['opt1', 4],['user_id',Auth::id()],['status','!=',6]])
+                ->whereBetween('matter_change_date', [$startDate, $endDate])->sum('allotted')/60;
             //取得時間給を日数に変換
-            $used_rest_day=intdiv($used_rest_time,8);
+                $used_rest_day=intdiv($used_rest_time,8);
 
 
             //半休消化単位
-            $used_harf_rest= Matter::where([['matter_type', 2],['user_id',Auth::id()],['status','!=',6]])->whereIn('opt1',[2,3])->count();
+                $used_harf_rest= Matter::where([['matter_type', 2],['user_id',Auth::id()],['status','!=',6]])->whereIn('opt1',[2,3])
+                ->whereBetween('matter_change_date', [$startDate, $endDate])->count();
 
 
             //時間給日にち換算
-            $used_rest_time_byday = ceil(($used_rest_time-$user->rest->co_time)/8);
+                $used_rest_time_byday = ceil(($used_rest_time-$user->rest->co_time)/8);
             //半休日にち換算
-            $used_harf_rest_byday = ($used_harf_rest-$user->rest->co_harf_rest)/2;
+                $used_harf_rest_byday = ($used_harf_rest-$user->rest->co_harf_rest)/2;
             //休暇日数
-            $used_rest_day=Matter::where([['matter_type', 2],['user_id',Auth::id()],['status','!=',6]])->where('opt1',1)->count();
+                $used_rest_day=Matter::where([['matter_type', 2],['user_id',Auth::id()],['status','!=',6]])->where('opt1',1)
+                ->whereBetween('matter_change_date', [$startDate, $endDate])->count();
 
             $residue_co_day=$user->rest->co_day-$used_rest_time_byday-$used_harf_rest_byday-$used_rest_day;
 

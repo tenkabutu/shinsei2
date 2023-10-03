@@ -114,7 +114,8 @@ var user_role = {{Auth::user()->permissions}} & 2; // ログインユーザー�
 		var user_role=0;
 	@endif
 @endisset
-var pu_role =  {{Auth::user()->permissions}} & 8;
+var pu_role =  {{Auth::user()->permissions}} & 4;
+var check_count = $('.check-opt:checked,.check-opt2:checked,.check-opt3:checked').length;
 $(function(){
 	var radio = $('div.radio-group');
 	$('input', radio).css({'opacity': '0'})
@@ -138,9 +139,8 @@ $(function(){
 	});
 
 
-
 	 // ページが読み込まれたときに、各チェックボックスの状態を設定する
-    $('.check-opt,.check-opt2').each(function() {
+    $('.check-opt').each(function() {
         var opt = $(this).data('opt'); // opt1, opt2, opt3 のいずれか
         var value = $(this).data('value'); // 初期値
         if (value == 0) {
@@ -152,14 +152,54 @@ $(function(){
         } else {
             // opt の値が 0 以外であればチェック済み
             $(this).prop('checked', true);
+            if (!user_role || value != user_id) {
+                $(this).prop('disabled', true); // 自分以外のチェックボックスを無効にする
+              }else if(value == user_id && check_count <= 2){
+            	  $('.check-opt').not(this).prop('disabled', true);
+            }
+        }
+    });
+    $('.check-opt2').each(function() {
+        var opt = $(this).data('opt'); // opt1, opt2, opt3 のいずれか
+        var value = $(this).data('value'); // 初期値
+        if (value == 0) {
+            // opt の値が 0 であれば未チェック
+            $(this).prop('checked', false);
+
+            if (!pu_role || $('.check-opt:checked').length != 2) {
+                $(this).prop('disabled', true); // ユーザー権限がない場合、未チェックのチェックボックスも無効にする
+              }
+        } else {
+            // opt の値が 0 以外であればチェック済み
+            $(this).prop('checked', true);
             if (!pu_role || value != user_id) {
                 $(this).prop('disabled', true); // 自分以外のチェックボックスを無効にする
               }else if(value == user_id){
-            	  $('.check-opt').not(this).prop('disabled', true);
-            	  }
-
+            	  $('.check-opt2').not(this).prop('disabled', true);
+            }
         }
     });
+
+    var opt3 = $('.check-opt3');
+
+        var value3 = opt3.data('value'); // 初期値
+        if (value3 == 0) {
+            // opt の値が 0 であれば未チェック
+            opt3.prop('checked', false);
+
+            if (!pu_role || $('.check-opt:checked').length != 2) {
+            	opt3.prop('disabled', true); // ユーザー権限がない場合、未チェックのチェックボックスも無効にする
+              }
+        } else {
+            // opt の値が 0 以外であればチェック済み
+            opt3.prop('checked', true);
+            if (!pu_role || value3 != user_id) {
+            	opt3.prop('disabled', true); // 自分以外のチェックボックスを無効にする
+              }else if(value3 == user_id){
+            	  $('.check-opt').not(opt3).prop('disabled', true);
+            }
+        }
+
 
     // チェックボックスがクリックされたときに、承認権限を持つユーザーであれば以下の処理を行う
     $('.check-opt').click(function() {

@@ -15,6 +15,7 @@
 					@elseif($matter->status==3)許可済み({{$matter->matter_reply_date->format('Y/m/d')}})
 					@elseif($matter->status==5)修正待ち({{$matter->matter_reply_date->format('Y/m/d')}})
 					@elseif($matter->status==6)削除済み({{$matter->matter_request_date->format('Y/m/d')}})
+					@elseif($matter->status==7)購入済み({{$matter->matter_reply_date->format('Y/m/d')}})
 					@endif</div>
 				</div>
 			</fieldset>

@@ -69,13 +69,9 @@ class PurchaseController extends Controller
 
         $check_userlist=$this->pu_check_userlist();
 
-
             //  with('roletag','approvaltag','areatag','worktype')->findOrFail(Auth::user()->id);
 
-
-            return view('purchase.create_pu',compact('user','matter','check_userlist'));
-
-
+        return view('purchase.create_pu',compact('user','matter','check_userlist'));
     }
     public function purcher_accept(Request $request,$id){
 
@@ -84,7 +80,14 @@ class PurchaseController extends Controller
         $name = $request->input('name');
         $matter->update([$name => $userId]);
        // $matter = Matter::findOrFail($id);
-        if($matter->hour1!=0 && $matter->hour2 !=0){
+        if($matter->hour1!=0 && $matter->hour2 !=0&& $matter->minutes1!=0){
+            $matter->status=7;
+            $date=Carbon::now()->toDateTimeString();
+            $matter->matter_reply_date=$date;
+            $matter->update();
+            return  redirect($id.'/show_pu');
+
+        }elseif($matter->hour1!=0 && $matter->hour2 !=0){
             $matter->status=3;
             $date=Carbon::now()->toDateTimeString();
             $matter->matter_reply_date=$date;
