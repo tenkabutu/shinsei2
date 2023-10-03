@@ -1133,3 +1133,11 @@ div.no_use{
   user-select: none;
 }
 
+
+.supplement{
+	display:block;
+
+	    text-align: center;
+    margin: 0px;
+    font-size: 12px;
+}

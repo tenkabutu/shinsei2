@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Rest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class MatterTotalController extends Controller
 {
@@ -14,9 +15,20 @@ class MatterTotalController extends Controller
         $this->middleware('auth');
     }
     public function total_pa(){
+        $currentYear = Carbon::now()->year;
+
+        // 今年度の開始日（4月1日）を設定
+        $startDate = Carbon::create($currentYear, 4, 1);
+
+        // 今年度の終了日（翌年の3月31日）を設定
+        $endDate = Carbon::create($currentYear + 1, 3, 31);
 
 
-        $userlist = User::leftJoin('matters', 'users.id', '=', 'matters.user_id')
+        $userlist = User::leftJoin('matters', function($join) use ($startDate, $endDate) {
+            $join->on('users.id', '=', 'matters.user_id')
+            ->whereBetween('matters.matter_change_date', [$startDate, $endDate])
+            ->where('matters.status', '!=', 6);
+        })
         ->with('rest')
         ->select(
             'users.id','users.name','users.employee',

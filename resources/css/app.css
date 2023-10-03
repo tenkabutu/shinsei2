@@ -772,3 +772,10 @@ div.no_use{
   -ms-user-select: none;
   user-select: none;
 }
+.supplement{
+	display:block;
+
+	    text-align: center;
+    margin: 0px;
+    font-size: 12px;
+}

@@ -85,6 +85,7 @@
 						</tr>
 
 					</table>
+					<label class="supplement" style="margin-top: -5px;margin-bottom:5px;">{{$startDate->format('Y/n/j').'~'.$endDate->format('Y/n/j')}}</label>
 
 
 					@else

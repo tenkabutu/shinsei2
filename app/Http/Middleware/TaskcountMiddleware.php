@@ -234,12 +234,37 @@ class TaskcountMiddleware
 
             // 現在の年を取得
             $currentYear = Carbon::now()->year;
+            // 現在の月を取得
+            $currentMonth = Carbon::now()->month;
 
-            // 今年度の開始日（4月1日）を設定
-            $startDate = Carbon::create($currentYear, 4, 1);
+            // ユーザーの hiring_lower の値を取得
+            $period = Auth::user()->hiring_period;
 
-            // 今年度の終了日（翌年の3月31日）を設定
-            $endDate = Carbon::create($currentYear + 1, 3, 31);
+            // 年度の開始日と終了日を計算
+            if ($period == 0) {
+                // 前半のユーザーの場合
+                if ($currentMonth >= 4) {
+                    // 現在の年度が始まったら
+                    $startDate = Carbon::create($currentYear, 4, 1);
+                    $endDate = Carbon::create($currentYear + 1, 3, 31);
+                } else {
+                    // 現在の年度がまだ始まっていない場合
+                    $startDate = Carbon::create($currentYear - 1, 4, 1);
+                    $endDate = Carbon::create($currentYear, 3, 31);
+                }
+            } elseif ($period == 1) {
+                // 後半のユーザーの場合
+                if ($currentMonth >= 10) {
+                    // 現在の年度が始まったら
+                    $startDate = Carbon::create($currentYear, 10, 1);
+                    $endDate = Carbon::create($currentYear + 1, 9, 30);
+                } else {
+                    // 現在の年度がまだ始まっていない場合
+                    $startDate = Carbon::create($currentYear - 1, 10, 1);
+                    $endDate = Carbon::create($currentYear, 9, 30);
+                }
+            }
+
 
 
 
@@ -301,6 +326,7 @@ class TaskcountMiddleware
                 'te_count2', 'pa_count3',
                 'ov_count3', 'te_count3',
                 'pu_count2','pu_count3',
+                'startDate','endDate',
                 ));
             $this->viewFactory->share('userdata', $user);
         }
