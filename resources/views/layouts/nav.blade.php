@@ -133,7 +133,6 @@
 					<li class="nav_count"><a href="/shinsei2/public/3/matter_search">申請一覧</a>　@if($te_count3!=0)<a class="double2">要修正</a>@else　　　@endif @if($te_count2!=0)<a class="double">申請中{{$te_count2}}</a>@endif</li>
 				</ul>
 
-
 				<div class='side_label'>
 					<span>購入申請</span>
 				</div>
@@ -141,7 +140,11 @@
 
 					<li><a href="/shinsei2/public/create_pu" >新規申請</a></li>
 
+@if(Auth::user()->role!=3)
 						<li class="nav_count"><a href="/shinsei2/public/7/matter_search">申請一覧</a>　<a class="double2">要修正</a>　　　 </li>
+
+
+	@endif
 
 
 				</ul>
