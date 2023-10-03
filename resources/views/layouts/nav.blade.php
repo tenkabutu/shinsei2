@@ -140,7 +140,8 @@
 
 					<li><a href="/shinsei2/public/create_pu" >新規申請</a></li>
 
-						<li class="nav_count"><a href="/shinsei2/public/7/matter_search">申請一覧</a>　<a class="double2">要修正</a>@else　　　 </li>
+						<li class="nav_count"><a href="/shinsei2/public/7/matter_search">申請一覧</a>　<a class="double2">要修正</a>　　　 </li>
+
 
 				</ul>
 					<div class='side_label'>
