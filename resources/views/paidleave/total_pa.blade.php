@@ -38,6 +38,7 @@ $(document).ready(function(){
 				<th colspan="2">残有給</th>
 				<th>5日</th>
 				<th></th>
+				<th></th>
 			</tr>
 			</thead>
 			{{-- @foreach ($userlist as $record) --}}
@@ -48,7 +49,7 @@ $(document).ready(function(){
         		$uq = $record->rest ? $record->rest->co_day+$record->rest->co_harf_rest*0.5+$record->rest->rest_allotted_day :'';
         		$ruq=$record->harf_rest_day*0.5+$record->rest_day+ceil(($record->rest_time/60-optional($record->rest)->co_time)/8);
    			@endphp
-			<tr class="d{{$id+1}}">
+			<tr class="d{{$id+1}} @if($record->hiring_period==1) hiring_lower @endif">
 				<td>{{ $record->employee}}</td>
 				<td>{{ $record->name}}</td>
 				<td>{{$uq}}日</td>
@@ -64,10 +65,16 @@ $(document).ready(function(){
 				<td>@if($ruq>=5)
 				◯
 				@endif</td>
+				@if($record->hiring_period==0)
+				<td>{{$startDate1->format('Y/n/j').'~'.$endDate1->format('n/j')}}</td>
+				@else
+				<td>{{$startDate2->format('Y/n/j').'~'.$endDate2->format('n/j')}}</td>
+				 @endif
+
 				<td><input type="button" value="印刷" id='{{$record->id}}' ></td>
 
 				  @else
-				  <td></td><td></td><td></td>
+				  <td></td><td></td><td></td><td></td>
 				  @endif
 
 
