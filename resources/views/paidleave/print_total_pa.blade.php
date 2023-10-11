@@ -65,7 +65,18 @@
     <td class="square_6_5">{{$uq-optional($user)->harf_rest_day*0.5-optional($user)->rest_day-ceil((optional($user)->rest_time/60-$user_rest->co_time)/8)}}日</td>
     <td class="square_6_6">{{(8-(optional($user)->rest_time/60-$user_rest->co_time)%8)%8}}時間</td>
   </tr>
-   <tr><td>{{$user_rest->rest_year}}年度</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+   <tr><th colspan="4">{{$user_rest->rest_year}}年度
+   @if($month==0)
+
+   	@if($user->hiring_period==0)
+   		({{$user_rest->rest_year}}年4月1日～3月31日)
+   	@else
+   		({{$user_rest->rest_year}}年10月1日～9月30日)
+   	@endif
+   @else
+   		({{$user_rest->rest_year}}年{{$month}}月)
+   	@endif
+   	</th><td></td><td></td><td></td><td></td></tr>
 </table>
 
 
