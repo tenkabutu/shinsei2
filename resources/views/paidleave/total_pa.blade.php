@@ -48,13 +48,14 @@ $(document).ready(function(){
 
         		$uq = $record->rest ? $record->rest->co_day+$record->rest->co_harf_rest*0.5+$record->rest->rest_allotted_day :'';
         		$ruq=$record->harf_rest_day*0.5+$record->rest_day+ceil(($record->rest_time/60-optional($record->rest)->co_time)/8);
+        		$ruq2=$record->harf_rest_day*0.5+$record->rest_day;
    			@endphp
 			<tr class="d{{$id+1}} @if($record->hiring_period==1) hiring_lower @endif">
 				<td>{{ $record->employee}}</td>
 				<td>{{ $record->name}}</td>
 				<td>{{$uq}}日</td>
 				<td>{{optional($record->rest)->co_time}}時間</td>
-				<td>{{$ruq}}日</td>
+				<td>{{$ruq2}}日</td>
 				<td>{{$record->rest_time/60%8}}時間</td>
 
 				<td>@if(is_numeric($uq) && is_numeric($ruq))
