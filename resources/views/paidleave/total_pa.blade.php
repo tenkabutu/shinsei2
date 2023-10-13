@@ -54,9 +54,10 @@ $(document).ready(function(){
 				}else{
 					$upc=100;
 				}
+				$upc2=$record->rest ? (8-($record->rest_time/60-optional($record->rest)->co_time)%8)%8 :'0';
 
    			@endphp
-			<tr class="d{{$id+1}} @if($upc==0) uq_just @elseif($upc==100) uq_none @elseif($upc<0) uq_alert @endif">
+			<tr class="d{{$id+1}} @if($upc==0&&$upc2==0) uq_just @elseif($upc==100) uq_none @elseif($upc<0) uq_alert @endif">
 				<td>{{ $record->employee}}</td>
 				<td>{{ $record->name}}</td>
 				<td>{{$uq}}日</td>
@@ -67,7 +68,7 @@ $(document).ready(function(){
 					{{$upc}}日
 					@endif</td>
 				 @if(isset($record->rest))
-				<td>{{(8-($record->rest_time/60-optional($record->rest)->co_time)%8)%8}}時間</td>
+				<td>{{$upc2}}時間</td>
 				<td>@if($ruq>=5)
 				◯
 				@endif</td>
