@@ -55,7 +55,7 @@ $(document).ready(function(){
 				<td>{{ $record->name}}</td>
 				<td>{{$uq}}日</td>
 				<td>{{optional($record->rest)->co_time}}時間</td>
-				<td>{{$ruq2}}日</td>
+				<td>{{$ruq}}日</td>
 				<td>{{$record->rest_time/60%8}}時間</td>
 
 				<td>@if(is_numeric($uq) && is_numeric($ruq))
