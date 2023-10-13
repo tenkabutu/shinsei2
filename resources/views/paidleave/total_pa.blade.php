@@ -48,7 +48,7 @@ $(document).ready(function(){
 
         		$uq = $record->rest ? $record->rest->co_day+$record->rest->co_harf_rest*0.5+$record->rest->rest_allotted_day :'';
         		$ruq=$record->harf_rest_day*0.5+$record->rest_day+ceil(($record->rest_time/60-optional($record->rest)->co_time)/8);
-        		$ruq2=$record->harf_rest_day*0.5+$record->rest_day+floor(($record->rest_time/60-optional($record->rest)->co_time)/8);
+        		$ruq2=$record->harf_rest_day*0.5+$record->rest_day+floor(abs(($record->rest_time/60-optional($record->rest)->co_time))/8);
    			@endphp
 			<tr class="d{{$id+1}} @if($record->hiring_period==1) hiring_lower @endif">
 				<td>{{ $record->employee}}</td>
