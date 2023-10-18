@@ -11,10 +11,10 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
         <!-- Styles -->
-        <link rel="stylesheet" href="{{ url(mix('css/app.css')) }}">
+        <link rel="stylesheet" href="/shinsei2/public/css/app.css">
 
         <!-- Scripts -->
-        <script src="{{ url(mix('js/app.js')) }}" defer></script>
+        <script src="/shinsei2/public/js/app.js" defer></script>
         {{ $head }}
 
     </head>

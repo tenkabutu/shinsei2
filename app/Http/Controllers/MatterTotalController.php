@@ -20,7 +20,7 @@ class MatterTotalController extends Controller
         $currentYear = Carbon::now()->year;
         // 現在の月を取得
         $currentMonth = Carbon::now()->month;
-
+        //前期入社ユーザー4月1日～翌年3月31日までの場合
         if ($currentMonth >= 4) {
             // 現在の年度が始まったら
             $startDate1 = Carbon::create($currentYear, 4, 1);
@@ -31,6 +31,7 @@ class MatterTotalController extends Controller
             $startDate1 = Carbon::create($currentYear - 1, 4, 1);
             $endDate1 = Carbon::create($currentYear, 3, 31);
         }
+        //後期入社ユーザー10月1日～翌年9月30日までの場合
         if ($currentMonth >= 10) {
             // 現在の年度が始まったら
             $startDate2 = Carbon::create($currentYear, 10, 1);
