@@ -40,7 +40,7 @@
 
 				<input type="submit" class="g23" value="再申請" onclick="setAction('save_request_ov')">
 			@elseif($status==5)
-				<input type="submit" class="g12" value="再申請" onclick="setAction('update_request_pa')">
+				<input type="submit" class="g12" value="再申請" onclick="setAction('update_request_ov')">
 				<input type="submit" class="g23" value="削除" onclick="setAction('delete_pa')">
 			@elseif($status==6)
 				<p>この申請は削除されました。</p>
