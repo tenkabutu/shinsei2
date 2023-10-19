@@ -56,6 +56,10 @@
     	<div class="alert text-danger">{{ session('save_check') }}</div>
 		<x-save-box :status="$matter->status" :role="0" :type="1"/>
 		@endif
+			@if (session('save_check2'))
+    	<div class="alert text-danger">{{ session('save_check2') }}</div>
+		<x-save-box :status="$matter->status" :role="0" :type="1"/>
+		@endif
 			<input type="hidden" name="user_id" value="{{Auth::user()->id}}">
 			<input type="hidden" name="matter_type" value="1">
 
@@ -67,7 +71,15 @@
 				@else
 				<input type="hidden" name="change_check" value="{{old('change_check',$matter->status)}}">
 				@endif
+
+				@if (session('save_check2'))
+				<input type="hidden" name="change_check2" value="2">
+				@else
 				<input type="hidden" name="change_check2" value="{{old('change_check2',1)}}">
+				@endif
+
+
+
 				<x-matter-rewrite-box :userdata="$user" type="1" :matter="$matter"/>
 			@else
 				<input type="hidden" name="allotted" value="{{old('allotted',$user->worktype->def_allotted)}}">

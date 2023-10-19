@@ -189,10 +189,17 @@ class OverWorkController extends Controller
             $matter->matter_request_date=$date;
             $matter->status=2;
             $matter->save();
-            return  redirect($id.'/rewrite_ov');
+
+
+
+
+
+           // return  redirect($id.'/rewrite_ov');
         }elseif($matter->isDirty()){
             $request->change_check=1;
-            return back()->withInput()->with('save_check', '申請済の内容が変更されています、保存する場合再申請が必要になりますがよろしいですか？');
+            return back()->withInput()
+            ->with(['save_check'=>'申請済の内容が変更されています、保存する場合再申請が必要になりますがよろしいですか？',
+                'old_task_group'=>$request->task_group]);
 
         }
 
@@ -204,12 +211,11 @@ class OverWorkController extends Controller
                 $task->fill($row);
 
                 //タスクが既存であれば更新があったかどうかと、申請済みかどうかをチェック
-                if($task->isDirty()&&$row['task_status']==3){
+                if($task->isDirty()){
                     if($request->change_check2==1){
-                        $request->merge(['change_check2' =>2]);
-                            return back()
-                            ->withInput()
-                            ->with(['save_check'=>'申請済の内容が変更されています、保存する場合再申請が必要になりますがよろしいですか？'.$row["task_change_date"].':'.$row["task_minutes2"],
+                        $request->change_check2 =2;
+                            return back()->withInput()
+                            ->with(['save_check2'=>'申請済の内容が変更されています、保存する場合再申請が必要になりますがよろしいですか？'.$row["task_change_date"].':'.$row["task_minutes2"],
                                     'old_task_group'=>$request->task_group
                             ]);
 
@@ -228,12 +234,15 @@ class OverWorkController extends Controller
 
             }elseif($row['task_change_date']){
                 $task = new Task();
-                $task->task_allotted = ((int)$row['task_hour2']*60+(int)$row['task_minutes2'])-((int)$row['task_hour1']*60+(int)$row['task_minutes1'])-(int)$row['task_breaktime'];
+
                 $task->task_status =2;
                 $date=Carbon::now()->toDateTimeString();
                 $task->task_request_date=$date;
                 $task->matter_id =$id;
-                $task->fill($row)->save();
+                $task->fill($row);
+                $task->task_allotted = ((int)$row['task_hour2']*60+(int)$row['task_minutes2'])-((int)$row['task_hour1']*60+(int)$row['task_minutes1'])-(int)$row['task_breaktime'];
+
+                $task->save();
             }
         }
 
