@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'failed' => '登録メールアドレスか、パスワードが間違っています。パスワード変更機能が未実装なので見に覚えがなければ管理者まで連絡してください。',
+    'failed' => 'ログインできませんでした。パスワードを忘れた方はリンクからリセットを行ってください',
     'password' => 'The provided password is incorrect.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
 
