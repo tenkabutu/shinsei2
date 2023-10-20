@@ -17,7 +17,7 @@
 				<fieldset>
 				<legend>update</legend>
 				<ul>
-					<li>・振替申請の修正の不具合を修正。</li>
+					<li>・振替申請修正時の不具合を修正。</li>
 				</ul>
 				</fieldset>
 				 <fieldset>

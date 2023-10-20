@@ -2,14 +2,16 @@
     <x-auth-card>
         <x-slot name="logo">
             <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
+
             </a>
         </x-slot>
+        <div class="create_logo">
+        		<h2 class="create_header"><img width="50" alt="" src="/shinsei2/public/img/shinsei.jpg">新規パスワード設定</h2>
+        	</div>
 
-        <!-- Validation Errors -->
-        <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-        <form method="POST" action="{{ route('password.update') }}">
+
+        <form  class="create_user_form" method="POST" action="{{ route('password.update') }}">
             @csrf
 
             <!-- Password Reset Token -->
@@ -43,6 +45,8 @@
                     {{ __('Reset Password') }}
                 </x-button>
             </div>
+             <!-- Validation Errors -->
+        <x-auth-validation-errors class="mb-4" :errors="$errors" />
         </form>
     </x-auth-card>
 </x-guest-layout>
