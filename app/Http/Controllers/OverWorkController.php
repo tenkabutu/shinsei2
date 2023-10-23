@@ -255,7 +255,7 @@ class OverWorkController extends Controller
 
         $matter = matter::with('tasklist')->findOrFail($id);
         //$task_count = task::where('matter_id',$id)->where('task_status',2)->count();
-        $task_data = task::select(DB::raw('sum(task_allotted) as task_total,count(id) as task_count'))->where('matter_id',$id)->where('task_status',2)->get()->all();
+        $task_data = task::select(DB::raw('sum(task_allotted) as task_total,count(id) as task_count'))->where('matter_id',$id)->get()->all();
 
 
 
