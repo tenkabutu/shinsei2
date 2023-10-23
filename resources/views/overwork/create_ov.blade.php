@@ -314,12 +314,11 @@ $(function(){
 		$('.task_total').text(Math.floor(tt/60)+'時間'+tt%60+'分');
 
 		if(tt>{{$user->worktype->def_allotted}}){
-			$('label.task_time_alert').text('基本勤務時間オーバー');
+			$('label.task_time_alert').text('基本勤務時間オーバー').addClass('text-danger');
 		}else if(tt>$('input[name="allotted"]').val()){
-			$('label.task_time_alert').text('振替勤務時間オーバー');
-		}
-		else{
-			$('label.task_time_alert').text('');
+			$('label.task_time_alert').text('振替勤務時間オーバー').addClass('text-danger');
+		}else{
+			$('label.task_time_alert').text('').removeClass('text-danger');
 		}
 	});
 	@empty($matter)
