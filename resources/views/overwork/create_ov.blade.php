@@ -156,6 +156,7 @@
 							<div class="grid">
 								<label class="g12">振替時間</label>
 								<label class="task_hour3 g34"></label><label class="task_minutes3 g45"></label>
+								<input type="hidden" class="task_allotted" name="task_allotted" value="0">
 							</div>
 
 						</div>
@@ -277,7 +278,7 @@ $(function(){
 	});
 	$('#task_area input[type="number"]').bind('input', function () {
 		var tf = $(this).closest('.task_form');
-		tf.css('color', 'red');
+		//tf.css('color', 'red');
 
 		var th1 = tf.find('.task_hour1').val()- 0;
 
