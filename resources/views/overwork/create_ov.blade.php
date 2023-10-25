@@ -173,7 +173,7 @@
 						@isset($matter->tasklist)
 						<div class="g23 text_right"><label class="task_time_alert"></label><label class="task_total">{{intdiv($task_data[0]['task_total'],60)}}時間{{$task_data[0]['task_total']%60}}分</label></div>
 						@else
-						<div class="g23 text_right"><label class="task_total"></label></div>
+						<div class="g23 text_right"><label class="task_time_alert"></label><label class="task_total"></label></div>
 						@endisset
 					</div>
 				</fieldset>
@@ -235,7 +235,7 @@ $(function(){
 	        	}
 			},
 			show: function(){
-				$('#task_area input[type="number"]').off('input').on('input', function () {
+				$('#task_area input[type="number"]').on('input', function () {
 					var tf = $(this).closest('.task_form');
 					var th1 = tf.find('.task_hour1').val()- 0;
 					var th2 = tf.find('.task_hour2').val()- 0;
