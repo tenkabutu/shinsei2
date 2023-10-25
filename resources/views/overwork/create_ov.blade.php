@@ -228,11 +228,42 @@ $(function(){
 		    };
 	    }
 	});
-	$('.repeater').repeater({hide: function (deleteElement) {
-	      if(confirm('削除してもいいですか？')) {
-	          $(this).slideUp(deleteElement);
-	        }
-	}});
+	$('.repeater').repeater(
+			{hide: function (deleteElement) {
+				if(confirm('削除してもいいですか？')) {
+					$(this).slideUp(deleteElement);
+	        	}
+			},
+			show: function(){
+				$('#task_area input[type="number"]').off('input').on('input', function () {
+					var tf = $(this).closest('.task_form');
+					var th1 = tf.find('.task_hour1').val()- 0;
+					var th2 = tf.find('.task_hour2').val()- 0;
+					var tm1 = tf.find('.task_minutes1').val()- 0;
+					var tm2 = tf.find('.task_minutes2').val()- 0;
+					var tbt = tf.find('.task_break').val()- 0;
+					var tmt = ((th2*60+tm2)-(th1*60+tm1))-tbt;
+					var twt = Math.floor(tmt/60);
+					var tlt = tmt%60;
+					tf.find('.task_hour3').text(twt+'時間');
+					tf.find('.task_minutes3').text(tlt+'分');
+					tf.find('.task_allotted').val(tmt);
+					var tt=0;
+					$('.task_allotted').each(function(){
+						tt+=$(this).val()-0;
+						});
+					$('.task_total').text(Math.floor(tt/60)+'時間'+tt%60+'分');
+					if(tt>{{$user->worktype->def_allotted}}){
+						$('label.task_time_alert').text('基本勤務時間オーバー').addClass('text-danger');
+					}else if(tt>$('input[name="allotted"]').val()){
+						$('label.task_time_alert').text('振替勤務時間オーバー').addClass('text-danger');
+					}else{
+						$('label.task_time_alert').text('').removeClass('text-danger');
+					}
+				});
+				 $(this).slideDown();
+				}
+			});
 
 	$('label', radio).click(function() {
 		if($(this).prev().val()!=7){
