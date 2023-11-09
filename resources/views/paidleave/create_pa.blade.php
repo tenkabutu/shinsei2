@@ -8,16 +8,20 @@
 	<script>
    $(function() {
 	   $.datetimepicker.setLocale('ja');
-	   $('.target').datetimepicker({  scrollMonth : false,
-		    scrollInput : false}).datepicker('setDate','today');
+	   $('.target').datetimepicker({
+		   minDate: new Date(new Date().setFullYear(new Date().getFullYear() - 1)),
+		   scrollMonth : false,
+		   scrollInput : false}).datepicker('setDate','today');
 
 	  $('.target2').datetimepicker({
+		  minDate: new Date(new Date().setFullYear(new Date().getFullYear() - 1)),
 		  scrollMonth : false,
 		  scrollInput : false,
 		  timepicker:false,
 	      format:'Y/n/j'
 		});
 	  $('.target3').datetimepicker({
+		  minDate: new Date(new Date().setFullYear(new Date().getFullYear() - 1)),
 		  scrollMonth : false,
 		  scrollInput : false,
 		  format:'h:m'
