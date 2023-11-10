@@ -55,6 +55,8 @@ class PaidLeaveController extends Controller
          exit; */
 
         $matter =matter::find($id);
+        $carbon = new CarbonImmutable($request->matter_change_date);
+        $request->merge(['nendo' =>$carbon->subMonthsNoOverflow(3)->format('Y')]);
         $matter->fill($request->except('_token'));
 
         if($matter->isDirty()&&$request->change_check==1){
@@ -76,6 +78,8 @@ class PaidLeaveController extends Controller
     }
     public function fix(ShinseiRequest $request,$id){
         $matter =matter::find($id);
+        $carbon = new CarbonImmutable($request->matter_change_date);
+        $request->merge(['nendo' =>$carbon->subMonthsNoOverflow(3)->format('Y')]);
         $request->merge(['proxy_id' =>Auth::id()]);
         $matter->fill($request->except('_token','user_id'));
         $matter->save();
@@ -101,6 +105,8 @@ class PaidLeaveController extends Controller
     }
     public function update_request(ShinseiRequest $request,$id){
         $matter =matter::find($id);
+        $carbon = new CarbonImmutable($request->matter_change_date);
+        $request->merge(['nendo' =>$carbon->subMonthsNoOverflow(3)->format('Y')]);
         $matter->fill($request->except('_token'));
         if($matter->isDirty()&&$request->change_check==1){
             $date=Carbon::now()->toDateTimeString();
