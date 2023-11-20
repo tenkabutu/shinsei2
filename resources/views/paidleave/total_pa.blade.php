@@ -69,7 +69,7 @@ $(document).ready(function(){
 					@endif</td>
 				 @if(isset($record->rest))
 				<td>{{$upc2}}時間</td>
-				<td>@if($upc!=100&&$upc>=5)
+				<td>@if($ruq2>=5)
 				◯
 				@endif</td>
 				@if($record->hiring_period==0)
