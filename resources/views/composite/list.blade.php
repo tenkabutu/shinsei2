@@ -73,8 +73,10 @@
 				rewrite_ov
 				@elseif($record->matter_type==2)
 				show_pa
-				@else
+				@elseif($record->matter_type==3)
 				show_te
+				@else
+				show_pu
 				@endif
 
 				">{{ $record->matters_id}}</a></td>
