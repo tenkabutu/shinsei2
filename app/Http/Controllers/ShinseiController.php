@@ -370,6 +370,7 @@ class ShinseiController extends Controller
     }
     public function matter_ruling2 (Request $request,$type)
     {
+        //publicのあとに数字が入っていればこっち
         //var_dump($request->toArray());
         $type2=$type;
         if($type<7&&$type>3){
@@ -528,7 +529,12 @@ class ShinseiController extends Controller
                 $query->where('matters.nendo',$request->year);
             }
             $query->select('*', 'matters.id as matters_id', 'matters.created_at as matters_created_at', 'users.name as username', 'users.employee as employee','reception.name as username2','nt2.nametag as statusname','nt4.nametag as area','nt3.nametag as optname');
-            $query->orderByRaw('users.employee asc','matters.id desc');
+
+            if ($request->user != null && $request->user != 0) {
+                $query->orderByRaw('matters.id desc');
+            }else{
+                $query->orderByRaw('users.employee asc','matters.id desc');
+            }
             //$query->orderBy('matters.id', 'desc');
             // ->select('matters.id','matters.created_at')
             // ->get();
