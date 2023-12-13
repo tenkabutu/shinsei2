@@ -530,11 +530,7 @@ class ShinseiController extends Controller
             }
             $query->select('*', 'matters.id as matters_id', 'matters.created_at as matters_created_at', 'users.name as username', 'users.employee as employee','reception.name as username2','nt2.nametag as statusname','nt4.nametag as area','nt3.nametag as optname');
 
-            if ($request->user != null && $request->user != 0) {
-                $query->orderByRaw('matters.id desc');
-            }else{
-                $query->orderByRaw('users.employee asc','matters.id desc');
-            }
+           $query->orderByRaw('users.employee asc,matters.id desc');
             //$query->orderBy('matters.id', 'desc');
             // ->select('matters.id','matters.created_at')
             // ->get();
