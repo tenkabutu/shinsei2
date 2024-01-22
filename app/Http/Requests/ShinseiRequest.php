@@ -57,9 +57,14 @@ class ShinseiRequest extends FormRequest
         }elseif ($this->matter_type==2) {
 
             $rules['opt1'] = 'required';
+            if (in_array($this->opt1, [9, 10, 11])) {
+                if ($this->has('order_content')) {
+                    $rules['order_content'] = 'required|string|max:250';
+                }
+            }
         }elseif($this->matter_type==3) {
             if ($this->has('order_content')) {
-            $rules['order_content'] = 'required|string|max:250';
+                $rules['order_content'] = 'required|string|max:250';
             }
         }elseif($this->matter_type==7) {
             if ($this->has('matter_name')) {
