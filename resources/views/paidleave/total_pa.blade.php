@@ -118,12 +118,12 @@ function initializeSelectBoxes() {
 
 	  // 年のセレクトボックスの初期化
 	  for (var year = currentYear; year >= 2022; year--) {
-	    var option = $('<option>').val(year).text(year);
-	    if (year === currentYear) {
-	      option.prop('selected', true);
-	    }
-	    yearSelect.append(option);
-	  }
+    var option = $('<option>').val(year).text(year);
+    if ((year === currentYear && currentMonth >= 4) || (year === currentYear - 1 && currentMonth <= 3)) {
+        option.prop('selected', true);
+    }
+    yearSelect.append(option);
+}
 
 	  // 月のセレクトボックスの初期化
 	  var option = $('<option>').val(0).text('---');

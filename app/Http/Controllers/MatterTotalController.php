@@ -134,11 +134,11 @@ class MatterTotalController extends Controller
             }
             $user = $query1->first();
 
-                $user_rest = user::leftJoin('rests', function ($join) use ($month, $year,$user) {
+                $user_rest = user::leftJoin('rests', function ($join) use ($month, $year,$user,$select_user) {
                     $join->on('users.employee', '=', 'rests.user_id');
                     if ($month == 0) {
                         $join->where('rests.rest_year', $year);
-                    }else if($user->hiring_period==0) {
+                    }else if($select_user->hiring_period==0) {
                         $restYear = ($month <= 4) ? ($year - 1) : $year;
                         $join->where('rests.rest_year', $restYear);
                     }else{
@@ -156,7 +156,7 @@ class MatterTotalController extends Controller
                 $join->on('matters.opt1', '=', 'nt3.tagid')
                 ->where('nt3.groupid', 6);
             });
-            if($user->hiring_period==0){
+            if($select_user->hiring_period==0){
                 if($month==0){
                     $query->where('matters.nendo', $year);
                 }else{
@@ -180,7 +180,7 @@ class MatterTotalController extends Controller
             $query->orderBy('matters.matter_change_date','asc');
             $records = $query->get();
 
-            return view('paidleave.print_total_pa',compact('user','records','user_rest','month'));
+            return view('paidleave.print_total_pa',compact('select_user','user','records','user_rest','month','year'));
 
     }
 
