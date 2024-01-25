@@ -125,7 +125,20 @@ $(function(){
 	    }
 	});
 	//クリックした要素にクラス割り当てる
-	$('label', radio).click(function() {
+	var labelsSelector;
+
+	@php
+    $labelSelector = '';
+    if ($residue_rest_day == 0) {
+        $labelSelector = '"label:not(#st1_1_label, #st1_2_label, #st1_3_label)"';
+    } elseif ($residue_rest_day < 1) {
+        $labelSelector = '"label:not(#st1_1_label)"';
+    } else {
+        $labelSelector = '"label"';
+    }
+@endphp
+var labelsSelector = {!! $labelSelector !!};
+	$(labelsSelector, radio).click(function() {
 		var cr =$(this).prev().val();
 		if($(this).prev().val()!=4&&$(this).prev().val()<10){
 	        $('.matter_date input').attr('readonly',true);
@@ -165,6 +178,11 @@ $(function(){
 	        $('label',this).removeClass('checked');
 	    });
 	    $(this).addClass('checked');
+	    if ({{$residue_rest_day}} == 0) {
+	        $('.st1_1_label').click(function(event) {
+	            event.preventDefault();
+	        });
+	    }
 	    var h1 = $('input[name="hour1"]').val()- 0;
 		var h2 = $('input[name="hour2"]').val()- 0;
 		var m1 = $('input[name="minutes1"]').val()- 0;
