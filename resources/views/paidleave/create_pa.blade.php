@@ -146,6 +146,7 @@ $(function(){
 
 	@php
     $labelSelector = '';
+    if($userdata->rest){
     if ($residue_rest_day == 0) {
         $labelSelector = '"label:not(#st1_1_label, #st1_2_label, #st1_3_label)"';
     } elseif ($residue_rest_day < 1) {
@@ -153,6 +154,9 @@ $(function(){
     } else {
         $labelSelector = '"label"';
     }
+    }else{
+    	$labelSelector = '"label:not(#st1_1_label, #st1_2_label, #st1_3_label)"';
+        }
 @endphp
 var labelsSelector = {!! $labelSelector !!};
 	$(labelsSelector, radio).click(function() {
