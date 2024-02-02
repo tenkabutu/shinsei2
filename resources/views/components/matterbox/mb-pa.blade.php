@@ -9,11 +9,11 @@
 			<label class="g12">種別1:</label>
 			<div class="radio-group g23">
 				<input id="st1_1" type="radio" class="st1" name="opt1" value="1" {{old('opt1')=='1' ? 'checked':''}} />
-				<label id="st1_1_label" for="st1_1" style="{{ ($residue_rest_day < 1 || is_null($residue_rest_day)) ? 'background-color: red;' : '' }}">全日</label>
+				<label id="st1_1_label" for="st1_1" style="{{ (!is_null($residue_rest_day) && $residue_rest_day < 1) ? 'background-color: red;' : '' }}">全日</label>
 				<input id="st1_2" type="radio" class="st1" name="opt1" value="2" {{old('opt1')=='2' ? 'checked':''}}/>
-				<label id="st1_2_label" for="st1_2" style="{{ ($residue_rest_day == 0  || is_null($residue_rest_day)) ? 'background-color: red;' : '' }}">午前休</label>
+				<label id="st1_2_label" for="st1_2" style="{{ (!is_null($residue_rest_day) && $residue_rest_day ==0) ? 'background-color: red;' : '' }}">午前休</label>
 				<input id="st1_3" type="radio" class="st1" name="opt1" value="3" {{old('opt1')=='3' ? 'checked':''}}/>
-				<label id="st1_3_label" for="st1_3" style="{{ ($residue_rest_day == 0 || is_null($residue_rest_day)) ? 'background-color: red;' : '' }}">午後休</label>
+				<label id="st1_3_label" for="st1_3" style="{{ (!is_null($residue_rest_day) && $residue_rest_day ==0) ? 'background-color: red;' : '' }}">午後休</label>
 				<input id="st1_4" type="radio" class="st1" name="opt1" value="4" {{old('opt1')=='4' ? 'checked':''}}/>
 				<label id="st1_4_label" for="st1_4">時間休</label>
 			</div>
