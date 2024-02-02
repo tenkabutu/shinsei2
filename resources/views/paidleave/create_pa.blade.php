@@ -158,6 +158,22 @@ $(function(){
     	$labelSelector = '"label:not(#st1_1_label, #st1_2_label, #st1_3_label)"';
         }
 @endphp
+@if (!isset($residue_rest_day))
+	 $('#st1_1_label,#st1_2_label,#st1_3_label').click(function(event) {
+        event.preventDefault();
+    });
+
+@elseif ($residue_rest_day == 0)
+$('#st1_1_label').click(function(event) {
+   event.preventDefault();
+});
+@else
+$('#st1_1_label,#st1_2_label,#st1_3_label').click(function(event) {
+        event.preventDefault();
+    });
+
+
+@endif
 var labelsSelector = {!! $labelSelector !!};
 	$(labelsSelector, radio).click(function() {
 		var cr =$(this).prev().val();
@@ -199,11 +215,13 @@ var labelsSelector = {!! $labelSelector !!};
 	        $('label',this).removeClass('checked');
 	    });
 	    $(this).addClass('checked');
-	    if ({{$residue_rest_day}} == 0) {
-	        $('.st1_1_label').click(function(event) {
-	            event.preventDefault();
-	        });
-	    }
+
+
+
+
+
+
+
 	    var h1 = $('input[name="hour1"]').val()- 0;
 		var h2 = $('input[name="hour2"]').val()- 0;
 		var m1 = $('input[name="minutes1"]').val()- 0;
