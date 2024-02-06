@@ -184,7 +184,7 @@
 
 				</td>
 				<td>@if($record->matters_id){{$lap_rest_time/60}}@endif</td>
-				<td>@if(($lap_rest_time/60-$user_rest->co_time)/8)>=1)
+				<td>@if((is_int(($lap_rest_time/60-$user_rest->co_time)/8)||($lap_rest_time/60-$user_rest->co_time)/8)<0))
 						{{$user_rest->co_day+$user_rest->co_harf_rest*0.5+$user_rest->rest_allotted_day-$lap_rest_day}}
 						@else
 						{{$user_rest->co_day+$user_rest->co_harf_rest*0.5+$user_rest->rest_allotted_day-$lap_rest_day-1}}
