@@ -164,7 +164,7 @@
 					</div>
 					<div>
 						<div class="g23 text_right">
-							<span data-repeater-create>＋</span>
+							<span class="round-btn" data-repeater-create>振替日追加＋</span>
 						</div>
 					</div>
 					<div>

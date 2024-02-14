@@ -1107,6 +1107,18 @@ div.no_use{
 /* || 汎用 */
 
 
+.round-btn{
+	display: inline-block; /* インラインブロック要素に変更 */
+        padding: 2px 10px; /* ボタンの内側の余白 */
+        border-radius: 50px; /* 丸形にするための半径 */
+        background-color: #007bff; /* ボタンの背景色 */
+        color: #fff; /* ボタンのテキスト色 */
+        text-align: center; /* テキストを中央に配置 */
+        text-decoration: none;
+        cursor: pointer;
+}
+
+
 .display_none{
 	display:none;
 }
