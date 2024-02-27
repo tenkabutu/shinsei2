@@ -129,21 +129,6 @@ function setAction(url) {
 }
 $(function(){
 
-	@if (!isset($residue_rest_day))
-		 $('#st1_1_label,#st1_2_label,#st1_3_label').click(function(event) {
-	        event.preventDefault();
-	    });
-
-	@elseif ($residue_rest_day == 0)
-	$('#st1_1_label').click(function(event) {
-	   event.preventDefault();
-	});
-	@elseif ($residue_rest_day <1)
-	$('#st1_1_label,#st1_2_label,#st1_3_label').click(function(event) {
-	        event.preventDefault();
-	    });
-
-	@endif
 
 	var radio = $('div.radio-group');
 	$('input', radio).css({'opacity': '0'})
