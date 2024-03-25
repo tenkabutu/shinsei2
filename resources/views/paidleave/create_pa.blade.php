@@ -162,6 +162,7 @@ $(function(){
     @endphp
 
 var labelsSelector = {!! $labelSelector !!};
+    var labelsSelector ='label';
 	$(labelsSelector, radio).click(function() {
 		var cr =$(this).prev().val();
 		if($(this).prev().val()!=4&&$(this).prev().val()<10){
