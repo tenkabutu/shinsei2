@@ -788,8 +788,11 @@ div.no_use{
 	font-weight: bold;
 }
 .text-bold{
-
 	font-weight: bold;
+}
+.text-small{
+	color:teal;
+	font-size: 12px;
 }
 .unselect {
   -moz-user-select: none;

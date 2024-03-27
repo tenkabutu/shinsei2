@@ -1151,8 +1151,13 @@ div.no_use{
 
 
 .text-bold{
-
 	font-weight: bold;
+}
+
+
+.text-small{
+	color:teal;
+	font-size: 12px;
 }
 
 
