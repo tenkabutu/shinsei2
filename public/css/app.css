@@ -1150,6 +1150,12 @@ div.no_use{
 }
 
 
+.text-bold{
+
+	font-weight: bold;
+}
+
+
 .unselect {
   -moz-user-select: none;
   -webkit-user-select: none;
