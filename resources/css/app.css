@@ -815,8 +815,8 @@ div.no_use{
         left: 0;
         right: 0;
         text-align: center;
-        padding: 10px;
-        border-top: 1px solid #ccc;
+        padding: -10px;
+
     }
 
     /* ページごとのフッターの挿入 */
