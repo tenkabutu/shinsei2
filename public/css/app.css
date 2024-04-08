@@ -1180,8 +1180,7 @@ div.no_use{
 /* 印刷時のスタイル設定 */
 
 
-@media print {
-    .footer {
+.footer {
         position: fixed;
         bottom: 0;
         left: 0;
@@ -1192,6 +1191,7 @@ div.no_use{
 
     }
 
-    /* ページごとのフッターの挿入 */
 
-}
+/* ページごとのフッターの挿入 */
+
+
