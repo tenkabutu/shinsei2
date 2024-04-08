@@ -202,7 +202,9 @@
 
 
 </div>
-
+<div class="footer">
+ {{$user_rest->employee}}
+</div>
 <script>
 </script>
 </x-print-layout>

@@ -1175,3 +1175,22 @@ div.no_use{
     margin: 0px;
     font-size: 12px;
 }
+
+
+/* 印刷時のスタイル設定 */
+
+
+@media print {
+    .footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        text-align: center;
+        padding: 10px;
+        border-top: 1px solid #ccc;
+    }
+
+    /* ページごとのフッターの挿入 */
+
+}
