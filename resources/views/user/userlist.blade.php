@@ -29,6 +29,7 @@ $(document).ready(function(){
 				<th>購承</th>
 				<th>購買</th>
 				<th>編</th>
+				<th>表</th>
 				<th  data-sorter="false"></th>
 			</tr>
 			</thead>
@@ -95,6 +96,7 @@ $(document).ready(function(){
 				<td><input type="checkbox" name="p2" value="2" @if($record->permissions & 2) checked @endif></td>
 				<td><input type="checkbox" name="p3" value="4" @if($record->permissions & 4) checked @endif></td>
 				<td><input type="checkbox" name="p4" value="8" @if($record->permissions & 8) checked @endif></td>
+				<td><input type="checkbox" name="p5" value="16" @if($record->permissions & 16) checked @endif></td>
 				<td><input type="button" class="user_change" value="変更"></td>
 				@else
 				<td>{{ $record->approvaltag->nametag}}</td>
@@ -105,6 +107,7 @@ $(document).ready(function(){
 				<td>@if($record->permissions & 2) ◯ @endif</td>
 				<td>@if($record->permissions & 4) ◯ @endif</td>
 				<td>@if($record->permissions & 8) ◯ @endif</td>
+				<td>@if($record->permissions & 16) ◯ @endif</td>
 				<td></td>
 				@endif
 
@@ -137,6 +140,9 @@ $(document).ready(function(){
 			}
 		if(str.find('input[name="p4"]').prop('checked')){
 			pe |= 8;
+			}
+		if(str.find('input[name="p5"]').prop('checked')){
+			pe |= 16;
 			}
 
 		$.ajax({

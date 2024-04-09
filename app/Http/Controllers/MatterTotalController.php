@@ -50,6 +50,7 @@ class MatterTotalController extends Controller
         })
         ->with('rest')
         ->where('users.hiring_period', 0)
+        ->whereRaw('(users.permissions & 16) = 16')
         ->select(
             'users.id','users.name','users.employee','users.hiring_period',
             DB::raw('SUM(CASE WHEN matters.opt1 = 1 AND matters.status != 6 THEN 1 ELSE 0 END) AS rest_day'),
@@ -67,6 +68,7 @@ class MatterTotalController extends Controller
             })
             ->with('rest')
             ->where('users.hiring_period', 1)
+            ->whereRaw('(users.permissions & 16) = 16')
             ->select(
                 'users.id','users.name','users.employee','users.hiring_period',
                 DB::raw('SUM(CASE WHEN matters.opt1 = 1 AND matters.status != 6 THEN 1 ELSE 0 END) AS rest_day'),
