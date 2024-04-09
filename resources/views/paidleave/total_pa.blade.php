@@ -33,7 +33,7 @@ $(document).ready(function(){
 			<tr>
 				<th>No</th>
 				<th>使用者</th>
-				<th colspan="2">今年度有給</th>
+				<th colspan="3">有給</th>
 				<th colspan="2">取得有給</th>
 				<th colspan="2">残有給</th>
 				<th>5日</th>
@@ -60,6 +60,7 @@ $(document).ready(function(){
 			<tr class="d{{$id+1}} @if($upc==0&&$upc2==0) uq_just @elseif($upc==100) uq_none @elseif($upc<0) uq_alert @endif">
 				<td>{{ $record->employee}}</td>
 				<td>{{ $record->name}}</td>
+				<td>{{ optional($record->rest)->rest_year}}</td>
 				<td>{{$uq}}日</td>
 				<td>{{optional($record->rest)->co_time}}時間</td>
 				<td>{{$ruq2}}日</td>
@@ -72,12 +73,13 @@ $(document).ready(function(){
 				<td>@if($ruq2>=5)
 				◯
 				@endif</td>
+				<td>
 				@if($record->hiring_period==0)
-				<td>{{$startDate1->format('Y/n/j').'~'.$endDate1->format('n/j')}}</td>
+					4月～
 				@else
-				<td>{{$startDate2->format('Y/n/j').'~'.$endDate2->format('n/j')}}</td>
+					10月～
 				 @endif
-
+				</td>
 				<td><input type="button" value="印刷" id='{{$record->id}}' ></td>
 
 				  @else
