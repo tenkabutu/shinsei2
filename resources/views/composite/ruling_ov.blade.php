@@ -27,8 +27,7 @@
     		<input type="hidden" name="mode" value="1">
     		<ul>
 
-    			<li><div>日時：<select id="year" name="year">
-    				<option value="2024">2024</option><option value="2023" selected>2023</option><option value="2022">2022</option></select>年
+    			<li><div>日時：<select id="year" name="year"><option value="0">--</option></select>年
 					<select id="month" name="month">
 						<option value="0">--</option>
 						@for($i = 1; $i <= 12; $i++)
@@ -144,7 +143,10 @@ $(".end_check").change(function() {
   });
 
 
-
+var currentYear = new Date().getFullYear();
+for (var year = currentYear; year >= 2023; year--) {
+    $('#year').append('<option value="' + year + '">' + year + '</option>');
+}
 
 });
 </script>

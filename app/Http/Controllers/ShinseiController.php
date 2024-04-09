@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Matter;
 use App\Models\Nametag;
 use App\Models\User;
+use Carbon\Carbon;
 
 class ShinseiController extends Controller
 {
@@ -91,7 +92,14 @@ class ShinseiController extends Controller
             } else {
                 return back()->withInput();
             }
+            if ($request->year != 0&&$request->month != 0) {
+                $query->whereYear('matters.matter_change_date', $request->year);
+            }elseif($request->year != 0){
 
+                $query->where('matters.nendo',$request->year);
+            }else{
+                $query->where('matters.nendo',Carbon::now()->subMonthsNoOverflow(3)->format('Y'));
+            }
             if ($request->month != 0) {
                 $query->whereMonth('matters.matter_change_date', $request->month);
             }
@@ -196,7 +204,14 @@ class ShinseiController extends Controller
             } else {
                 return back()->withInput();
             }
+            if ($request->year != 0&&$request->month != 0) {
+                $query->whereYear('matters.matter_change_date', $request->year);
+            }elseif($request->year != 0){
 
+                $query->where('matters.nendo',$request->year);
+            }else{
+                $query->where('matters.nendo',Carbon::now()->subMonthsNoOverflow(3)->format('Y'));
+            }
             if ($request->month != 0) {
                 $query->whereMonth('matters.matter_change_date', $request->month);
             }
@@ -332,8 +347,13 @@ class ShinseiController extends Controller
                     }
                 }
             } else {}
-            if ($request->user != 0) {
-                $query->where('matters.user_id', $request->user);
+            if ($request->year != 0&&$request->month != 0) {
+                $query->whereYear('matters.matter_change_date', $request->year);
+            }elseif($request->year != 0){
+
+                $query->where('matters.nendo',$request->year);
+            }else{
+                $query->where('matters.nendo',Carbon::now()->subMonthsNoOverflow(3)->format('Y'));
             }
 
             if ($request->month != 0) {
@@ -527,6 +547,8 @@ class ShinseiController extends Controller
             }elseif($request->year != 0){
 
                 $query->where('matters.nendo',$request->year);
+            }else{
+                $query->where('matters.nendo',Carbon::now()->subMonthsNoOverflow(3)->format('Y'));
             }
             $query->select('*', 'matters.id as matters_id', 'matters.created_at as matters_created_at', 'users.name as username', 'users.employee as employee','reception.name as username2','nt2.nametag as statusname','nt4.nametag as area','nt3.nametag as optname');
 
