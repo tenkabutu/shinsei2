@@ -254,7 +254,14 @@ class ShinseiController extends Controller
                 $query->Where('users.id', '=', Auth::id())
                 ->Where('status', '!=', 6);
 
+                if ($request->year != 0&&$request->month != 0) {
+                    $query->whereYear('matters.matter_change_date', $request->year);
+                }elseif($request->year != 0){
 
+                    $query->where('matters.nendo',$request->year);
+                }else{
+                    $query->where('matters.nendo',Carbon::now()->subMonthsNoOverflow(3)->format('Y'));
+                }
             if ($request->month != 0) {
                 $query->whereMonth('matters.matter_change_date', $request->month);
             }
