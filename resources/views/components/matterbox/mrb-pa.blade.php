@@ -7,6 +7,7 @@
 		</div>
 		<div>
 			<label class="g12">種別1:</label>
+			<div class="radio-group g23">
 				<input id="st1_1" type="radio" class="st1" name="opt1" value="1" {{old('opt1',$matter->opt1)=='1' ? 'checked':''}} />
 				<label id="st1_1_label" for="st1_1" style="{{  (!isset($residue_rest_day)  || $residue_rest_day < 1) ? 'background-color: red;' : '' }}">全日</label>
 				<input id="st1_2" type="radio" class="st1" name="opt1" value="2" {{old('opt1',$matter->opt1)=='2' ? 'checked':''}}/>
