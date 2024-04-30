@@ -583,6 +583,7 @@ table select{
 .g89{grid-column:8/9;}
 .g13{grid-column:1/3;}
 .g35{grid-column:3/5;}
+.g37{grid-column:3/7;}
 .g14{grid-column:1/4;}
 .g15{grid-column:1/5;}
 .g19{grid-column:1/9;}
@@ -649,16 +650,14 @@ table select{
 #park_figure{
 
 	margin:20px;
-	background-color: #dedede;
 
-
-	border-bottom:2px solid black;
 }
 #park_figure div{
 	 text-align: center;
 }
 #park_figure p{
-	 margin:0 0 5px;
+	 margin:0 0 2px;
+	 font-weight: bold;
 }
 .park_upper input span{
 
@@ -709,16 +708,17 @@ div.user_car{
 	width:100%;
 	box-sizing: border-box;
 	padding:26px 0 41px;
-	height:100px;
-	background-size:auto 80% ;
+	height:90px;
+	background-size:auto 76% ;
 	background-repeat: no-repeat;
+	background-position: top center;
 
 }
 #emergency_form{
 	display:none;
 }
 div.user_car span.car_owner{
-	padding:5px;
+	padding:2px 3px 2px 3px;
 	background-color: white;
 	border:3px solid black;
 	border-radius:15px;
@@ -729,6 +729,8 @@ div.user_car span.time_stamp{
 	position:absolute;
 	bottom:0;
 	left:15%;
+	font-size:14px;
+	font-weight: bold;
 
 }
 .check-opt {
@@ -738,22 +740,91 @@ div.no_use{
 	display:none;
 }
 
-.park_upper ,.park_lower,.park_ahead{
-	height:170px;
+.park_upper ,.park_lower,.park_ahead,.park_outer{
+	background-color: #dedede;
+	box-sizing: border-box;
+	height:160px;
 	border-left:2px solid black;
 
 }
-.park_upper:nth-child(7),.park_lower:nth-child(12){
+.park_outer{
+	border-bottom:2px solid black;
+	border-top:2px solid black;
+	margin:30px 0 20px 0px;
+}
+.park_upper:nth-child(10),.park_lower:nth-child(16),.park_ahead:nth-child(3),.park_ahead:nth-child(4)
+,.park_outer:nth-child(19){
 	border-right:2px solid black;
 }
+.park_info{
+	margin:30px 0 20px 0;
+	border-bottom:2px solid black;
+	border-top:2px solid black;
+	border-left:2px solid black;
+
+}
 .park_upper{
-	margin-bottom:30px;
+	margin-bottom:20px;
 	border-top:2px solid black;
 }
 .park_ahead{
+	margin-top:10px;
 	border-top:2px solid black;
-	border-right:2px solid black;
 }
+.park_lower{
+	margin-bottom:30px;
+	border-bottom:2px solid black;
+}
+.park_ahead:nth-child(2){
+	border-left:none;
+	border-top:3px solid black;border-right:2px solid black;
+
+}
+.park_upper:nth-child(5){
+	border-left:none;border-right:2px solid black;
+	border-top:3px solid black;
+	border-bottom:3px solid black;
+
+}
+/* || モーダルウィンドウ */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 3;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.9);
+}
+
+.modal-content {
+  margin: auto;
+  display: block;
+  max-width: 80%;
+  max-height: 80%;
+}
+
+.close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+
 
 /* || 汎用 */
 .round-btn{
@@ -806,6 +877,9 @@ div.no_use{
 	    text-align: center;
     margin: 0px;
     font-size: 12px;
+}
+.back_white{
+	background-color: white;
 }
 /* 印刷時のスタイル設定 */
 

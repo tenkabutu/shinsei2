@@ -40,20 +40,20 @@
 
 				<fieldset id="park_status">
 				<legend>駐車申請</legend>
-				<buton id="emergency">修正</buton>
-				<div id="emergency_form">
-					<select name="park_place">
-					@foreach ($park_list as $park)
-					<option value="{{ $park->id }}">{{ $park->nendo }}</option>
-					@endforeach
-					</select>に車が
-					<select name="user_id"><option value="25">ある</option><option value="0">ない</option>
-					</select>
-					<button id="emergency_submit">送信</button>
-				</div>
+
 				<div id ="park_figure" class="grid">
-					@foreach ($park_list->skip(10)->take(2) as $index =>$park)
-					<div class="park_ahead g{{$index-9+($index-10)*3}}{{$index-8+($index-10)*3}}">
+					<div>
+					<p>木下第2駐車場</p>
+					<button class="openModal" data-image="/shinsei2/public/img/park.jpg">見取り図</button>
+						<a href="https://maps.app.goo.gl/9eCXxyowJyiZvmRu9">MAP</a>
+						<div id="modal" class="modal">
+							<span class="close">&times;</span>
+
+							<img class="modal-content" id="modalImage">
+						</div>
+					</div>
+					@foreach ($park_list->skip(12)->take(3) as $index =>$park)
+					<div class="park_ahead g{{$park->order_content}}">
 
 						<p>{{ $park->nendo }}</p>
 						@if($park->user_id==0)
@@ -74,8 +74,8 @@
 					</div>
 					@endforeach
 
-					@foreach ($park_list->take(5) as $index =>$park)
-					<div class="park_upper g{{$index+1}}{{$index+2}}">
+					@foreach ($park_list->take(6) as $index =>$park)
+					<div class="park_upper g{{$park->order_content}}">
 
 						<p>{{ $park->nendo }}</p>
 						@if($park->user_id==0)
@@ -94,8 +94,8 @@
 					</div>
 					@endforeach
 
-					@foreach ($park_list->skip(5)->take(5) as $index =>$park)
-					<div class="park_lower g{{$index-4}}{{$index-3}}">
+					@foreach ($park_list->skip(6)->take(6) as $index =>$park)
+					<div class="park_lower g{{$park->order_content}}">
 
 						<p>{{ $park->nendo }}</p>
 						@if($park->user_id==0)
@@ -115,7 +115,58 @@
 
 					</div>
 					@endforeach
+					<div>
+					<p>江越第一駐車場</p>
+					<button class="openModal" data-image="/shinsei2/public/img/park_outer.jpg">見取り図</button>
+						<a href="https://maps.app.goo.gl/EVhMhh6k3XVNEvqo8">MAP</a>
+						<div id="modal" class="modal">
+							<span class="close">&times;</span>
 
+							<img class="modal-content" id="modalImage">
+						</div>
+					</div>
+					<!-- <div class="g35 park_info">
+
+						<button id="openModal">見取り図</button>
+						<a href="https://maps.app.goo.gl/EVhMhh6k3XVNEvqo8">MAP</a>
+						<div id="modal" class="modal">
+							<span class="close">&times;</span>
+
+							<img class="modal-content" id="modalImage">
+						</div>
+					</div> -->
+					@foreach ($park_list->skip(15)->take(2) as $index =>$park)
+					<div class="park_outer g{{$park->order_content}}">
+
+						<p>{{ $park->nendo }}</p>
+						@if($park->user_id==0)
+						<div class="no_use user_car" >
+						<span class="car_owner">{{$userdata->name2}}</span>
+						<span class="time_stamp">{{optional($park->updated_at)->format('m/d h:i')}}</span></div>
+						@else
+						<div class="user_car" >
+							<span class="car_owner">{{optional($park->user)->name2}}</span>
+							<span class="time_stamp">{{optional($park->updated_at)->format('n/j G:i')}}</span>
+						</div>
+						@endif
+
+						<label for="p{{$index+1}}"></label>
+						<input id="p{{$index+1}}" type="checkbox" name="user_id" value="{{old('user_id', $park->user_id) }}" data-id="{{$park->id}}" class="check-opt">
+
+
+					</div>
+					@endforeach
+				<buton id="emergency">修正</buton>
+				<div id="emergency_form">
+					<select name="park_place">
+					@foreach ($park_list as $park)
+					<option value="{{ $park->id }}">{{ $park->nendo }}</option>
+					@endforeach
+					</select>に車が
+					<select name="user_id"><option value="25">ある</option><option value="0">ない</option>
+					</select>
+					<button id="emergency_submit">送信</button>
+				</div>
 
 				</div></fieldset>
 					<fieldset>
@@ -205,6 +256,32 @@
     </div>
     <script>
     $(document).ready(function () {
+    	var modals = document.querySelectorAll(".modal");
+    	var modalImages = document.querySelectorAll(".modal-content");
+    	var openModals = document.querySelectorAll(".openModal");
+    	var closeModals = document.querySelectorAll(".close");
+
+    	openModals.forEach(function(openModal, index) {
+    	    openModal.onclick = function() {
+    	        modals[index].style.display = "block";
+    	        var imageUrl = openModal.getAttribute("data-image");
+    	        modalImages[index].src = imageUrl;
+    	    }
+    	});
+
+    	closeModals.forEach(function(closeModal) {
+    	    closeModal.onclick = function() {
+    	        closeModal.parentNode.style.display = "none";
+    	    }
+    	});
+
+    	window.onclick = function(event) {
+    	    modals.forEach(function(modal) {
+    	        if (event.target == modal) {
+    	            modal.style.display = "none";
+    	        }
+    	    });
+    	}
     	var images = [
     		  { url: 'url("/shinsei2/public/img/red_car.png")', weight: 1 },
     		  { url: 'url("/shinsei2/public/img/blue_car.png")', weight: 1 },
