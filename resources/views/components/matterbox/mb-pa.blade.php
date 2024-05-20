@@ -16,6 +16,8 @@
 				<label id="st1_3_label" for="st1_3" style="{{ (!isset($residue_rest_day)  || $residue_rest_day ==0) ? 'background-color: red;' : '' }}">午後休</label>
 				<input id="st1_4" type="radio" class="st1" name="opt1" value="4" {{old('opt1')=='4' ? 'checked':''}}/>
 				<label id="st1_4_label" for="st1_4">時間休</label>
+				<input id="st1_12" type="radio" class="st1" name="opt1" value="12" {{old('opt1')=='12' ? 'checked':''}}/>
+				<label id="st1_12_label" for="st1_12" style="{{ (!isset($residue_rest_day)  || $residue_rest_day ==0) ? 'background-color: red;' : '' }}">変休</label>
 
 				<!--
 				<input id="st1_1" type="radio" class="st1" name="opt1" value="1" {{old('opt1')=='1' ? 'checked':''}} />

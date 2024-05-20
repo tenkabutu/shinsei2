@@ -151,7 +151,7 @@
                         	$lap_rest_day+=1;
                     @endphp
 
-                @elseif($record->opt1==2||$record->opt1==3)
+                @elseif($record->opt1==2||$record->opt1==3||$record->opt1==12)
                 	@php
                         	$lap_rest_day+=0.5;
                     @endphp
@@ -166,7 +166,7 @@
 					@endif</td>
 				@if($record->opt1==1)
 				<td>1</td><td></td>
-				@elseif($record->opt1==2||$record->opt1==3)
+				@elseif($record->opt1==2||$record->opt1==3||$record->opt1==12)
 				<td>0.5</td><td></td>
 				@elseif($record->opt1==4)
 				<td></td><td>{{floor($record->allotted/60)}}@if($record->allotted%60>0)時間{{$record->allotted%60}}分@endif</td>

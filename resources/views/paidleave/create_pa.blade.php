@@ -103,6 +103,7 @@
 				<strong>＜種別２の説明＞</strong>
 
 			<ul>
+				<li><strong>変休：</strong>本来の勤務時間ではない日に半休を取得する場合に指定してください。</li>
 				<li><strong>特別：</strong>会社が指定する休暇</li>
 				<li><strong>慶弔：</strong>忌引き（日数は就業規則参照）・結婚休暇（5日）
 					<ul>
@@ -137,7 +138,7 @@ $(function(){
 	    if ($(this).attr('checked') == 'checked') {
 	        $(this).next().addClass('checked');
 
-	        if($(this).val()!=4){
+	        if($(this).val()!=4&&$(this).val()!=12){
 		        $('.matter_date input').attr('readonly',true);
 		        $('.matter_date input').css('backgroundColor','#e9e9e9');
 		    };
@@ -150,14 +151,14 @@ $(function(){
     $labelSelector = '';
     if($userdata->rest){
     if ($residue_rest_day == 0) {
-        $labelSelector = '"label:not(#st1_1_label, #st1_2_label, #st1_3_label)"';
+        $labelSelector = '"label:not(#st1_1_label, #st1_2_label, #st1_3_label, #st1_12_label)"';
     } elseif ($residue_rest_day < 1) {
         $labelSelector = '"label:not(#st1_1_label)"';
     } else {
         $labelSelector = '"label"';
     }
     }else{
-    	$labelSelector = '"label:not(#st1_1_label, #st1_2_label, #st1_3_label)"';
+    	$labelSelector = '"label:not(#st1_1_label, #st1_2_label, #st1_3_label, #st1_12_label)"';
         }
     @endphp
 
@@ -194,8 +195,18 @@ var labelsSelector = {!! $labelSelector !!};
 	        	$('input[name="breaktime"]').val('0');
 	        	$('.mol_2').text('出勤')
 
-			    }
-	    }else{
+			 }
+		}else if(cr==12){
+
+	    	$('input[name="hour1"]').val('0');
+        	$('input[name="hour2"]').val('0');
+        	$('input[name="minutes1"]').val('0');
+        	$('input[name="minutes2"]').val('0');
+        	$('input[name="breaktime"]').val('0');
+        	$('.mol_2').text('出勤')
+        	$('.matter_date input').attr('readonly',false);
+	        $('.matter_date input').css('backgroundColor','#fff');
+        }else{
 	    	$('.matter_date input').attr('readonly',false);
 	        $('.matter_date input').css('backgroundColor','#fff');
 		};
@@ -203,11 +214,6 @@ var labelsSelector = {!! $labelSelector !!};
 	        $('label',this).removeClass('checked');
 	    });
 	    $(this).addClass('checked');
-
-
-
-
-
 
 
 	    var h1 = $('input[name="hour1"]').val()- 0;
@@ -235,9 +241,12 @@ var labelsSelector = {!! $labelSelector !!};
 	    //    }
 	});
 
-
+	calculateTime();
 
 	$('#matter_area input[type="number"]').bind('input', function () {
+		 calculateTime();
+    });
+	function calculateTime() {
 		var h1 = $('input[name="hour1"]').val()- 0;
 		var h2 = $('input[name="hour2"]').val()- 0;
 		var m1 = $('input[name="minutes1"]').val()- 0;
@@ -265,7 +274,7 @@ var labelsSelector = {!! $labelSelector !!};
 		}else{
 			$('label.time_alert').text('');
 		}
-	});
+	}
 	@empty($matter)
 	$('.proxy_check').click(function() {
 

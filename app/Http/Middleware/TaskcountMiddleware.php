@@ -281,7 +281,7 @@ class TaskcountMiddleware
 
 
             //半休消化単位
-                $used_harf_rest= Matter::where([['matter_type', 2],['user_id',Auth::id()],['status','!=',6]])->whereIn('opt1',[2,3])
+                $used_harf_rest= Matter::where([['matter_type', 2],['user_id',Auth::id()],['status','!=',6]])->whereIn('opt1',[2,3,12])
                 ->whereBetween('matter_change_date', [$startDate, $endDate])->count();
 
 

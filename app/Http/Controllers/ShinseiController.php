@@ -426,7 +426,7 @@ class ShinseiController extends Controller
             if(isset($request->matter_opt)){
                 $opt = $request->matter_opt;
                 if($opt==1){
-                    $query->WhereIn('opt1',[1,2,3,4]);
+                    $query->WhereIn('opt1',[1,2,3,4,12]);
                 }elseif($opt==2){
                     $query->WhereIn('opt1',[9,10,11]);
                 }elseif($opt==3){

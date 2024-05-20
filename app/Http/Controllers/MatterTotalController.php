@@ -55,7 +55,7 @@ class MatterTotalController extends Controller
             'users.id','users.name','users.employee','users.hiring_period',
             DB::raw('SUM(CASE WHEN matters.opt1 = 1 AND matters.status != 6 THEN 1 ELSE 0 END) AS rest_day'),
             DB::raw('SUM(CASE WHEN matters.opt1 = 4 AND matters.status != 6 THEN matters.allotted ELSE 0 END) AS rest_time'),
-            DB::raw('SUM(CASE WHEN matters.opt1 IN (2,3) AND matters.status != 6 THEN 1 ELSE 0 END) AS harf_rest_day')
+            DB::raw('SUM(CASE WHEN matters.opt1 IN (2,3,12) AND matters.status != 6 THEN 1 ELSE 0 END) AS harf_rest_day')
             )
             ->groupBy('users.id','users.name','users.employee','users.hiring_period')
             ->orderby('users.employee')
@@ -73,7 +73,7 @@ class MatterTotalController extends Controller
                 'users.id','users.name','users.employee','users.hiring_period',
                 DB::raw('SUM(CASE WHEN matters.opt1 = 1 AND matters.status != 6 THEN 1 ELSE 0 END) AS rest_day'),
                 DB::raw('SUM(CASE WHEN matters.opt1 = 4 AND matters.status != 6 THEN matters.allotted ELSE 0 END) AS rest_time'),
-                DB::raw('SUM(CASE WHEN matters.opt1 IN (2,3) AND matters.status != 6 THEN 1 ELSE 0 END) AS harf_rest_day')
+                DB::raw('SUM(CASE WHEN matters.opt1 IN (2,3,12) AND matters.status != 6 THEN 1 ELSE 0 END) AS harf_rest_day')
                 )
                 ->groupBy('users.id','users.name','users.employee','users.hiring_period')
                 ->orderby('users.employee')
@@ -113,7 +113,7 @@ class MatterTotalController extends Controller
             'users.id','users.name','users.employee','users.hiring_period',
             DB::raw('SUM(CASE WHEN matters.opt1 = 1 AND matters.status != 6 THEN 1 ELSE 0 END) AS rest_day'),
             DB::raw('SUM(CASE WHEN matters.opt1 = 4 AND matters.status != 6 THEN matters.allotted ELSE 0 END) AS rest_time'),
-            DB::raw('SUM(CASE WHEN matters.opt1 IN (2,3) AND matters.status != 6 THEN 1 ELSE 0 END) AS harf_rest_day')
+            DB::raw('SUM(CASE WHEN matters.opt1 IN (2,3,12) AND matters.status != 6 THEN 1 ELSE 0 END) AS harf_rest_day')
             )
             ->where('users.id', $id)
             ->where('matters.status','!=', 6)
@@ -150,7 +150,7 @@ class MatterTotalController extends Controller
                 })->where('users.id', $id)->first();
 
             $query = Matter::query();
-            $query->WhereIn('matters.opt1',[1,2,3,4]);
+            $query->WhereIn('matters.opt1',[1,2,3,4,12]);
             $query->where('matters.user_id', $id);
             $query->where('matters.status','!=', 6);
             $query->leftjoin('nametags as nt3', function ($join)
