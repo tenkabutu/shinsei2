@@ -45,5 +45,5 @@
 			<textarea class="g23" id="order_content" name="order_content" rows="2" cols="60">{{old('order_content',$matter->order_content)}}</textarea>
 		</div>
 	</fieldset>
-	<p>リーダーか水田に事前に電話で了解を取ってください。</p>
+	<p>業務担当者及びエリアマネージャーへ申請前に了承を得てください。</p>
 </section>

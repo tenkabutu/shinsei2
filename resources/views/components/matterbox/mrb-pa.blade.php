@@ -75,5 +75,5 @@
 			<textarea class="g23" id="order_content" name="order_content" rows="2" cols="60">{{old('order_content',$matter->order_content)}}</textarea>
 		</div>
 	</fieldset>
-	<p>申請種別1はリーダーに、申請種別2はリーダー及び水田に事前に電話で了解を取ってください。</p>
+	<p>申請種別1は業務担当者に、申請種別2は業務担当者及びエリアマネージャーに申請前に了承を得てください。</p>
 </section>
