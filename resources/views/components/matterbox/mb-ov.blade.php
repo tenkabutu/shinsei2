@@ -13,10 +13,7 @@
 				<label for="st1_1">振替</label>
 				<input id="st1_2" type="radio" class="st1" name="opt1" value="8" {{old('opt1')=='8' ? 'checked':''}}/>
 				<label for="st1_2">時間外</label>
-
-
 			</div>
-
 		</div>
 		<div class="matter_date">
 			<label class="g12">開始時間</label>
@@ -49,5 +46,5 @@
 
 
 	</fieldset>
-	<p>業務担当者及びエリアマネージャーに申請前に了承を得てください。</p>
+	<label><strong>業務担当者及びエリアマネージャーに申請前に了承を得てください。</strong></label>
 </section>

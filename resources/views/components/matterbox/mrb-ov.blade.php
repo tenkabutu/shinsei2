@@ -45,5 +45,5 @@
 			<textarea class="g23" id="order_content" name="order_content" rows="2" cols="60">{{old('order_content',$matter->order_content)}}</textarea>
 		</div>
 	</fieldset>
-	<p>業務担当者及びエリアマネージャーへ申請前に了承を得てください。</p>
+	<label><strong>業務担当者及びエリアマネージャーに申請前に了承を得てください。</strong></label>
 </section>
