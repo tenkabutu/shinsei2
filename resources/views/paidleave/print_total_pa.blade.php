@@ -67,19 +67,19 @@
   </tr>
    <tr><th colspan="4">
    @if(isset($user->hiring_period))
-   {{$user_rest->rest_year}}年度
-   	@if($month==0)
+   		{{$user_rest->rest_year}}年度
+   		@if($month==0)
 
-   	@if($select_user->hiring_period==0)
-   		({{$year}}年4月1日～{{$year+1}}年3月31日)
-   	@else
-   		({{$year}}年10月1日～{{$year+1}}年9月30日)
-   	@endif
+   			@if($select_user->hiring_period==0)
+   				({{$year}}年4月1日～{{$year+1}}年3月31日)
+   			@else
+   				({{$year}}年10月1日～{{$year+1}}年9月30日)
+   			@endif
+   		@else
+   			({{$year}}年{{$month}}月)
+   		@endif
    @else
-   		({{$year}}年{{$month}}月)
-   	@endif
-   @else
-	該当データなし
+	該当なし
    	@if($month==0)
 
    	@if($select_user->hiring_period==0)
