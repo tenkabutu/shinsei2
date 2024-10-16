@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use App\Models\Matter;
+use Illuminate\Support\Facades\Log;
 
 class UpdateRecords extends Command
 {
@@ -38,8 +39,9 @@ class UpdateRecords extends Command
      */
     public function handle()
     {
-//         Matter::where('matter_type',8)->update(['user_id' => '0']);
-        Matter::where('matter_type',8)->update(['user_id' => 0]);
+
+        Matter::where('matter_type',8)->update(['user_id' => '0']);
+        Log::info('update:records command executed successfully.');
         $this->info('Records updated successfully.');
     }
 }
