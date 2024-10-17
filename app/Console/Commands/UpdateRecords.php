@@ -40,7 +40,6 @@ class UpdateRecords extends Command
     public function handle()
     {
         Matter::where('matter_type', 8)
-        ->where('nendo', 65)
         ->update(['user_id' => '0']);
         /* Matter::where('matter_type',8)->update(['user_id' => '0']); */
         Log::info('update:records command executed successfully.');
