@@ -22,7 +22,7 @@ class PaidLeaveController extends Controller
         $query=user::query();
         $area_id=$user->area;
 
-        $query->where('users.id', '!=', 2)->where(function($query2) use($area_id){
+        $query->where(function($query2) use($area_id){
             $query2->whereIn('users.role',[1,2])
             ->Where('users.area', $area_id)
             ->Where('users.approval',2);
@@ -30,7 +30,7 @@ class PaidLeaveController extends Controller
             $query2->whereIn('users.role',[1,2])
             ->Where('users.approval',1);
         });
-            $check_userlist=$query->get('name')->all();
+            $check_userlist=$query->get(['id', 'name'])->all();
 
             return view('paidleave.create_pa',compact('user','check_userlist','userlist'));
 
@@ -135,7 +135,7 @@ class PaidLeaveController extends Controller
         $query=user::query();
         $area_id=$user->area;
 
-        $query->where('users.id', '!=', 2)->where(function($query2) use($area_id){
+        $query->where(function($query2) use($area_id){
             $query2->whereIn('users.role',[1,2])
             ->Where('users.area', $area_id)
             ->Where('users.approval',2);
@@ -143,7 +143,7 @@ class PaidLeaveController extends Controller
             $query2->whereIn('users.role',[1,2])
             ->Where('users.approval',1);
         });
-            $check_userlist=$query->get('name')->all();
+            $check_userlist=$query->get(['id', 'name'])->all();
 
 
             //  with('roletag','approvaltag','areatag','worktype')->findOrFail(Auth::user()->id);
@@ -191,7 +191,7 @@ class PaidLeaveController extends Controller
         $query=user::query();
         $area_id=$user->area;
 
-        $query->where('users.id', '!=', 2)->where(function($query2) use($area_id){
+        $query->where(function($query2) use($area_id){
             $query2->whereIn('users.role',[1,2])
             ->Where('users.area', $area_id)
             ->Where('users.approval',2);
@@ -199,7 +199,7 @@ class PaidLeaveController extends Controller
             $query2->whereIn('users.role',[1,2])
             ->Where('users.approval',1);
         });
-            $check_userlist=$query->get('name')->all();
+            $check_userlist=$query->get(['id', 'name'])->all();
 
 
             //  with('roletag','approvaltag','areatag','worktype')->findOrFail(Auth::user()->id);

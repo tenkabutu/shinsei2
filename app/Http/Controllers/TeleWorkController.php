@@ -31,7 +31,7 @@ class TeleWorkController extends Controller
             $query2->whereIn('users.role',[1,2])
             ->Where('users.approval',1);
         });
-            $check_userlist=$query->get('name')->all();
+            $check_userlist=$query->get(['id', 'name'])->all();
 
             return view('telework.create_te',compact('user','check_userlist','userlist'));
 
@@ -144,7 +144,7 @@ class TeleWorkController extends Controller
             $query2->whereIn('users.role',[1,2])
             ->Where('users.approval',1);
         });
-            $check_userlist=$query->get('name')->all();
+            $check_userlist=$query->get(['id', 'name'])->all();
 
 
             //  with('roletag','approvaltag','areatag','worktype')->findOrFail(Auth::user()->id);
