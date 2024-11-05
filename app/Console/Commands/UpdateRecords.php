@@ -41,7 +41,6 @@ class UpdateRecords extends Command
     {
         Matter::where('matter_type', 8)
         ->update(['user_id' => '0']);
-        /* Matter::where('matter_type',8)->update(['user_id' => '0']); */
         Log::info('update:records command executed successfully.');
         $this->info('Records updated successfully.');
     }

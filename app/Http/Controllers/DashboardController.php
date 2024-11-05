@@ -17,9 +17,6 @@ class DashboardController extends Controller
         //$user = user::findOrFail(Auth::id());
         $query = matter::query();
 
-
-
-
         $query->where('user_id',Auth::id());
 
 
