@@ -22,7 +22,7 @@ class PaidLeaveController extends Controller
         $query=user::query();
         $area_id=$user->area;
 
-        $query->where(function($query2) use($area_id){
+        $query->where('users.id', '!=', 2)->where(function($query2) use($area_id){
             $query2->whereIn('users.role',[1,2])
             ->Where('users.area', $area_id)
             ->Where('users.approval',2);
@@ -135,7 +135,7 @@ class PaidLeaveController extends Controller
         $query=user::query();
         $area_id=$user->area;
 
-        $query->where(function($query2) use($area_id){
+        $query->where('users.id', '!=', 2)->where(function($query2) use($area_id){
             $query2->whereIn('users.role',[1,2])
             ->Where('users.area', $area_id)
             ->Where('users.approval',2);
@@ -191,7 +191,7 @@ class PaidLeaveController extends Controller
         $query=user::query();
         $area_id=$user->area;
 
-        $query->where(function($query2) use($area_id){
+        $query->where('users.id', '!=', 2)->where(function($query2) use($area_id){
             $query2->whereIn('users.role',[1,2])
             ->Where('users.area', $area_id)
             ->Where('users.approval',2);
