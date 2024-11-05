@@ -30,13 +30,12 @@
 					<div class="g23 text_right">
 					@foreach($checker as $record)
 						@if($record->id == 2)
-        @continue
-    @endif
-						@if(!$loop->first)
-						,
-						@endif
-
+        					@continue
+    					@endif
 						{{$record->name}}
+						@if(!$loop->last)
+        ,
+    @endif
 
 					@endforeach
 					</div>
