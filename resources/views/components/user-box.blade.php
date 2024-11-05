@@ -29,13 +29,15 @@
 					<div class="g12"><label>確認者</label></div>
 					<div class="g23 text_right">
 					@foreach($checker as $record)
-						@if($record->id!=2)
+						@if($record->id == 2)
+        @continue
+    @endif
 						@if(!$loop->first)
 						,
 						@endif
 
 						{{$record->name}}
-						@endif
+
 					@endforeach
 					</div>
 				</div>
