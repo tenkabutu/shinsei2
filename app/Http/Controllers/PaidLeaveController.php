@@ -59,20 +59,21 @@ class PaidLeaveController extends Controller
         $request->merge(['nendo' =>$carbon->subMonthsNoOverflow(3)->format('Y')]);
         $matter->fill($request->except('_token'));
 
-        if($matter->isDirty()&&$request->change_check==1){
+       /*  if($matter->isDirty()&&$request->change_check==1){ */
             $matter->status=1;
             $matter->save();
-            return  redirect($id.'/rewrite_ov');
-        }elseif($matter->isDirty()){
+            $request->session()->regenerateToken();
+            return  redirect($id.'/show_pa');
+        /* }elseif($matter->isDirty()){
 
             $request->merge(['change_check' =>1]);
             return back()
             ->withInput()
             ->with('save_check', '申請済の内容が変更されています、保存する場合再申請が必要になりますがよろしいですか？');
 
-        }
+        } */
 
-        $request->session()->regenerateToken();
+
         //$id = $matter->id;
         return  redirect($id.'/show_pa');
     }
@@ -108,20 +109,20 @@ class PaidLeaveController extends Controller
         $carbon = new CarbonImmutable($request->matter_change_date);
         $request->merge(['nendo' =>$carbon->subMonthsNoOverflow(3)->format('Y')]);
         $matter->fill($request->except('_token'));
-        if($matter->isDirty()&&$request->change_check==1){
+        /* if($matter->isDirty()&&$request->change_check==1){ */
             $date=Carbon::now()->toDateTimeString();
             $matter->matter_request_date=$date;
             $matter->status=2;
             $matter->save();
+            $request->session()->regenerateToken();
             return  redirect($id.'/show_pa');
-        }elseif($matter->isDirty()){
+        /* }elseif($matter->isDirty()){
             $request->change_check=1;
             return back()->withInput()->with('save_check', '申請済の内容が変更されています、保存する場合再申請が必要になりますがよろしいですか？');
-        }
+        } */
 
-        $request->session()->regenerateToken();
-        // $id = $matter->id;
-        return  redirect($id.'/show_pa');
+       /*  $request->session()->regenerateToken();
+        return  redirect($id.'/show_pa'); */
     }
     public function show_pa($id){
 
