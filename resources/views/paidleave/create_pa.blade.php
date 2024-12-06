@@ -213,6 +213,11 @@ var labelsSelector = {!! $labelSelector !!};
         	$('.mol_2').text('出勤')
         	$('.matter_date input').attr('readonly',false);
 	        $('.matter_date input').css('backgroundColor','#fff');
+		}else if(cr==4){
+			$('.matter_date input').attr('readonly',false);
+	        $('.matter_date input').css('backgroundColor','#fff');
+	        $('input[name="breaktime"]').val('0');
+
         }else{
 	    	$('.matter_date input').attr('readonly',false);
 	        $('.matter_date input').css('backgroundColor','#fff');
