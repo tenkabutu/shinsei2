@@ -41,7 +41,13 @@ class TaskcountMiddleware
         $ov_count2 = 0;
         $te_count2 = 0;
         $pu_count1=0;
-        if (Auth::id()) {
+        if (Auth::check()) {
+            if (Auth::user()->employee == 8565) {
+                // attendance とその配下のURLはリダイレクト対象外
+                if (!str_starts_with($request->path(), 'attendance')) {
+                    return redirect('attendance');
+                }
+            }
 
 
             //承認権限がすべてかエリアか

@@ -8,6 +8,7 @@ use App\Http\Controllers\ShinseiController;
 use App\Http\Controllers\AcceptController;
 use App\Http\Controllers\PaidLeaveController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\AttendanceController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\MatterTotalController;
@@ -88,6 +89,12 @@ Route::post('{type}/end_check_pa',[PaidLeaveController::class,'end_check']);
 Route::get('/',[DashboardController::class,'show_dash']);
 Route::get('/dashboard',[DashboardController::class,'show_dash']);
 Route::post('car_park',[DashboardController::class,'car_park']);
+
+Route::get('/attendance', [AttendanceController::class, 'index'])->name('attendance.index');
+
+Route::post('/attendance/check', [AttendanceController::class, 'check'])->name('attendance.check');
+
+Route::get('/attendance/search', [AttendanceController::class, 'search'])->name('attendance.search');
 
 //Route::get('/', function () { return view('dashboard');})->middleware(['auth'])->name('dashboard');
 
