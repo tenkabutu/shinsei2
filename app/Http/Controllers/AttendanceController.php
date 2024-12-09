@@ -29,9 +29,9 @@ class AttendanceController extends Controller
         $action = $request->input('action');
 
         // 管理者IDの場合は検索ページにリダイレクト
-        /* if ($employeeId == 0) {
+        if ($employeeId == 0) {
             return redirect('/attendance/search');
-        }else */if ($employeeId == 'out'){
+        }elseif ($employeeId == 'out'){
             Auth::logout();
             return redirect('/')->with('status', 'Logged out successfully.');
         }
