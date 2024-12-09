@@ -18,13 +18,14 @@
 				<fieldset>
 				<legend>update</legend>
 				<ul>
-					<li>・年度を指定していない場合は現在の年度でフィルターするように改修。</li>
+					<li>・振替で分が空白だと0を入れるように改修。</li>
+					<li>・時間給に切り替えたときに休憩時間を0に変更するように改修。</li>
 				</ul>
 				</fieldset>
 				 <fieldset>
 					<legend>改修予定</legend>
 					<ul>
-						<li>・入力エラーがでたときに入力欄の情報を保持する</li>
+						<li>・</li>
 					</ul>
 				</fieldset>
 				<!-- <fieldset>
