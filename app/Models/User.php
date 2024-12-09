@@ -49,6 +49,7 @@ class User extends Authenticatable
         'worktype_id',
         'employee',
         'hiring_day',
+        'hiring_period',
         'permissions',
 
     ];

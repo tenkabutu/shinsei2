@@ -32,8 +32,6 @@ class AttendanceController extends Controller
         if ($employeeId == 'out'){
             Auth::logout();
             return redirect('/')->with('status', 'Logged out successfully.');
-        }elseif ($employeeId == 0) {
-            return redirect('/attendance/search');
         }
 
         // 社員を取得
@@ -121,10 +119,10 @@ class AttendanceController extends Controller
         $results = $query->get();
 
         // エリアデータを再取得してビューに渡す
-        $areas = AreaData::all();
+       /*  $areas = AreaData::all(); */
 
         return view('attendance.management', [
-                'areas' => $areas,
+               /*  'areas' => $areas, */
                 'results' => $results,
         ]);
     }

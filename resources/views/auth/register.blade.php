@@ -85,6 +85,14 @@
 
 
 					</select>
+				<br>
+               	契約開始<select name="hiring_period">
+					<option value=0 >４月～３月</option>
+					<option value=1 >１０月～９月</option>
+
+
+
+					</select>
             </div>
             <br>
 
