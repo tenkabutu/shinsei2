@@ -1,5 +1,6 @@
+require('dotenv').config();
 const mix = require('laravel-mix');
-
+mix.setResourceRoot(process.env.MIX_URL);
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
