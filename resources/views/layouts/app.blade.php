@@ -14,8 +14,9 @@
         <link rel="stylesheet" href="/shinsei2/public/css/app.css">
 
         <!-- Scripts -->
-        <script src="/shinsei2/public/js/app.js" defer></script>
+
         {{ $head }}
+        <script src="/shinsei2/public/js/app.js" defer></script>
 
     </head>
     <body class="font-sans antialiased">

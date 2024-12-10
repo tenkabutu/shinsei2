@@ -94,7 +94,7 @@ Route::get('/attendance', [AttendanceController::class, 'index'])->name('attenda
 
 Route::post('/attendance/check', [AttendanceController::class, 'check'])->name('attendance.check');
 
-Route::get('/attendance/search', [AttendanceController::class, 'search'])->name('attendance.search');
+Route::get('/attendance/admin/search', [AttendanceController::class, 'search'])->name('attendance.admin.search');
 
 //Route::get('/', function () { return view('dashboard');})->middleware(['auth'])->name('dashboard');
 

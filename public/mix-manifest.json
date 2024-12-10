@@ -1,4 +1,5 @@
 {
-    "/js/app.js": "/js/app.js",
-    "/css/app.css": "/css/app.css"
+    "/js/app.js": "/js/app.js?id=b0a521d75824a1112de5d72d9886a050",
+    "/js/jquery.tablesorter.js": "/js/jquery.tablesorter.js?id=a4c9d2c384e39594f3af610c5ff4b03d",
+    "/css/app.css": "/css/app.css?id=eb9f50f85ad73dc8dca626dc5dfc4ae8"
 }

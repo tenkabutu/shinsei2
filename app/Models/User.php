@@ -22,8 +22,9 @@ class User extends Authenticatable
     public function areatag(){
         return $this->belongsTo('App\Models\Nametag','area','tagid')->where('groupid', '=', 3);
     }
-    public function Manage(){
-        return $this->hasMany('App\Models\AreaData','manage','manage');
+    public function areas()
+    {
+        return $this->belongsToMany(AreaData::class, 'user_area', 'user_id', 'area_id');
     }
     public function worktype(){
         return $this->belongsTo('App\Models\WorkType');
@@ -46,6 +47,7 @@ class User extends Authenticatable
         'role',
         'approval',
         'area',
+        'area_id',
         'worktype_id',
         'employee',
         'hiring_day',

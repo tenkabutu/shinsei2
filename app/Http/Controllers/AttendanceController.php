@@ -32,6 +32,8 @@ class AttendanceController extends Controller
         if ($employeeId == 'out'){
             Auth::logout();
             return redirect('/')->with('status', 'Logged out successfully.');
+        }elseif($employeeId == 'search'){
+            return redirect('/attendance/admin/search');
         }
 
         // 社員を取得
@@ -90,41 +92,50 @@ class AttendanceController extends Controller
 
     public function search(Request $request)
     {
-        // フィルター条件
-        $userFilter = $request->input('user');
-        $areaFilter = $request->input('area');
-        $dateFilter = $request->input('date', now()->toDateString());
 
-        // クエリビルダー
-        $query = Attendance::query()->with(['user.area']);
+        if ($request->employee_id == 'out'){
+            Auth::logout();
+            return redirect('/')->with('status', 'Logged out successfully.');
+        }
+        // 初期状態では何も表示しない
+        $results = null;
 
-        if ($userFilter) {
-            $query->whereHas('user', function ($q) use ($userFilter) {
-                $q->where('name', 'LIKE', "%{$userFilter}%")
-                ->orWhere('employee_number', 'LIKE', "%{$userFilter}%");
-            });
+
+        // エリアリストを取得
+        $areas = AreaData::all();
+
+        // 検索実行
+        if ($request->hasAny(['employee_id', 'area_id', 'date_from', 'date_to'])) {
+            $query = Attendance::query()->with(['user.areas']);
+
+            // 社員番号でフィルター
+            if ($request->filled('employee_id')) {
+                $query->whereHas('user', function ($q) use ($request) {
+                    $q->where('employee', $request->input('employee_id'));
+                });
+            }
+
+            // 担当地域でフィルター
+            if ($request->filled('area_id')) {
+                $query->whereHas('user.areas', function ($q) use ($request) {
+                    $q->where('area_data.id', $request->input('area_id'));
+                });
+            }
+
+            // 日付範囲でフィルター
+            if ($request->filled('date_from')) {
+                $query->where('check_in', '>=', $request->input('date_from'));
+            }
+
+            if ($request->filled('date_to')) {
+                $dateTo = $request->input('date_to') . ' 23:59:59'; // 終了時刻を23:59:59に設定
+                $query->where('check_in', '<=', $dateTo);
+            }
+
+            $results = $query->orderBy('check_in', 'desc')->get();
         }
 
-        if ($areaFilter) {
-            $query->whereHas('user.area', function ($q) use ($areaFilter) {
-                $q->where('id', $areaFilter);
-            });
-        }
-
-        if ($dateFilter) {
-            $query->whereDate('check_in', $dateFilter);
-        }
-
-        // 結果取得
-        $results = $query->get();
-
-        // エリアデータを再取得してビューに渡す
-       /*  $areas = AreaData::all(); */
-
-        return view('attendance.management', [
-               /*  'areas' => $areas, */
-                'results' => $results,
-        ]);
+        return view('attendance.admin', compact('results', 'areas'));
     }
 
 }

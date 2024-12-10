@@ -3,11 +3,15 @@
 <x-slot name="head">
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 	<script src='./js/jquery.tablesorter.js'></script>
+	<script src='./js/select2.min.js'></script>
+	 <link rel="stylesheet" href="/shinsei2/public/css/select2.min.css">
 <script>
 $(document).ready(function(){
 	$('.sort-table').tablesorter();
 });
 </script>
+<style>
+.select2-search--inline{display:none;}</style>
 </x-slot>
 
 <div class="main_right">
@@ -24,6 +28,7 @@ $(document).ready(function(){
 				<th>権限</th>
 				<th>承認</th>
 				<th>地域</th>
+				<th>エリア</th>
 				<th>勤務時間</th>
 				<th>購確</th>
 				<th>購承</th>
@@ -80,6 +85,17 @@ $(document).ready(function(){
 					</select>
 				</td>
 				<td>
+    				<select name="areas[]" multiple class="areas">
+        			@foreach($areas as $area)
+            			<option value="{{ $area->id }}"
+                @if($record->areas->contains('id', $area->id)) selected @endif>
+                {{ $area->name }}
+            </option>
+        @endforeach
+    </select>
+</td>
+
+				<td>
 					<select name="worktype_id">
 					<option value=0 @if($record->worktype_id==0)selected @endif >未設定</option>
 					<option value=1 @if($record->worktype_id==1)selected @endif >9時-18時</option>
@@ -121,12 +137,22 @@ $(document).ready(function(){
 	</div>
 </div>
 <script>
+$(document).ready(function() {
+    $('.areas').select2({
+        placeholder: "未選択",
+
+        width: '100%'
+    });
+    $ ('.areas'). on ( 'select2:opening select2:closing' , function ( event ) { var $searchfield = $ ( this ). parent (). find ( '.select2-search__field' );
+    $searchfield . prop ( 'disabled' , true ); });
+});
 	$('.user_change').on('click', function(){
 		var str = $(this).closest('tr');
 		var id = str.find('input[name="id"]').val();
 		var role = str.find('select[name="role"]').val();
 		var approval = str.find('select[name="approval"]').val();
 		var area = str.find('select[name="area"]').val();
+		var areas = str.find('select[name="areas[]"]').val();
 		var wt = str.find('select[name="worktype_id"]').val();
 		var pe=0;
 		if(str.find('input[name="p1"]').prop('checked')){
@@ -149,7 +175,7 @@ $(document).ready(function(){
 	        url: "user/change",
 	        dataType: "json",
 	        type: "POST",
-	        data:{id:id,role:role,approval:approval,area:area,worktype_id:wt,permissions:pe, _token: '{{csrf_token()}}'},
+	        data:{id:id,role:role,approval:approval,areas:areas,area:area,worktype_id:wt,permissions:pe, _token: '{{csrf_token()}}'},
 	        success: function(data) {
 
 	         	var resp ="ID:"+data.id+" "+data.name+"さんの情報を書き換えました。";
@@ -165,9 +191,6 @@ $(document).ready(function(){
 	        	console.log("errorThrown    : " + errorThrown.message);
 	        }
 	     });
-	    // }else{
-	      //   alert("端末が選択されていません");
-	       //  }
 	});
 	$('input[type="checkbox"]').on('click', function() {
 	    // クリックされたチェックボックスのname属性とチェック状態を取得します

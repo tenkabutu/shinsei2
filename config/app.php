@@ -52,9 +52,10 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+    'url' => env('APP_URL', 'http://localhost/shinsei2/public'),
+        'mix_url' => env('MIX_ASSET_URL', null),
 
-    'asset_url' => env('ASSET_URL', null),
+    'asset_url' => env('ASSET_URL', 'http://localhost/tabusapo_lb/public'),
 
     /*
     |--------------------------------------------------------------------------
