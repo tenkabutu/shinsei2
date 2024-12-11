@@ -28,14 +28,14 @@
 						<li>・</li>
 					</ul>
 				</fieldset>
-				<!-- <fieldset>
+				<fieldset>
 					<legend>不具合</legend>
 					<ul>
 
-						<li>・振替申請の修正まち状態時に、作業情報を更新しないと修正まちから申請中に変更されない。</li>
+						<li>・日付が選択できない、対応中。</li>
 
 					</ul>
-				</fieldset> -->
+				</fieldset>
 
 
 
