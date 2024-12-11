@@ -2,9 +2,6 @@
 <x-slot name="style"></x-slot>
 <x-slot name="head">
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-	<script src='./js/jquery.tablesorter.js'></script>
-	<script src='./js/select2.min.js'></script>
-	 <link rel="stylesheet" href="/shinsei2/public/css/select2.min.css">
 <script>
 $(document).ready(function(){
 	$('.sort-table').tablesorter();
