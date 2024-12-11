@@ -2,11 +2,11 @@
 <x-slot name="style"></x-slot>
 <x-slot name="head">
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+	<script src="/shinsei2/public/js/jquery.datetimepicker.full.min.js"></script>
+	<script src="/shinsei2/public/js/jquery-ui.min.js"></script>
 	<script src='/shinsei2/public/js/jquery.repeater.js'></script>
 	<script>
-   $(function() {
+	$(document).ready(function() {
 	   $.datetimepicker.setLocale('ja');
 	   $('.target').datetimepicker({  scrollMonth : false,
 		    scrollInput : false}).datepicker('setDate','today');

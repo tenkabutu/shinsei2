@@ -14,9 +14,10 @@
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 
         <!-- Scripts -->
-
         {{ $head }}
-        <script src="/shinsei2/public/js/app.js" defer></script>
+		<script src="/shinsei2/public/js/app.js" defer></script>
+
+
 
     </head>
     <body class="font-sans antialiased">

@@ -32,6 +32,30 @@ class PaidLeaveController extends Controller
         });
             $check_userlist=$query->get(['id', 'name'])->all();
 
+            $user = User::with('roletag', 'approvaltag', 'areatag', 'worktype', 'areas')
+            ->findOrFail(Auth::user()->id);
+            $userlist = $this->create_userlist();
+
+            // ユーザーの担当エリアIDを取得
+            $userAreaIds = $user->areas->pluck('id')->toArray();
+
+            $query = User::query();
+
+            $query->where(function ($query2) use ($userAreaIds) {
+                // 管理者またはリーダーで、approvalが2かつ担当エリアが重なるユーザー
+                $query2->whereIn('users.role', [1, 2])
+                ->where('users.approval', 2)
+                ->whereHas('areas', function ($query3) use ($userAreaIds) {
+                    $query3->whereIn('id', $userAreaIds);
+                });
+            })->orWhere(function ($query2) {
+                // 管理者またはリーダーで、approvalが1のユーザー
+                $query2->whereIn('users.role', [1, 2])
+                ->where('users.approval', 1);
+            });
+
+                $check_userlist = $query->get(['id', 'name'])->all();
+
             return view('paidleave.create_pa',compact('user','check_userlist','userlist'));
 
     }
