@@ -18,4 +18,9 @@ mix.js('resources/js/app.js', 'public/js')
        require('autoprefixer'),
    ]);
 mix.js('resources/js/jquery.tablesorter.js', 'public/js');
+mix.webpackConfig({
+    externals: {
+        jquery: 'jQuery'
+    }
+});
 mix.version();
