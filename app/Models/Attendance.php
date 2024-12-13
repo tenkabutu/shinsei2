@@ -14,6 +14,7 @@ class Attendance extends Model
             'user_id',
             'check_in',
             'check_out',
+            'area_bitmask',
     ];
 
     /**

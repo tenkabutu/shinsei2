@@ -43,7 +43,28 @@
     <script>
  $(document).ready(function(){
 	$('.sort-table').tablesorter();
+
+	const initialAreaId = $('#area_id').val(); // 選択済みエリアID
+    if (initialAreaId) {
+        displayUsers($('#area_id option:selected').data('users'));
+    }
+
+    $('#area_id').on('change', function() {
+        const selectedOption = $(this).find(':selected');
+        displayUsers(selectedOption.data('users'));
+    });
+
+    function displayUsers(users) {
+
+         if (users) {
+             const userList = users.split(',').map(user => `<li>${user}</li>`).join('');
+             $('#user-list').html(`<ul>${userList}</ul>`);
+         } else {
+             $('#user-list').html('<p>所属なし</p>');
+         }
+     }
 });
+
 </script>
     </x-slot>
 
@@ -61,9 +82,11 @@
             <label for="area_id">地域</label>
             <select id="area_id" name="area_id">
                 <option value="">未選択</option>
-                @foreach ($areas as $area)
-                    <option value="{{ $area->id }}" {{ request('area_id') == $area->id ? 'selected' : '' }}>{{ $area->name }}</option>
-                @endforeach
+                 @foreach ($areas as $area)
+        <option value="{{ $area->id }}" {{ request('area_id') == $area->id ? 'selected' : '' }} data-users="{{ $area->users->map(fn($user) => $user->id . ') ' . $user->name)->join(',') }}">
+            {{ $area->name }}
+        </option>
+    @endforeach
             </select>
             </div>
           <div>
@@ -80,7 +103,8 @@
 
 
         </form>
-		 </div>
+		</div>
+		<div id="user-list"></div>
         <div class="results">
             @if (isset($results) && $results->isNotEmpty())
                 <table class="task_table sort-table">

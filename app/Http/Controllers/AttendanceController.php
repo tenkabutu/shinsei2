@@ -64,10 +64,14 @@ class AttendanceController extends Controller
             return back()->withErrors(['employee_id' => 'Employee is already checked in.']);
         }
 
+        $areaIds = $user->areas->pluck('id')->toArray(); // 担当エリアIDを取得
+        $areaBitmask = $this->calculateAreaBitmask($areaIds);
+
         // 新規レコード作成
         Attendance::create([
                 'user_id' => $user->id,
                 'check_in' => now(),
+                'area_bitmask' => $areaBitmask,
         ]);
 
         return back()->with('status', 'Check-in successful.');
@@ -103,6 +107,8 @@ class AttendanceController extends Controller
 
         // エリアリストを取得
         $areas = AreaData::all();
+        $areas = AreaData::with('users:id,name,area')->get(); // 必要なデータを取得
+
 
         // 検索実行
         if ($request->hasAny(['employee_id', 'area_id', 'date_from', 'date_to'])) {
@@ -117,9 +123,8 @@ class AttendanceController extends Controller
 
             // 担当地域でフィルター
             if ($request->filled('area_id')) {
-                $query->whereHas('user.areas', function ($q) use ($request) {
-                    $q->where('area_data.id', $request->input('area_id'));
-                });
+                $areaBit = 1 << ($request->area_id - 1);
+                $query->whereRaw('area_bitmask & ? > 0', [$areaBit]);
             }
 
             // 日付範囲でフィルター
@@ -136,6 +141,12 @@ class AttendanceController extends Controller
         }
 
         return view('attendance.admin', compact('results', 'areas'));
+    }
+    private function calculateAreaBitmask(array $areaIds): int
+    {
+        return array_reduce($areaIds, function ($bitmask, $areaId) {
+            return $bitmask | (1 << ($areaId - 1));
+        }, 0);
     }
 
 }
