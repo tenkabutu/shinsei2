@@ -33,6 +33,9 @@ class UserController extends Controller
         if ($request->has('areas')) {
             // 複数選択されたエリアを同期
             $user->areas()->sync($request->areas);
+        }else {
+            // areas が存在しない場合、全てのエリアを解除
+            $user->areas()->detach();
         }
 
 
