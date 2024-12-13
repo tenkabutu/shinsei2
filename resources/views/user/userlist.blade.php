@@ -138,7 +138,7 @@ $(document).ready(function(){
 $(document).ready(function() {
     $('.areas').select2({
         placeholder: "未選択",
-
+        allowClear: true,
         width: '100%'
     });
     $ ('.areas'). on ( 'select2:opening select2:closing' , function ( event ) { var $searchfield = $ ( this ). parent (). find ( '.select2-search__field' );
