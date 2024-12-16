@@ -21,7 +21,7 @@ class OverWorkController extends Controller
     }
 
     public function create(){
-        $user=user::with('roletag','approvaltag','areatag','worktype')->findOrFail(Auth::user()->id);
+        /* $user=user::with('roletag','approvaltag','areatag','worktype')->findOrFail(Auth::user()->id);
         $userlist = $this->create_userlist();
         $query=user::query();
         $area_id=$user->area;
@@ -34,7 +34,28 @@ class OverWorkController extends Controller
             $query2->whereIn('users.role',[1,2])
             ->Where('users.approval',1);
         });
-            $check_userlist=$query->get(['id', 'name'])->all();
+            $check_userlist=$query->get(['id', 'name'])->all(); */
+        $user = User::with('roletag', 'approvaltag', 'areatag', 'worktype', 'areas')
+        ->findOrFail(Auth::user()->id);
+        $userlist = $this->create_userlist();
+
+        // ユーザーの担当エリアIDを取得
+        $userAreaIds = $user->areas->pluck('id')->toArray();
+
+        $query = User::query();
+
+        $query->where(function ($query2) use ($userAreaIds) {
+            $query2->whereIn('users.role', [1, 2])
+            ->where('users.approval', 2)
+            ->whereHas('areas', function ($query3) use ($userAreaIds) {
+                $query3->whereIn('area_data.id', $userAreaIds);
+            });
+        })->orWhere(function ($query2) {
+            $query2->whereIn('users.role', [1, 2])
+            ->where('users.approval', 1);
+        });
+
+            $check_userlist = $query->get(['id', 'name'])->all();
 
             return view('overwork.create_ov',compact('user','check_userlist','userlist'));
 
