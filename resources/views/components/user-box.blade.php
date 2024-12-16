@@ -23,7 +23,13 @@
 				</div>
 				<div>
 					<div class="g12"><label>所属</label></div>
-					<div class="g23 text_right">{{ $userdata->areatag->nametag}}</div>
+					<div class="g23 text_right">
+                    @if ($userdata->areas->isNotEmpty())
+                        {{ $userdata->areas->pluck('name')->join(', ') }}
+                    @else
+                        なし
+                    @endif
+                    </div>
 				</div>
 				<div>
 					<div class="g12"><label>確認者</label></div>
