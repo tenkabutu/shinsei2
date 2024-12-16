@@ -17,20 +17,7 @@ class PaidLeaveController extends Controller
         $this->middleware('auth');
     }
     public function create(){
-        $user=User::with('roletag','approvaltag','areatag','worktype')->findOrFail(Auth::user()->id);
-        $userlist = $this->create_userlist();
-        $query=user::query();
-        $area_id=$user->area;
 
-        $query->where(function($query2) use($area_id){
-            $query2->whereIn('users.role',[1,2])
-            ->Where('users.area', $area_id)
-            ->Where('users.approval',2);
-        })->orwhere(function($query2){
-            $query2->whereIn('users.role',[1,2])
-            ->Where('users.approval',1);
-        });
-            $check_userlist=$query->get(['id', 'name'])->all();
 
             $user = User::with('roletag', 'approvaltag', 'areatag', 'worktype', 'areas')
             ->findOrFail(Auth::user()->id);
@@ -42,14 +29,12 @@ class PaidLeaveController extends Controller
             $query = User::query();
 
             $query->where(function ($query2) use ($userAreaIds) {
-                // 管理者またはリーダーで、approvalが2かつ担当エリアが重なるユーザー
                 $query2->whereIn('users.role', [1, 2])
                 ->where('users.approval', 2)
                 ->whereHas('areas', function ($query3) use ($userAreaIds) {
-                    $query3->whereIn('id', $userAreaIds);
+                    $query3->whereIn('area_data.id', $userAreaIds);
                 });
             })->orWhere(function ($query2) {
-                // 管理者またはリーダーで、approvalが1のユーザー
                 $query2->whereIn('users.role', [1, 2])
                 ->where('users.approval', 1);
             });
