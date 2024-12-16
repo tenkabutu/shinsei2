@@ -32,7 +32,7 @@
 					<legend>不具合</legend>
 					<ul>
 
-						<li>・日付が選択できない、対応中。</li>
+						<li>・たまにforbiddenと言われる(更新を押せば通る)。</li>
 
 					</ul>
 				</fieldset>
