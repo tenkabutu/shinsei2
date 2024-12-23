@@ -144,7 +144,7 @@
                     </tbody>
                 </table>
             @elseif (isset($results))
-                <p>No records found for the given criteria.</p>
+                <p>記録がないようです(;_;)</p>
             @endif
         </div>
     </div>
