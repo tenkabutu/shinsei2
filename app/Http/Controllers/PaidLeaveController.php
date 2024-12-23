@@ -19,7 +19,7 @@ class PaidLeaveController extends Controller
     public function create(){
 
 
-            $user = User::with('roletag', 'approvaltag', 'areatag', 'worktype', 'areas')
+            $user = User::with('roletag', 'approvaltag', 'worktype', 'areas')
             ->findOrFail(Auth::user()->id);
             $userlist = $this->create_userlist();
 
@@ -38,11 +38,8 @@ class PaidLeaveController extends Controller
                 $query2->whereIn('users.role', [1, 2])
                 ->where('users.approval', 1);
             });
-
                 $check_userlist = $query->get(['id', 'name'])->all();
-
             return view('paidleave.create_pa',compact('user','check_userlist','userlist'));
-
     }
     public function save(ShinseiRequest $request){
 
