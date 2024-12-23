@@ -32,8 +32,8 @@
 					<legend>不具合</legend>
 					<ul>
 
-						<li>・ログアウト時に419と表示される</li>
-
+						<li>・ログアウト時にたまに419と表示される</li>
+						<li>・極稀にforbbdenと表示される</li>
 					</ul>
 				</fieldset>
 

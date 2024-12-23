@@ -19,7 +19,7 @@
 							<td rowspan='2' width='45'>
 								<form method="POST" action="{{ route('logout') }}">
 								@csrf
-								<a href="route('logout')" onclick="event.preventDefault();this.closest('form').submit();">
+								<a href="#" onclick="event.preventDefault();this.closest('form').submit();">
 									{{ __('LogOut') }}
                                 </a>
                         </form>
