@@ -97,7 +97,7 @@
             <select id="area_id" name="area_id">
                 <option value="">未選択</option>
                  @foreach ($areas as $area)
-        <option value="{{ $area->id }}" {{ request('area_id') == $area->id ? 'selected' : '' }} data-users="{{ $area->users->map(fn($user) => $user->id . ') ' . $user->name)->join(',') }}">
+        <option value="{{ $area->id }}" {{ request('area_id') == $area->id ? 'selected' : '' }} data-users="{{ $area->users->map(fn($user) => $user->employee . ') ' . $user->name)->join(',') }}">
             {{ $area->name }}
         </option>
     @endforeach

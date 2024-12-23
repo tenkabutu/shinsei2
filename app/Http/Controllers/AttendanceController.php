@@ -107,7 +107,10 @@ class AttendanceController extends Controller
 
         // エリアリストを取得
         $areas = AreaData::all();
-        $areas = AreaData::with('users:id,name,area')->get(); // 必要なデータを取得
+        $areas = AreaData::with(['users' => function ($query) {
+            $query->select('users.id', 'users.name', 'users.area', 'users.employee')
+            ->orderBy('users.employee', 'asc');
+        }])->get();
 
 
         // 検索実行
