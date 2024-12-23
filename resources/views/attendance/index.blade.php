@@ -101,7 +101,7 @@
 				@forelse ($currentEmployees as $employee)
                     <li>{{ $employee->name }} ({{ $employee->attendance->check_in }})</li>
                 @empty
-                    <li>No employees currently checked in.</li>
+                    <li>いません</li>
                 @endforelse
             </ul>
         </div>
