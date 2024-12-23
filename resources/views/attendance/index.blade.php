@@ -87,7 +87,7 @@
         <form action="attendance/check" method="POST">
             @csrf
             <label for="employee_id">社員番号</label>
-            <input type="text" id="employee_id" name="employee_id" required>
+            <input type="text" id="employee_id" name="employee_id"  autocomplete="off" required>
 
             <div style="display: flex; justify-content: space-between;">
                 <button type="submit" name="action" value="check-in">入室</button>
