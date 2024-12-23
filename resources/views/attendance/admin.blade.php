@@ -39,7 +39,7 @@
         }
         #user-list ul {
   display: flex; /* 横並びにする */
-  list-style: none; /* デフォルトの箇条書きスタイルを削除 */
+  flex-wrap: wrap;list-style: none; /* デフォルトの箇条書きスタイルを削除 */
   padding: 0; /* 不要な余白を削除 */
   margin: 0; /* 不要な余白を削除 */
 }
