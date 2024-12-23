@@ -98,6 +98,8 @@
                 <div class="main_right">
                     <div class="container">
                         <h1>第二事務所タイムスタンプ</h1>
+                        <p>・入室時に自分の社員番号を入力して入室ボタンを押してください</p>
+                        <p>・退室時に自分の社員番号を入力して退出ボタンを押してください</p>
                         <form action="attendance/check" method="POST">
                             @csrf
                             <label for="employee_id">社員番号</label>
