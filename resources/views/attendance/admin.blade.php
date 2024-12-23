@@ -37,7 +37,20 @@
         .results {
             margin-top: 20px;
         }
+        #user-list ul {
+  display: flex; /* 横並びにする */
+  list-style: none; /* デフォルトの箇条書きスタイルを削除 */
+  padding: 0; /* 不要な余白を削除 */
+  margin: 0; /* 不要な余白を削除 */
+}
 
+#user-list ul li {
+  border: 1px solid #000; /* 線で囲む */
+  padding: 10px; /* 内側の余白 */
+  margin: 5px; /* 各要素間の余白 */
+  text-align: center; /* テキストを中央揃え */
+  min-width: 80px; /* 各要素の最低幅 */
+}
 
     </style>
     <script>

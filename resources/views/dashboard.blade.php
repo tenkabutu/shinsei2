@@ -32,7 +32,7 @@
 					<legend>不具合</legend>
 					<ul>
 
-						<li>・たまにforbiddenと言われる(更新を押せば通る)。</li>
+						<li>・ログアウト時に419と表示される</li>
 
 					</ul>
 				</fieldset>
