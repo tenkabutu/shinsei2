@@ -46,8 +46,9 @@
 
 #user-list ul li {
   border: 1px solid #000; /* 線で囲む */
-  padding: 10px; /* 内側の余白 */
-  margin: 5px; /* 各要素間の余白 */
+  border-radius:5px;
+  padding: 2px; /* 内側の余白 */
+  margin: 2px; /* 各要素間の余白 */
   text-align: center; /* テキストを中央揃え */
   min-width: 80px; /* 各要素の最低幅 */
 }
