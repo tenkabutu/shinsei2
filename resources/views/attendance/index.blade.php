@@ -90,6 +90,8 @@
                 padding: 10px;
                 border-bottom: 1px solid #ddd;
             }
+            .hg-width{
+            width:93px !important;}
         </style>
     </head>
     <body class="font-sans antialiased">
@@ -97,20 +99,21 @@
             <main>
                 <div class="main_right">
                     <div class="container">
+                    <div>
                         <h1>第二事務所タイムスタンプ</h1>
                         <p>・入室時に自分の社員番号を入力して入室ボタンを押してください</p>
                         <p>・退室時に自分の社員番号を入力して退出ボタンを押してください</p>
                         <form action="attendance/check" method="POST">
                             @csrf
                             <label for="employee_id">社員番号</label>
-                            <input type="text" id="employee_id" name="employee_id" autocomplete="off" required>
+                            <input class="input" type="text" id="employee_id" name="employee_id" autocomplete="off" required>
 
                             <div class="button-group">
                                 <button type="submit" name="action" value="check-in">入室</button>
                                 <button type="submit" name="action" value="check-out">退出</button>
                             </div>
                         </form>
-
+</div> <div class="simple-keyboard"></div>
                         <div class="employee-list">
                             <h2>なかのひと</h2>
                             <ul>
@@ -121,7 +124,9 @@
                                 @endforelse
                             </ul>
                         </div>
+
                     </div>
+
                 </div>
             </main>
         </div>

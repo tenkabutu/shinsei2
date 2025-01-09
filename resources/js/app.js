@@ -19,3 +19,36 @@ require('./select2.min');
 //$(document).ready(function () {
 //    $('#myTable').tablesorter(); // 必要に応じてテーブルIDを指定
 //});
+
+
+import Keyboard from "simple-keyboard";
+import "simple-keyboard/build/css/index.css";
+
+
+let keyboard = new Keyboard({
+  onChange: input => onChange(input),
+  onKeyPress: button => onKeyPress(button),
+  layout: {
+    default: ["1 2 3 4 5 6", "7 8 9 0 {bksp}"],
+    shift: ["! / #", "$ % ^", "& * (", "{shift} ) +", "{bksp}"]
+  },
+  theme: "hg-theme-default hg-layout-numeric numeric-theme",
+  buttonTheme: [
+    {
+      class: "hg-width",
+      buttons: "1 2 3 4 5 6 7 8 9 0"
+    }
+
+  ]
+});
+
+
+
+function onChange(input){
+  document.querySelector(".input").value = input;
+  console.log("Input changed", input);
+}
+
+function onKeyPress(button){
+  console.log("Button pressed", button);
+}
