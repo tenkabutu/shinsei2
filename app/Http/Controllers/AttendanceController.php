@@ -29,7 +29,7 @@ class AttendanceController extends Controller
         $action = $request->input('action');
 
         // 管理者IDの場合は検索ページにリダイレクト
-        if ($employeeId == 'out'){
+        if ($employeeId == 8565){
             Auth::logout();
             return redirect('/')->with('status', 'Logged out successfully.');
         }elseif($employeeId == 'search'){

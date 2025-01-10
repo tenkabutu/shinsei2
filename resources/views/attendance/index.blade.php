@@ -106,7 +106,7 @@
                         <form action="attendance/check" method="POST">
                             @csrf
                             <label for="employee_id">社員番号</label>
-                            <input class="input" type="text" id="employee_id" name="employee_id" autocomplete="off" required>
+                            <input class="input" readonly  type="text" id="employee_id" name="employee_id" autocomplete="off" required>
 
                             <div class="button-group">
                                 <button type="submit" name="action" value="check-in">入室</button>
