@@ -18,8 +18,7 @@
 				<fieldset>
 				<legend>update</legend>
 				<ul>
-					<li>・振替で分が空白だと0を入れるように改修。</li>
-					<li>・時間給に切り替えたときに休憩時間を0に変更するように改修。</li>
+					<li>・419(有効期限切れ)時に前のページをリロードするかトップに戻るように改修</li>
 				</ul>
 				</fieldset>
 				 <fieldset>
@@ -31,8 +30,6 @@
 				<fieldset>
 					<legend>不具合</legend>
 					<ul>
-
-						<li>・ログアウト時にたまに419と表示される</li>
 						<li>・極稀にforbbdenと表示される</li>
 					</ul>
 				</fieldset>
