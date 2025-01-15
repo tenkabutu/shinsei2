@@ -92,6 +92,19 @@
             }
             .hg-width{
             width:93px !important;}
+           #flash-message {
+                display: none;
+                position: fixed;
+                inset: 0;
+             margin: auto;
+             width:250px;height:30px;
+                padding: 10px;
+                color: white;
+                border-radius: 4px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+}
+            }
         </style>
     </head>
     <body class="font-sans antialiased">
@@ -107,13 +120,13 @@
                             @csrf
                             <label for="employee_id">社員番号</label>
                             <input class="input" readonly  type="text" id="employee_id" name="employee_id" autocomplete="off" required>
-
+							<div id="flash-message"></div>
                             <div class="button-group">
-                                <button type="submit" name="action" value="check-in">入室</button>
+                            <button type="submit" name="action" value="check-in">入室</button>
                                 <button type="submit" name="action" value="check-out">退出</button>
                             </div>
                         </form>
-</div> <div class="simple-keyboard"></div>
+						</div> <div class="simple-keyboard"></div>
                         <div class="employee-list">
                             <h2>なかのひと</h2>
                             <ul>
@@ -131,15 +144,27 @@
             </main>
         </div>
         <script>
-            document.querySelector('form').addEventListener('submit', function (e) {
-                const employeeId = document.querySelector('#employee_id').value;
-                const action = e.submitter.value;
+        $(document).ready(function() {
 
-                if (employeeId === '{{ config('app.admin_id') }}') {
-                    e.preventDefault();
-                    window.location.href = '/attendance/search';
+            // メッセージ表示関数
+            const successMessage = "{{ session('success') }}";
+                const errorMessage = "{{ session('error') }}";
+
+                if (successMessage || errorMessage) {
+                    const messageBox = $('#flash-message');
+                    const messageContent = successMessage || errorMessage;
+                    const backgroundColor = successMessage ? '#28a745' : '#dc3545';
+
+                    messageBox.text(messageContent).css({
+                        display: 'block',
+                        backgroundColor: backgroundColor,
+                    });
+
+                    setTimeout(() => {
+                        messageBox.fadeOut();
+                    }, 2000);
                 }
-            });
+        });
         </script>
     </body>
 </html>

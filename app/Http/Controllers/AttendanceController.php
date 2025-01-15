@@ -32,9 +32,9 @@ class AttendanceController extends Controller
         if ($employeeId == 8565){
             Auth::logout();
             return redirect('/')->with('status', 'Logged out successfully.');
-        }elseif($employeeId == 'search'){
+        }/* elseif($employeeId == 'search'){
             return redirect('/attendance/admin/search');
-        }
+        } */
 
         // 社員を取得
         $user = User::where('employee', $employeeId)->first();
@@ -61,7 +61,7 @@ class AttendanceController extends Controller
         ->first();
 
         if ($existingAttendance) {
-            return back()->withErrors(['employee_id' => 'Employee is already checked in.']);
+            return redirect()->back()->with('error', "{$user->name} さんは入室済みです。");
         }
 
         $areaIds = $user->areas->pluck('id')->toArray(); // 担当エリアIDを取得
@@ -74,7 +74,7 @@ class AttendanceController extends Controller
                 'area_bitmask' => $areaBitmask,
         ]);
 
-        return back()->with('status', 'Check-in successful.');
+        return redirect()->back()->with('success', "{$user->name} さんが入室しました。");
     }
 
     private function checkOut(User $user)
@@ -85,13 +85,13 @@ class AttendanceController extends Controller
         ->first();
 
         if (!$attendance) {
-            return back()->withErrors(['employee_id' => 'No active check-in found.']);
+            return redirect()->back()->with('error', "{$user->name} さんは退室済みか、入室記録がありません。");
         }
 
         // 退出時刻を更新
         $attendance->update(['check_out' => now()]);
 
-        return back()->with('status', 'Check-out successful.');
+        return redirect()->back()->with('success', "{$user->name} さんが退出しました。");
     }
 
     public function search(Request $request)
