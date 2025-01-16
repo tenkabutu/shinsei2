@@ -61,7 +61,7 @@ class AttendanceController extends Controller
         ->first();
 
         if ($existingAttendance) {
-            return redirect()->back()->with('error', "{$user->name} さんは入室済みです。");
+            return redirect()->back()->with('error', "!!{$user->name} さんは入室済みです!!");
         }
 
         $areaIds = $user->areas->pluck('id')->toArray(); // 担当エリアIDを取得
@@ -85,7 +85,7 @@ class AttendanceController extends Controller
         ->first();
 
         if (!$attendance) {
-            return redirect()->back()->with('error', "{$user->name} さんは退室済みか、入室記録がありません。");
+            return redirect()->back()->with('error', "!!{$user->name} さんは退室済みか、入室記録がありません!!");
         }
 
         // 退出時刻を更新

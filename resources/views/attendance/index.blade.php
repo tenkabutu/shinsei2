@@ -97,11 +97,13 @@
                 position: fixed;
                 inset: 0;
              margin: auto;
-             width:250px;height:30px;
+             width:380px;height:30px;
                 padding: 10px;
                 color: white;
-                border-radius: 4px;
+                border-radius: 5px;
                 box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                font-size: 24px;
+                font-weight: bold;
 
 }
             }
