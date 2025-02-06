@@ -38,7 +38,8 @@ $(document).ready(function(){
 			</thead>
 			{{-- @foreach ($userlist as $record) --}}
 			@foreach ($userlist as $id =>$record)
-			@if(($record->permissions & 16) === 0 || $record->role != 5)
+			@if(($record->permissions & 16) === 0 && $record->role == 5)
+			@else
 			<tr class="d{{$id+1}}">
 				<td>{{ $record->employee}}</td>
 				<td>{{ $record->name}}</td>
