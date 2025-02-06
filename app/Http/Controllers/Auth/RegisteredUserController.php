@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\AreaData;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -20,7 +21,8 @@ class RegisteredUserController extends Controller
      */
     public function create()
     {
-        return view('auth.register');
+        $areas = AreaData::all();
+        return view('auth.register',compact('areas'));
     }
 
     /**
@@ -46,9 +48,15 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'employee' => $request->employee,
             'worktype_id' => $request->worktype_id,
-             'area'    => $request->area,
             'password' => Hash::make($request->password),
         ]);
+        if ($request->has('areas')) {
+            // 複数選択されたエリアを同期
+            $user->areas()->sync($request->areas);
+        }else {
+            // areas が存在しない場合、全てのエリアを解除
+            $user->areas()->detach();
+        }
 
         event(new Registered($user));
 

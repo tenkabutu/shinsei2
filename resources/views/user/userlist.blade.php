@@ -20,7 +20,7 @@ $(document).ready(function(){
 		<table class="user_table  sort-table">
 			<thead>
 			<tr>
-				<th  data-sorter="false">No</th>
+				<th class="id" data-sorter="false">No</th>
 				<th >使用者</th>
 
 				<th>権限</th>
@@ -38,6 +38,7 @@ $(document).ready(function(){
 			</thead>
 			{{-- @foreach ($userlist as $record) --}}
 			@foreach ($userlist as $id =>$record)
+			@if(($record->permissions & 16) === 0 || $record->role != 5)
 			<tr class="d{{$id+1}}">
 				<td>{{ $record->employee}}</td>
 				<td>{{ $record->name}}</td>
@@ -115,14 +116,21 @@ $(document).ready(function(){
 				@else
 				<td>{{ $record->approvaltag->nametag}}</td>
 				<td>{{ $record->areatag->nametag}}</td>
+				<td>{{ $record->areas->pluck('name')->implode(', ') }}</td>
 				<td>{{optional( $record->worktype)->worktype}}</td>
 
 				<td>@if($record->permissions & 1) ◯ @endif</td>
 				<td>@if($record->permissions & 2) ◯ @endif</td>
 				<td>@if($record->permissions & 4) ◯ @endif</td>
 				<td>@if($record->permissions & 8) ◯ @endif</td>
+				@if(Auth::user()->role==4)
+				<input type="hidden" name="id" value="{{ $record->id}}">
+				<td><input type="checkbox" name="p5" value="16" @if($record->permissions & 16) checked @endif></td>
+				<td><input type="button" class="user_change" value="変更"></td>
+				@else
 				<td>@if($record->permissions & 16) ◯ @endif</td>
 				<td></td>
+				@endif
 				@endif
 
 
@@ -130,6 +138,7 @@ $(document).ready(function(){
 
 
 			</tr>
+			@endif
 			@endforeach
 		</table>
 	</div>

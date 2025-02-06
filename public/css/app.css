@@ -559,7 +559,7 @@ table select{
 	text-align: center;
 }
 .user_table{
-
+	font-size: 16px;
 }
 .user_table tr.uq_just{
 	background-color: #ffff80;

@@ -72,26 +72,15 @@
 					<option value=7 >9時-17時半</option>
 				</select>
 				<br>
-               	勤務地<select name="area">
-					<option value=0 >江越</option>
-					<option value=1 >八代</option>
-					<option value=2 >熊本市</option>
-					<option value=3 >玉名</option>
-					<option value=4 >荒尾</option>
-					<option value=5 >天草</option>
-					<option value=6 >市町村A</option>
-					<option value=7 >市町村B</option>
-					<option value=8 >熊本県</option>
-
-
-					</select>
+               	勤務地<select name="areas[]"  class="areas">
+        			@foreach($areas as $area)
+            			<option value="{{ $area->id }}">{{ $area->name }}</option>
+        			@endforeach
+        			</select>
 				<br>
                	契約開始<select name="hiring_period">
 					<option value=0 >４月～３月</option>
 					<option value=1 >１０月～９月</option>
-
-
-
 					</select>
             </div>
             <br>
