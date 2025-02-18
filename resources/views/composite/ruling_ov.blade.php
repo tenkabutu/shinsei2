@@ -145,7 +145,24 @@ $(".end_check").change(function() {
 
 var currentYear = new Date().getFullYear();
 for (var year = currentYear; year >= 2023; year--) {
-    $('#year').append('<option value="' + year + '">' + year + '</option>');
+    var option = $('<option>', {
+        value: year,
+        text: year
+    });
+
+    // old('year') があれば、それを選択する
+    @php
+            $yearParam = request()->get('year');
+        @endphp
+
+        // URLパラメータのyearが存在する場合のみ選択状態を設定
+        @if($yearParam)
+            if ({{ $yearParam }} == year) {
+                option.prop('selected', true);
+            }
+        @endif
+
+    $('#year').append(option);
 }
 
 });

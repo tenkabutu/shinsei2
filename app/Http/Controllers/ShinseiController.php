@@ -3,8 +3,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Models\AreaData;
 use App\Models\Matter;
 use App\Models\Nametag;
+
 use App\Models\User;
 use Carbon\Carbon;
 
@@ -435,11 +437,16 @@ class ShinseiController extends Controller
                     $query->Where('opt1',8);
                 }
             }
-            $query->leftjoin('nametags as nt4', function ($join)
-            {
-                $join->on('users.area', '=', 'nt4.tagid')
-                ->where('nt4.groupid', 3);
-            });
+            $query->leftJoinSub(
+                DB::table('user_area')
+                ->join('area_data', 'user_area.area_id', '=', 'area_data.id')
+                ->select('user_area.user_id', DB::raw('GROUP_CONCAT(area_data.name ORDER BY area_data.name SEPARATOR ", ") as area_names'))
+                ->groupBy('user_area.user_id'),
+                'user_areas',
+                'users.id',
+                '=',
+                'user_areas.user_id'
+                );
             $query->leftjoin('users as reception','matters.reception_id','reception.id');
             $query->leftjoin('nametags as nt2', function ($join)
             {
@@ -521,29 +528,17 @@ class ShinseiController extends Controller
                         $query->Where('status', 3);
                     }
                 }
-//             } else {
-//                 var_dump('tes');
 
-
-            /*     $area_id = $user->area;
-                $query->where(function ($query2) use ( $area_id)
-                {
-                    $query2->Where('status', 2)
-                    ->Where('users.area', $area_id)
-                    ->Where('users.id', '!=', Auth::id());
-                })
-                ->orwhere(function ($query2) use ( $area_id)
-                {
-                    $query2->Where('task_status', 2)
-                    ->Where('users.area', $area_id)
-                    ->Where('users.id', '!=', Auth::id());
-                }); */
-           /*  } */
                 if ($request->user != null && $request->user != 0) {
                 $query->where('matters.user_id', $request->user);
             }
             if ($request->area != null && $request->area != 100) {
-                $query->where('users.area', $request->area);
+                $query->whereExists(function ($subquery) use ($request) {
+                    $subquery->select(DB::raw(1))
+                    ->from('user_area')
+                    ->whereRaw('user_area.user_id = users.id')
+                    ->where('user_area.area_id', $request->area);
+                });
             }
 
             if ($request->month != 0) {
@@ -557,12 +552,19 @@ class ShinseiController extends Controller
             }else{
                 $query->where('matters.nendo',Carbon::now()->subMonthsNoOverflow(3)->format('Y'));
             }
-            $query->select('*', 'matters.id as matters_id', 'matters.created_at as matters_created_at', 'users.name as username', 'users.employee as employee','reception.name as username2','nt2.nametag as statusname','nt4.nametag as area','nt3.nametag as optname');
+            $query->select(
+                '*',
+                'matters.id as matters_id',
+                'matters.created_at as matters_created_at',
+                'users.name as username',
+                'users.employee as employee',
+                'reception.name as username2',
+                'nt2.nametag as statusname',
+                'user_areas.area_names' // 担当エリアの名前を取得
+                );
 
            $query->orderByRaw('users.employee asc,matters.id desc');
-            //$query->orderBy('matters.id', 'desc');
-            // ->select('matters.id','matters.created_at')
-            // ->get();
+
             $records = $query->get();
 
             $records2 = $records->groupBy('matters.id');
@@ -716,12 +718,13 @@ class ShinseiController extends Controller
     }
     public static function create_arealist ()
     {
-        $arealist = Nametag::where('groupid','3')->select('tagid', 'nametag')->orderby('tagid','asc')->get();
+        $arealist = AreaData::orderBy('id', 'asc')->get();
         $create_arealist = "";
-        foreach ($arealist as $us) {
-            $create_arealist .= '<option value="' . $us->tagid . '">'. $us->nametag . '</option>';
+
+        foreach ($arealist as $area) {
+            $create_arealist .= '<option value="' . $area->id . '">' . $area->name . '</option>';
         }
-        ;
+
         return $create_arealist;
     }
 
