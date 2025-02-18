@@ -559,7 +559,7 @@ class ShinseiController extends Controller
                 'users.name as username',
                 'users.employee as employee',
                 'reception.name as username2',
-                'nt2.nametag as statusname',
+                'nt2.nametag as statusname','nt3.nametag as optname',
                 'user_areas.area_names' // 担当エリアの名前を取得
                 );
 
