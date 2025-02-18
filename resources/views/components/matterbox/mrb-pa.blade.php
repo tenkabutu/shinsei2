@@ -40,6 +40,9 @@
 			<div class="radio-group g67 radio_red">
 				<input id="st1_7" type="radio" class="st1" name="opt1" value="9" {{old('opt1',$matter->opt1)=='9' ? 'checked':''}}/>
 				<label for="st1_7">欠勤</label>
+				<input id="st1_10" type="radio" class="st1" name="opt1" value="13" {{old('opt1',$matter->opt1)=='13' ? 'checked':''}}/>
+				<label for="st1_10">欠時</label>
+				<br>
 				<input id="st1_8" type="radio" class="st1" name="opt1" value="10" {{old('opt1',$matter->opt1)=='10' ? 'checked':''}}/>
 				<label for="st1_8">遅刻</label>
 				<input id="st1_9" type="radio" class="st1" name="opt1" value="11" {{old('opt1',$matter->opt1)=='11' ? 'checked':''}}/>
