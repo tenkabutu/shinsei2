@@ -3005,23 +3005,26 @@ __webpack_require__(/*! ./select2.min */ "./resources/js/select2.min.js");
 
 
 
-var keyboard = new (simple_keyboard__WEBPACK_IMPORTED_MODULE_2___default())({
-  onChange: function onChange(input) {
-    return _onChange(input);
-  },
-  onKeyPress: function onKeyPress(button) {
-    return _onKeyPress(button);
-  },
-  layout: {
-    "default": ["1 2 3 4 5 6", "7 8 9 0 {bksp}"],
-    shift: ["! / #", "$ % ^", "& * (", "{shift} ) +", "{bksp}"]
-  },
-  theme: "hg-theme-default hg-layout-numeric numeric-theme",
-  buttonTheme: [{
-    "class": "hg-width",
-    buttons: "1 2 3 4 5 6 7 8 9 0"
-  }]
-});
+var keyboardContainer = document.querySelector('.simple-keyboard');
+if (keyboardContainer) {
+  var keyboard = new (simple_keyboard__WEBPACK_IMPORTED_MODULE_2___default())({
+    onChange: function onChange(input) {
+      return _onChange(input);
+    },
+    onKeyPress: function onKeyPress(button) {
+      return _onKeyPress(button);
+    },
+    layout: {
+      "default": ["1 2 3 4 5 6", "7 8 9 0 {bksp}"],
+      shift: ["! / #", "$ % ^", "& * (", "{shift} ) +", "{bksp}"]
+    },
+    theme: "hg-theme-default hg-layout-numeric numeric-theme",
+    buttonTheme: [{
+      "class": "hg-width",
+      buttons: "1 2 3 4 5 6 7 8 9 0"
+    }]
+  });
+}
 function _onChange(input) {
   document.querySelector(".input").value = input;
   console.log("Input changed", input);

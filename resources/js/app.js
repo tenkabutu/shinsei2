@@ -15,7 +15,6 @@ require('./select2.min');
 //require('./jquery.repeater');
 
 
-
 //$(document).ready(function () {
 //    $('#myTable').tablesorter(); // 必要に応じてテーブルIDを指定
 //});
@@ -23,8 +22,8 @@ require('./select2.min');
 
 import Keyboard from "simple-keyboard";
 import "simple-keyboard/build/css/index.css";
-
-
+const keyboardContainer = document.querySelector('.simple-keyboard');
+if (keyboardContainer) {
 let keyboard = new Keyboard({
   onChange: input => onChange(input),
   onKeyPress: button => onKeyPress(button),
@@ -42,7 +41,7 @@ let keyboard = new Keyboard({
   ]
 });
 
-
+}
 
 function onChange(input){
   document.querySelector(".input").value = input;
