@@ -120,44 +120,77 @@ class TaskcountMiddleware
                 })
                     ->distinct('matters.id')
                     ->count('matters.id');
-                $pa_count1 = DB::table('matters')
-                    ->where('matter_type',2)
-                    ->leftjoin('tasks', 'matters.id', 'tasks.matter_id')
-                    ->join('users', 'matters.user_id', 'users.id')
-                    ->Where('status', 2)
-                    ->Where('users.area', $area_id)
-                     ->Where('users.id', '!=', Auth::id())
 
-                    ->count('matters.id');
-                 $ov_count1 = DB::table('matters')
-                    ->where('matter_type',1)
-                    ->leftjoin('tasks', 'matters.id', 'tasks.matter_id')
-                    ->join('users', 'matters.user_id', 'users.id')
-                    ->where(function ($query) use ( $area_id)
-                    {
-                        $query->Where('status', 2)
-                        ->Where('users.area', $area_id)
-                        ->Where('users.id', '!=', Auth::id());
+                $pa_count1 = DB::table('matters')
+                    ->where('matter_type', 2)
+                    ->leftJoin('tasks', 'matters.id', '=', 'tasks.matter_id')
+                    ->join('users', 'matters.user_id', '=', 'users.id')
+                    ->where('status', 2)
+                    ->where('users.id', '!=', Auth::id())
+                    ->whereExists(function ($query) {
+                        $query->select(DB::raw(1))
+                        ->from('user_area')
+                        ->whereColumn('user_area.user_id', 'users.id')
+                        ->whereIn('user_area.area_id', function ($subQuery) {
+                            $subQuery->select('area_id')
+                            ->from('user_area')
+                            ->where('user_id', Auth::id());
+                        });
                     })
-                    ->orwhere(function ($query) use ( $area_id)
-                    {
-                        $query->Where('task_status', 2)
-                        ->Where('status', '!=',6)
-                        ->Where('users.area', $area_id)
-                        ->Where('users.id', '!=', Auth::id());
+                    ->count('matters.id');
+                    $ov_count1 = DB::table('matters')
+                    ->where('matter_type', 1)
+                    ->leftJoin('tasks', 'matters.id', '=', 'tasks.matter_id')
+                    ->join('users', 'matters.user_id', '=', 'users.id')
+                    ->where(function ($query) {
+                        $query->where('status', 2)
+                        ->where('users.id', '!=', Auth::id())
+                        ->whereExists(function ($subQuery) {
+                            $subQuery->select(DB::raw(1))
+                            ->from('user_area')
+                            ->whereColumn('user_area.user_id', 'users.id')
+                            ->whereIn('user_area.area_id', function ($areaQuery) {
+                                $areaQuery->select('area_id')
+                                ->from('user_area')
+                                ->where('user_id', Auth::id());
+                            });
+                        });
+                    })
+                    ->orWhere(function ($query) {
+                        $query->where('task_status', 2)
+                        ->where('status', '!=', 6)
+                        ->where('users.id', '!=', Auth::id())
+                        ->whereExists(function ($subQuery) {
+                            $subQuery->select(DB::raw(1))
+                            ->from('user_area')
+                            ->whereColumn('user_area.user_id', 'users.id')
+                            ->whereIn('user_area.area_id', function ($areaQuery) {
+                                $areaQuery->select('area_id')
+                                ->from('user_area')
+                                ->where('user_id', Auth::id());
+                            });
+                        });
                     })
                     ->distinct('matters.id')
                     ->count('matters.id');
 
                   $te_count1 = DB::table('matters')
-                    ->where('matter_type',3)
-                    ->leftjoin('tasks', 'matters.id', 'tasks.matter_id')
-                    ->join('users', 'matters.user_id', 'users.id')
-                    ->Where('status', 2)
-                        ->Where('users.area', $area_id)
-                        ->Where('users.id', '!=', Auth::id())
-
-                    ->count('matters.id');
+                  ->where('matter_type', 3)
+                  ->leftJoin('tasks', 'matters.id', '=', 'tasks.matter_id')
+                  ->join('users', 'matters.user_id', '=', 'users.id')
+                  ->where('status', 2)
+                  ->where('users.id', '!=', Auth::id())
+                  ->whereExists(function ($query) {
+                      $query->select(DB::raw(1))
+                      ->from('user_area')
+                      ->whereColumn('user_area.user_id', 'users.id')
+                      ->whereIn('user_area.area_id', function ($subQuery) {
+                          $subQuery->select('area_id')
+                          ->from('user_area')
+                          ->where('user_id', Auth::id());
+                      });
+                  })
+                  ->count('matters.id');
             }
 /*
             $pa_count2 = DB::table('matters')
