@@ -95,19 +95,17 @@ $(document).ready(function(){
     </select>
 </td>
 
-				<td>
-					<select name="worktype_id">
-					<option value=0 @if($record->worktype_id==0)selected @endif >未設定</option>
-					<option value=1 @if($record->worktype_id==1)selected @endif >9時-18時</option>
-					<option value=2 @if($record->worktype_id==2)selected @endif >8時半-17時</option>
-					<option value=3 @if($record->worktype_id==3)selected @endif >9時-17時</option>
-					<option value=4 @if($record->worktype_id==4)selected @endif >10時-18時</option>
-					<option value=5 @if($record->worktype_id==5)selected @endif >8時半-16時半</option>
-					<option value=6 @if($record->worktype_id==6)selected @endif >8時半-17時半</option>
-					<option value=7 @if($record->worktype_id==7)selected @endif >9時-17時半</option>
 
-					</select>
-				</td>
+				<td>
+	<select name="worktype_id">
+		<option value=0 @if($record->worktype_id==0)selected @endif >未設定</option>
+		@foreach($worktype as $type)
+			<option value="{{ $type->id }}" {{ $type->id == $record->worktype_id ? 'selected' : '' }}>
+				{{ $type->worktype }}
+			</option>
+		@endforeach
+	</select>
+</td>
 				<td><input type="checkbox" name="p1" value="1" @if($record->permissions & 1) checked @endif></td>
 				<td><input type="checkbox" name="p2" value="2" @if($record->permissions & 2) checked @endif></td>
 				<td><input type="checkbox" name="p3" value="4" @if($record->permissions & 4) checked @endif></td>

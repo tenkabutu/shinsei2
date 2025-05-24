@@ -52,12 +52,12 @@ class MatterTotalController extends Controller
         ->where('users.hiring_period', 0)
         ->whereRaw('(users.permissions & 16) = 16')
         ->select(
-            'users.id','users.name','users.employee','users.hiring_period',
+            'users.id','users.name','users.employee','users.hiring_period','users.worktype_id',
             DB::raw('SUM(CASE WHEN matters.opt1 = 1 AND matters.status != 6 THEN 1 ELSE 0 END) AS rest_day'),
             DB::raw('SUM(CASE WHEN matters.opt1 = 4 AND matters.status != 6 THEN matters.allotted ELSE 0 END) AS rest_time'),
             DB::raw('SUM(CASE WHEN matters.opt1 IN (2,3,12) AND matters.status != 6 THEN 1 ELSE 0 END) AS harf_rest_day')
             )
-            ->groupBy('users.id','users.name','users.employee','users.hiring_period')
+            ->groupBy('users.id','users.name','users.employee','users.hiring_period','users.worktype_id')
             ->orderby('users.employee')
             ->get();
 
@@ -70,12 +70,12 @@ class MatterTotalController extends Controller
             ->where('users.hiring_period', 1)
             ->whereRaw('(users.permissions & 16) = 16')
             ->select(
-                'users.id','users.name','users.employee','users.hiring_period',
+                'users.id','users.name','users.employee','users.hiring_period','users.worktype_id',
                 DB::raw('SUM(CASE WHEN matters.opt1 = 1 AND matters.status != 6 THEN 1 ELSE 0 END) AS rest_day'),
                 DB::raw('SUM(CASE WHEN matters.opt1 = 4 AND matters.status != 6 THEN matters.allotted ELSE 0 END) AS rest_time'),
                 DB::raw('SUM(CASE WHEN matters.opt1 IN (2,3,12) AND matters.status != 6 THEN 1 ELSE 0 END) AS harf_rest_day')
                 )
-                ->groupBy('users.id','users.name','users.employee','users.hiring_period')
+                ->groupBy('users.id','users.name','users.employee','users.hiring_period','users.worktype_id')
                 ->orderby('users.employee')
                 ->get();
 

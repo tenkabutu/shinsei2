@@ -181,7 +181,7 @@ var labelsSelector = {!! $labelSelector !!};
 	        	$('input[name="hour2"]').val({{$user->worktype->def_hour2}});
 	        	$('input[name="minutes1"]').val({{$user->worktype->def_minutes1}});
 	        	$('input[name="minutes2"]').val({{$user->worktype->def_minutes2}});
-	        	$('input[name="breaktime"]').val('60');
+	        	$('input[name="breaktime"]').val('{{$userdata->worktype->def_breaktime}}');
 		    }else if($(this).prev().val()==2){
 			    var h2={{$user->worktype->def_hour1+intdiv(($user->worktype->def_allotted/2+$user->worktype->def_minutes1),60)}};
 		    	var m2={{($user->worktype->def_allotted/2+$user->worktype->def_minutes1)%60}};
@@ -238,9 +238,10 @@ var labelsSelector = {!! $labelSelector !!};
 		//alert(m2);
 		var wt = Math.floor(mt/60);
 		var lt = mt%60;
-		if(wt>4){
-			$('input[name="breaktime"]').val('60');
-			mt = ((h2*60+m2)-(h1*60+m1))-60;
+		if(wt>4&&cr!=4){
+			bt='{{$userdata->worktype->def_breaktime}}';
+			$('input[name="breaktime"]').val(bt);
+			mt = ((h2*60+m2)-(h1*60+m1))-bt;
 			wt = Math.floor(mt/60);
 			lt = mt%60;
 		}
@@ -269,12 +270,13 @@ var labelsSelector = {!! $labelSelector !!};
 		//alert(m2);
 		var wt = Math.floor(mt/60);
 		var lt = mt%60;
-		if(wt>4){
-			$('input[name="breaktime"]').val('60');
-			mt = ((h2*60+m2)-(h1*60+m1))-60;
+		/* if(wt>4){
+			bt='{{$userdata->worktype->def_breaktime}}';
+			$('input[name="breaktime"]').val(bt);
+			mt = ((h2*60+m2)-(h1*60+m1))-bt;
 			wt = Math.floor(mt/60);
 			lt = mt%60;
-		}
+		} */
 		$('label.hour3').text(wt+'時間');
 		$('input[name="hour3"]').val(wt);
 		$('label.minutes3').text(lt+'分');

@@ -45,7 +45,18 @@ $(document).ready(function(){
 			@foreach ($userlist as $id =>$record)
 
 			@php
+				if(in_array($record->worktype_id,[8,9])){
+					$uq = $record->rest ? $record->rest->co_day+$record->rest->co_harf_rest*0.5+$record->rest->rest_allotted_day :'';
+        			$ruq=$record->harf_rest_day*0.5+$record->rest_day+ceil(($record->rest_time/60-optional($record->rest)->co_time)/6);
+        			$ruq2=$record->harf_rest_day*0.5+$record->rest_day+floor(abs(($record->rest_time/60-optional($record->rest)->co_time))/6);
+   				if(is_numeric($uq) && is_numeric($ruq)){
+					$upc=$uq - $ruq;
+				}else{
+					$upc=100;
+				}
+				$upc2=$record->rest ? (6-($record->rest_time/60-optional($record->rest)->co_time)%6)%6 :'0';
 
+				}else{
         		$uq = $record->rest ? $record->rest->co_day+$record->rest->co_harf_rest*0.5+$record->rest->rest_allotted_day :'';
         		$ruq=$record->harf_rest_day*0.5+$record->rest_day+ceil(($record->rest_time/60-optional($record->rest)->co_time)/8);
         		$ruq2=$record->harf_rest_day*0.5+$record->rest_day+floor(abs(($record->rest_time/60-optional($record->rest)->co_time))/8);
@@ -55,7 +66,7 @@ $(document).ready(function(){
 					$upc=100;
 				}
 				$upc2=$record->rest ? (8-($record->rest_time/60-optional($record->rest)->co_time)%8)%8 :'0';
-
+				}
    			@endphp
 			<tr class="d{{$id+1}} @if($upc==0&&$upc2==0) uq_just @elseif($upc==100) uq_none @elseif($upc<0) uq_alert @endif">
 				<td>{{ $record->employee}}</td>
@@ -64,7 +75,7 @@ $(document).ready(function(){
 				<td>{{$uq}}日</td>
 				<td>{{optional($record->rest)->co_time}}時間</td>
 				<td>{{$ruq2}}日</td>
-				<td>{{$record->rest_time/60%8}}時間</td>
+				<td>{{$record->rest_time/60%6}}時間</td>
 				<td>@if($upc!=100)
 					{{$upc}}日
 					@endif</td>

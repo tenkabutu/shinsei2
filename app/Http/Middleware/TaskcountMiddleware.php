@@ -325,7 +325,11 @@ class TaskcountMiddleware
 
 
             //時間給日にち換算
-                $used_rest_time_byday = ceil(($used_rest_time-$user->rest->co_time)/8);
+                if(in_array($user->worktype->id,[8,9])){
+                    $used_rest_time_byday = ceil(($used_rest_time-$user->rest->co_time)/6);
+                }else{
+                    $used_rest_time_byday = ceil(($used_rest_time-$user->rest->co_time)/8);
+                }
             //半休日にち換算
                 $used_harf_rest_byday = ($used_harf_rest-$user->rest->co_harf_rest)/2;
             //休暇日数

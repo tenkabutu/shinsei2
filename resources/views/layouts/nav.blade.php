@@ -55,7 +55,12 @@
 						</tr>
 						<tr>
 							<th>時間休日数換算</th>
-							<th>{{max(ceil(($used_rest_time-$userdata->rest->co_time)/8),0).'日分('.($used_rest_time-$userdata->rest->co_time)}}時間)</th>
+							<th>@if(in_array($userdata->worktype->id, [8, 9]))
+								{{max(ceil(($used_rest_time-$userdata->rest->co_time)/6),0).'日分('.($used_rest_time-$userdata->rest->co_time)}}時間)
+							@else
+								{{max(ceil(($used_rest_time-$userdata->rest->co_time)/8),0).'日分('.($used_rest_time-$userdata->rest->co_time)}}時間)
+							@endif
+							</th>
 						</tr>
 						<tr class="rest">
 							<th>残有給</th>
@@ -77,11 +82,20 @@
 
 						<tr class="rest">
 							<th>残時間休</th>
-							<th>{{(8-($used_rest_time-$userdata->rest->co_time)%8)%8}}時間</th>
+							<th>@if(in_array($userdata->worktype->id, [8, 9]))
+								{{(6-($used_rest_time-$userdata->rest->co_time)%6)%6}}時間
+							@else
+								{{(8-($used_rest_time-$userdata->rest->co_time)%8)%8}}時間
+							@endif</th>
 						</tr>
 						<tr>
 							<th>取得可能総時間</th>
-							<td>{{40-$used_rest_time}}時間</td>
+							<td>
+							@if(in_array($userdata->worktype->id, [8, 9]))
+								{{ 30 - $used_rest_time }}時間
+							@else
+								{{ 40 - $used_rest_time }}時間
+							@endif</td>
 						</tr>
 
 					</table>

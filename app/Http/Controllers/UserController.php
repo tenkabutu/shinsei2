@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Models\AreaData;
 use App\Models\User;
+use App\Models\WorkType;
 
 
 class UserController extends Controller
@@ -19,7 +20,8 @@ class UserController extends Controller
 
         $userlist = user::with('areas','roletag','approvaltag','areatag','worktype')->orderBy('employee','asc')->get();
         $areas = AreaData::all();
-        return view('user.userlist',compact('userlist','areas'));
+        $worktype=WorkType::all();
+        return view('user.userlist',compact('userlist','areas','worktype'));
 
     }
     public function user_change(Request $request){
