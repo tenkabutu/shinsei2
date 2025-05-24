@@ -61,15 +61,9 @@
             <div class="mt-4">
             	勤務時間
                 <select name="worktype_id">
-
-
-					<option value=3 >9時-17時</option>
-					<option value=4 >10時-18時</option>
-					<option value=5 >8時半-16時半</option>
-					<option value=1 >9時-18時</option>
-					<option value=2 >8時半-17時</option>
-					<option value=6 >8時半-17時半</option>
-					<option value=7 >9時-17時半</option>
+					@foreach($worktype as $type)
+						<option value={{$type->id}}>{{$type->worktype}}</option>
+					@endforeach
 				</select>
 				<br>
                	勤務地<select name="areas[]"  class="areas">

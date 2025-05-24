@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\AreaData;
 use App\Models\User;
+use App\Models\WorkType;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
@@ -22,7 +23,9 @@ class RegisteredUserController extends Controller
     public function create()
     {
         $areas = AreaData::all();
-        return view('auth.register',compact('areas'));
+        $worktype=WorkType::all();
+
+        return view('auth.register',compact('areas','worktype'));
     }
 
     /**
