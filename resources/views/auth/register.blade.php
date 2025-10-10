@@ -72,9 +72,9 @@
         			@endforeach
         			</select>
 				<br>
-               	契約開始<select name="hiring_period">
-					<option value=0 >４月～３月</option>
-					<option value=1 >１０月～９月</option>
+               	入社月<select name="hiring_period">
+					<option value=0 >１０月～３月</option>
+					<option value=1 >４月～９月</option>
 					</select>
             </div>
             <br>
