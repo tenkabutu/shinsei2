@@ -41,65 +41,125 @@ $(document).ready(function(){
 				<th></th>
 			</tr>
 			</thead>
-			{{-- @foreach ($userlist as $record) --}}
-			@foreach ($userlist as $id =>$record)
+			@foreach ($userlist as $id => $record)
 
-			@php
-				if(in_array($record->worktype_id,[8,9])){
-					$uq = $record->rest ? $record->rest->co_day+$record->rest->co_harf_rest*0.5+$record->rest->rest_allotted_day :'';
-        			$ruq=$record->harf_rest_day*0.5+$record->rest_day+ceil(($record->rest_time/60-optional($record->rest)->co_time)/6);
-        			$ruq2=$record->harf_rest_day*0.5+$record->rest_day+floor(abs(($record->rest_time/60-optional($record->rest)->co_time))/6);
-   				if(is_numeric($uq) && is_numeric($ruq)){
-					$upc=$uq - $ruq;
-				}else{
-					$upc=100;
-				}
-				$upc2=$record->rest ? (6-($record->rest_time/60-optional($record->rest)->co_time)%6)%6 :'0';
+@php
+$rest = $record->rest;
 
-				}else{
-        		$uq = $record->rest ? $record->rest->co_day+$record->rest->co_harf_rest*0.5+$record->rest->rest_allotted_day :'';
-        		$ruq=$record->harf_rest_day*0.5+$record->rest_day+ceil(($record->rest_time/60-optional($record->rest)->co_time)/8);
-        		$ruq2=$record->harf_rest_day*0.5+$record->rest_day+floor(abs(($record->rest_time/60-optional($record->rest)->co_time))/8);
-   				if(is_numeric($uq) && is_numeric($ruq)){
-					$upc=$uq - $ruq;
-				}else{
-					$upc=100;
-				}
-				$upc2=$record->rest ? (8-($record->rest_time/60-optional($record->rest)->co_time)%8)%8 :'0';
-				}
-   			@endphp
-			<tr class="d{{$id+1}} @if($upc==0&&$upc2==0) uq_just @elseif($upc==100) uq_none @elseif($upc<0) uq_alert @endif">
-				<td>{{ $record->employee}}</td>
-				<td>{{ $record->name}}</td>
-				<td>{{ optional($record->rest)->rest_year}}</td>
-				<td>{{$uq}}日</td>
-				<td>{{optional($record->rest)->co_time}}時間</td>
-				<td>{{$ruq2}}日</td>
-				<td>{{$record->rest_time/60%6}}時間</td>
-				<td>@if($upc!=100)
-					{{$upc}}日
-					@endif</td>
-				 @if(isset($record->rest))
-				<td>{{$upc2}}時間</td>
-				<td>@if($ruq2>=5)
-				◯
-				@endif</td>
-				<td>
-				@if($record->hiring_period==0)
-					4月～
-				@else
-					10月～
-				 @endif
-				</td>
-				<td><input type="button" value="印刷" id='{{$record->id}}' ></td>
+if (!$rest) {
+    $rowClass = 'uq_none';
+} else {
 
-				  @else
-				  <td></td><td></td><td></td><td></td>
-				  @endif
+    /* ============================
+       基本設定
+    ============================ */
+    $dayHours = in_array($record->worktype_id, [8,9]) ? 6 : 8;
+
+    /* ============================
+       ① 付与有給
+    ============================ */
+
+    $grantDays =
+        (float)$rest->co_day +
+        ((float)$rest->co_harf_rest * 0.5) +
+        (float)$rest->rest_allotted_day;
+
+    $grantHours = (float)($rest->co_time ?? 0);
 
 
-			</tr>
-			@endforeach
+
+    /* ============================
+       ② 取得有給
+    ============================ */
+
+    $usedDays =
+        (float)$record->rest_day +
+        ((float)$record->harf_rest_day * 0.5);
+
+    $usedHours = (float)$record->rest_time / 60;
+
+    if ($usedHours >= $dayHours) {
+        $usedDays += floor($usedHours / $dayHours);
+        $usedHours %= $dayHours;
+    }
+
+    /* ============================
+       ③ 残有給
+    ============================ */
+
+    $remainDays  = $grantDays - $usedDays;
+    $remainHours = $grantHours - $usedHours;
+
+    if ($remainHours < 0) {
+        $remainDays -= 1;
+        $remainHours += $dayHours;
+    }
+
+    /* ============================
+       ④ 行クラス判定
+    ============================ */
+
+    if ($remainDays == 0 && $remainHours == 0) {
+        $rowClass = 'uq_just';
+    } elseif ($remainDays < 0) {
+        $rowClass = 'uq_alert';
+    } else {
+        $rowClass = '';
+    }
+
+    /* ============================
+       ⑤ 5日取得判定
+    ============================ */
+
+    $usedTotalDays = $usedDays + ($usedHours / $dayHours);
+}
+@endphp
+
+<tr class="d{{ $id+1 }} {{ $rowClass }}">
+<td>{{ $record->employee }}</td>
+<td>{{ $record->name }}</td>
+
+@if($rest)
+
+<td>{{ $rest->rest_year }}</td>
+
+{{-- 付与 --}}
+<td>{{ $grantDays }}日</td>
+<td>{{ $grantHours }}時間</td>
+
+{{-- 取得 --}}
+<td>{{ $usedDays }}日</td>
+<td>{{ $usedHours }}時間</td>
+
+{{-- 残 --}}
+<td>{{ $remainDays }}日</td>
+<td>{{ $remainHours }}時間</td>
+
+{{-- 5日取得 --}}
+<td>
+@if($usedTotalDays >= 5)
+◯
+@endif
+</td>
+
+<td>
+@if($record->hiring_period==0)
+4月～
+@else
+10月～
+@endif
+</td>
+
+<td>
+<input type="button" value="印刷" id="{{ $record->id }}">
+</td>
+
+@else
+<td colspan="9"></td><td></td>
+@endif
+
+</tr>
+@endforeach
 		</table>
 	</div>
 </div>
