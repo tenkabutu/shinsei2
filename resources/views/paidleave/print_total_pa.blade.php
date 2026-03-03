@@ -225,6 +225,7 @@
     $displayDays =
         $usedFullAndHalfDays
         + floor($usedTimeHours / $dayHours);
+    $displayRemainTime = $usedTimeHours % $dayHours;
 
 @endphp
 
@@ -270,6 +271,11 @@
 
 </tr>
 @endforeach
+<tfoot>
+        <tr>
+            <td></td><td></td><td></td><td></td><td class="footer_border">{{$displayDays}}</td><td class="footer_border">{{ $displayRemainTime }}</td><td></td><td></td>
+        </tr>
+    </tfoot>
 </table>
 
 

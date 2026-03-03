@@ -274,6 +274,21 @@ th.auto,td.auto{
 	width:auto;
 	white-space:pre-wrap;
 }
+.total_table thead,
+.total_table tbody {
+    border: 1px solid #000;
+    border-collapse: collapse;
+}
+
+/* 通常セルの枠線 */
+.total_table thead th,
+.total_table tbody th,
+.total_table tbody td,
+.total_table thead td {
+    border: 1px solid #000;
+}
+
+/* footer_border 以外の tfoot は枠線なし */
 
 
 .result_table td,.search_table td,.kitt_table td,.task_table td,.device_table td,.report_table td{
@@ -503,7 +518,7 @@ table select{
 	font-size:14px;
 	width: calc(100% / 8);height:calc(950px/42);
 }
-.total_table th,.total_table td,.user_table th,.user_table td{
+.total_table thead th,.total_table tbody  td,.user_table th,.user_table td{
 
 	border-right:1px solid black;border-bottom:1px solid black;
 }
@@ -515,7 +530,7 @@ table select{
 	text-align: left;
 	font-weight: normal;
 }
-.total_table,.user_table{
+.total_table tbody,.user_table{
 	border-left:1px solid black;border-top:1px solid black;
 }
 .total_table a{
@@ -525,7 +540,9 @@ table select{
 	width:100%;
 	height:100%;
 }
-
+.footer_border {
+    border: 1px solid #000;
+}
 
 .square_4_1{border-top:2px solid black;border-bottom:2px solid black;border-left:2px solid black;border-right:1px solid black;}
 .square_4_2{border-top:2px solid black;border-bottom:2px solid black;border-right:2px solid black;}
