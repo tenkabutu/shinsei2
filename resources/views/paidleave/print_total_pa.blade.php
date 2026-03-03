@@ -260,7 +260,7 @@
 
 {{-- 累計表示 --}}
 @if($record->matters_id)
-<td>{{ $displayDays }}</td>
+<td>{{ $usedFullAndHalfDays }}</td>
 <td>{{ $usedTimeHours }}</td>
 <td>{{ $remainDays }}</td>
 <td>{{ $remainTime }}</td>
