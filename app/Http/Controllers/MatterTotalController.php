@@ -88,7 +88,7 @@ class MatterTotalController extends Controller
     }
     public function print_total_pa($id,$year,$month){
 
-        $select_user=User::findOrFail($id);
+        $select_user = User::with('worktype')->findOrFail($id);
         $query1 = User::leftJoin('matters', 'users.id', '=', 'matters.user_id')
         ->leftJoin('rests', function ($join) use ($month, $year,$select_user) {
             $join->on('users.employee', '=', 'rests.user_id');

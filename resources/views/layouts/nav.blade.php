@@ -36,7 +36,6 @@
 						<span>休暇申請情報</span>
 					</div>
 					<table>
-
 						<tr>
 							<th width='98'>付与有給</th>
 							<th>{{$userdata->rest->rest_allotted_day}}日</th>
@@ -66,8 +65,6 @@
 							<th>残有給</th>
 							<td>{{$residue_rest_day}}日</td>
 						</tr>
-
-
 					</table>
 						<table>
 
