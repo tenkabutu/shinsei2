@@ -143,6 +143,72 @@ function setAction(url) {
 }
 
 $(function(){
+	const remainDay = {{ $residue_rest_day ?? 0 }};
+
+	const remainHour =
+	@if(in_array($userdata->worktype->id,[8,9]))
+	    {{ (6-($used_rest_time-$userdata->rest->co_time)%6)%6 }}
+	@else
+	    {{ (8-($used_rest_time-$userdata->rest->co_time)%8)%8 }}
+	@endif;
+
+	const remainTotal =
+	@if(in_array($userdata->worktype->id,[8,9]))
+	    {{ 30 - $used_rest_time }}
+	@else
+	    {{ 40 - $used_rest_time }}
+	@endif;
+
+	const workDayHours =
+	@if(in_array($userdata->worktype->id,[8,9]))
+	    6
+	@else
+	    8
+	@endif;
+
+	function lockSubmit(){
+	    $('input[type="submit"]').prop('disabled', true);
+	}
+
+	function unlockSubmit(){
+	    $('input[type="submit"]').prop('disabled', false);
+	}
+	function checkTimeLimit(){
+
+	    var opt = $('.st1:checked').val();
+
+	    if(opt != 4){
+	        unlockSubmit();
+	        return;
+	    }
+
+	    var h1 = Number($('input[name="hour1"]').val());
+	    var h2 = Number($('input[name="hour2"]').val());
+	    var m1 = Number($('input[name="minutes1"]').val());
+	    var m2 = Number($('input[name="minutes2"]').val());
+	    var bt = Number($('input[name="breaktime"]').val());
+
+	    var mt = ((h2*60+m2)-(h1*60+m1))-bt;
+
+	    if(mt < 0){ mt = 0; }
+
+	    var hours = mt/60;
+
+	    var limit;
+
+	    if(remainDay >= 1){
+	        limit = workDayHours;
+	    }else{
+	        limit = remainHour;
+	    }
+
+	    if(hours > limit){
+	        lockSubmit();
+	    }else{
+	        unlockSubmit();
+	    }
+
+	}
 
 	var radio = $('div.radio-group');
 
@@ -253,6 +319,7 @@ $('.st1').on('change', function() {
     }
 
     calculateTime();
+    checkTimeLimit();
 });
 
 
@@ -262,6 +329,7 @@ $('.st1').on('change', function() {
 
 $('#matter_area input[type="number"]').on('input', function(){
     calculateTime();
+    checkTimeLimit();
 });
 
 
@@ -301,6 +369,7 @@ function calculateTime(){
    ■ 初期計算
 ================================= */
 calculateTime();
+checkTimeLimit();
 
 });
 </script>
