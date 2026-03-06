@@ -28,6 +28,13 @@
 		});
 	});
 	</script>
+	<style>
+.radio-group input:disabled + label {
+    background-color: #ddd !important;
+    color: #999;
+    cursor: not-allowed;
+}
+</style>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.css">
 </x-slot>
 
@@ -91,7 +98,6 @@
 					<x-save-box :status="$matter->status" :role="1" :type="2" :checker="$matter->opt2"/>
 				@elseif(Auth::user()->role==4)
 					<x-save-box :status="$matter->status" :role="4" :type="2" :checker="$matter->opt2"/>
-
 				@else
 				<!-- <label>test</label> -->
 				@endif
@@ -130,178 +136,172 @@
 
 
 <script>
+
 function setAction(url) {
     $('form').attr('action', url);
-
     $('form').submit();
 }
+
 $(function(){
 
-
 	var radio = $('div.radio-group');
-	$('input', radio).css({'opacity': '0'})
-	//checkedだったら最初からチェックする
+
+	$('input', radio)
+	.css({'opacity': '0'})
 	.each(function(){
-	    if ($(this).attr('checked') == 'checked') {
+
+	    if ($(this).prop('checked')) {
+
 	        $(this).next().addClass('checked');
 
-	        if($(this).val()!=4&&$(this).val()!=12){
-		        $('.matter_date input').attr('readonly',true);
-		        $('.matter_date input').css('backgroundColor','#e9e9e9');
-		    };
+	        if($(this).val()!=4 && $(this).val()!=12){
+	            $('.matter_date input').prop('readonly',true)
+	            .css('backgroundColor','#e9e9e9');
+	        }
+
 	    }
-	});
-	//クリックした要素にクラス割り当てる
-	var labelsSelector;
 
-	@php
-    $labelSelector = '';
-    if($userdata->rest){
-    if ($residue_rest_day == 0) {
-        $labelSelector = '"label:not(#st1_1_label, #st1_2_label, #st1_3_label, #st1_12_label)"';
-    } elseif ($residue_rest_day < 1) {
-        $labelSelector = '"label:not(#st1_1_label)"';
-    } else {
-        $labelSelector = '"label"';
+	});
+/* ===============================
+   ■ ① ラジオ選択制御ブロック
+================================= */
+
+$('.st1').on('change', function() {
+
+    if ($(this).prop('disabled')) {
+        return false;
     }
-    }else{
-    	$labelSelector = '"label:not(#st1_1_label, #st1_2_label, #st1_3_label, #st1_12_label)"';
+
+    var cr = parseInt($(this).val());
+
+    // checked表示制御
+    $('.radio-group label').removeClass('checked');
+    $('label[for="' + $(this).attr('id') + '"]').addClass('checked');
+
+    /* ===== 時間入力制御 ===== */
+
+    if(cr != 4 && cr < 10){
+
+        $('.matter_date input').prop('readonly', true)
+                               .css('backgroundColor','#e9e9e9');
+
+        // 全日・特別・慶弔・欠勤
+        if(cr==1 || cr==5 || cr==6 || cr==9){
+
+            $('input[name="hour1"]').val({{$user->worktype->def_hour1}});
+            $('input[name="hour2"]').val({{$user->worktype->def_hour2}});
+            $('input[name="minutes1"]').val({{$user->worktype->def_minutes1}});
+            $('input[name="minutes2"]').val({{$user->worktype->def_minutes2}});
+            $('input[name="breaktime"]').val({{$userdata->worktype->def_breaktime}});
+
         }
-    @endphp
+        // 午前休
+        else if(cr==2){
 
-var labelsSelector = {!! $labelSelector !!};
-    var labelsSelector ='label';
-	$(labelsSelector, radio).click(function() {
-		var cr =$(this).prev().val();
-		if($(this).prev().val()!=4&&$(this).prev().val()<10){
-	        $('.matter_date input').attr('readonly',true);
-	        $('.matter_date input').css('backgroundColor','#e9e9e9');
-	        if($(this).prev().val()==1||cr==5||cr==6||cr==9){
-	        	$('input[name="hour1"]').val({{$user->worktype->def_hour1}});
-	        	$('input[name="hour2"]').val({{$user->worktype->def_hour2}});
-	        	$('input[name="minutes1"]').val({{$user->worktype->def_minutes1}});
-	        	$('input[name="minutes2"]').val({{$user->worktype->def_minutes2}});
-	        	$('input[name="breaktime"]').val('{{$userdata->worktype->def_breaktime}}');
-		    }else if($(this).prev().val()==2){
-			    var h2={{$user->worktype->def_hour1+intdiv(($user->worktype->def_allotted/2+$user->worktype->def_minutes1),60)}};
-		    	var m2={{($user->worktype->def_allotted/2+$user->worktype->def_minutes1)%60}};
+            var h2={{$user->worktype->def_hour1+intdiv(($user->worktype->def_allotted/2+$user->worktype->def_minutes1),60)}};
+            var m2={{($user->worktype->def_allotted/2+$user->worktype->def_minutes1)%60}};
 
-		    	$('input[name="hour1"]').val({{$user->worktype->def_hour1}});
-	        	$('input[name="hour2"]').val(h2);
-	        	$('input[name="minutes1"]').val({{$user->worktype->def_minutes1}});
-	        	$('input[name="minutes2"]').val(m2);
-	        	$('input[name="breaktime"]').val('0');
-	        	$('.mol_2').text('出勤')
-		    }else if($(this).prev().val()==3){
-			    var h1={{$user->worktype->def_hour1+intdiv(($user->worktype->def_allotted/2+$user->worktype->def_minutes1),60)+1}};
-		    	var m1={{($user->worktype->def_allotted/2+$user->worktype->def_minutes1)%60}};
-		    	$('input[name="hour1"]').val(h1);
-	        	$('input[name="hour2"]').val({{$user->worktype->def_hour2}});
-	        	$('input[name="minutes1"]').val(m1);
-	        	$('input[name="minutes2"]').val({{$user->worktype->def_minutes2}});
-	        	$('input[name="breaktime"]').val('0');
-	        	$('.mol_2').text('出勤')
+            $('input[name="hour1"]').val({{$user->worktype->def_hour1}});
+            $('input[name="hour2"]').val(h2);
+            $('input[name="minutes1"]').val({{$user->worktype->def_minutes1}});
+            $('input[name="minutes2"]').val(m2);
+            $('input[name="breaktime"]').val(0);
 
-			 }
-		}else if(cr==12){
+        }
+        // 午後休
+        else if(cr==3){
 
-	    	$('input[name="hour1"]').val('0');
-        	$('input[name="hour2"]').val('0');
-        	$('input[name="minutes1"]').val('0');
-        	$('input[name="minutes2"]').val('0');
-        	$('input[name="breaktime"]').val('0');
-        	$('.mol_2').text('出勤')
-        	$('.matter_date input').attr('readonly',false);
-	        $('.matter_date input').css('backgroundColor','#fff');
-		}else if(cr==4){
-			$('.matter_date input').attr('readonly',false);
-	        $('.matter_date input').css('backgroundColor','#fff');
-	        $('input[name="breaktime"]').val('0');
+        	var half={{$user->worktype->def_allotted/2+$user->worktype->def_minutes1}};
+            var breaktime={{$user->worktype->def_breaktime}};
 
-        }else{
-	    	$('.matter_date input').attr('readonly',false);
-	        $('.matter_date input').css('backgroundColor','#fff');
-		};
-	    $(this).parent().parent().each(function() {
-	        $('label',this).removeClass('checked');
-	    });
-	    $(this).addClass('checked');
+            var total=half+breaktime;
 
+            var h1={{$user->worktype->def_hour1}} + Math.floor(total/60);
+            var m1=total%60;
 
-	    var h1 = $('input[name="hour1"]').val()- 0;
-		var h2 = $('input[name="hour2"]').val()- 0;
-		var m1 = $('input[name="minutes1"]').val()- 0;
+            $('input[name="hour1"]').val(h1);
+            $('input[name="hour2"]').val({{$user->worktype->def_hour2}});
+            $('input[name="minutes1"]').val(m1);
+            $('input[name="minutes2"]').val({{$user->worktype->def_minutes2}});
+            $('input[name="breaktime"]').val(0);
 
-		var m2 = $('input[name="minutes2"]').val()- 0;
-		var bt = $('input[name="breaktime"]').val()- 0;
-		var mt = ((h2*60+m2)-(h1*60+m1))-bt;
-		//alert(m2);
-		var wt = Math.floor(mt/60);
-		var lt = mt%60;
-		if(wt>4&&cr!=4){
-			bt='{{$userdata->worktype->def_breaktime}}';
-			$('input[name="breaktime"]').val(bt);
-			mt = ((h2*60+m2)-(h1*60+m1))-bt;
-			wt = Math.floor(mt/60);
-			lt = mt%60;
-		}
-		$('label.hour3').text(wt+'時間');
-		$('input[name="hour3"]').val(wt);
-		$('label.minutes3').text(lt+'分');
-		$('input[name="allotted"]').val(mt);
-	  ////  if($(this).parent().hasClass('index_select')){
-	    //	alert($('input[name="index50"]:checked').val());
-	    //    }
-	});
+        }
 
-	calculateTime();
+    }
+    // 変更
+    else if(cr==12){
 
-	$('#matter_area input[type="number"]').bind('input', function () {
-		 calculateTime();
-    });
-	function calculateTime() {
-		var h1 = $('input[name="hour1"]').val()- 0;
-		var h2 = $('input[name="hour2"]').val()- 0;
-		var m1 = $('input[name="minutes1"]').val()- 0;
+        $('input[name="hour1"],input[name="hour2"],input[name="minutes1"],input[name="minutes2"],input[name="breaktime"]').val(0);
 
-		var m2 = $('input[name="minutes2"]').val()- 0;
-		var bt = $('input[name="breaktime"]').val()- 0;
-		var mt = ((h2*60+m2)-(h1*60+m1))-bt;
-		//alert(m2);
-		var wt = Math.floor(mt/60);
-		var lt = mt%60;
-		/* if(wt>4){
-			bt='{{$userdata->worktype->def_breaktime}}';
-			$('input[name="breaktime"]').val(bt);
-			mt = ((h2*60+m2)-(h1*60+m1))-bt;
-			wt = Math.floor(mt/60);
-			lt = mt%60;
-		} */
-		$('label.hour3').text(wt+'時間');
-		$('input[name="hour3"]').val(wt);
-		$('label.minutes3').text(lt+'分');
-		$('input[name="allotted"]').val(mt);
-		//$('input[name="starttime"]').val(h1+":"+m1+":00");
-		//$('input[name="endtime"]').val(h2+":"+m2+":00");
-		if(mt>{{$user->worktype->def_allotted}}){
-			$('label.time_alert').text('設定時間オーバー');
-		}else{
-			$('label.time_alert').text('');
-		}
-	}
-	@empty($matter)
-	$('.proxy_check').click(function() {
+        $('.matter_date input').prop('readonly', false)
+                               .css('backgroundColor','#fff');
 
-		$('.proxy_user').html('<select class="select_proxy"><option>---</option>{!!$userlist!!}</select')
-		$('#matter_area').append('<input type="hidden" name="proxy_id" value="'+{{Auth::user()->id}}+'">')
-		$('.select_proxy').change(function(){
-			$('input[name="user_id"]').val($(this).val());
-			});
+    }
+    // 時間休
+    else if(cr==4){
+
+        $('.matter_date input').prop('readonly', false)
+                               .css('backgroundColor','#fff');
+
+        $('input[name="breaktime"]').val(0);
+
+    }
+    else{
+
+        $('.matter_date input').prop('readonly', false)
+                               .css('backgroundColor','#fff');
+    }
+
+    calculateTime();
+});
 
 
-		});
-	@endisset
+/* ===============================
+   ■ ② 数値変更ブロック
+================================= */
 
- });
+$('#matter_area input[type="number"]').on('input', function(){
+    calculateTime();
+});
+
+
+/* ===============================
+   ■ ③ 時間計算ブロック
+================================= */
+
+function calculateTime(){
+
+    var h1 = Number($('input[name="hour1"]').val());
+    var h2 = Number($('input[name="hour2"]').val());
+    var m1 = Number($('input[name="minutes1"]').val());
+    var m2 = Number($('input[name="minutes2"]').val());
+    var bt = Number($('input[name="breaktime"]').val());
+
+    var mt = ((h2*60+m2)-(h1*60+m1))-bt;
+
+    if(mt < 0){ mt = 0; }
+
+    var wt = Math.floor(mt/60);
+    var lt = mt%60;
+
+    $('label.hour3').text(wt+'時間');
+    $('input[name="hour3"]').val(wt);
+    $('label.minutes3').text(lt+'分');
+    $('input[name="allotted"]').val(mt);
+
+    if(mt > {{$user->worktype->def_allotted}}){
+        $('label.time_alert').text('設定時間オーバー');
+    }else{
+        $('label.time_alert').text('');
+    }
+}
+
+
+/* ===============================
+   ■ 初期計算
+================================= */
+calculateTime();
+
+});
 </script>
 </x-app-layout>

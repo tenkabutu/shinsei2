@@ -8,26 +8,26 @@
 		<div>
 			<label class="g12">種別1:</label>
 			<div class="radio-group g23">
-				<input id="st1_1" type="radio" class="st1" name="opt1" value="1" {{old('opt1',$matter->opt1)=='1' ? 'checked':''}} />
-				<label id="st1_1_label" for="st1_1" style="{{  (!isset($residue_rest_day)  || $residue_rest_day < 1) ? 'background-color: red;' : '' }}">全日</label>
-				<input id="st1_2" type="radio" class="st1" name="opt1" value="2" {{old('opt1',$matter->opt1)=='2' ? 'checked':''}}/>
-				<label id="st1_2_label" for="st1_2" style="{{  (!isset($residue_rest_day)  || $residue_rest_day ==0) ? 'background-color: red;' : '' }}">午前休</label>
-				<input id="st1_3" type="radio" class="st1" name="opt1" value="3" {{old('opt1',$matter->opt1)=='3' ? 'checked':''}}/>
-				<label id="st1_3_label" for="st1_3" style="{{  (!isset($residue_rest_day)  || $residue_rest_day ==0) ? 'background-color: red;' : '' }}">午後休</label>
-				<input id="st1_4" type="radio" class="st1" name="opt1" value="4" {{old('opt1',$matter->opt1)=='4' ? 'checked':''}}/>
-				<label for="st1_4">時間休</label>
-				<input id="st1_12" type="radio" class="st1" name="opt1" value="12" {{old('opt1',$matter->opt1)=='12' ? 'checked':''}}/>
-				<label id="st1_12_label" for="st1_12" style="{{  (!isset($residue_rest_day)  || $residue_rest_day ==0) ? 'background-color: red;' : '' }}">変更</label>
-
-				<!--
-				<input id="st1_1" type="radio" class="st1" name="opt1" value="1" {{old('opt1',$matter->opt1)=='1' ? 'checked':''}} />
-				<label for="st1_1">全日</label>
-				<input id="st1_2" type="radio" class="st1" name="opt1" value="2" {{old('opt1',$matter->opt1)=='2' ? 'checked':''}}/>
-				<label for="st1_2">午前休</label>
-				<input id="st1_3" type="radio" class="st1" name="opt1" value="3" {{old('opt1',$matter->opt1)=='3' ? 'checked':''}}/>
-				<label for="st1_3">午後休</label>
-				<input id="st1_4" type="radio" class="st1" name="opt1" value="4" {{old('opt1',$matter->opt1)=='4' ? 'checked':''}}/>
-				<label for="st1_4">時間休</label>-->
+				@php
+					$disabledAll  = (!isset($residue_rest_day) || $residue_rest_day < 1);
+					$disabledHalf = (!isset($residue_rest_day) || $residue_rest_day < 0.5);
+					$dayHours = in_array($userdata->worktype->id, [8,9]) ? 6 : 8;
+					$remainHour = ($dayHours - ($used_rest_time - $userdata->rest->co_time) % $dayHours) % $dayHours;
+					$monthRemain = in_array($userdata->worktype->id, [8,9]) ? 30 - $used_rest_time : 40 - $used_rest_time;
+					$canTime =($residue_rest_day >= 1 || $remainHour > 0) && ($monthRemain > 0);
+					$disabledTime = !$canTime;
+					$currentOpt = old('opt1',$matter->opt1);
+				@endphp
+				<input id="st1_1" type="radio" class="st1" name="opt1" value="1" {{ $currentOpt=='1' ? 'checked':'' }} {{ ($disabledAll && $currentOpt!='1') ? 'disabled':'' }} />
+				<label id="st1_1_label" for="st1_1">全日</label>
+				<input id="st1_2" type="radio" class="st1" name="opt1" value="2" {{ $currentOpt=='2' ? 'checked':'' }} {{ ($disabledHalf && $currentOpt!='2') ? 'disabled':'' }} />
+				<label id="st1_2_label" for="st1_2">午前休</label>
+				<input id="st1_3" type="radio" class="st1" name="opt1" value="3" {{ $currentOpt=='3' ? 'checked':'' }} {{ ($disabledHalf && $currentOpt!='3') ? 'disabled':'' }} />
+				<label id="st1_3_label" for="st1_3">午後休</label>
+				<input id="st1_4" type="radio" class="st1" name="opt1" value="4" {{ $currentOpt=='4' ? 'checked':'' }} {{ ($disabledTime && $currentOpt!='4') ? 'disabled':'' }} />
+				<label id="st1_4_label"for="st1_4">時間休</label>
+				<input id="st1_12" type="radio" class="st1" name="opt1" value="12" {{ $currentOpt=='12' ? 'checked':'' }} {{ ($disabledAll && $currentOpt!='12') ? 'disabled':'' }} />
+				<label id="st1_12_label" for="st1_12">変更</label>
 			</div>
 			<label class="g34">種別2:</label>
 			<div class="radio-group g45">
