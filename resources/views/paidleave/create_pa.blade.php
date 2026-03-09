@@ -197,9 +197,9 @@ $(function(){
 	    var limit;
 
 	    if(remainDay >= 1){
-	        limit = workDayHours;
+	        limit = Math.min(workDayHours, remainTotal);
 	    }else{
-	        limit = remainHour;
+	        limit = Math.min(remainHour, remainTotal);
 	    }
 
 	    if(hours > limit){
