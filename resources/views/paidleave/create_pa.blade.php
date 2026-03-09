@@ -266,59 +266,39 @@ $('.st1').on('change', function() {
         }
         // 午前休
         else if(cr==2){
-
             var h2={{$user->worktype->def_hour1+intdiv(($user->worktype->def_allotted/2+$user->worktype->def_minutes1),60)}};
             var m2={{($user->worktype->def_allotted/2+$user->worktype->def_minutes1)%60}};
-
             $('input[name="hour1"]').val({{$user->worktype->def_hour1}});
             $('input[name="hour2"]').val(h2);
             $('input[name="minutes1"]').val({{$user->worktype->def_minutes1}});
             $('input[name="minutes2"]').val(m2);
             $('input[name="breaktime"]').val(0);
-
         }
         // 午後休
         else if(cr==3){
-
         	var half={{$user->worktype->def_allotted/2+$user->worktype->def_minutes1}};
             var breaktime={{$user->worktype->def_breaktime}};
-
             var total=half+breaktime;
-
             var h1={{$user->worktype->def_hour1}} + Math.floor(total/60);
             var m1=total%60;
-
             $('input[name="hour1"]').val(h1);
             $('input[name="hour2"]').val({{$user->worktype->def_hour2}});
             $('input[name="minutes1"]').val(m1);
             $('input[name="minutes2"]').val({{$user->worktype->def_minutes2}});
             $('input[name="breaktime"]').val(0);
-
         }
-
     }
     // 変更
     else if(cr==12){
-
         $('input[name="hour1"],input[name="hour2"],input[name="minutes1"],input[name="minutes2"],input[name="breaktime"]').val(0);
-
-        $('.matter_date input').prop('readonly', false)
-                               .css('backgroundColor','#fff');
-
+        $('.matter_date input').prop('readonly', false).css('backgroundColor','#fff');
     }
     // 時間休
     else if(cr==4){
-
-        $('.matter_date input').prop('readonly', false)
-                               .css('backgroundColor','#fff');
-
+        $('.matter_date input').prop('readonly', false).css('backgroundColor','#fff');
         $('input[name="breaktime"]').val(0);
-
-    }
-    else{
-
-        $('.matter_date input').prop('readonly', false)
-                               .css('backgroundColor','#fff');
+    }else{
+        $('.matter_date input').prop('readonly', false).css('backgroundColor','#fff');
     }
 
     calculateTime();

@@ -316,14 +316,6 @@ $(function(){
 		var th2 = tf.find('.task_hour2').val()- 0;
 		var tm1 = tf.find('.task_minutes1').val()- 0;
 		var tm2 = tf.find('.task_minutes2').val()- 0;
-		//var mdf1 =$('.mdef1').val()-0;
-		//$('.mdef1').text(m1);
-		//if(m1<30){
-		//	$('.mdef2').text(m1+30);
-		//}else{
-		//	$('.mdef2').text(m1-30);
-		//}
-		//var m2 = $('select.minutes2').val()- 0;
 		var tbt = tf.find('.task_break').val()- 0;
 		var tmt = ((th2*60+tm2)-(th1*60+tm1))-tbt;
 		//alert(tmt);
