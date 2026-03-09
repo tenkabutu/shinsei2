@@ -167,11 +167,11 @@ $(function(){
 	@endif;
 
 	function lockSubmit(){
-	    $('input[type="submit"]').prop('disabled', true);
+	    $('.lock_target').prop('disabled', true);
 	}
 
 	function unlockSubmit(){
-	    $('input[type="submit"]').prop('disabled', false);
+	    $('.lock_target').prop('disabled', false);
 	}
 	function checkTimeLimit(){
 
@@ -370,6 +370,18 @@ function calculateTime(){
 ================================= */
 calculateTime();
 checkTimeLimit();
+@empty($matter)
+$('.proxy_check').click(function() {
+
+	$('.proxy_user').html('<select class="select_proxy"><option>---</option>{!!$userlist!!}</select')
+	$('#matter_area').append('<input type="hidden" name="proxy_id" value="'+{{Auth::user()->id}}+'">')
+	$('.select_proxy').change(function(){
+		$('input[name="user_id"]').val($(this).val());
+		});
+
+
+	});
+@endisset
 
 });
 </script>
