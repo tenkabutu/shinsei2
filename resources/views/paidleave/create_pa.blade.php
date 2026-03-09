@@ -144,6 +144,7 @@ function setAction(url) {
 
 $(function(){
 	const remainDay = {{ $residue_rest_day ?? 0 }};
+	let proxyMode = false;
 
 	const remainHour =
 	@if(in_array($userdata->worktype->id,[8,9]))
@@ -248,8 +249,10 @@ $('.st1').on('change', function() {
 
     if(cr != 4 && cr < 10){
 
-        $('.matter_date input').prop('readonly', true)
-                               .css('backgroundColor','#e9e9e9');
+    	if(!proxyMode){
+    	    $('.matter_date input').prop('readonly', true)
+    	                           .css('backgroundColor','#e9e9e9');
+    	}
 
         // 全日・特別・慶弔・欠勤
         if(cr==1 || cr==5 || cr==6 || cr==9){
@@ -372,7 +375,7 @@ calculateTime();
 checkTimeLimit();
 @empty($matter)
 $('.proxy_check').click(function() {
-
+	proxyMode = true;
 	$('.proxy_user').html('<select class="select_proxy"><option>---</option>{!!$userlist!!}</select')
 	$('#matter_area').append('<input type="hidden" name="proxy_id" value="'+{{Auth::user()->id}}+'">')
 	$('.select_proxy').change(function(){
