@@ -6,7 +6,8 @@
 			<input type="text" class="target2 g23" name="matter_change_date" autocomplete="off">
 		</div>
 		<div>
-			<label class="g12">種別1:</label>
+			<label class="g12">有給休暇</label>
+			@isset($userdata->rest)
 			<div class="radio-group g23">
 				@php
 					$disabledAll = (!isset($residue_rest_day) || $residue_rest_day < 1);
@@ -20,7 +21,7 @@
 
 				@endphp
 				<input id="st1_1" type="radio" class="st1" name="opt1" value="1" {{ old('opt1')=='1' ? 'checked':'' }} {{ $disabledAll ? 'disabled' : '' }} />
-				<label for="st1_1">全日</label>
+				<label for="st1_1">全日休</label>
 				<input id="st1_2" type="radio" class="st1" name="opt1" value="2" {{ old('opt1')=='2' ? 'checked':'' }} {{ $disabledHalf ? 'disabled' : '' }} />
 				<label for="st1_2">午前休</label>
 				<input id="st1_3" type="radio" class="st1" name="opt1" value="3" {{ old('opt1')=='3' ? 'checked':'' }} {{ $disabledHalf ? 'disabled' : '' }} />
@@ -31,24 +32,42 @@
 				<label id="st1_12_label" for="st1_12">変更</label>
 
 			</div>
-			<label class="g34">種別2:</label>
-			<div class="radio-group g45">
+			@endisset
+		</div>
+		<div>
+			<label class="g12">特別休暇・その他</label>
+			<div class="radio-group g23">
 
 				<input id="st1_5" type="radio" class="st1" name="opt1" value="5" {{old('opt1')=='5' ? 'checked':''}}/>
 				<label for="st1_5">特別</label>
 				<input id="st1_6" type="radio" class="st1" name="opt1" value="6" {{old('opt1')=='6' ? 'checked':''}}/>
 				<label for="st1_6">慶弔</label>
+				<input id="st1_14" type="radio" class="st1" name="opt1" value="14" {{old('opt1')=='14' ? 'checked':''}}/>
+				<label for="st1_14">子の看護等</label>
+				<input id="st1_15" type="radio" class="st1" name="opt1" value="15" {{old('opt1')=='15' ? 'checked':''}}/>
+				<label for="st1_15">介護</label>
 			</div>
-			<label class="g56">種別3:</label>
-			<div class="radio-group g67 radio_red">
+		</div>
+		<div>
+			<label class="g12">欠勤</label>
+			<div class="radio-group g23 radio_red">
 				<input id="st1_7" type="radio" class="st1" name="opt1" value="9" {{old('opt1')=='9' ? 'checked':''}}/>
-				<label for="st1_7">欠勤</label>
-				<input id="st1_10" type="radio" class="st1" name="opt1" value="13" {{old('opt1')=='13' ? 'checked':''}}/>
-				<label for="st1_10">欠時</label>
-				<br><input id="st1_8" type="radio" class="st1" name="opt1" value="10" {{old('opt1')=='10' ? 'checked':''}}/>
+				<label for="st1_7">全日欠勤</label>
+				<input id="st1_8" type="radio" class="st1" name="opt1" value="10" {{old('opt1')=='10' ? 'checked':''}}/>
 				<label for="st1_8">遅刻</label>
 				<input id="st1_9" type="radio" class="st1" name="opt1" value="11" {{old('opt1')=='11' ? 'checked':''}}/>
 				<label for="st1_9">早退</label>
+				<input id="st1_10" type="radio" class="st1" name="opt1" value="13" {{old('opt1')=='13' ? 'checked':''}}/>
+				<label for="st1_10">時間欠勤</label>
+				<details class="detail">
+            <summary>詳細はこちら</summary>
+
+            <div class="detail_text">
+                ・遅刻は始業後の出勤<br>
+                ・早退は終業前の退勤<br>
+                ・時間欠勤は時間単位の欠勤です
+            </div>
+        </details>
 			</div>
 		</div>
 		<div class="matter_date">

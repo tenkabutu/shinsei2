@@ -7,6 +7,7 @@
 		</div>
 		<div>
 			<label class="g12">種別1:</label>
+			@isset($userdata->rest)
 			<div class="radio-group g23">
 				@php
 					$disabledAll  = (!isset($residue_rest_day) || $residue_rest_day < 1);
@@ -29,6 +30,7 @@
 				<input id="st1_12" type="radio" class="st1" name="opt1" value="12" {{ $currentOpt=='12' ? 'checked':'' }} {{ ($disabledAll && $currentOpt!='12') ? 'disabled':'' }} />
 				<label id="st1_12_label" for="st1_12">変更</label>
 			</div>
+			@endisset
 			<label class="g34">種別2:</label>
 			<div class="radio-group g45">
 				<input id="st1_5" type="radio" class="st1" name="opt1" value="5" {{old('opt1',$matter->opt1)=='5' ? 'checked':''}}/>

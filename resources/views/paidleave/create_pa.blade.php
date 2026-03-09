@@ -147,16 +147,16 @@ $(function(){
 
 	const remainHour =
 	@if(in_array($userdata->worktype->id,[8,9]))
-	    {{ (6-($used_rest_time-$userdata->rest->co_time)%6)%6 }}
+	    {{ (6-(($used_rest_time ?? 0)-optional($userdata->rest)->co_time)%6)%6 }}
 	@else
-	    {{ (8-($used_rest_time-$userdata->rest->co_time)%8)%8 }}
+	    {{ (8-(($used_rest_time ?? 0)-optional($userdata->rest)->co_time)%8)%8 }}
 	@endif;
 
 	const remainTotal =
 	@if(in_array($userdata->worktype->id,[8,9]))
-	    {{ 30 - $used_rest_time }}
+	    {{ 30 - ($used_rest_time ?? 0) }}
 	@else
-	    {{ 40 - $used_rest_time }}
+	    {{ 40 - ($used_rest_time ?? 0) }}
 	@endif;
 
 	const workDayHours =
