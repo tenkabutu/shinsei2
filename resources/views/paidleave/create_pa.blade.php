@@ -229,6 +229,14 @@ $(function(){
 	    }
 
 	});
+
+	$('.open_detail').click(function(){
+	    $('.modal_detail').fadeIn();
+	});
+
+	$('.close_modal').click(function(){
+	    $('.modal_detail').fadeOut();
+	});
 /* ===============================
    ■ ① ラジオ選択制御ブロック
 ================================= */

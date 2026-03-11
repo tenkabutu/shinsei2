@@ -516,6 +516,22 @@ select{
 table select{
 	height:100%;
 }
+/* 詳細*/
+.modal_detail{
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.5);
+}
+.modal_body{
+    background:white;
+    padding:20px;
+    width:400px;
+    margin:100px auto;
+}
 /* || 申請ツール新規登録 */
 .create_user{
 	width:400px;
