@@ -59,7 +59,7 @@
 				<label for="st1_9">早退</label>
 				<input id="st1_10" type="radio" class="st1" name="opt1" value="13" {{old('opt1')=='13' ? 'checked':''}}/>
 				<label for="st1_10">時間欠勤</label>
-			<!-- 	<span class="open_detail">詳細はこちら</span>
+				<span class="open_detail"></span>
 				<div class="modal_detail">
     <div class="modal_body">
         ・遅刻は始業後の出勤<br>
@@ -67,7 +67,7 @@
         ・時間欠勤は時間単位の欠勤です
         <br><br>
         <button class="close_modal">閉じる</button>
-    </div> -->
+    </div>
 </div>
 			</div>
 
