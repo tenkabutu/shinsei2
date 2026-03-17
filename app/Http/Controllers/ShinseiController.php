@@ -435,6 +435,8 @@ class ShinseiController extends Controller
                     $query->Where('opt1',7);
                 }elseif($opt==4){
                     $query->Where('opt1',8);
+                }elseif($opt==5){
+                    $query->WhereIn('opt1',[5,6,14,15]);
                 }
             }
             $query->leftJoinSub(

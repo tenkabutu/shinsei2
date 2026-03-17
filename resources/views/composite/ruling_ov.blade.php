@@ -76,6 +76,8 @@
 					 <div class="radio-group">
 					<input id="st1_1" type="radio" class="st1" name="matter_opt" value="1" @if(Request::get('matter_opt')==1) checked @endif />
 					<label for="st1_1">有給</label>
+					<input id="st1_3" type="radio" class="st1" name="matter_opt" value="5" @if(Request::get('matter_opt')==5) checked @endif/>
+					<label for="st1_3">その他</label>
 					<input id="st1_2" type="radio" class="st1" name="matter_opt" value="2" @if(Request::get('matter_opt')==2) checked @endif/>
 					<label for="st1_2">欠勤</label>
 					</div>
