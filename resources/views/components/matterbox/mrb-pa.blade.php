@@ -5,8 +5,8 @@
 			<label class="g12">休暇予定日</label>
 			<input type="text" class="target2 g23" name="matter_change_date" autocomplete="off" value="{{old('matter_change_date',substr($matter->matter_change_date,0,10))}}">
 		</div>
-		<div>
-			<label class="g12">種別1:</label>
+		<div class="select_type">
+			<label class="g12">有給休暇</label>
 			@isset($userdata->rest)
 			<div class="radio-group g23">
 				@php
@@ -31,25 +31,33 @@
 				<label id="st1_12_label" for="st1_12">変更</label>
 			</div>
 			@endisset
-			<label class="g34">種別2:</label>
-			<div class="radio-group g45">
+		</div>
+		<div class="select_type">
+			<label class="g12">特別休暇・その他</label>
+			<div class="radio-group g23">
 				<input id="st1_5" type="radio" class="st1" name="opt1" value="5" {{old('opt1',$matter->opt1)=='5' ? 'checked':''}}/>
 				<label for="st1_5">特別</label>
 				<input id="st1_6" type="radio" class="st1" name="opt1" value="6" {{old('opt1',$matter->opt1)=='6' ? 'checked':''}}/>
 				<label for="st1_6">慶弔</label>
+				<input id="st1_14" type="radio" class="st1" name="opt1" value="14" {{old('opt1',$matter->opt1)=='14' ? 'checked':''}}/>
+				<label for="st1_14">子の看護等(工事中)</label>
+				<input id="st1_15" type="radio" class="st1" name="opt1" value="15" {{old('opt1',$matter->opt1)=='15' ? 'checked':''}}/>
+				<label for="st1_15">介護(工事中)</label>
+				<span class="open_detail" data-target="modal_special">詳細はこちら</span>
 			</div>
-			<label class="g56">種別3:</label>
-			<div class="radio-group g67 radio_red">
+		</div>
+		<div class="select_type">
+			<label class="g12">欠勤</label>
+			<div class="radio-group g23 radio_red">
 				<input id="st1_7" type="radio" class="st1" name="opt1" value="9" {{old('opt1',$matter->opt1)=='9' ? 'checked':''}}/>
-				<label for="st1_7">欠勤</label>
-				<input id="st1_10" type="radio" class="st1" name="opt1" value="13" {{old('opt1',$matter->opt1)=='13' ? 'checked':''}}/>
-				<label for="st1_10">欠時</label>
-				<br>
+				<label for="st1_7">全日欠勤</label>
 				<input id="st1_8" type="radio" class="st1" name="opt1" value="10" {{old('opt1',$matter->opt1)=='10' ? 'checked':''}}/>
 				<label for="st1_8">遅刻</label>
 				<input id="st1_9" type="radio" class="st1" name="opt1" value="11" {{old('opt1',$matter->opt1)=='11' ? 'checked':''}}/>
 				<label for="st1_9">早退</label>
-
+				<input id="st1_10" type="radio" class="st1" name="opt1" value="13" {{old('opt1',$matter->opt1)=='13' ? 'checked':''}}/>
+				<label for="st1_10">時間欠勤</label>
+				<span class="open_detail" data-target="modal_kekkin">詳細はこちら</span>
 			</div>
 		</div>
 		<div class="matter_date">
