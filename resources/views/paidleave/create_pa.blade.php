@@ -134,7 +134,62 @@
 	</div>
 </div>
 
+<div id="modal_kekkin" class="detail_modal">
+    <div class="modal_content">
+        <h4>欠勤（遅刻・早退）</h4>
+        <p>
+            有給休暇の残数がない（または付与前）の社員が、私用や体調不良等により勤務できない場合は、以下の扱いとなります。
+        </p>
 
+        <ul>
+            <li><strong>[全日欠勤]：</strong>終日勤務できない場合</li>
+            <li><strong>[遅刻]・[早退]：</strong>業務の開始時間に遅れる、または終了時間前に退勤する場合</li>
+            <li>
+                <strong>[時間欠勤]：</strong>
+                時間欠勤の前後に就労しないため、遅刻・早退扱いにならない場合に限定
+                <br>
+                時間単位の有給休暇、または振替休暇と組み合わせて取得する場合に使用
+            </li>
+        </ul>
+
+        <br>
+        <button type="button" class="close_modal">閉じる</button>
+    </div>
+</div>
+
+<!-- モーダル② -->
+<div id="modal_special" class="detail_modal">
+    <div class="modal_content">
+         <h4>特別休暇・その他</h4>
+        <p>申請前に自治体管理者およびエリアマネージャに了承を得てください。</p>
+
+        <ul>
+            <li><strong>［特別］：</strong>会社が個別に指定する休暇</li>
+
+            <li>
+                <strong>［慶弔］：</strong>分割せず、土日・休日を含めて連続して取得します。
+                <ul>
+                    <li>（忌引き）：日数は就業規則を参照</li>
+                    <li>休暇理由欄に「続柄」を記入し、後日、会葬礼状等の証明書類を提出してください。</li>
+                    <li>（結婚休暇）：入社半年以上経過した社員が対象。入籍日から6か月以内に取得し、休暇理由欄に入籍日を記入してください。</li>
+                </ul>
+            </li>
+
+            <li><strong>［子の看護等］：</strong>小学3年生までの子の看病、世話、式典参加（入園・卒園・入学式）</li>
+
+            <li><strong>［介護］：</strong>要介護状態にある家族の介護、世話</li>
+        </ul>
+
+        <ul>
+            <li>子の看護等休暇・介護休暇は無給</li>
+            <li>日数：対象家族1名につき年5日（2名以上の場合は年10日まで）</li>
+            <li>単位：1日または時間単位で取得（時間単位は所定労働時間に準ず）</li>
+            <li>必要書類：この申請とは別に「休暇申出書」および「証明書類」の提出が必要</li>
+        </ul>
+        <br>
+        <button type="button" class="close_modal">閉じる</button>
+    </div>
+</div>
 <script>
 
 function setAction(url) {
@@ -373,7 +428,21 @@ $('.proxy_check').click(function() {
 
 	});
 @endisset
+/*モーダル*/
+$('.open_detail').on('click', function(){
+    const target = $(this).data('target');
+    $('#' + target).fadeIn();
+});
 
+$('.close_modal').on('click', function(){
+    $(this).closest('.detail_modal').fadeOut();
+});
+
+$('.detail_modal').on('click', function(e){
+    if(e.target === this){
+        $(this).fadeOut();
+    }
+});
 });
 </script>
 </x-app-layout>

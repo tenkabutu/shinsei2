@@ -5,7 +5,7 @@
 			<label class="g12">{{$typename}}予定日</label>
 			<input type="text" class="target2 g23" name="matter_change_date" autocomplete="off">
 		</div>
-		<div>
+		<div class="select_type">
 			<label class="g12">有給休暇</label>
 			@isset($userdata->rest)
 			<div class="radio-group g23">
@@ -34,7 +34,7 @@
 			</div>
 			@endisset
 		</div>
-		<div>
+		<div class="select_type">
 			<label class="g12">特別休暇・その他</label>
 			<div class="radio-group g23">
 
@@ -46,9 +46,10 @@
 				<label for="st1_14">子の看護等(工事中)</label>
 				<input id="st1_15" type="radio" class="st1" name="opt1" value="15" {{old('opt1')=='15' ? 'checked':''}}/>
 				<label for="st1_15">介護(工事中)</label>
+				<span class="open_detail" data-target="modal_special">詳細はこちら</span>
 			</div>
 		</div>
-		<div>
+		<div class="select_type">
 			<label class="g12">欠勤</label>
 			<div class="radio-group g23 radio_red">
 				<input id="st1_7" type="radio" class="st1" name="opt1" value="9" {{old('opt1')=='9' ? 'checked':''}}/>
@@ -59,16 +60,7 @@
 				<label for="st1_9">早退</label>
 				<input id="st1_10" type="radio" class="st1" name="opt1" value="13" {{old('opt1')=='13' ? 'checked':''}}/>
 				<label for="st1_10">時間欠勤</label>
-				<span class="open_detail"></span>
-				<div class="modal_detail">
-    <div class="modal_body">
-        ・遅刻は始業後の出勤<br>
-        ・早退は終業前の退勤<br>
-        ・時間欠勤は時間単位の欠勤です
-        <br><br>
-        <button class="close_modal">閉じる</button>
-    </div>
-</div>
+				<span class="open_detail" data-target="modal_kekkin">詳細はこちら</span>
 			</div>
 
 		</div>
