@@ -486,6 +486,21 @@ table select{
 .modal_content ul {
     margin-left: 15px;
 }
+.special_keicho_wrap {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.special_keicho_text {
+    flex: 1;
+}
+
+.special_keicho_image img {
+    max-width: 260px;
+    height: auto;
+    border: 1px solid #ccc;
+}
 /* || 申請ツール新規登録 */
 
 .create_user{
