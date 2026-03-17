@@ -514,7 +514,7 @@ class ShinseiController extends Controller
 
 
                 }else{
-                    return view('composite.ruling_ov', compact( 'userlist','type'));
+                    return view('composite.ruling_ov', compact( 'userlist','type','arealist'));
                 }
 
 
