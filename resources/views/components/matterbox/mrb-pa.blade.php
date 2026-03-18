@@ -41,9 +41,9 @@
 				<input id="st1_6" type="radio" class="st1" name="opt1" value="6" {{old('opt1',$matter->opt1)=='6' ? 'checked':''}}/>
 				<label for="st1_6">慶弔</label>
 				<input id="st1_14" type="radio" class="st1" name="opt1" value="14" {{old('opt1',$matter->opt1)=='14' ? 'checked':''}}/>
-				<label for="st1_14">子の看護等(工事中)</label>
+				<label for="st1_14">子の看護等</label>
 				<input id="st1_15" type="radio" class="st1" name="opt1" value="15" {{old('opt1',$matter->opt1)=='15' ? 'checked':''}}/>
-				<label for="st1_15">介護(工事中)</label>
+				<label for="st1_15">介護</label>
 				<span class="open_detail" data-target="modal_special">詳細はこちら</span>
 			</div>
 		</div>
