@@ -30,6 +30,7 @@
 				<label id="st1_4_label" for="st1_4">時間休</label>
 				<input id="st1_12" type="radio" class="st1" name="opt1" value="12" {{ old('opt1')=='12' ? 'checked':'' }} {{ $disabledAll ? 'disabled' : '' }} />
 				<label id="st1_12_label" for="st1_12">変更</label>
+				<span class="open_detail" data-target="modal_paidleave">詳細はこちら</span>
 
 			</div>
 			@endisset
@@ -95,5 +96,4 @@
 
 
 	</fieldset>
-	<label><strong>申請種別1は業務担当者に、申請種別2は業務担当者及びエリアマネージャーに申請前に了承を得てください。</strong></label>
 </section>

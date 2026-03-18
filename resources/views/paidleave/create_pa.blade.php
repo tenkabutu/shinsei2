@@ -86,6 +86,7 @@
 				<input type="hidden" name="allotted" value="{{old('allotted',$user->worktype->def_allotted)}}">
 				<x-matter-box :userdata="$user" :type="2"/>
 			@endif
+			<p><strong>申請前に自治体管理者およびエリアマネージャに了承を得てください。<br>休暇の申請と合わせて、サイボウズへの予定入力もお願いします。</strong></p>
 
 			@if(session('delete_check'))
 				<input type="hidden" name="delete_check" value="{{old('delete_check')}}">
@@ -104,13 +105,34 @@
 			@else
 			<x-save-box :status="0" :role="0" :type="2"/>
 			@endif
-			<p><strong>休暇の申請と合わせて、サイボウズへの予定入力もお願いします。</strong></p>
+
 
 
 		</form>
 	</div>
 </div>
+<div id="modal_paidleave" class="detail_modal">
+    <div class="modal_content">
 
+        <h4>年次有給休暇</h4>
+        <ul>
+            <li><strong>単位：</strong>1日、半日、または時間単位で取得可能です。</li>
+            <li>・社員は毎年5日以上の有給休暇を取得する義務があります。</li>
+            <li><strong>時間単位の制限：</strong>1年につき最大40時間（所定6時間勤務の方は30時間）まで。</li>
+        </ul>
+        <p>
+            ※注意：時間単位の有休は「年5日取得義務」のカウントに入りません。
+            「日または半日」で5日以上取得が必要です。
+        </p>
+        <ul>
+            <li><strong>［変更］：</strong>特別な勤務体系の社員が半休を取得する場合に使用</li>
+        </ul>
+        <p>申請時間が「所定労働時間の半分」になっていることを確認してください。</p>
+        <br>
+        <p>詳細については、<a href="https://ict-ss.cybozu.com/o/ag.cgi?page=FileIndex&fCID=53375">★就業規則・既定等</a>を参照してください。</p>
+        <button type="button" class="close_modal">閉じる</button>
+    </div>
+</div>
 <div id="modal_kekkin" class="detail_modal">
     <div class="modal_content">
         <h4>欠勤（遅刻・早退）</h4>
@@ -130,6 +152,7 @@
         </ul>
 
         <br>
+        <p>詳細については、<a href="https://ict-ss.cybozu.com/o/ag.cgi?page=FileIndex&fCID=53375">★就業規則・既定等</a>を参照してください。</p>
         <button type="button" class="close_modal">閉じる</button>
     </div>
 </div>
@@ -180,6 +203,7 @@
         </ul>
 
         <br>
+        <p>詳細については、<a href="https://ict-ss.cybozu.com/o/ag.cgi?page=FileIndex&fCID=53375">★就業規則・既定等</a>を参照してください。</p>
         <button type="button" class="close_modal">閉じる</button>
 
     </div>
