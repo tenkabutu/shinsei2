@@ -20,7 +20,7 @@
 					$currentOpt = old('opt1',$matter->opt1);
 				@endphp
 				<input id="st1_1" type="radio" class="st1" name="opt1" value="1" {{ $currentOpt=='1' ? 'checked':'' }} {{ ($disabledAll && $currentOpt!='1') ? 'disabled':'' }} />
-				<label id="st1_1_label" for="st1_1">全日</label>
+				<label id="st1_1_label" for="st1_1">全日休</label>
 				<input id="st1_2" type="radio" class="st1" name="opt1" value="2" {{ $currentOpt=='2' ? 'checked':'' }} {{ ($disabledHalf && $currentOpt!='2') ? 'disabled':'' }} />
 				<label id="st1_2_label" for="st1_2">午前休</label>
 				<input id="st1_3" type="radio" class="st1" name="opt1" value="3" {{ $currentOpt=='3' ? 'checked':'' }} {{ ($disabledHalf && $currentOpt!='3') ? 'disabled':'' }} />
