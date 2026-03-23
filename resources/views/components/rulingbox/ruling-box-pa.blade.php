@@ -39,7 +39,17 @@
 				<td>{{ $record->statusname}}</td>
 				<td>@if($record->status==2){{date('n/j',strtotime($record->matter_request_date))}}@elseif($record->status>=3){{date('n/j',strtotime($record->matter_reply_date))}}@endif</td>
 				<td>{{ $record->username2}}</td>
-				<td><button class="show_ov" onclick="location.href='/shinsei2/public/{{ $record->matters_id }}/show_pa'">詳細</button></td>
+				<td><button class="show_ov" onclick="location.href='/shinsei2/public/{{ $record->matters_id }}/show_pa'">詳細</button>
+				@if($role==1 && $record->status==2)
+					<form method="POST" action="/shinsei2/public/{{ $record->matters_id }}/accept" style="display:inline;">
+    				@csrf
+    				<input type="hidden" name="action_type" value="list">
+    				<input type="hidden" name="type" value="2">
+    				<input type="hidden" name="search_type" value="3">
+   					<button type="submit" class="show_ov">承認</button>
+					</form>
+				@endif
+				</td>
 				</tr>
 			@endforeach
 			@endif

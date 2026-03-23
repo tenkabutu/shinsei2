@@ -67,6 +67,7 @@
 		@endif
 			<input type="hidden" name="user_id" value="{{Auth::user()->id}}">
 			<input type="hidden" name="matter_type" value="2">
+			<input type="hidden" name="action_type" value="detail">
 
 			<!-- onsubmit="return false;"  -->
 			@if(isset($matter))

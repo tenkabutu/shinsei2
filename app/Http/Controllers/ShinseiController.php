@@ -280,9 +280,7 @@ class ShinseiController extends Controller
             return view('composite.list',compact('records','search_type'));
         }
 
-        // $matter ->fill($request->except('_token'))->save();
 
-        // event(new Registered($user));
     }
     public function matter_ruling (Request $request)
     {

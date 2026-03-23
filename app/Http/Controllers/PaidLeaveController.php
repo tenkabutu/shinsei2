@@ -127,10 +127,7 @@ class PaidLeaveController extends Controller
     public function show_pa($id){
 
         $matter = Matter::with('tasklist')->findOrFail($id);
-        //$task_count = task::where('matter_id',$id)->where('task_status',2)->count();
 
-
-        //$user=user::with('roletag','approvaltag','areatag','worktype')->findOrFail(Auth::user()->id);
         $user=user::with('roletag','approvaltag','areatag','worktype')->findOrFail($matter->user_id);
 
         $query=user::query();
@@ -146,13 +143,7 @@ class PaidLeaveController extends Controller
         });
             $check_userlist=$query->get(['id', 'name'])->all();
 
-
-            //  with('roletag','approvaltag','areatag','worktype')->findOrFail(Auth::user()->id);
-
-
             return view('paidleave.create_pa',compact('user','matter','check_userlist'));
-
-
     }
     public function delete(Request $request,$id){
         $matter =matter::find($id);

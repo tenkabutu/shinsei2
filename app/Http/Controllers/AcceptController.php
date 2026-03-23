@@ -15,7 +15,7 @@ class AcceptController extends Controller
     public function __construct(){
         $this->middleware('auth');
     }
-    public function accept($id){
+    public function accept(Request $request,$id){
 
         /* $matter = matter::findOrFail($id); */
         $matter = matter::with('tasklist')->findOrFail($id);
@@ -42,6 +42,12 @@ class AcceptController extends Controller
         }
 
         $matter->save();
+
+        if ($request->action_type === 'list') {
+            return redirect('/'.$request->type.'/matter_ruling?search_type='.$request->search_type)
+            ->with('success','承認しました');
+        }
+
 
         return back();
 
