@@ -1,4 +1,24 @@
  <div class="">
+ 	@if(session('success'))
+<div id="toast" style="
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 5px;
+    z-index: 9999;
+">
+    {{ session('success') }}
+</div>
+
+<script>
+    setTimeout(() => {
+        document.getElementById('toast').style.display = 'none';
+    }, 3000);
+</script>
+@endif
 		<table class="task_table sort-table">
 			<thead>
 			<tr>
