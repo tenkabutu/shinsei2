@@ -118,47 +118,7 @@
 
 					</div>
 					@endforeach
-					<div>
-					<p>江越第一駐車場</p>
-					<button class="openModal" data-image="/shinsei2/public/img/park_outer.jpg">見取り図</button>
-						<a href="https://maps.app.goo.gl/EVhMhh6k3XVNEvqo8">MAP</a>
-						<div id="modal" class="modal">
-							<span class="close">&times;</span>
 
-							<img class="modal-content" id="modalImage">
-						</div>
-					</div>
-					<!-- <div class="g35 park_info">
-
-						<button id="openModal">見取り図</button>
-						<a href="https://maps.app.goo.gl/EVhMhh6k3XVNEvqo8">MAP</a>
-						<div id="modal" class="modal">
-							<span class="close">&times;</span>
-
-							<img class="modal-content" id="modalImage">
-						</div>
-					</div> -->
-					@foreach ($park_list->skip(15)->take(2) as $index =>$park)
-					<div class="park_outer g{{$park->order_content}}">
-
-						<p>{{ $park->nendo }}</p>
-						@if($park->user_id==0)
-						<div class="no_use user_car" >
-						<span class="car_owner">{{$userdata->name2}}</span>
-						<span class="time_stamp">{{optional($park->updated_at)->format('m/d h:i')}}</span></div>
-						@else
-						<div class="user_car" >
-							<span class="car_owner">{{optional($park->user)->name2}}</span>
-							<span class="time_stamp">{{optional($park->updated_at)->format('n/j G:i')}}</span>
-						</div>
-						@endif
-
-						<label for="p{{$index+1}}"></label>
-						<input id="p{{$index+1}}" type="checkbox" name="user_id" value="{{old('user_id', $park->user_id) }}" data-id="{{$park->id}}" class="check-opt">
-
-
-					</div>
-					@endforeach
 				<buton id="emergency">修正</buton>
 				<div id="emergency_form">
 					<select name="park_place">
