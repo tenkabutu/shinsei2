@@ -76,6 +76,8 @@
 					<option value=0 >１０月～３月</option>
 					<option value=1 >４月～９月</option>
 					</select>
+				<br>
+				入社日<input type="text" name="work_start" class="">
             </div>
             <br>
 
