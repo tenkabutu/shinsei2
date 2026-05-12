@@ -52,7 +52,7 @@
                 <x-input id="employee" class="block mt-1 w-full" type="text" name="employee" :value="old('employee')" required autofocus />
 
 
-               <br> <x-label for="name" :value="__('氏名')" />
+               <br> <x-label for="name" :value="__('氏名　　')" />
 
                 <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
 
@@ -94,18 +94,18 @@
 					@endforeach
 				</select>
 				<br>
-               	勤務地<select name="areas[]"  class="areas">
+               	勤務地　<select name="areas[]"  class="areas">
         			@foreach($areas as $area)
             			<option value="{{ $area->id }}">{{ $area->name }}</option>
         			@endforeach
         			</select>
 				<br>
-               	入社月<select name="hiring_period">
+               	入社月　<select name="hiring_period">
 					<option value=0 >１０月～３月</option>
 					<option value=1 >４月～９月</option>
 					</select>
 				<br>
-				入社日<input type="text" name="start_date" class="target2">
+				入社日　<input type="text" name="start_date" class="target2">
             </div>
             <br>
 
