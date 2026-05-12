@@ -51,6 +51,7 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'employee' => $request->employee,
             'worktype_id' => $request->worktype_id,
+            'start_date' => $request->start_date,
             'password' => Hash::make($request->password),
         ]);
         if ($request->has('areas')) {
