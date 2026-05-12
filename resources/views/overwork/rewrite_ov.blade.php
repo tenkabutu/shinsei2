@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-app-layout><main>
 <x-slot name="head">
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
@@ -237,5 +237,5 @@ $(function(){
 	});
 
  });
-</script>
+</script></main>
 </x-app-layout>

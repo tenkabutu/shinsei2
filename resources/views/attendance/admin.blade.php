@@ -82,7 +82,7 @@
 </script>
     </x-slot>
 
-
+<main>
     <div class="main_right">
     <div class="container">
         <h1>2号打刻管理</h1>
@@ -149,5 +149,5 @@
         </div>
     </div>
     </div>
-
+	</main>
     </x-app-layout>

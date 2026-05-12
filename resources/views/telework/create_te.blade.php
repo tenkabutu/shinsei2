@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-app-layout><main>
 <x-slot name="style"></x-slot>
 <x-slot name="head">
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -161,5 +161,5 @@ $(function(){
 
 
  });
-</script>
+</script></main>
 </x-app-layout>

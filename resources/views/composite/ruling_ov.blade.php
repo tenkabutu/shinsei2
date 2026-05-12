@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-app-layout><main>
 	<x-slot name="style">wrap_wide</x-slot>
 
 	<x-slot name="head">
@@ -162,5 +162,5 @@ for (var year = currentYear; year >= 2023; year--) {
 }
 
 });
-</script>
+</script></main>
 </x-app-layout>

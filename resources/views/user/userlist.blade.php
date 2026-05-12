@@ -12,6 +12,7 @@ $(document).ready(function(){
 .select2-search--inline{display:none;}</style>
 </x-slot>
 
+<main>
 <div class="main_right">
 	<div class="">
 		<h2>ユーザー管理</h2>
@@ -25,7 +26,7 @@ $(document).ready(function(){
 
 				<th>権限</th>
 				<th>承認</th>
-				<th>地域</th>
+				<!-- <th>地域</th> -->
 				<th>エリア</th>
 				<th>勤務時間</th>
 				<th>購確</th>
@@ -70,20 +71,20 @@ $(document).ready(function(){
 
 					</select>
 				</td>
-				<td>
-					<select name="area">
-					<option value=0 @if($record->area==0)selected @endif >江越</option>
-					<option value=1 @if($record->area==1)selected @endif >八代</option>
-					<option value=2 @if($record->area==2)selected @endif >熊本市</option>
-					<option value=3 @if($record->area==3)selected @endif >玉名</option>
-					<option value=4 @if($record->area==4)selected @endif >荒尾</option>
-					<option value=5 @if($record->area==5)selected @endif >天草</option>
-					<option value=6 @if($record->area==6)selected @endif >市町村A</option>
-					<option value=7 @if($record->area==7)selected @endif >市町村B</option>
-					<option value=8 @if($record->area==8)selected @endif >熊本県</option>
+<!-- 				<td> -->
+<!-- 					<select name="area"> -->
+<!-- 					<option value=0 @if($record->area==0)selected @endif >江越</option> -->
+<!-- 					<option value=1 @if($record->area==1)selected @endif >八代</option> -->
+<!-- 					<option value=2 @if($record->area==2)selected @endif >熊本市</option> -->
+<!-- 					<option value=3 @if($record->area==3)selected @endif >玉名</option> -->
+<!-- 					<option value=4 @if($record->area==4)selected @endif >荒尾</option> -->
+<!-- 					<option value=5 @if($record->area==5)selected @endif >天草</option> -->
+<!-- 					<option value=6 @if($record->area==6)selected @endif >市町村A</option> -->
+<!-- 					<option value=7 @if($record->area==7)selected @endif >市町村B</option> -->
+<!-- 					<option value=8 @if($record->area==8)selected @endif >熊本県</option> -->
 
-					</select>
-				</td>
+<!-- 					</select> -->
+<!-- 				</td> -->
 				<td>
     				<select name="areas[]" multiple class="areas">
         			@foreach($areas as $area)
@@ -142,6 +143,7 @@ $(document).ready(function(){
 		</table>
 	</div>
 </div>
+</main>
 <script>
 $(document).ready(function() {
     $('.areas').select2({
@@ -211,4 +213,5 @@ $(document).ready(function() {
 	    }
 	});
    	</script>
+
 </x-app-layout>
