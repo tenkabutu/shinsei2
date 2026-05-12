@@ -5,6 +5,32 @@
 
             </a>
         </x-slot>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+	<script>
+   $(function() {
+	   $.datetimepicker.setLocale('ja');
+	   $('.target').datetimepicker({
+		   minDate: new Date(new Date().setFullYear(new Date().getFullYear() - 1)),
+		   scrollMonth : false,
+		   scrollInput : false}).datepicker('setDate','today');
+
+	  $('.target2').datetimepicker({
+		  minDate: new Date(new Date().setFullYear(new Date().getFullYear() - 1)),
+		  scrollMonth : false,
+		  scrollInput : false,
+		  timepicker:false,
+	      format:'Y/n/j'
+		});
+	  $('.target3').datetimepicker({
+		  minDate: new Date(new Date().setFullYear(new Date().getFullYear() - 1)),
+		  scrollMonth : false,
+		  scrollInput : false,
+		  format:'h:m'
+		});
+	});
+	</script>
 
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
@@ -77,7 +103,7 @@
 					<option value=1 >４月～９月</option>
 					</select>
 				<br>
-				入社日<input type="text" name="work_start" class="">
+				入社日<input type="text" name="start_date" class="target2">
             </div>
             <br>
 
