@@ -32,18 +32,18 @@
 						<li>・</li>
 					</ul>
 				</fieldset> -->
-				<fieldset>
+				<!-- <fieldset>
 					<legend>不具合</legend>
 					<ul>
 						<li>・極稀にforbbdenと表示される</li>
 					</ul>
-				</fieldset>
+				</fieldset> -->
 
 
 
 				<fieldset id="park_status">
 				<legend>駐車申請</legend>
-
+				<p class="text-danger">木下第2駐車場の使用は5月31日までです！</p>
 				<div id ="park_figure" class="grid">
 					<div>
 					<p>木下第2駐車場</p>

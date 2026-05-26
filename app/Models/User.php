@@ -53,6 +53,7 @@ class User extends Authenticatable
         'hiring_day',
         'hiring_period',
         'permissions',
+        'start_date',
 
     ];
     protected  $dates=[
