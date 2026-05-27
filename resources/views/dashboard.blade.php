@@ -43,7 +43,8 @@
 
 				<fieldset id="park_status">
 				<legend>駐車申請</legend>
-				<p class="text-danger">木下第2駐車場の使用は5月31日までです！</p>
+				<p class="text-danger">木下第2駐車場の使用は5月31日までです！<br>
+				6月は<a href="https://maps.app.goo.gl/Q4pNf6QcHUnEYLjf8">江越新事務所</a>、<a href="https://maps.app.goo.gl/tntw7vbzXkXgJYCT7">江越旧事務所</a>の駐車場に停めてください。</p>
 				<div id ="park_figure" class="grid">
 					<div>
 					<p>木下第2駐車場</p>
