@@ -42,12 +42,12 @@
 
 
 				<fieldset id="park_status">
-				<legend>駐車申請</legend>
-				<p class="text-danger">木下第2駐車場の使用は5月31日までです！<br>
+				<legend>駐車</legend>
+				<p class="text-danger">木下第2駐車場の使用は終了しました<br>
 				6月は<a href="https://maps.app.goo.gl/Q4pNf6QcHUnEYLjf8">江越新事務所</a>、<a href="https://maps.app.goo.gl/tntw7vbzXkXgJYCT7">江越旧事務所</a>の駐車場に停めてください。</p>
-				<div id ="park_figure" class="grid">
+				<!--<div id ="park_figure" class="grid">
 					<div>
-					<p>木下第2駐車場</p>
+					 <p>木下第2駐車場</p>
 					<button class="openModal" data-image="/shinsei2/public/img/park.jpg">見取り図</button>
 						<a href="https://maps.app.goo.gl/9eCXxyowJyiZvmRu9">MAP</a>
 						<div id="modal" class="modal">
@@ -130,9 +130,9 @@
 					<select name="user_id"><option value="25">ある</option><option value="0">ない</option>
 					</select>
 					<button id="emergency_submit">送信</button>
-				</div>
+				</div> -->
 
-				</div></fieldset>
+				</fieldset>
 					<fieldset>
 				<legend>未振替(仮)</legend>
 				<ul><li>
