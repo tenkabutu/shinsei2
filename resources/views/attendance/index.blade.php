@@ -133,7 +133,7 @@
                             <h2>なかのひと</h2>
                             <ul>
                                 @forelse ($currentEmployees as $employee)
-                                    <li>{{ $employee->user->employee }} :{{ $employee->name }} ({{ $employee->attendance->check_in }})</li>
+                                    <li>{{$employee->employee }} :{{ $employee->name }} ({{ $employee->attendance->check_in }})</li>
                                 @empty
                                     <li>いません</li>
                                 @endforelse
