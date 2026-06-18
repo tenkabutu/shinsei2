@@ -133,10 +133,16 @@
                             <h2>なかのひと</h2>
                             <ul>
                                 @forelse ($currentEmployees as $employee)
-                                    <li>{{$employee->employee }} :{{ $employee->name }} ({{ $employee->attendance->check_in }})</li>
-                                @empty
-                                    <li>いません</li>
-                                @endforelse
+        <li>
+            <span style="display:inline-block; width:4em; text-align:right;">
+                {{ $employee->employee }}
+            </span>
+            : {{ $employee->name }}
+            ({{ $employee->attendance->check_in }})
+        </li>
+    @empty
+        <li>いません</li>
+    @endforelse
                             </ul>
                         </div>
 
