@@ -18,7 +18,7 @@ $(document).ready(function(){
 		<h2>ユーザー管理</h2>
 
 		<label class="success_label"></label>
-		<table class="user_table  sort-table">
+		<table class="user_table">
 			<thead>
 			<tr>
 				<th class="id" data-sorter="false">No</th>
