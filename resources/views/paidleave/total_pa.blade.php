@@ -1,5 +1,5 @@
 <x-app-layout><main>
-<x-slot name="style"></x-slot>
+<x-slot name="style">wrap_wide</x-slot>
 <x-slot name="head">
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 	<script src='./js/jquery.tablesorter.js'></script>
@@ -118,6 +118,7 @@ if (!$rest) {
 <tr class="d{{ $id+1 }} {{ $rowClass }}">
 <td>{{ $record->employee }}</td>
 <td>{{ $record->name }}</td>
+<td>{{ $record->start_date }}</td>
 
 @if($rest)
 
