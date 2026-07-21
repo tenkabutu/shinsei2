@@ -33,12 +33,13 @@ $(document).ready(function(){
 			<tr>
 				<th>No</th>
 				<th>使用者</th>
+				<th>入社日</th>
 				<th colspan="3">有給</th>
 				<th colspan="2">取得有給</th>
 				<th colspan="2">残有給</th>
 				<th>5日</th>
 				<th></th>
-				<th></th>
+				<th data-sorter="false"></th>
 			</tr>
 			</thead>
 			@foreach ($userlist as $id => $record)
