@@ -37,7 +37,10 @@
 
   </tr>
   <tr>
-  	 <td colspan="5"></td>
+  	 <td></td>
+     <th class="square_4_3"><label>入社日</label></th>
+     <td  class="square_4_4" colspan="2">{{$user_rest->start_date}}</td>
+     <td></td>
   	 <th class="square_4_3" colspan="2">今年度付与日</th>
   	 <td class="square_4_4">{{$user_rest->rest_allotted_day}}</td>
   	 </tr>
