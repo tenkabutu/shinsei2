@@ -20,12 +20,6 @@ class ShinseiController extends Controller
 
     public function matter_search (Request $request)
     {
-
-        // var_dump($request->toArray());
-        // session(['ms_request'=>$request->all()]);
-        // $request->sesson()->put('ms_request',$request);
-
-        // session()->forget('mskeys');
         if ($request->mode) {
             $query = matter::query();
 
@@ -100,7 +94,7 @@ class ShinseiController extends Controller
 
                 $query->where('matters.nendo',$request->year);
             }else{
-                $query->where('matters.nendo',Carbon::now()->subMonthsNoOverflow(3)->format('Y'));
+                $query->where('matters.nendo','>=', Carbon::now()->subMonthsNoOverflow(3)->format('Y'));
             }
             if ($request->month != 0) {
                 $query->whereMonth('matters.matter_change_date', $request->month);
@@ -116,27 +110,17 @@ class ShinseiController extends Controller
 
             $query->select('*', 'matters.id as matters_id', 'matters.created_at as matters_created_at', 'nt1.nametag as typename', 'nt2.nametag as statusname');
             $query->orderBy('matters.id', 'desc');
-            // ->select('matters.id','matters.created_at')
-            // ->get();
-            $records = $query->
-            get();
+            $records = $query->get();
 
-            // $mskeys=$query->get(['id']);
             session([
                     'mskeys' => $mskeys
             ]);
 
-            // header("Content-type: application/json; charset=UTF-8");
-            // var_dump($records->toArray());
 
             return view('composite.list', compact('records'));
         } else {
             return view('composite.list');
         }
-
-        // $matter ->fill($request->except('_token'))->save();
-
-        // event(new Registered($user));
     }
     public function matter_search2 (Request $request,$type)
     {
@@ -212,7 +196,7 @@ class ShinseiController extends Controller
 
                 $query->where('matters.nendo',$request->year);
             }else{
-                $query->where('matters.nendo',Carbon::now()->subMonthsNoOverflow(3)->format('Y'));
+                $query->where('matters.nendo','>=', Carbon::now()->subMonthsNoOverflow(3)->format('Y'));
             }
             if ($request->month != 0) {
                 $query->whereMonth('matters.matter_change_date', $request->month);
@@ -262,7 +246,7 @@ class ShinseiController extends Controller
 
                     $query->where('matters.nendo',$request->year);
                 }else{
-                    $query->where('matters.nendo',Carbon::now()->subMonthsNoOverflow(3)->format('Y'));
+                    $query->where('matters.nendo','>=', Carbon::now()->subMonthsNoOverflow(3)->format('Y'));
                 }
             if ($request->month != 0) {
                 $query->whereMonth('matters.matter_change_date', $request->month);
