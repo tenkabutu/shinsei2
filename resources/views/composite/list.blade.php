@@ -83,7 +83,7 @@
 
 
 				<td>@isset($record->typename) {{$record->typename}} @else テレワ @endif</td>
-				<td>{{ date('n/j',strtotime($record->matter_change_date))}}</td>
+				<td>{{ date('Y-n-j',strtotime($record->matter_change_date))}}</td>
 				<td>{{$record->hour1."時".$record->minutes1}}分</td>
 				<td>{{$record->hour2."時".$record->minutes2}}分</td>
 				<td>{{floor($record->allotted/60).'時間 '.($record->allotted%60).'分'}}</td>
