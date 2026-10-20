@@ -43,8 +43,7 @@
 
 				<fieldset id="park_status">
 				<legend>駐車</legend>
-				<p class="text-danger">江越旧事務所、木下第2駐車場の使用は終了しました</p>
-				<img width="350" alt="" src="/shinsei2/public/img/egoe_park.png">
+				<img width="700" alt="" src="/shinsei2/public/img/egoe_park.png">
 
 				<!--<div id ="park_figure" class="grid">
 					<div>
